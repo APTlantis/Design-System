@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aptlantis-Logo (apt) — Brand System &amp; Token Specimen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <style>
+    :root {
+      /* Canonical Primitives */
+      --apt-color-01: #000000;
+      --apt-color-02: #02020E;
+      --apt-color-03: #0D0100;
+      --apt-color-04: #00101A;
+      --apt-color-05: #260600;
+      --apt-color-06: #031C28;
+      --apt-color-07: #2A2923;
+      --apt-color-08: #05303F;
+      --apt-color-09: #4F2000;
+      --apt-color-10: #07455E;
+      --apt-color-11: #2E5701;
+      --apt-color-12: #555245;
+      --apt-color-13: #71481D;
+      --apt-color-14: #00637D;
+      --apt-color-15: #506F80;
+      --apt-color-16: #697500;
+      --apt-color-17: #A95403;
+      --apt-color-18: #0380A1;
+      --apt-color-19: #748E97;
+      --apt-color-20: #CF7818;
+      --apt-color-21: #A29062;
+      --apt-color-22: #18AAC2;
+      --apt-color-23: #D99D36;
+      --apt-color-24: #A0B4B9;
+      --apt-color-25: #00CAE3;
+      --apt-color-26: #F7BE4F;
+      --apt-color-27: #CFD0C9;
+      --apt-color-28: #23F2F7;
+      --apt-color-29: #F7DD74;
+      --apt-color-30: #A1FCFD;
+      --apt-color-31: #FDEDB3;
+      --apt-color-32: #FDFDFB;
+
+      /* Surfaces */
+      --apt-bg-void: var(--apt-color-01);
+      --apt-bg-canvas: var(--apt-color-02);
+      --apt-bg-warm-void: var(--apt-color-03);
+      --apt-bg-base: var(--apt-color-04);
+      --apt-bg-raised: var(--apt-color-06);
+      --apt-bg-overlay: var(--apt-color-08);
+
+      /* Borders */
+      --apt-border-neutral-subtle: var(--apt-color-07);
+      --apt-border-subtle: var(--apt-color-10);
+      --apt-border-default: var(--apt-color-12);
+      --apt-border-warm: var(--apt-color-13);
+      --apt-border-interactive: var(--apt-color-14);
+
+      /* Typography Colors */
+      --apt-text-primary: var(--apt-color-32);
+      --apt-text-warm-display: var(--apt-color-31);
+      --apt-text-secondary: var(--apt-color-27);
+      --apt-text-tertiary: var(--apt-color-24);
+      --apt-text-muted: var(--apt-color-19);
+      --apt-text-disabled: var(--apt-color-15);
+
+      /* Brand & Interactive */
+      --apt-brand-primary: var(--apt-color-25);
+      --apt-brand-primary-hover: var(--apt-color-28);
+      --apt-brand-primary-dim: var(--apt-color-22);
+      --apt-brand-primary-muted: var(--apt-color-18);
+      --apt-brand-secondary: var(--apt-color-26);
+      --apt-brand-secondary-hover: var(--apt-color-29);
+      --apt-brand-secondary-dim: var(--apt-color-23);
+      --apt-accent-ice: var(--apt-color-30);
+      --apt-accent-sand: var(--apt-color-21);
+
+      /* Status */
+      --apt-status-success: var(--apt-color-16);
+      --apt-status-success-surface: var(--apt-color-11);
+      --apt-status-warning: var(--apt-color-26);
+      --apt-status-danger: var(--apt-color-20);
+      --apt-status-danger-strong: var(--apt-color-17);
+      --apt-status-danger-surface: var(--apt-color-05);
+      --apt-status-danger-border: var(--apt-color-09);
+      --apt-status-info: var(--apt-color-25);
+
+      /* Typography */
+      --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+      --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      /* Elevation & Glow */
+      --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+      --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65);
+      --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+      --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--apt-bg-canvas);
+      color: var(--apt-text-secondary);
+      font-family: var(--apt-font-body);
+    }
+
+    body {
+      background:
+        radial-gradient(900px 420px at 12% -4%, rgba(0, 202, 227, 0.14), transparent 60%),
+        radial-gradient(760px 380px at 88% 2%, rgba(247, 190, 79, 0.10), transparent 60%),
+        var(--apt-bg-canvas);
+      min-height: 100vh;
+    }
+
+    .font-display { font-family: var(--apt-font-display); }
+    .font-mono-code { font-family: var(--apt-font-mono); }
+
+    .surface-base {
+      background-color: var(--apt-bg-base);
+      border: 1px solid var(--apt-border-subtle);
+    }
+    .surface-raised {
+      background-color: var(--apt-bg-raised);
+      border: 1px solid var(--apt-border-subtle);
+      box-shadow: var(--apt-shadow-raised);
+    }
+    .surface-overlay {
+      background-color: var(--apt-bg-overlay);
+      border: 1px solid var(--apt-border-interactive);
+      box-shadow: var(--apt-shadow-overlay);
+    }
+
+    .btn-primary {
+      background-color: var(--apt-brand-primary);
+      color: var(--apt-bg-void);
+      font-weight: 600;
+      transition: background-color 150ms ease, box-shadow 150ms ease, transform 120ms ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-glow-primary);
+    }
+    .btn-primary:active {
+      background-color: var(--apt-brand-primary-dim);
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--apt-brand-secondary);
+      color: var(--apt-bg-void);
+      font-weight: 600;
+      transition: background-color 150ms ease, box-shadow 150ms ease, transform 120ms ease;
+    }
+    .btn-secondary:hover {
+      background-color: var(--apt-brand-secondary-hover);
+      box-shadow: var(--apt-glow-secondary);
+    }
+    .btn-secondary:active {
+      background-color: var(--apt-brand-secondary-dim);
+      transform: translateY(1px);
+    }
+
+    .apt-input {
+      background-color: var(--apt-bg-canvas);
+      border: 1px solid var(--apt-border-default);
+      color: var(--apt-text-primary);
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+    .apt-input:focus {
+      outline: none;
+      border-color: var(--apt-brand-primary-hover);
+      box-shadow: 0 0 0 2px var(--apt-bg-base), 0 0 0 4px rgba(35, 242, 247, 0.45);
+    }
+
+    .swatch-card {
+      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+    }
+    .swatch-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--apt-border-interactive);
+      box-shadow: var(--apt-shadow-raised);
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--apt-bg-canvas); }
+    ::-webkit-scrollbar-thumb { background: var(--apt-border-subtle); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--apt-border-interactive); }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#00CAE3] selection:text-[#000000]">
+
+  <!-- Sticky Top Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#02020E]/85 border-b border-[#07455E]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="w-3 h-3 rounded-full bg-[#23F2F7] shadow-[0_0_12px_#23F2F7] shrink-0"></span>
+        <span class="font-display font-bold text-[#FDFDFB] tracking-tight truncate">Aptlantis-Logo</span>
+        <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-mono-code bg-[#031C28] text-[#A1FCFD] border border-[#07455E]">apt · dark</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-[#A0B4B9]">
+        <a href="#palette" class="hover:text-[#23F2F7] transition-colors">Palette</a>
+        <a href="#contrast" class="hover:text-[#23F2F7] transition-colors">Contrast Lab</a>
+        <a href="#typography" class="hover:text-[#23F2F7] transition-colors">Typography</a>
+        <a href="#components" class="hover:text-[#23F2F7] transition-colors">Components</a>
+        <a href="#tokens" class="hover:text-[#23F2F7] transition-colors">Tokens</a>
+      </nav>
+      <button id="copyAllCssBtn" type="button" class="btn-primary px-3 py-1.5 rounded-lg text-xs sm:text-sm shrink-0">
+        Copy tokens.css
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-14">
+
+    <!-- Hero & System Overview -->
+    <section class="surface-base rounded-2xl p-6 sm:p-10 relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#00CAE3]/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#F7BE4F]/10 blur-3xl pointer-events-none"></div>
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#031C28] border border-[#00637D] text-xs font-mono-code text-[#A1FCFD]">
+          <span>PIPELINE BRAND SPECIMEN</span>
+          <span class="text-[#748E97]">|</span>
+          <span>v1 · apt-logo</span>
+        </div>
+        <h1 class="font-display text-3xl sm:text-5xl font-bold text-[#FDFDFB] tracking-tight leading-tight">
+          Abyssal Cyan &amp; <span class="text-[#FDEDB3]">Solar Amber</span> Design System
+        </h1>
+        <p class="text-[#CFD0C9] text-base sm:text-lg leading-relaxed">
+          Interactive brand specification derived from <span class="font-mono-code text-[#A1FCFD]">palette.toml</span>. Built on a deep oceanic neutral spine (<span class="font-mono-code text-[#A1FCFD]">#000000</span> to <span class="font-mono-code text-[#A1FCFD]">#05303F</span>) with bioluminescent cyan (<span class="font-mono-code text-[#23F2F7]">#23F2F7</span>) and warm gold (<span class="font-mono-code text-[#F7BE4F]">#F7BE4F</span>) accents.
+        </p>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="surface-raised rounded-xl p-4">
+          <div class="text-xs font-mono-code text-[#748E97] uppercase">Canonical Tokens</div>
+          <div class="font-display text-2xl font-bold text-[#FDFDFB] mt-1">32</div>
+          <div class="text-xs text-[#A0B4B9] mt-1">100% mapped to semantic roles</div>
+        </div>
+        <div class="surface-raised rounded-xl p-4">
+          <div class="text-xs font-mono-code text-[#748E97] uppercase">Peak Contrast</div>
+          <div class="font-display text-2xl font-bold text-[#23F2F7] mt-1">18.93:1</div>
+          <div class="text-xs text-[#A0B4B9] mt-1">WCAG AAA on base surface</div>
+        </div>
+        <div class="surface-raised rounded-xl p-4">
+          <div class="text-xs font-mono-code text-[#748E97] uppercase">Primary Spine</div>
+          <div class="font-display text-2xl font-bold text-[#00CAE3] mt-1">196°–233°</div>
+          <div class="text-xs text-[#A0B4B9] mt-1">Oceanic navy to ice cyan</div>
+        </div>
+        <div class="surface-raised rounded-xl p-4">
+          <div class="text-xs font-mono-code text-[#748E97] uppercase">Counterpoint</div>
+          <div class="font-display text-2xl font-bold text-[#F7BE4F] mt-1">37°–96°</div>
+          <div class="text-xs text-[#A0B4B9] mt-1">Copper, amber &amp; warm gold</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Semantic Color Architecture & OKLCH Map -->
+    <section id="palette" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-semibold text-[#FDFDFB]">Semantic Color Architecture</h2>
+          <p class="text-sm text-[#A0B4B9] mt-1">Click any swatch to copy its CSS variable, or filter by functional category.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input id="swatchSearch" type="search" placeholder="Search hex, alias, or role..." class="apt-input px-3 py-2 rounded-lg text-sm w-full sm:w-60" />
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div id="filterPills" class="flex flex-wrap gap-2">
+        <button data-cat="all" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#00CAE3] text-[#000000]">All (32)</button>
+        <button data-cat="surface" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]">Surfaces (6)</button>
+        <button data-cat="border" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]">Borders (5)</button>
+        <button data-cat="text" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]">Typography (6)</button>
+        <button data-cat="brand" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]">Brand &amp; Accents (9)</button>
+        <button data-cat="status" class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]">In-Palette Status (6)</button>
+      </div>
+
+      <!-- Swatch Grid -->
+      <div id="swatchGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+      <!-- OKLCH Lightness vs Chroma Distribution -->
+      <div class="surface-base rounded-2xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="font-display text-lg font-semibold text-[#FDFDFB]">OKLCH Lightness vs. Chroma Map</h3>
+            <p class="text-xs text-[#A0B4B9]">Hover any plotted token to inspect its perceptual coordinates and pipeline weight.</p>
+          </div>
+          <div id="oklchHoverReadout" class="text-xs font-mono-code text-[#A1FCFD] bg-[#031C28] border border-[#07455E] px-3 py-1.5 rounded-lg">
+            Hover a dot to inspect OKLCH
+          </div>
+        </div>
+        <div class="w-full overflow-x-auto">
+          <svg id="oklchPlot" viewBox="0 0 840 300" class="w-full min-w-[600px] h-auto select-none"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive WCAG Contrast Lab -->
+    <section id="contrast" class="space-y-6">
+      <div>
+        <h2 class="font-display text-2xl sm:text-3xl font-semibold text-[#FDFDFB]">WCAG 2.1 Contrast Lab</h2>
+        <p class="text-sm text-[#A0B4B9] mt-1">Test any foreground and background token pairing in real time against WCAG AA and AAA thresholds.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-5 surface-base rounded-2xl p-5 space-y-4">
+          <div class="space-y-2">
+            <label for="fgSelect" class="block text-xs font-mono-code uppercase text-[#A0B4B9]">Foreground Token</label>
+            <select id="fgSelect" class="apt-input w-full px-3 py-2 rounded-lg text-sm font-mono-code"></select>
+          </div>
+          <div class="space-y-2">
+            <label for="bgSelect" class="block text-xs font-mono-code uppercase text-[#A0B4B9]">Background Token</label>
+            <select id="bgSelect" class="apt-input w-full px-3 py-2 rounded-lg text-sm font-mono-code"></select>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <button type="button" data-fg="color_32" data-bg="color_04" class="preset-pair px-2.5 py-1 rounded text-xs bg-[#031C28] text-[#A1FCFD] border border-[#07455E] hover:border-[#23F2F7]">Primary / Base</button>
+            <button type="button" data-fg="color_19" data-bg="color_08" class="preset-pair px-2.5 py-1 rounded text-xs bg-[#031C28] text-[#F7BE4F] border border-[#07455E] hover:border-[#F7BE4F]">Muted / Overlay</button>
+            <button type="button" data-fg="color_01" data-bg="color_25" class="preset-pair px-2.5 py-1 rounded text-xs bg-[#031C28] text-[#A1FCFD] border border-[#07455E] hover:border-[#23F2F7]">Void / Cyan CTA</button>
+            <button type="button" data-fg="color_32" data-bg="color_17" class="preset-pair px-2.5 py-1 rounded text-xs bg-[#031C28] text-[#A1FCFD] border border-[#07455E] hover:border-[#23F2F7]">White / Danger</button>
+          </div>
+          <button id="swapPairBtn" type="button" class="w-full py-2 rounded-lg text-xs font-semibold border border-[#00637D] text-[#A1FCFD] hover:bg-[#031C28] transition-colors">
+            Swap Foreground &amp; Background
+          </button>
+        </div>
+
+        <div class="lg:col-span-7 surface-base rounded-2xl p-5 flex flex-col justify-between gap-5">
+          <div id="contrastPreview" class="rounded-xl p-6 border border-[#07455E] transition-colors">
+            <div class="text-xs font-mono-code uppercase tracking-wider opacity-80 mb-2">Live Pairing Specimen</div>
+            <div class="font-display text-2xl font-bold mb-2">Abyssal Telemetry &amp; Signal Clarity</div>
+            <p class="text-sm leading-relaxed">
+              Every surface step and typographic token in Aptlantis-Logo is calibrated to preserve legibility across deep oceanic canvases without sacrificing luminous cyan and gold accents.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="surface-raised rounded-xl p-3">
+              <div class="text-xs text-[#748E97]">Contrast Ratio</div>
+              <div id="ratioReadout" class="font-display text-xl font-bold text-[#FDFDFB] mt-0.5">—</div>
+            </div>
+            <div class="surface-raised rounded-xl p-3">
+              <div class="text-xs text-[#748E97]">Normal Text (AA)</div>
+              <div id="aaNormalBadge" class="font-mono-code text-sm font-semibold mt-1">—</div>
+            </div>
+            <div class="surface-raised rounded-xl p-3">
+              <div class="text-xs text-[#748E97]">Normal Text (AAA)</div>
+              <div id="aaaNormalBadge" class="font-mono-code text-sm font-semibold mt-1">—</div>
+            </div>
+            <div class="surface-raised rounded-xl p-3">
+              <div class="text-xs text-[#748E97]">Large / UI (3:1)</div>
+              <div id="aaLargeBadge" class="font-mono-code text-sm font-semibold mt-1">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Typography & Spatial Elevation -->
+    <section id="typography" class="space-y-6">
+      <div>
+        <h2 class="font-display text-2xl sm:text-3xl font-semibold text-[#FDFDFB]">Typography &amp; Elevation</h2>
+        <p class="text-sm text-[#A0B4B9] mt-1">Interactive type specimen paired with dark-mode surface stepping and bioluminescent glow tokens.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 surface-base rounded-2xl p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex gap-2">
+              <button type="button" data-font="display" class="font-switch px-3 py-1 rounded-lg text-xs font-semibold bg-[#00CAE3] text-[#000000]">Space Grotesk</button>
+              <button type="button" data-font="body" class="font-switch px-3 py-1 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]">Inter</button>
+              <button type="button" data-font="mono" class="font-switch px-3 py-1 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]">JetBrains Mono</button>
+            </div>
+            <span id="activeFontLabel" class="text-xs font-mono-code text-[#A1FCFD]">--apt-font-display</span>
+          </div>
+          <input id="typeTesterInput" type="text" value="Aptlantis Deep-Sea Telemetry System — 00CAE3 / F7BE4F" class="apt-input w-full px-3 py-2 rounded-lg text-sm" />
+          <div id="typeSpecimenOutput" class="space-y-4 pt-2 font-display">
+            <div>
+              <div class="text-xs font-mono-code text-[#748E97]">Display · 48px / 700 / -0.03em</div>
+              <div class="specimen-line text-3xl sm:text-5xl font-bold text-[#FDFDFB] tracking-tight truncate">Aptlantis Deep-Sea Telemetry</div>
+            </div>
+            <div>
+              <div class="text-xs font-mono-code text-[#748E97]">Heading 2 · 24px / 600 / -0.015em</div>
+              <div class="specimen-line text-xl sm:text-2xl font-semibold text-[#FDEDB3]">Aptlantis Deep-Sea Telemetry System</div>
+            </div>
+            <div>
+              <div class="text-xs font-mono-code text-[#748E97]">Body · 16px / 400 / 1.60</div>
+              <div class="specimen-line text-base text-[#CFD0C9]">Aptlantis Deep-Sea Telemetry System — 00CAE3 / F7BE4F</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 surface-base rounded-2xl p-6 space-y-4">
+          <h3 class="font-display text-lg font-semibold text-[#FDFDFB]">Surface &amp; Glow Hierarchy</h3>
+          <div class="space-y-3">
+            <div class="p-3 rounded-lg bg-[#000000] border border-[#2A2923] flex justify-between items-center text-xs">
+              <span class="font-mono-code text-[#FDFDFB]">--apt-bg-void</span>
+              <span class="font-mono-code text-[#748E97]">#000000 · L=0.000</span>
+            </div>
+            <div class="p-3 rounded-lg bg-[#02020E] border border-[#07455E] flex justify-between items-center text-xs">
+              <span class="font-mono-code text-[#FDFDFB]">--apt-bg-canvas</span>
+              <span class="font-mono-code text-[#748E97]">#02020E · L=0.099</span>
+            </div>
+            <div class="p-3 rounded-lg bg-[#00101A] border border-[#07455E] flex justify-between items-center text-xs">
+              <span class="font-mono-code text-[#FDFDFB]">--apt-bg-base</span>
+              <span class="font-mono-code text-[#A0B4B9]">#00101A · L=0.163</span>
+            </div>
+            <div class="p-3 rounded-lg bg-[#031C28] border border-[#00637D] shadow-[0_4px_16px_rgba(0,0,0,0.55)] flex justify-between items-center text-xs">
+              <span class="font-mono-code text-[#FDFDFB]">--apt-bg-raised</span>
+              <span class="font-mono-code text-[#A1FCFD]">#031C28 · L=0.214</span>
+            </div>
+            <div class="p-3 rounded-lg bg-[#05303F] border border-[#00637D] shadow-[0_12px_36px_rgba(0,0,0,0.75)] flex justify-between items-center text-xs">
+              <span class="font-mono-code text-[#FDFDFB]">--apt-bg-overlay</span>
+              <span class="font-mono-code text-[#A1FCFD]">#05303F · L=0.289</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Live UI Component Specimen -->
+    <section id="components" class="space-y-6">
+      <div>
+        <h2 class="font-display text-2xl sm:text-3xl font-semibold text-[#FDFDFB]">UI Component Specimen</h2>
+        <p class="text-sm text-[#A0B4B9] mt-1">Interactive controls and in-palette semantic status banners.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="surface-base rounded-2xl p-6 space-y-5">
+          <h3 class="font-display text-lg font-semibold text-[#FDFDFB]">Actions &amp; Inputs</h3>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" class="btn-primary px-4 py-2 rounded-lg text-sm">Primary Cyan</button>
+            <button type="button" class="btn-secondary px-4 py-2 rounded-lg text-sm">Secondary Gold</button>
+            <button type="button" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[#031C28] text-[#A1FCFD] border border-[#00637D] hover:border-[#23F2F7] transition-colors">Outline / Ghost</button>
+            <button type="button" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[#A95403] text-[#FDFDFB] hover:bg-[#CF7818] hover:text-[#000000] transition-colors">Danger Action</button>
+          </div>
+          <div class="space-y-2">
+            <label for="demoInput" class="block text-xs font-mono-code text-[#A0B4B9]">Focus Ring Demo (--apt-brand-primary-hover)</label>
+            <input id="demoInput" type="text" placeholder="Click to inspect #23F2F7 focus ring..." class="apt-input w-full px-3.5 py-2.5 rounded-lg text-sm" />
+          </div>
+        </div>
+
+        <div class="surface-base rounded-2xl p-6 space-y-3">
+          <h3 class="font-display text-lg font-semibold text-[#FDFDFB]">In-Palette Semantic Status</h3>
+          <div class="p-3 rounded-lg bg-[#2E5701]/40 border border-[#697500] flex items-center justify-between text-sm">
+            <span class="text-[#FDFDFB] font-medium">Success · Olive-Moss (<span class="font-mono-code text-xs">#2E5701 / #697500</span>)</span>
+            <span class="text-xs font-mono-code text-[#FDEDB3]">8.31:1 text</span>
+          </div>
+          <div class="p-3 rounded-lg bg-[#031C28] border border-[#00CAE3] flex items-center justify-between text-sm">
+            <span class="text-[#A1FCFD] font-medium">Info · Electric Cyan (<span class="font-mono-code text-xs">#00CAE3</span>)</span>
+            <span class="text-xs font-mono-code text-[#00CAE3]">9.69:1 text</span>
+          </div>
+          <div class="p-3 rounded-lg bg-[#4F2000]/35 border border-[#F7BE4F] flex items-center justify-between text-sm">
+            <span class="text-[#F7BE4F] font-medium">Warning · Solar Gold (<span class="font-mono-code text-xs">#F7BE4F</span>)</span>
+            <span class="text-xs font-mono-code text-[#F7DD74]">11.42:1 text</span>
+          </div>
+          <div class="p-3 rounded-lg bg-[#260600] border border-[#4F2000] flex items-center justify-between text-sm">
+            <span class="text-[#CF7818] font-medium">Danger · Burnt Copper (<span class="font-mono-code text-xs">#260600 / #CF7818</span>)</span>
+            <span class="text-xs font-mono-code text-[#FDFDFB]">5.83:1 text</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Developer Token Exporter -->
+    <section id="tokens" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-semibold text-[#FDFDFB]">Developer Tokens</h2>
+          <p class="text-sm text-[#A0B4B9] mt-1">Copy or download production-ready CSS custom properties or W3C Design Tokens JSON.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="tabCssBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#00CAE3] text-[#000000]">tokens.css</button>
+          <button id="tabJsonBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]">tokens.json</button>
+          <button id="copyCodeBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A1FCFD] border border-[#00637D] hover:border-[#23F2F7]">Copy</button>
+          <button id="downloadCodeBtn" type="button" class="btn-secondary px-3 py-1.5 rounded-lg text-xs">Download</button>
+        </div>
+      </div>
+      <pre class="surface-base rounded-2xl p-5 overflow-x-auto max-h-96 text-xs font-mono-code text-[#A1FCFD] leading-relaxed"><code id="tokenCodeBlock"></code></pre>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-[#05303F] border border-[#23F2F7] text-[#FDFDFB] text-xs font-mono-code shadow-[0_0_20px_rgba(35,242,247,0.3)] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+
+  <script>
+    const PALETTE = [
+      { id: "color_01", hex: "#000000", rgb: [0,0,0], l: 0.000, c: 0.000, h: 0.0, weight: 22433, alias: "--apt-bg-void", cat: "surface", role: "Deepest backdrop / viewport void" },
+      { id: "color_02", hex: "#02020E", rgb: [2,2,14], l: 0.099, c: 0.036, h: 277.6, weight: 557, alias: "--apt-bg-canvas", cat: "surface", role: "Primary app shell canvas" },
+      { id: "color_03", hex: "#0D0100", rgb: [13,1,0], l: 0.106, c: 0.035, h: 37.1, weight: 328, alias: "--apt-bg-warm-void", cat: "surface", role: "Warm-tinted shadow backdrop" },
+      { id: "color_04", hex: "#00101A", rgb: [0,16,26], l: 0.163, c: 0.034, h: 233.4, weight: 986, alias: "--apt-bg-base", cat: "surface", role: "Main navigation & persistent panels" },
+      { id: "color_05", hex: "#260600", rgb: [38,6,0], l: 0.182, c: 0.058, h: 39.1, weight: 125, alias: "--apt-status-danger-surface", cat: "status", role: "In-palette danger container fill" },
+      { id: "color_06", hex: "#031C28", rgb: [3,28,40], l: 0.214, c: 0.039, h: 232.2, weight: 709, alias: "--apt-bg-raised", cat: "surface", role: "Cards & elevated containers" },
+      { id: "color_07", hex: "#2A2923", rgb: [42,41,35], l: 0.280, c: 0.011, h: 99.3, weight: 126, alias: "--apt-border-neutral-subtle", cat: "border", role: "Neutral hairline divider" },
+      { id: "color_08", hex: "#05303F", rgb: [5,48,63], l: 0.289, c: 0.052, h: 226.9, weight: 564, alias: "--apt-bg-overlay", cat: "surface", role: "Modals, popovers & flyouts" },
+      { id: "color_09", hex: "#4F2000", rgb: [79,32,0], l: 0.307, c: 0.082, h: 49.4, weight: 140, alias: "--apt-status-danger-border", cat: "status", role: "In-palette danger container border" },
+      { id: "color_10", hex: "#07455E", rgb: [7,69,94], l: 0.367, c: 0.071, h: 232.0, weight: 229, alias: "--apt-border-subtle", cat: "border", role: "Oceanic structural divider" },
+      { id: "color_11", hex: "#2E5701", rgb: [46,87,1], l: 0.410, c: 0.117, h: 133.7, weight: 67, alias: "--apt-status-success-surface", cat: "status", role: "In-palette success container" },
+      { id: "color_12", hex: "#555245", rgb: [85,82,69], l: 0.437, c: 0.021, h: 96.4, weight: 113, alias: "--apt-border-default", cat: "border", role: "Standard input & card border" },
+      { id: "color_13", hex: "#71481D", rgb: [113,72,29], l: 0.440, c: 0.080, h: 64.0, weight: 134, alias: "--apt-border-warm", cat: "border", role: "Warm bronze accent divider" },
+      { id: "color_14", hex: "#00637D", rgb: [0,99,125], l: 0.464, c: 0.087, h: 223.9, weight: 196, alias: "--apt-border-interactive", cat: "border", role: "Active tabs & focus borders" },
+      { id: "color_15", hex: "#506F80", rgb: [80,111,128], l: 0.524, c: 0.045, h: 232.7, weight: 182, alias: "--apt-text-disabled", cat: "text", role: "Disabled labels & icons" },
+      { id: "color_16", hex: "#697500", rgb: [105,117,0], l: 0.534, c: 0.123, h: 116.6, weight: 54, alias: "--apt-status-success", cat: "status", role: "In-palette olive-moss success accent" },
+      { id: "color_17", hex: "#A95403", rgb: [169,84,3], l: 0.540, c: 0.135, h: 53.5, weight: 181, alias: "--apt-status-danger-strong", cat: "status", role: "Solid danger badge/button" },
+      { id: "color_18", hex: "#0380A1", rgb: [3,128,161], l: 0.558, c: 0.104, h: 224.2, weight: 177, alias: "--apt-brand-primary-muted", cat: "brand", role: "Subtle active pill & secondary cyan" },
+      { id: "color_19", hex: "#748E97", rgb: [116,142,151], l: 0.630, c: 0.032, h: 220.9, weight: 143, alias: "--apt-text-muted", cat: "text", role: "Metadata, timestamps & placeholders" },
+      { id: "color_20", hex: "#CF7818", rgb: [207,120,24], l: 0.655, c: 0.145, h: 60.7, weight: 182, alias: "--apt-status-danger", cat: "status", role: "In-palette danger text & icon" },
+      { id: "color_21", hex: "#A29062", rgb: [162,144,98], l: 0.658, c: 0.066, h: 89.0, weight: 65, alias: "--apt-accent-sand", cat: "brand", role: "Warm metallic sand chart series" },
+      { id: "color_22", hex: "#18AAC2", rgb: [24,170,194], l: 0.679, c: 0.115, h: 212.9, weight: 190, alias: "--apt-brand-primary-dim", cat: "brand", role: "Pressed primary cyan CTA" },
+      { id: "color_23", hex: "#D99D36", rgb: [217,157,54], l: 0.736, c: 0.135, h: 76.8, weight: 105, alias: "--apt-brand-secondary-dim", cat: "brand", role: "Pressed secondary gold CTA" },
+      { id: "color_24", hex: "#A0B4B9", rgb: [160,180,185], l: 0.756, c: 0.023, h: 214.4, weight: 213, alias: "--apt-text-tertiary", cat: "text", role: "Captions & secondary UI labels" },
+      { id: "color_25", hex: "#00CAE3", rgb: [0,202,227], l: 0.769, c: 0.133, h: 210.4, weight: 187, alias: "--apt-brand-primary", cat: "brand", role: "Primary interactive CTA & info" },
+      { id: "color_26", hex: "#F7BE4F", rgb: [247,190,79], l: 0.833, c: 0.141, h: 81.1, weight: 201, alias: "--apt-brand-secondary", cat: "brand", role: "Secondary gold CTA & warning" },
+      { id: "color_27", hex: "#CFD0C9", rgb: [207,208,201], l: 0.855, c: 0.010, h: 113.2, weight: 217, alias: "--apt-text-secondary", cat: "text", role: "Body copy & long-form prose" },
+      { id: "color_28", hex: "#23F2F7", rgb: [35,242,247], l: 0.874, c: 0.145, h: 197.6, weight: 494, alias: "--apt-brand-primary-hover", cat: "brand", role: "Cyan hover & bioluminescent glow" },
+      { id: "color_29", hex: "#F7DD74", rgb: [247,221,116], l: 0.898, c: 0.128, h: 95.7, weight: 168, alias: "--apt-brand-secondary-hover", cat: "brand", role: "Gold hover & highlight state" },
+      { id: "color_30", hex: "#A1FCFD", rgb: [161,252,253], l: 0.935, c: 0.087, h: 196.7, weight: 184, alias: "--apt-accent-ice", cat: "brand", role: "Specular cyan & code text" },
+      { id: "color_31", hex: "#FDEDB3", rgb: [253,237,179], l: 0.945, c: 0.076, h: 94.5, weight: 178, alias: "--apt-text-warm-display", cat: "text", role: "Warm cream-gold display accent" },
+      { id: "color_32", hex: "#FDFDFB", rgb: [253,253,251], l: 0.993, c: 0.003, h: 106.4, weight: 1177, alias: "--apt-text-primary", cat: "text", role: "Primary headings & high-emphasis text" }
+    ];
+
+    let activeCat = "all";
+    let searchTerm = "";
+    let activeTokenTab = "css";
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.remove("opacity-0");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.add("opacity-0"), 2000);
+    }
+
+    function copyText(text, label) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast("Copied " + label)).catch(() => fallbackCopy(text, label));
+      } else {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); showToast("Copied " + label); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+
+    function renderSwatches() {
+      const grid = document.getElementById("swatchGrid");
+      const q = searchTerm.trim().toLowerCase();
+      const filtered = PALETTE.filter(item => {
+        const catOk = activeCat === "all" || item.cat === activeCat;
+        const qOk = !q || item.id.includes(q) || item.hex.toLowerCase().includes(q) || item.alias.toLowerCase().includes(q) || item.role.toLowerCase().includes(q);
+        return catOk && qOk;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="col-span-full surface-base rounded-xl p-8 text-center text-sm text-[#A0B4B9]">No tokens match "${q}".</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const textOnSwatch = item.l > 0.62 ? "#000000" : "#FDFDFB";
+        return `
+          <button type="button" data-copy="var(${item.alias})" data-label="${item.alias} (${item.hex})"
+            class="swatch-card text-left surface-raised rounded-xl overflow-hidden flex flex-col">
+            <div class="h-16 w-full px-3 py-2 flex items-end justify-between" style="background-color:${item.hex}; color:${textOnSwatch};">
+              <span class="font-mono-code text-xs font-semibold">${item.hex}</span>
+              <span class="font-mono-code text-[11px] opacity-80">${item.id}</span>
+            </div>
+            <div class="p-3.5 space-y-1.5 flex-1 flex flex-col justify-between w-full">
+              <div>
+                <div class="font-mono-code text-xs font-semibold text-[#A1FCFD] truncate">${item.alias}</div>
+                <div class="text-xs text-[#CFD0C9] mt-0.5 leading-snug">${item.role}</div>
+              </div>
+              <div class="pt-2 border-t border-[#07455E]/60 flex items-center justify-between text-[11px] font-mono-code text-[#748E97]">
+                <span>L:${item.l.toFixed(2)} C:${item.c.toFixed(2)} H:${Math.round(item.h)}°</span>
+                <span>w:${item.weight}</span>
+              </div>
+            </div>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderOklchPlot() {
+      const svg = document.getElementById("oklchPlot");
+      const readout = document.getElementById("oklchHoverReadout");
+      const padL = 52, padR = 24, padT = 20, padB = 38;
+      const w = 840 - padL - padR, h = 300 - padT - padB;
+      let html = "";
+
+      // Grid lines
+      [0, 0.25, 0.5, 0.75, 1.0].forEach(val => {
+        const x = padL + val * w;
+        html += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT+h}" stroke="#07455E" stroke-dasharray="3 3" />`;
+        html += `<text x="${x}" y="${padT+h+18}" fill="#748E97" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle">L=${val.toFixed(2)}</text>`;
+      });
+      [0, 0.05, 0.10, 0.15].forEach(cVal => {
+        const y = padT + h - (cVal / 0.16) * h;
+        html += `<line x1="${padL}" y1="${y}" x2="${padL+w}" y2="${y}" stroke="#07455E" stroke-dasharray="3 3" />`;
+        html += `<text x="${padL-8}" y="${y+4}" fill="#748E97" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="end">${cVal.toFixed(2)}</text>`;
+      });
+      html += `<text x="16" y="${padT + h/2}" fill="#A0B4B9" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle" transform="rotate(-90 16 ${padT + h/2})">Chroma (C)</text>`;
+
+      PALETTE.forEach(item => {
+        const cx = padL + item.l * w;
+        const cy = padT + h - (item.c / 0.16) * h;
+        const r = Math.min(11, Math.max(5.5, Math.log10(item.weight + 10) * 2.5));
+        html += `<circle class="oklch-dot cursor-pointer" data-id="${item.id}" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" fill="${item.hex}" stroke="#FDFDFB" stroke-width="1.2" opacity="0.92" />`;
+      });
+      svg.innerHTML = html;
+
+      svg.querySelectorAll(".oklch-dot").forEach(dot => {
+        dot.addEventListener("mouseenter", () => {
+          const item = PALETTE.find(p => p.id === dot.dataset.id);
+          if (item) {
+            readout.textContent = `${item.id} (${item.hex}) · L=${item.l.toFixed(3)} C=${item.c.toFixed(3)} H=${item.h.toFixed(1)}° · ${item.alias}`;
+          }
+        });
+      });
+    }
+
+    function relLum(rgb) {
+      const c = rgb.map(v => {
+        const s = v / 255;
+        return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+    }
+
+    function contrastRatio(rgb1, rgb2) {
+      const l1 = relLum(rgb1), l2 = relLum(rgb2);
+      return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    }
+
+    function updateContrastLab() {
+      const fgId = document.getElementById("fgSelect").value;
+      const bgId = document.getElementById("bgSelect").value;
+      const fg = PALETTE.find(p => p.id === fgId);
+      const bg = PALETTE.find(p => p.id === bgId);
+      if (!fg || !bg) return;
+
+      const ratio = contrastRatio(fg.rgb, bg.rgb);
+      const preview = document.getElementById("contrastPreview");
+      preview.style.backgroundColor = bg.hex;
+      preview.style.color = fg.hex;
+
+      document.getElementById("ratioReadout").textContent = ratio.toFixed(2) + ":1";
+      const setBadge = (elId, pass) => {
+        const el = document.getElementById(elId);
+        el.textContent = pass ? "PASS" : "FAIL";
+        el.style.color = pass ? "#23F2F7" : "#CF7818";
+      };
+      setBadge("aaNormalBadge", ratio >= 4.5);
+      setBadge("aaaNormalBadge", ratio >= 7.0);
+      setBadge("aaLargeBadge", ratio >= 3.0);
+    }
+
+    function initContrastSelects() {
+      const fgSel = document.getElementById("fgSelect");
+      const bgSel = document.getElementById("bgSelect");
+      const opts = PALETTE.map(p => `<option value="${p.id}">${p.id} · ${p.hex} (${p.alias})</option>`).join("");
+      fgSel.innerHTML = opts;
+      bgSel.innerHTML = opts;
+      fgSel.value = "color_32";
+      bgSel.value = "color_04";
+      fgSel.addEventListener("change", updateContrastLab);
+      bgSel.addEventListener("change", updateContrastLab);
+      updateContrastLab();
+    }
+
+    function buildCssTokens() {
+      const lines = [":root {", "  /* Canonical Primitives */"];
+      PALETTE.forEach(p => lines.push(`  --apt-${p.id.replace("_", "-")}: ${p.hex};`));
+      lines.push("", "  /* Semantic Aliases */");
+      PALETTE.forEach(p => lines.push(`  ${p.alias}: var(--apt-${p.id.replace("_", "-")});`));
+      lines.push(
+        "",
+        "  /* Typography & Radii */",
+        '  --apt-font-display: "Space Grotesk", system-ui, sans-serif;',
+        '  --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;',
+        '  --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;',
+        "  --apt-radius-sm: 4px;",
+        "  --apt-radius-md: 8px;",
+        "  --apt-radius-lg: 14px;",
+        "  --apt-radius-pill: 9999px;",
+        "}"
+      );
+      return lines.join("\n");
+    }
+
+    function buildJsonTokens() {
+      const obj = { color: { surface: {}, border: {}, text: {}, brand: {}, status: {} } };
+      PALETTE.forEach(p => {
+        const key = p.alias.replace(/^--apt-/, "");
+        const bucket = p.cat === "surface" ? "surface" : p.cat === "border" ? "border" : p.cat === "text" ? "text" : p.cat === "status" ? "status" : "brand";
+        obj.color[bucket][key] = { "$value": p.hex, "$type": "color", "oklch": `oklch(${p.l.toFixed(3)} ${p.c.toFixed(3)} ${p.h.toFixed(1)})` };
+      });
+      return JSON.stringify(obj, null, 2);
+    }
+
+    function renderTokenCode() {
+      const block = document.getElementById("tokenCodeBlock");
+      block.textContent = activeTokenTab === "css" ? buildCssTokens() : buildJsonTokens();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderSwatches();
+      renderOklchPlot();
+      initContrastSelects();
+      renderTokenCode();
+
+      document.getElementById("swatchSearch").addEventListener("input", e => {
+        searchTerm = e.target.value;
+        renderSwatches();
+      });
+
+      document.getElementById("filterPills").addEventListener("click", e => {
+        const btn = e.target.closest(".filter-btn");
+        if (!btn) return;
+        activeCat = btn.dataset.cat;
+        document.querySelectorAll(".filter-btn").forEach(b => {
+          const active = b.dataset.cat === activeCat;
+          b.className = active
+            ? "filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#00CAE3] text-[#000000]"
+            : "filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E] hover:border-[#00637D]";
+        });
+        renderSwatches();
+      });
+
+      document.getElementById("swatchGrid").addEventListener("click", e => {
+        const card = e.target.closest("[data-copy]");
+        if (card) copyText(card.dataset.copy, card.dataset.label);
+      });
+
+      document.querySelectorAll(".preset-pair").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.getElementById("fgSelect").value = btn.dataset.fg;
+          document.getElementById("bgSelect").value = btn.dataset.bg;
+          updateContrastLab();
+        });
+      });
+
+      document.getElementById("swapPairBtn").addEventListener("click", () => {
+        const fg = document.getElementById("fgSelect");
+        const bg = document.getElementById("bgSelect");
+        const tmp = fg.value;
+        fg.value = bg.value;
+        bg.value = tmp;
+        updateContrastLab();
+      });
+
+      document.getElementById("typeTesterInput").addEventListener("input", e => {
+        const val = e.target.value || "Aptlantis Deep-Sea Telemetry System";
+        document.querySelectorAll(".specimen-line").forEach(el => { el.textContent = val; });
+      });
+
+      document.querySelectorAll(".font-switch").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const f = btn.dataset.font;
+          const out = document.getElementById("typeSpecimenOutput");
+          const lbl = document.getElementById("activeFontLabel");
+          out.style.fontFamily = f === "display" ? "var(--apt-font-display)" : f === "body" ? "var(--apt-font-body)" : "var(--apt-font-mono)";
+          lbl.textContent = f === "display" ? "--apt-font-display" : f === "body" ? "--apt-font-body" : "--apt-font-mono";
+          document.querySelectorAll(".font-switch").forEach(b => {
+            const active = b.dataset.font === f;
+            b.className = active
+              ? "font-switch px-3 py-1 rounded-lg text-xs font-semibold bg-[#00CAE3] text-[#000000]"
+              : "font-switch px-3 py-1 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]";
+          });
+        });
+      });
+
+      const setTokenTab = tab => {
+        activeTokenTab = tab;
+        document.getElementById("tabCssBtn").className = tab === "css"
+          ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#00CAE3] text-[#000000]"
+          : "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]";
+        document.getElementById("tabJsonBtn").className = tab === "json"
+          ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#00CAE3] text-[#000000]"
+          : "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#031C28] text-[#A0B4B9] border border-[#07455E]";
+        renderTokenCode();
+      };
+
+      document.getElementById("tabCssBtn").addEventListener("click", () => setTokenTab("css"));
+      document.getElementById("tabJsonBtn").addEventListener("click", () => setTokenTab("json"));
+
+      document.getElementById("copyAllCssBtn").addEventListener("click", () => copyText(buildCssTokens(), "tokens.css"));
+      document.getElementById("copyCodeBtn").addEventListener("click", () => {
+        copyText(activeTokenTab === "css" ? buildCssTokens() : buildJsonTokens(), activeTokenTab === "css" ? "tokens.css" : "tokens.json");
+      });
+
+      document.getElementById("downloadCodeBtn").addEventListener("click", () => {
+        const isCss = activeTokenTab === "css";
+        const blob = new Blob([isCss ? buildCssTokens() : buildJsonTokens()], { type: isCss ? "text/css" : "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = isCss ? "aptlantis-tokens.css" : "aptlantis-tokens.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast("Downloaded " + a.download);
+      });
+    });
+  </script>
+</body>
+</html>

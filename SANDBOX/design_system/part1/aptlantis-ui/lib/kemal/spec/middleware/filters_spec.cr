@@ -1,0 +1,347 @@
+require "../spec_helper"
+
+describe "Kemal::FilterHandler" do
+  it "executes code before home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("GET", "/greetings", :before) { test_filter.modified = "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+  end
+
+  it "executes code before GET home request but not POST home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("GET", "/greetings", :before) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+    kemal.add_route "POST", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+
+    request = HTTP::Request.new("POST", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+  end
+
+  it "executes code before all GET/POST home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "/greetings", :before) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("GET", "/greetings", :before) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("POST", "/greetings", :before) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+    kemal.add_route "POST", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("false")
+
+    request = HTTP::Request.new("POST", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("false")
+  end
+
+  it "executes before_query filter for QUERY requests but not GET requests" do
+    before_query "/greetings" do |env|
+      env.set "filtered", "true"
+    end
+
+    query "/greetings" do |env|
+      env.get?("filtered").to_s
+    end
+
+    get "/greetings" do |env|
+      env.get?("filtered").to_s
+    end
+
+    query_response = call_request_on_app(HTTP::Request.new("QUERY", "/greetings"))
+    query_response.body.should eq("true")
+
+    get_response = call_request_on_app(HTTP::Request.new("GET", "/greetings"))
+    get_response.body.should eq("")
+  end
+
+  it "executes after_query filter for QUERY requests" do
+    after_query "/greetings" do |env|
+      env.response.headers["X-After-Query"] = "applied"
+    end
+
+    query "/greetings" do
+      "hello"
+    end
+
+    response = call_request_on_app(HTTP::Request.new("QUERY", "/greetings"))
+    response.headers["X-After-Query"].should eq("applied")
+  end
+
+  it "executes code after home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("GET", "/greetings", :after) { test_filter.modified = "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+  end
+
+  it "executes code after GET home request but not POST home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("GET", "/greetings", :after) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+    kemal.add_route "POST", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+
+    request = HTTP::Request.new("POST", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+  end
+
+  it "executes code after all GET/POST home request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "/greetings", :after) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("GET", "/greetings", :after) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("POST", "/greetings", :after) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+    kemal.add_route "POST", "/greetings" { test_filter.modified }
+
+    test_filter.modified.should eq("false")
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("false")
+
+    request = HTTP::Request.new("POST", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("false")
+  end
+
+  it "executes 3 differents blocks after all request" do
+    test_filter = FilterTest.new
+    test_filter.modified = "false"
+    test_filter_second = FilterTest.new
+    test_filter_second.modified = "false"
+    test_filter_third = FilterTest.new
+    test_filter_third.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "/greetings", :before) { test_filter.modified = test_filter.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("ALL", "/greetings", :before) { test_filter_second.modified = test_filter_second.modified == "true" ? "false" : "true" }
+    filter_middleware._add_route_filter("ALL", "/greetings", :before) { test_filter_third.modified = test_filter_third.modified == "true" ? "false" : "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/greetings" { test_filter.modified }
+    kemal.add_route "POST", "/greetings" { test_filter_second.modified }
+    kemal.add_route "PUT", "/greetings" { test_filter_third.modified }
+
+    test_filter.modified.should eq("false")
+    test_filter_second.modified.should eq("false")
+    test_filter_third.modified.should eq("false")
+    request = HTTP::Request.new("GET", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+
+    request = HTTP::Request.new("POST", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("false")
+
+    request = HTTP::Request.new("PUT", "/greetings")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true")
+  end
+
+  it "executes code before and after request" do
+    before_filter = FilterTest.new
+    before_filter.modified = "false"
+
+    after_filter = FilterTest.new
+    after_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "*", :before) { before_filter.modified = "true" }
+    filter_middleware._add_route_filter("ALL", "*", :after) { after_filter.modified = "true" }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/" { "#{before_filter.modified}-#{after_filter.modified}" }
+
+    before_filter.modified.should eq("false")
+    after_filter.modified.should eq("false")
+
+    request = HTTP::Request.new("GET", "/")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    io_with_context = create_request_and_return_io_and_context(kemal, request)[0]
+    client_response = HTTP::Client::Response.from_io(io_with_context, decompress: false)
+    client_response.body.should eq("true-true")
+  end
+
+  it "executes before_all filter only once per request" do
+    execution_count = 0
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "*", :before) { execution_count += 1 }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/" { "home" }
+    kemal.add_route "GET", "/about" { "about" }
+
+    request = HTTP::Request.new("GET", "/")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+    execution_count.should eq(1)
+
+    request = HTTP::Request.new("GET", "/about")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+    execution_count.should eq(2)
+  end
+
+  it "executes before_all and path-specific filters once each" do
+    global_count = 0
+    path_count = 0
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "*", :before) { global_count += 1 }
+    filter_middleware._add_route_filter("ALL", "/about", :before) { path_count += 1 }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/about" { "about" }
+
+    request = HTTP::Request.new("GET", "/about")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+
+    global_count.should eq(1)
+    path_count.should eq(1)
+  end
+
+  it "executes before_all /* and /api/* filters correctly" do
+    global_count = 0
+    api_count = 0
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "/*", :before) { global_count += 1 }
+    filter_middleware._add_route_filter("ALL", "/api/*", :before) { api_count += 1 }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/" { "home" }
+    kemal.add_route "GET", "/api/users" { "users" }
+
+    request = HTTP::Request.new("GET", "/")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+    global_count.should eq(1)
+    api_count.should eq(0)
+
+    request = HTTP::Request.new("GET", "/api/users")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+    global_count.should eq(2)
+    api_count.should eq(1)
+  end
+
+  it "treats * and /* as the same global filter path" do
+    star_count = 0
+    slash_star_count = 0
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "*", :before) { star_count += 1 }
+    filter_middleware._add_route_filter("ALL", "/*", :before) { slash_star_count += 1 }
+
+    kemal = Kemal::RouteHandler::INSTANCE
+    kemal.add_route "GET", "/" { "home" }
+
+    request = HTTP::Request.new("GET", "/")
+    create_request_and_return_io_and_context(filter_middleware, request)
+    create_request_and_return_io_and_context(kemal, request)
+
+    star_count.should eq(1)
+    slash_star_count.should eq(1)
+  end
+
+  it "executes before_all filter on 404" do
+    before_filter = FilterTest.new
+    before_filter.modified = "false"
+
+    filter_middleware = Kemal::FilterHandler.new
+    filter_middleware._add_route_filter("ALL", "*", :before) { before_filter.modified = "true" }
+
+    error 404 do
+      before_filter.modified
+    end
+
+    request = HTTP::Request.new("GET", "/not_found")
+    client_response = call_request_on_app(request)
+    client_response.body.should eq("true")
+  end
+end
+
+class FilterTest
+  property modified : String?
+end

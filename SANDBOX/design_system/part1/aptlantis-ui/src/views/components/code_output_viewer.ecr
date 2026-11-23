@@ -1,0 +1,124 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge">MULTI-FORMAT WORKBENCH</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Preview + HTML / CSS / JS / Token JSON</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">One-click copy tracks whichever code tab is active</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist" aria-label="Code and output views">
+        <button type="button" class="apt-pill-btn" data-code-tab="preview" aria-selected="true">Rendered Preview</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="false">HTML</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="css" aria-selected="false">CSS</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="js" aria-selected="false">JavaScript</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="json" aria-selected="false">Token JSON</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#wb-html">Copy Active Source</button>
+    </div>
+
+    <div class="apt-workbench-preview" data-code-panel="preview">
+      <article class="apt-hud-card" data-variant="primary" data-density="comfortable" data-glow="on">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong class="apt-display" style="font-size:1.02rem;">Chromatic Atlas · Status Beacon</strong>
+          <span class="apt-badge" data-tone="cyan">CALIBRATED</span>
+        </div>
+        <p style="margin:0; font-size:0.83rem; color:var(--apt-text-secondary);">
+          Switch tabs above to inspect the exact HTML markup, semantic CSS tokens, optional JS, and raw token JSON behind this card.
+        </p>
+      </article>
+    </div>
+
+    <pre id="wb-html" class="apt-code-pre" data-code-panel="html" hidden><%= HTML.escape(<<-'CODE'
+<article class="apt-hud-card" data-variant="primary" data-density="comfortable" data-glow="on">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <strong class="apt-display">Chromatic Atlas · Status Beacon</strong>
+    <span class="apt-badge" data-tone="cyan">CALIBRATED</span>
+  </div>
+  <p>Semantic OKLCH surfaces with bioluminescent accent glow.</p>
+</article>
+CODE
+) %></pre>
+
+    <pre id="wb-css" class="apt-code-pre" data-code-panel="css" hidden><%= HTML.escape(<<-'CODE'
+.apt-hud-card {
+  border-radius: var(--apt-radius-md);
+  border: 1px solid var(--apt-border-interactive);
+  background: var(--apt-bg-raised);
+  padding: 1.1rem 1.25rem;
+}
+.apt-hud-card[data-glow="on"] {
+  box-shadow: var(--apt-glow-primary);
+}
+CODE
+) %></pre>
+
+    <pre id="wb-js" class="apt-code-pre" data-code-panel="js" hidden><%= HTML.escape(<<-'CODE'
+// Optional progressive toggle for glow state
+document.querySelectorAll('[data-toggle-glow]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.apt-hud-card');
+    card.dataset.glow = card.dataset.glow === 'on' ? 'off' : 'on';
+  });
+});
+CODE
+) %></pre>
+
+    <pre id="wb-json" class="apt-code-pre" data-code-panel="json" hidden><%= HTML.escape(<<-'CODE'
+{
+  "surface": { "raised": "#031C28", "overlay": "#05303F" },
+  "brand": { "primary": "#00CAE3", "hover": "#23F2F7", "secondary": "#F7BE4F" },
+  "elevation": { "glowPrimary": "0 0 18px rgba(35, 242, 247, 0.28)" }
+}
+CODE
+) %></pre>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Variation — Side-by-Side Split Preview &amp; Source</h2>
+    <span class="apt-badge" data-tone="amber">SPLIT WORKBENCH</span>
+  </div>
+
+  <div class="apt-workbench-split">
+    <div class="apt-stage" style="display:grid; place-items:center;">
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <span class="apt-badge" data-tone="cyan">ABYSSAL CYAN</span>
+        <span class="apt-badge" data-tone="amber">SOLAR AMBER</span>
+        <span class="apt-beacon">STREAM: ACTIVE</span>
+      </div>
+    </div>
+    <div class="apt-code-viewer">
+      <div class="apt-code-bar">
+        <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">HTML OUTPUT</span>
+        <button type="button" class="apt-btn" data-apt-copy="#wb-split-code">Copy</button>
+      </div>
+      <pre id="wb-split-code" class="apt-code-pre"><%= HTML.escape(<<-'CODE'
+<span class="apt-badge" data-tone="cyan">ABYSSAL CYAN</span>
+<span class="apt-badge" data-tone="amber">SOLAR AMBER</span>
+<span class="apt-beacon">STREAM: ACTIVE</span>
+CODE
+) %></pre>
+    </div>
+  </div>
+</section>

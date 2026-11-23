@@ -1,0 +1,326 @@
+module Kemal
+  module Utils
+    ZIP_TYPES = {".htm", ".html", ".txt", ".css", ".js", ".svg", ".json", ".xml", ".otf", ".ttf", ".woff", ".woff2"}
+
+    # The content codings Kemal can apply to a response body, most preferred first. The
+    # order breaks ties between codings the client is equally happy with. `send_file` has a
+    # writer for each of them; adding one here without adding its writer there leaves the
+    # body unencoded.
+    CONTENT_CODINGS = {"gzip", "deflate"}
+
+    # Below this size the framing a content coding adds costs more than the coding saves.
+    # https://webmasters.stackexchange.com/questions/31750/what-is-recommended-minimum-object-size-for-gzip-performance-benefits
+    COMPRESS_MIN_SIZE = 860
+
+    # The non-alphanumeric characters [RFC 9110 §5.6.2](https://www.rfc-editor.org/rfc/rfc9110#section-5.6.2)
+    # allows in a token. `/` is deliberately not among them.
+    private TOKEN_SPECIALS = "!#$%&'*+-.^_`|~"
+
+    # Whether *method* is a well-formed HTTP method, that is a non-empty RFC 9110
+    # token (§9.1).
+    #
+    # Crystal's request parser takes whatever bytes stand before the first space of
+    # the request line as the method, without validating them, so a method can
+    # arrive carrying any character - `/` included. Kemal keys its routing tree on
+    # `"/#{method}#{path}"`, so a method holding a `/` moves the boundary between
+    # the two: `GET/admin` + `/secret` produces the same key as `GET` +
+    # `/admin/secret` and reaches the same route, while every path-scoped guard -
+    # `use "/prefix"`, `only`/`exclude`, `before_*`/`after_*` - matches on
+    # `request.path` and sees only `/secret` (#820).
+    #
+    # Unknown but well-formed methods stay valid: a `PROPFIND` or a custom verb is
+    # a token, and answering it is the router's business, not this check's.
+    def self.valid_method?(method : String) : Bool
+      return false if method.empty?
+
+      method.each_byte do |byte|
+        char = byte.unsafe_chr
+        return false unless char.ascii_alphanumeric? || TOKEN_SPECIALS.includes?(char)
+      end
+
+      true
+    end
+
+    # Whether *method* and *path* can be looked up in a tree keyed on the two run
+    # together. Routes, and the `only`/`exclude` rules of a `Kemal::Handler`, are
+    # keyed on `"#{method}#{path}"` with nothing in between, so a key names one
+    # request line only while the method is a token - no `/` in it - and the path
+    # starts with `/`. A method holding a `/` moves the boundary one way (#820);
+    # a request-target that does not start with `/` moves it the other: `GE` +
+    # `T/admin/secret` builds the key of `GET` + `/admin/secret`, while every
+    # path-scoped guard - `use "/prefix"`, `before_*`/`after_*`, a
+    # `Kemal::Router`'s filters, prefix `only`/`exclude` rules - matches on
+    # `T/admin/secret` and lets the request through.
+    def self.routable?(method : String, path : String) : Bool
+      path_starts_with_slash?(path) && valid_method?(method)
+    end
+
+    # A URI scheme followed by its `:` (RFC 3986 §3.1), which opens an
+    # absolute-form request-target.
+    private ABSOLUTE_FORM = /\A[A-Za-z][A-Za-z0-9+\-.]*:/
+
+    # Whether *path* - `HTTP::Request#path`, the request-target as Crystal parses
+    # it, query left out - takes none of the forms RFC 9112 §3.2 allows a *method*
+    # request: origin-form (`/where`), absolute-form (`http://host/where`, which a
+    # server must accept), authority-form (`host:port`, for `CONNECT` only) and
+    # asterisk-form (`*`, for `OPTIONS` only). Kemal routes nothing on the last
+    # three; they are well formed all the same. Anything else - `T/admin`, `*` on
+    # a `GET` - is a request line no client sends, and no route or guard can be
+    # matched against it.
+    def self.malformed_request_target?(method : String, path : String) : Bool
+      return false if path_starts_with_slash?(path)
+      return false if method == "CONNECT"
+      return false if path == "*" && method == "OPTIONS"
+
+      !ABSOLUTE_FORM.matches?(path)
+    end
+
+    def self.path_starts_with_slash?(path : String)
+      path.starts_with? '/'
+    end
+
+    def self.zip_types(path : String) # https://github.com/h5bp/server-configs-nginx/blob/master/nginx.conf
+      ZIP_TYPES.includes? File.extname(path)
+    end
+
+    # Whether `send_file` compresses a file of *size* bytes stored at *path*, given the
+    # `gzip` option of `serve_static`. This also decides whether the response needs a
+    # `Vary: Accept-Encoding`, which is why `Kemal::StaticFileHandler` asks before it knows
+    # whether it is answering with a body at all.
+    def self.compressible?(path : String, size : Int) : Bool
+      # Built without a compressor, Kemal has only the stored bytes to offer, so nothing
+      # about the response depends on `Accept-Encoding`.
+      {% if flag?(:without_zlib) %}
+        return false
+      {% end %}
+
+      config = Kemal.config.serve_static
+
+      config.is_a?(Hash) && config["gzip"]? == true && size > COMPRESS_MIN_SIZE && zip_types(path)
+    end
+
+    # Exact prefix, or prefix followed by `/`. `"/"`, and `""` match all paths.
+    def self.matches_path_prefix?(prefix : String, path : String) : Bool
+      return true if prefix.in?("/", "")
+
+      return true if path == prefix
+
+      path.starts_with?("#{prefix}/")
+    end
+
+    # Parses an `Accept-Encoding` field value into its content codings and their qvalues
+    # ([RFC 9110 §12.5.3](https://www.rfc-editor.org/rfc/rfc9110#section-12.5.3)). Coding
+    # names are case-insensitive (§8.4.1) and come back lowercased, with `x-gzip` folded
+    # into `gzip` (§8.4.1.3); `*` is kept as is.
+    #
+    # An element whose qvalue is not a number in `0..1` is dropped rather than taken as
+    # `q=1`, so a garbled field value cannot be read as a request for compression, and a
+    # coding listed more than once keeps its lowest qvalue, so a later duplicate cannot
+    # undo a refusal.
+    #
+    # ```
+    # Kemal::Utils.parse_accept_encoding("gzip;q=0.5, deflate") # => {"gzip" => 0.5, "deflate" => 1.0}
+    # ```
+    def self.parse_accept_encoding(value : String) : Hash(String, Float64)
+      codings = {} of String => Float64
+
+      value.split(',') do |element|
+        coding, _, parameters = element.partition(';')
+        coding = coding.strip
+        next if coding.empty?
+
+        q = qvalue(parameters) || next
+        coding = coding.downcase
+        # RFC 9110 §8.4.1.3: a recipient is to treat `x-gzip` as `gzip`. §12.5.3 notes that
+        # qvalues are not permitted with the alias, but honoring one can only refuse a
+        # coding, never ask for one, so it is read the same way as any other element.
+        coding = "gzip" if coding == "x-gzip"
+        previous = codings[coding]?
+        codings[coding] = previous ? {previous, q}.min : q
+      end
+
+      codings
+    end
+
+    # Reads the `q` parameter out of the parameters of one `Accept-Encoding` element.
+    # Returns `1.0` when the element carries no `q`, and `nil` when it carries one that is
+    # not a qvalue.
+    private def self.qvalue(parameters : String) : Float64?
+      return 1.0 if parameters.empty?
+
+      parameters.split(';') do |parameter|
+        name, equals, value = parameter.partition('=')
+        next if equals.empty?
+        next unless name.strip.compare("q", case_insensitive: true) == 0
+
+        q = value.strip.to_f?
+        return unless q && 0.0 <= q <= 1.0
+        return q
+      end
+
+      1.0
+    end
+
+    # Picks the content coding to apply to a response, given the request's
+    # *accept_encoding* field value and the *available* codings the caller can produce
+    # ([RFC 9110 §12.5.3](https://www.rfc-editor.org/rfc/rfc9110#section-12.5.3)).
+    #
+    # Returns `"identity"` when the body should be sent unencoded, and `nil` when the field
+    # value rules out every coding, `identity` included. RFC 9110 has the origin server
+    # send an unencoded response in that case as well, so `nil` may be treated as
+    # `"identity"`; it is distinct only so that a caller can tell the two apart.
+    #
+    # A missing field is answered with `"identity"`: it carries no preference, and Kemal
+    # does not compress a response the client did not ask to have compressed.
+    #
+    # ```
+    # Kemal::Utils.select_content_coding("gzip;q=0, deflate") # => "deflate"
+    # Kemal::Utils.select_content_coding("gzip;q=0")          # => "identity"
+    # Kemal::Utils.select_content_coding("identity;q=0")      # => nil
+    # ```
+    def self.select_content_coding(accept_encoding : String?, available : Enumerable(String) = CONTENT_CODINGS) : String?
+      return "identity" unless accept_encoding
+
+      codings = parse_accept_encoding(accept_encoding)
+      wildcard = codings["*"]?
+
+      best = nil
+      best_q = 0.0
+      available.each do |coding|
+        q = codings[coding]? || wildcard || 0.0
+        next unless q > best_q
+        best = coding
+        best_q = q
+      end
+
+      identity = codings["identity"]? || wildcard
+
+      if best.nil?
+        # `identity` is acceptable by default; only an explicit `identity;q=0`, or a `*;q=0`
+        # with no entry of its own for `identity`, refuses the unencoded body as well.
+        identity.nil? || identity > 0.0 ? "identity" : nil
+      elsif identity.nil? || best_q >= identity
+        # A client that listed a coding at all asked for it in preference to the stored
+        # bytes, so an unstated `identity` loses to it. Once the field value does state a
+        # qvalue for `identity`, directly or through `*`, it is ranked like any other coding.
+        best
+      else
+        "identity"
+      end
+    end
+
+    # Adds *field* to the `Vary` response header, keeping the fields already listed there.
+    # A field that is present, and the `*` that already covers every field, are left alone.
+    def self.append_vary(headers : HTTP::Headers, field : String) : Nil
+      existing = headers["Vary"]?
+      if existing.nil? || existing.empty?
+        headers["Vary"] = field
+        return
+      end
+
+      existing.split(',') do |name|
+        name = name.strip
+        return if name == "*" || name.compare(field, case_insensitive: true) == 0
+      end
+
+      headers["Vary"] = "#{existing}, #{field}"
+    end
+
+    # Marks *etag* as identifying the *coding* encoded form of a representation, so that the
+    # encoded and identity forms of one file cannot share a validator
+    # ([RFC 9110 §8.8.1](https://www.rfc-editor.org/rfc/rfc9110#section-8.8.1)). The suffix
+    # is spelled the way nginx and Apache spell it.
+    #
+    # Only the codings in `CONTENT_CODINGS` are marked. A tag Kemal cannot reproduce from
+    # the file's own tag is one it could never match on revalidation, which would re-send
+    # the whole body every time, so a coding the application applied itself is left alone.
+    #
+    # ```
+    # Kemal::Utils.etag_with_coding(%(W/"1700000000"), "gzip") # => %(W/"1700000000-gzip")
+    # ```
+    def self.etag_with_coding(etag : String, coding : String) : String
+      return etag unless CONTENT_CODINGS.includes?(coding) && etag.ends_with?('"')
+
+      %(#{etag.rchop}-#{coding}")
+    end
+
+    # The content coding `send_file` applies to a file of *size* bytes at *path* for a
+    # request carrying *request_headers*, or `nil` when it sends the stored bytes as they
+    # are. `Kemal::StaticFileHandler` has to know the answer before it writes a body, to
+    # name the right entity tag on a `304`, so both ask the same question here rather than
+    # each working it out for itself.
+    def self.content_coding_for(request_headers : HTTP::Headers, path : String, size : Int) : String?
+      return unless compressible?(path, size)
+
+      coding = select_content_coding(request_headers["Accept-Encoding"]?)
+      coding unless coding == "identity"
+    end
+
+    # Records *coding* as the content coding of a response and gives the encoded form its
+    # own entity tag, so that a cache holding the identity representation under `W/"..."`
+    # cannot hand it to a client being served the encoded one (RFC 9110 §8.8.1). The
+    # `-gzip` style suffix is the one nginx and Apache use.
+    #
+    # Only for a coding Kemal applied itself: an entity tag that came with a body the
+    # caller encoded already describes that body.
+    def self.set_content_coding(headers : HTTP::Headers, coding : String) : Nil
+      headers["Content-Encoding"] = coding
+
+      if etag = headers["Etag"]?
+        headers["Etag"] = etag_with_coding(etag, coding)
+      end
+    end
+
+    # Builds a `Content-Disposition` field value for *filename*
+    # ([RFC 6266 §4.3](https://www.rfc-editor.org/rfc/rfc6266#section-4.3)).
+    #
+    # The `filename` parameter is a quoted-string and has to stay in ASCII, so `"` and
+    # `\\` are escaped as quoted-pairs and every other character outside printable ASCII
+    # becomes `_`. When that loses something, the original name follows as
+    # `filename*=UTF-8''...` percent-encoded per
+    # [RFC 8187](https://www.rfc-editor.org/rfc/rfc8187), which user agents that
+    # understand it prefer. A name that is plain ASCII to begin with gets only the
+    # first form, unchanged.
+    #
+    # ```
+    # Kemal::Utils.content_disposition("attachment", "report.pdf")  # => %(attachment; filename="report.pdf")
+    # Kemal::Utils.content_disposition("attachment", "rapor ü.pdf") # => %(attachment; filename="rapor _.pdf"; filename*=UTF-8''rapor%20%C3%BC.pdf)
+    # ```
+    def self.content_disposition(disposition : String, filename : String) : String
+      String.build do |header|
+        header << disposition << %(; filename=")
+        lossy = false
+        filename.each_char do |char|
+          case char
+          when '"', '\\'
+            header << '\\' << char
+          when ' '..'~'
+            header << char
+          else
+            lossy = true
+            header << '_'
+          end
+        end
+        header << '"'
+
+        if lossy
+          header << "; filename*=UTF-8''"
+          percent_encode_attr_chars(filename, header)
+        end
+      end
+    end
+
+    # Percent-encodes everything in *value* that is not an RFC 8187 `attr-char`.
+    private def self.percent_encode_attr_chars(value : String, io : IO) : Nil
+      value.each_byte do |byte|
+        char = byte.unsafe_chr
+        if char.ascii_alphanumeric? || "!#$&+-.^_`|~".includes?(char)
+          io << char
+        else
+          io << '%'
+          io << byte.to_s(16, upcase: true).rjust(2, '0')
+        end
+      end
+    end
+  end
+end

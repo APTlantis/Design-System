@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= active_nav == "gallery" ? "APTLANTIS v2.0 — Component Gallery" : "APTLANTIS v2.0 — Telemetry Workspace" %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens-extended.css" />
+  <link rel="stylesheet" href="/css/apt-components.css" />
+  <link rel="stylesheet" href="/css/apt-topology.css" />
+  <link rel="stylesheet" href="/css/apt-gallery.css" />
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script src="https://unpkg.com/htmx-ext-sse@2.2.2/sse.js"></script>
+  <script src="/js/apt-explainer.js" defer></script>
+</head>
+<body hx-ext="sse" sse-connect="/stream">
+  <div class="apt-shell">
+    <nav class="apt-rail" aria-label="Workspace Modules">
+      <div class="apt-rail-group">
+        <a href="/" class="apt-btn" data-variant="ghost" data-size="icon" data-active="<%= active_nav == "telemetry" %>" title="Telemetry Ledger">
+          <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-ledger"/></svg>
+        </a>
+        <a href="/components" class="apt-btn" data-variant="ghost" data-size="icon" data-active="<%= active_nav == "gallery" %>" title="Component Gallery">
+          <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-gallery"/></svg>
+        </a>
+        <a href="/#topology-panel" class="apt-btn" data-variant="ghost" data-size="icon" title="Contract Topology">
+          <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-topology"/></svg>
+        </a>
+        <button class="apt-btn" data-variant="ghost" data-size="icon" title="Command Palette (⌘K)" onclick="openCommandPalette()">
+          <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-search"/></svg>
+        </button>
+      </div>
+      <div class="apt-rail-group">
+        <span class="apt-mono" style="font-size:0.65rem; color:var(--apt-text-muted);">v2.0</span>
+      </div>
+    </nav>
+
+    <header class="apt-topbar">
+      <div style="display:flex; align-items:center; gap:0.85rem;">
+        <a href="/" class="apt-display" style="font-weight:700; letter-spacing:0.06em; color:var(--apt-brand-primary-hover); text-decoration:none;">APTLANTIS</a>
+        <span style="color:var(--apt-border-interactive);">/</span>
+        <span class="apt-mono" style="font-size:0.8rem; color:var(--apt-text-secondary);"><%= topbar_label %></span>
+        <span class="apt-beacon" sse-swap="heartbeat" hx-swap="innerHTML">STREAM: ACTIVE</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <% if active_nav == "gallery" %>
+          <a href="/components" class="apt-btn" data-variant="ghost">Gallery Index</a>
+          <a href="/" class="apt-btn" data-variant="ghost">Telemetry App</a>
+        <% else %>
+          <a href="/components" class="apt-btn" data-variant="ghost">Component Gallery</a>
+        <% end %>
+        <button class="apt-btn" data-variant="ghost" onclick="openCommandPalette()">
+          <span>Search</span>
+          <kbd class="apt-kbd">⌘K</kbd>
+        </button>
+
+        <button class="apt-btn" popovertarget="sector-menu">Sector Filter ▾</button>
+        <div id="sector-menu" popover="auto" class="apt-menu">
+          <button class="apt-menu-item"
+                  hx-get="/telemetry?sector=ALL"
+                  hx-target="#ledger-body"
+                  onclick="document.getElementById('sector-menu').hidePopover()">
+            <span>All Sectors</span><kbd class="apt-kbd">ALL</kbd>
+          </button>
+          <button class="apt-menu-item"
+                  hx-get="/telemetry?sector=WGS"
+                  hx-target="#ledger-body"
+                  onclick="document.getElementById('sector-menu').hidePopover()">
+            <span>WGS · Governance</span><kbd class="apt-kbd">WGS</kbd>
+          </button>
+          <button class="apt-menu-item"
+                  hx-get="/telemetry?sector=DRS"
+                  hx-target="#ledger-body"
+                  onclick="document.getElementById('sector-menu').hidePopover()">
+            <span>DRS · Release</span><kbd class="apt-kbd">DRS</kbd>
+          </button>
+          <button class="apt-menu-item"
+                  hx-get="/telemetry?sector=CTS"
+                  hx-target="#ledger-body"
+                  onclick="document.getElementById('sector-menu').hidePopover()">
+            <span>CTS · Telemetry</span><kbd class="apt-kbd">CTS</kbd>
+          </button>
+        </div>
+
+        <button class="apt-btn" data-variant="primary" onclick="document.getElementById('deploy-dialog').showModal()">
+          + Dispatch Contract
+        </button>
+      </div>
+    </header>
+
+    <main class="apt-canvas">
+      <%= content %>
+    </main>
+
+    <aside id="apt-inspector" class="apt-inspector" aria-label="Node Inspector"></aside>
+  </div>
+
+  <div id="apt-bulk-bar" class="apt-bulk-bar" hidden></div>
+
+  <dialog id="deploy-dialog" class="apt-dialog">
+    <form hx-post="/contracts/dispatch"
+          hx-target="#ledger-body"
+          hx-swap="afterbegin"
+          hx-on::after-request="this.reset(); this.closest('dialog').close();"
+          style="padding:1.25rem; display:grid; gap:1rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <h3 class="apt-display" style="margin:0; font-size:1.05rem;">Dispatch Release Contract</h3>
+        <button type="button" class="apt-btn" data-variant="ghost" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="apt-field">
+        <label for="new-node">Target Node Hostname</label>
+        <input id="new-node" name="node" class="apt-input apt-mono" required placeholder="apt-node-05.abyssal" />
+      </div>
+      <div class="apt-field">
+        <label for="new-contract">Governance Spec</label>
+        <select id="new-contract" name="contract" class="apt-input apt-mono">
+          <option value="DRS · v2.4">DRS · v2.4 (Deterministic Release)</option>
+          <option value="WGS · v2.0">WGS · v2.0 (Workspace Governance)</option>
+          <option value="CTS · v1.9">CTS · v1.9 (Continuous Telemetry)</option>
+        </select>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:0.25rem;">
+        <button type="button" class="apt-btn" data-variant="ghost" onclick="this.closest('dialog').close()">Cancel</button>
+        <button type="submit" class="apt-btn" data-variant="primary">Execute Dispatch</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="cmd-dialog" class="apt-dialog" style="margin-top:10vh;">
+    <div style="padding:0.85rem;">
+      <input id="cmd-input" class="apt-input apt-mono" style="width:100%;" placeholder="Filter actions or contracts..." oninput="filterCommands(this.value)" />
+      <div id="cmd-list" style="margin-top:0.65rem; display:grid; gap:0.25rem;">
+        <a class="apt-menu-item" href="/components" style="text-decoration:none;">
+          <span>Open Component Gallery (12 Shortlist)</span><kbd class="apt-kbd">GALLERY</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/process-stepper" style="text-decoration:none;">
+          <span>01 · Interactive Process Stepper</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/explanation-panel" style="text-decoration:none;">
+          <span>02 · Expandable Explanation Panel</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/diagram-inspector" style="text-decoration:none;">
+          <span>03 · Interactive Diagram Inspector</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/before-after" style="text-decoration:none;">
+          <span>04 · Before/After Comparison</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/theme-switcher" style="text-decoration:none;">
+          <span>05 · Theme Switcher &amp; Live Preview</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/oklch-explorer" style="text-decoration:none;">
+          <span>06 · Color &amp; OKLCH Explorer</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/artifact-gallery" style="text-decoration:none;">
+          <span>07 · Artifact Gallery</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/feature-spotlight" style="text-decoration:none;">
+          <span>08 · Feature Spotlight</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/interactive-timeline" style="text-decoration:none;">
+          <span>09 · Interactive Timeline</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/code-output-viewer" style="text-decoration:none;">
+          <span>10 · Tabbed Code &amp; Output Viewer</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/decision-explorer" style="text-decoration:none;">
+          <span>11 · Guided Decision Explorer</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <a class="apt-menu-item" href="/components/component-playground" style="text-decoration:none;">
+          <span>12 · Component Playground</span><kbd class="apt-kbd">LIVE</kbd>
+        </a>
+        <button class="apt-menu-item" onclick="document.getElementById('cmd-dialog').close(); document.getElementById('deploy-dialog').showModal()">
+          <span>+ Dispatch New Release Contract</span><kbd class="apt-kbd">ACTION</kbd>
+        </button>
+        <button class="apt-menu-item" hx-get="/telemetry?sector=DRS" hx-target="#ledger-body" onclick="document.getElementById('cmd-dialog').close()">
+          <span>Filter Ledger: DRS Contracts</span><kbd class="apt-kbd">FILTER</kbd>
+        </button>
+        <button class="apt-menu-item" hx-get="/telemetry?sector=ALL" hx-target="#ledger-body" onclick="document.getElementById('cmd-dialog').close()">
+          <span>Reset Ledger Filter</span><kbd class="apt-kbd">RESET</kbd>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="apt-toast-region" aria-live="polite"></div>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: true,
+      securityLevel: 'loose',
+      theme: 'base',
+      themeVariables: {
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: '13px',
+        primaryColor: '#05303F',
+        primaryTextColor: '#FDFDFB',
+        primaryBorderColor: '#00CAE3',
+        lineColor: '#00637D',
+        background: '#00101A'
+      }
+    });
+
+    function bindTopologyNodes() {
+      document.querySelectorAll('#apt-mermaid-host .node').forEach((nodeEl) => {
+        if (nodeEl.dataset.bound) return;
+        nodeEl.dataset.bound = 'true';
+        nodeEl.addEventListener('click', () => {
+          const rawId = nodeEl.id.replace(/^flowchart-/, '').replace(/-\d+$/, '');
+          htmx.ajax('GET', `/nodes/${encodeURIComponent(rawId)}`, {
+            target: '#apt-inspector',
+            swap: 'innerHTML'
+          });
+        });
+      });
+    }
+
+    document.body.addEventListener('htmx:afterSwap', async (evt) => {
+      if (evt.detail.target && evt.detail.target.id === 'apt-mermaid-host') {
+        evt.detail.target.removeAttribute('data-processed');
+        await mermaid.run({ nodes: [evt.detail.target] });
+        bindTopologyNodes();
+      }
+    });
+
+    window.addEventListener('load', () => setTimeout(bindTopologyNodes, 150));
+  </script>
+
+  <script>
+    function openCommandPalette() {
+      const dlg = document.getElementById('cmd-dialog');
+      dlg.showModal();
+      document.getElementById('cmd-input').focus();
+    }
+
+    function filterCommands(q) {
+      const term = q.toLowerCase();
+      document.querySelectorAll('#cmd-list .apt-menu-item').forEach(btn => {
+        btn.style.display = btn.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
+      });
+    }
+
+    function toggleSelectAll(master) {
+      document.querySelectorAll('#ledger-body input[name="ids"]').forEach(cb => {
+        cb.checked = master.checked;
+      });
+      // Trigger htmx selection sync on the first checkbox if any exist
+      const first = document.querySelector('#ledger-body input[name="ids"]');
+      if (first) {
+        htmx.trigger(first, 'change');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openCommandPalette();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<div class="apt-artifact-detail" aria-live="polite">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+    <span class="apt-badge" data-tone="cyan"><%= HTML.escape(artifact.category.upcase) %> · <%= HTML.escape(artifact.format) %></span>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);"><%= HTML.escape(artifact.size_label) %></span>
+  </div>
+
+  <div>
+    <h3 class="apt-display" style="margin:0 0 0.35rem; font-size:1.12rem;"><%= HTML.escape(artifact.name) %></h3>
+    <p style="margin:0; font-size:0.84rem; color:var(--apt-text-secondary);"><%= HTML.escape(artifact.summary) %></p>
+  </div>
+
+  <div class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">
+    Path: <span style="color:var(--apt-accent-ice);"><%= HTML.escape(artifact.workspace_path) %></span>
+  </div>
+
+  <div style="display:grid; gap:0.35rem;">
+    <span class="apt-mono" style="font-size:0.68rem; color:var(--apt-brand-secondary);">USAGE SNIPPET</span>
+    <pre id="artifact-copy-target" class="apt-explain-code"><%= HTML.escape(artifact.copy_snippet) %></pre>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+    <button type="button" class="apt-btn" data-apt-copy="#artifact-copy-target">Copy Snippet</button>
+    <a href="/components/artifact-gallery/download/<%= artifact.id %>" class="apt-btn" data-variant="primary" download>
+      ↓ Download <%= HTML.escape(artifact.format) %>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<section>
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem;">
+    <h2 class="apt-panel-title">Active Telemetry Ledger</h2>
+    <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-text-secondary);" id="row-counter">
+      <%= nodes.size %> NODES ONLINE
+    </span>
+  </div>
+
+  <div class="apt-table-wrap">
+    <table class="apt-table">
+      <thead>
+        <tr>
+          <th style="width:36px;">
+            <input type="checkbox" class="apt-check" aria-label="Select all nodes" onclick="toggleSelectAll(this)" />
+          </th>
+          <th>Node Identifier</th>
+          <th>Contract</th>
+          <th>Status</th>
+          <th>Latency</th>
+          <th>SHA-256 Digest</th>
+        </tr>
+      </thead>
+      <tbody id="ledger-body">
+        <% nodes.each do |node| %>
+          <%= render_partial("_ledger_row", node: node) %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="topology-panel" class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Contract Topology Graph (Click Node to Inspect)</h2>
+    <span class="apt-badge" data-tone="cyan">apt-designsystem-mermaid.json</span>
+  </div>
+
+  <div class="apt-topology-frame">
+    <div class="apt-topology-toolbar">
+      <button class="apt-btn" hx-get="/topology/refresh" hx-target="#apt-mermaid-host" hx-swap="innerHTML">
+        ↻ Sync Graph
+      </button>
+    </div>
+
+    <div id="apt-mermaid-host" class="mermaid">
+      flowchart LR
+        02["WGS · Governance Quorum"]:::govNode --> 01["DRS · Deterministic Release"]:::releaseNode
+        01 --> 03["CTS · Telemetry Ledger"]:::auditNode
+        01 --> 04["apt-edge-04.pelagic"]:::releaseNode
+
+        classDef govNode fill:#031C28,stroke:#F7BE4F,stroke-width:1.5px,color:#FDFDFB;
+        classDef releaseNode fill:#05303F,stroke:#00CAE3,stroke-width:1.5px,color:#FDFDFB;
+        classDef auditNode fill:#00101A,stroke:#A29062,stroke-width:1.5px,color:#FDFDFB;
+    </div>
+  </div>
+</section>

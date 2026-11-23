@@ -1,0 +1,14 @@
+{
+  "sequential": [
+    "#004445",
+    "#005759",
+    "#006B6E",
+    "#008083",
+    "#109599",
+    "#34AAAD",
+    "#4DBEC1",
+    "#65D4D6",
+    "#7BE9EC"
+  ],
+  "acceptance_limits": "Single source hue, ordered lightness; no perceptual-uniformity or CVD claim."
+}

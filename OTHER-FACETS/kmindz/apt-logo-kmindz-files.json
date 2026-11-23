@@ -1,0 +1,68 @@
+{
+  "schema": "aptlantis.artifact-manifest.v2",
+  "target": "kmindz",
+  "theme": "Aptlantis-Logo",
+  "theme_identity": {
+    "version": 1,
+    "prefix": "apt",
+    "slug": "logo",
+    "evidence": [
+      {
+        "source": "--theme-version",
+        "version": 1
+      }
+    ]
+  },
+  "stem": "apt-logo-kmindz",
+  "files": [
+    {
+      "file": "apt-logo-kmindz.kmind-theme.json",
+      "role": "primary",
+      "logical_name": "KMINDS.json",
+      "fixed_name_reason": null,
+      "sha256": "eb5cff0b39cdd39ab3fe5987c14ffea33e4b94b62327a955f235c2c985f3bde3"
+    },
+    {
+      "file": "apt-logo-kmindz-format-provenance.json",
+      "role": "format-provenance",
+      "logical_name": "format-provenance.json",
+      "fixed_name_reason": null,
+      "sha256": "6d7df616aa11e4f13d30116b34166e2d5241e08ed634af456f76a6ef6d9e03b7"
+    },
+    {
+      "file": "apt-logo-kmindz-palette.toml",
+      "role": "palette",
+      "logical_name": "palette.toml",
+      "fixed_name_reason": null,
+      "sha256": "fbf097c01a67933e0e01e70669f7a0b169a3eca8317c565882a117a2af5b381b"
+    },
+    {
+      "file": "apt-logo-kmindz-preview.svg",
+      "role": "preview",
+      "logical_name": "preview.svg",
+      "fixed_name_reason": null,
+      "sha256": "7a459debf9c642e04d3bad4b16413a0b37c01793b5246a2f73c4328e626aea2c"
+    },
+    {
+      "file": "apt-logo-kmindz-swatch.png",
+      "role": "swatch",
+      "logical_name": "swatch.png",
+      "fixed_name_reason": null,
+      "sha256": "8568b8bc096672083017ef7abf0f565611524a4f469713d4c773467cc412e595"
+    },
+    {
+      "file": "apt-logo-kmindz-tokens.json",
+      "role": "tokens",
+      "logical_name": "tokens.json",
+      "fixed_name_reason": null,
+      "sha256": "fc70c981d52ac2275a3bfc8f94a6f029da84e03582bcc5848e33fa0078fee280"
+    },
+    {
+      "file": "apt-logo-kmindz-validation.json",
+      "role": "validation",
+      "logical_name": "validation.json",
+      "fixed_name_reason": null,
+      "sha256": "bf77ce3e505089b0a3fe91bc72f4418f4036d0e339cf414afb7f0a9d302962d3"
+    }
+  ]
+}

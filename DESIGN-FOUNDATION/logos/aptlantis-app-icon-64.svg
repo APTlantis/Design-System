@@ -1,0 +1,20 @@
+<svg id="svg-app-icon" width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="appGlow" cx="32" cy="32" r="30" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#05303F"/>
+                    <stop offset="100%" stop-color="#000000"/>
+                  </radialGradient>
+                </defs>
+                <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="url(#appGlow)" stroke="#07455E" stroke-width="2"/>
+                <circle cx="32" cy="32" r="24" stroke="#00637D" stroke-width="1" stroke-dasharray="3 3"/>
+                <!-- Gold Shield -->
+                <path d="M32 11L50 18V35C50 47.5 42.2 55.2 32 59C21.8 55.2 14 47.5 14 35V18L32 11Z" fill="#00101A" stroke="#F7BE4F" stroke-width="2.4"/>
+                <!-- Top Cyan Diamond -->
+                <polygon points="32,5 36.5,9.5 32,14 27.5,9.5" fill="#23F2F7"/>
+                <!-- Citadel Silhouette -->
+                <path d="M29.5 21H34.5V25.5H38.5V30.5H42V40H22V30.5H25.5V25.5H29.5V21Z" fill="#FDFDFB"/>
+                <rect x="30.2" y="33" width="3.6" height="7" rx="1.8" fill="#F7BE4F"/>
+                <!-- Cyan Wave Ribbons -->
+                <path d="M19.5 43C24 40 28 46 32 43C36 40 40 46 44.5 43" stroke="#23F2F7" stroke-width="2.4" stroke-linecap="round"/>
+                <path d="M22.5 48.5C26 46 29 51 32 48.5C35 46 38 51 41.5 48.5" stroke="#00CAE3" stroke-width="2" stroke-linecap="round"/>
+              </svg>

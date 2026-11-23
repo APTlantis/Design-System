@@ -1,0 +1,180 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge">PURE HTML + CSS + JS</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Generic Dark UI vs Aptlantis OKLCH Identity</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Drag handle, use ←/→ keys, or click presets</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-compare-wrap" data-apt-compare>
+      <div class="apt-compare-toolbar">
+        <div class="apt-pill-group" role="group" aria-label="Comparison view presets">
+          <button type="button" class="apt-pill-btn" data-compare-preset="100" aria-pressed="false">Before (Raw)</button>
+          <button type="button" class="apt-pill-btn" data-compare-preset="50" aria-pressed="true">Split 50 / 50</button>
+          <button type="button" class="apt-pill-btn" data-compare-preset="0" aria-pressed="false">After (Aptlantis)</button>
+        </div>
+        <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-text-secondary);">
+          DIVIDER: <strong data-compare-readout style="color:var(--apt-brand-primary-hover);">50%</strong>
+        </span>
+      </div>
+
+      <div class="apt-compare" style="--split: 50%;">
+        <span class="apt-compare-tag" data-side="before">BEFORE · GENERIC DARK</span>
+        <span class="apt-compare-tag" data-side="after">AFTER · APTLANTIS v2.0</span>
+
+        <!-- BEFORE LAYER -->
+        <div class="apt-compare-layer apt-compare-before">
+          <div class="apt-mock-card apt-mock-card--raw">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="font-size:1.05rem; color:#e2e8f0;">Release Contract #04</strong>
+              <span style="font-size:0.72rem; padding:2px 8px; border-radius:999px; background:#334155; color:#cbd5e1;">ACTIVE</span>
+            </div>
+            <p style="margin:0; font-size:0.84rem; color:#94a3b8;">
+              Flat gray surface, default system font, low-distinction borders, and uncalibrated status contrast.
+            </p>
+            <div style="display:flex; gap:0.5rem;">
+              <span style="padding:0.4rem 0.8rem; border-radius:6px; background:#3b82f6; color:#fff; font-size:0.8rem;">Verify Digest</span>
+              <span style="padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #475569; color:#cbd5e1; font-size:0.8rem;">Inspect</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AFTER LAYER -->
+        <div class="apt-compare-layer apt-compare-after">
+          <div class="apt-mock-card apt-mock-card--apt">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong class="apt-display" style="font-size:1.08rem; color:var(--apt-text-primary); letter-spacing:-0.01em;">Release Contract #04</strong>
+              <span class="apt-badge" data-tone="cyan">VERIFIED · OKLCH</span>
+            </div>
+            <p style="margin:0; font-size:0.84rem; color:var(--apt-text-secondary);">
+              Abyssal cyan surface elevation, Space Grotesk + JetBrains Mono hierarchy, and bioluminescent focus accents.
+            </p>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <span class="apt-btn" data-variant="primary" style="pointer-events:none;">Verify Digest</span>
+              <span class="apt-btn" data-variant="ghost" style="pointer-events:none;">Inspect</span>
+              <span class="apt-mono" style="margin-left:auto; font-size:0.72rem; color:var(--apt-brand-secondary);">10.4 ms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="apt-compare-divider" aria-hidden="true">
+          <div class="apt-compare-handle">↔</div>
+        </div>
+
+        <input type="range"
+               class="apt-compare-range"
+               min="0"
+               max="100"
+               value="50"
+               aria-label="Compare generic dark UI before and Aptlantis styled UI after" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Variation — CSS Token Refactor Comparison</h2>
+    <span class="apt-badge" data-tone="amber">CODE STATE DIFF</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-compare-wrap" data-apt-compare>
+      <div class="apt-compare-toolbar">
+        <div class="apt-pill-group" role="group" aria-label="Code comparison presets">
+          <button type="button" class="apt-pill-btn" data-compare-preset="100" aria-pressed="false">Hardcoded Hex</button>
+          <button type="button" class="apt-pill-btn" data-compare-preset="50" aria-pressed="true">Split</button>
+          <button type="button" class="apt-pill-btn" data-compare-preset="0" aria-pressed="false">Semantic Tokens</button>
+        </div>
+        <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-text-secondary);">
+          DIVIDER: <strong data-compare-readout style="color:var(--apt-brand-primary-hover);">50%</strong>
+        </span>
+      </div>
+
+      <div class="apt-compare" style="--split: 50%; min-height: 210px;">
+        <span class="apt-compare-tag" data-side="before">BEFORE · RAW HEX</span>
+        <span class="apt-compare-tag" data-side="after">AFTER · SEMANTIC TOKENS</span>
+
+        <div class="apt-compare-layer apt-compare-before">
+          <pre class="apt-explain-code" style="max-width:520px; margin:0 auto; width:100%; color:#94a3b8;">.card {
+  background: #14252d;
+  border: 1px solid #07455e;
+  color: #fdfdfb;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}</pre>
+        </div>
+
+        <div class="apt-compare-layer apt-compare-after">
+          <pre class="apt-explain-code" style="max-width:520px; margin:0 auto; width:100%;">.card {
+  background: var(--apt-bg-raised);
+  border: 1px solid var(--apt-border-subtle);
+  color: var(--apt-text-primary);
+  box-shadow: var(--apt-shadow-raised);
+}</pre>
+        </div>
+
+        <div class="apt-compare-divider" aria-hidden="true">
+          <div class="apt-compare-handle">↔</div>
+        </div>
+
+        <input type="range"
+               class="apt-compare-range"
+               min="0"
+               max="100"
+               value="50"
+               aria-label="Compare raw hex CSS before and semantic tokens CSS after" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">No backend required · Keyboard accessible</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Standalone HTML</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#compare-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="compare-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-compare-wrap" data-apt-compare>
+  <div class="apt-compare" style="--split: 50%;">
+    <span class="apt-compare-tag" data-side="before">BEFORE</span>
+    <span class="apt-compare-tag" data-side="after">AFTER</span>
+    <div class="apt-compare-layer apt-compare-before">Before content...</div>
+    <div class="apt-compare-layer apt-compare-after">After content...</div>
+    <div class="apt-compare-divider" aria-hidden="true">
+      <div class="apt-compare-handle">↔</div>
+    </div>
+    <input type="range" class="apt-compare-range" min="0" max="100" value="50" aria-label="Before and after comparison" />
+  </div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

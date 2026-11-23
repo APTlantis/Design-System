@@ -1,0 +1,28 @@
+<svg id="svg-wordmark-lockup" viewBox="0 0 340 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="wmGold" x1="12" y1="12" x2="76" y2="86" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F7DD74"/>
+                    <stop offset="100%" stop-color="#D99D36"/>
+                  </linearGradient>
+                  <linearGradient id="wmTextGrad" x1="96" y1="30" x2="96" y2="66" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FDFDFB"/>
+                    <stop offset="100%" stop-color="#CFD0C9"/>
+                  </linearGradient>
+                </defs>
+                <!-- Shield Emblem -->
+                <path d="M44 14L76 26V53C76 73 62 86 44 92C26 86 12 73 12 53V26L44 14Z" fill="#00101A" stroke="url(#wmGold)" stroke-width="3.5"/>
+                <polygon points="44,5 51,12 44,19 37,12" fill="#23F2F7" stroke="url(#wmGold)" stroke-width="1.5"/>
+                <path d="M40 30H48V37H54V45H60V61H28V45H34V37H40V30Z" fill="#FDFDFB"/>
+                <path d="M40.5 61V53C40.5 51.1 42.1 49.5 44 49.5C45.9 49.5 47.5 51.1 47.5 53V61H40.5Z" fill="#F7BE4F"/>
+                <path d="M21 65C29 60 36 70 44 65C52 60 59 70 67 65" stroke="#23F2F7" stroke-width="3" stroke-linecap="round"/>
+                <path d="M26 73C32 69 38 77 44 73C50 69 56 77 62 73" stroke="#00CAE3" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- Geometric Wordmark -->
+                <text x="94" y="54" fill="url(#wmTextGrad)" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="30" letter-spacing="3.5">APTLANTIS</text>
+
+                <!-- Telemetry Accent Rule & Diamond Node -->
+                <line x1="95" y1="67" x2="298" y2="67" stroke="#07455E" stroke-width="1.5"/>
+                <line x1="95" y1="67" x2="178" y2="67" stroke="#00CAE3" stroke-width="2"/>
+                <polygon points="306,67 311,62 316,67 311,72" fill="#F7BE4F"/>
+                <text x="95" y="81" fill="#748E97" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="9.5" letter-spacing="2.2">NAVIGATOR TELEMETRY</text>
+              </svg>

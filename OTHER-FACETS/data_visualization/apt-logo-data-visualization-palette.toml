@@ -1,0 +1,863 @@
+
+["theme"]
+"name" = "Aptlantis-Logo"
+"variant" = "dark"
+"source_sha256" = "d7e0d3f79cc3f38ff793db33edc2ad4b8335a8691e596959e19ac4f9c1e1ee7b"
+"final_colors" = 37
+
+["theme"."theme_identity"]
+"version" = 1
+"prefix" = "apt"
+"slug" = "logo"
+"evidence" = [{ "source" = "--theme-version", "version" = 1 }]
+
+["transformation"]
+"schema" = "aptlantis.target-palette.v1"
+"profile" = "data_visualization"
+"requested_count" = 48
+"actual_count" = 37
+"unique_hex_count" = 27
+"canonical_count" = 32
+"token_order" = ["background", "foreground", "panel", "elevated", "muted", "primary", "secondary", "selection", "selection_text", "border", "warning", "error", "success", "info", "keyword", "string", "number", "function", "type", "operator", "constant", "comment", "series_1", "series_2", "series_3", "series_4", "series_5", "series_6", "sequential_0", "sequential_1", "sequential_2", "sequential_3", "sequential_4", "sequential_5", "sequential_6", "sequential_7", "sequential_8"]
+"omitted_canonical" = ["color_01", "color_02", "color_03", "color_04", "color_07", "color_08", "color_09", "color_10", "color_12", "color_13", "color_14", "color_16", "color_20", "color_22", "color_24", "color_26", "color_27", "color_29", "color_30"]
+"aliases" = [["foreground", "selection_text"], ["muted", "comment"], ["primary", "number", "series_1", "series_5"], ["secondary", "error", "string"], ["keyword", "series_3"], ["type", "series_6"], ["series_2", "series_4"]]
+
+["palette"]
+
+["palette"."canonical"]
+
+["palette"."canonical"."background"]
+"hex" = "#031C28"
+"rgb" = [3, 28, 40]
+
+["palette"."canonical"."background"."oklch"]
+"l" = 0.21360565654086433
+"c" = 0.03914168043744154
+"h" = 232.21975046397674
+
+["palette"."canonical"."background"."origin"]
+"source" = "color_06"
+"purpose" = "app background"
+"requested_oklch" = [0.21360565654086433, 0.03914168043744154, 232.21975046397674]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."foreground"]
+"hex" = "#FDFDFB"
+"rgb" = [253, 253, 251]
+
+["palette"."canonical"."foreground"."oklch"]
+"l" = 0.9934939174813548
+"c" = 0.002631281267687989
+"h" = 106.44740039868515
+
+["palette"."canonical"."foreground"."origin"]
+"source" = "color_32"
+"purpose" = "body text across surfaces"
+"requested_oklch" = [0.9934939174813548, 0.002631281267687989, 106.44740039868515]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."primary"]
+"hex" = "#23F2F7"
+"rgb" = [35, 242, 247]
+
+["palette"."canonical"."primary"."oklch"]
+"l" = 0.8738669614604114
+"c" = 0.14467315665985872
+"h" = 197.57654069861755
+
+["palette"."canonical"."primary"."origin"]
+"source" = "color_28"
+"purpose" = "link and active accent"
+"requested_oklch" = [0.8738669614604114, 0.14467315665985872, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."selection_text"]
+"hex" = "#FDFDFB"
+"rgb" = [253, 253, 251]
+
+["palette"."canonical"."selection_text"."oklch"]
+"l" = 0.9934939174813548
+"c" = 0.002631281267687989
+"h" = 106.44740039868515
+
+["palette"."canonical"."selection_text"."origin"]
+"source" = "color_32"
+"purpose" = "selection text"
+"requested_oklch" = [0.9934939174813548, 0.002631281267687989, 106.44740039868515]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."border"]
+"hex" = "#748E97"
+"rgb" = [116, 142, 151]
+
+["palette"."canonical"."border"."oklch"]
+"l" = 0.6296611170519105
+"c" = 0.032484504810131896
+"h" = 220.85256860211354
+
+["palette"."canonical"."border"."origin"]
+"source" = "color_19"
+"purpose" = "control boundary"
+"requested_oklch" = [0.6296611170519105, 0.032484504810131896, 220.85256860211354]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."keyword"]
+"hex" = "#D99D36"
+"rgb" = [217, 157, 54]
+
+["palette"."canonical"."keyword"."oklch"]
+"l" = 0.7362697390282512
+"c" = 0.13476060589117875
+"h" = 76.75803576371642
+
+["palette"."canonical"."keyword"."origin"]
+"source" = "color_23"
+"purpose" = "code text"
+"requested_oklch" = [0.7362697390282512, 0.13476060589117875, 76.75803576371642]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."number"]
+"hex" = "#23F2F7"
+"rgb" = [35, 242, 247]
+
+["palette"."canonical"."number"."oklch"]
+"l" = 0.8738669614604114
+"c" = 0.14467315665985872
+"h" = 197.57654069861755
+
+["palette"."canonical"."number"."origin"]
+"source" = "color_28"
+"purpose" = "code text"
+"requested_oklch" = [0.8738669614604114, 0.14467315665985872, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."type"]
+"hex" = "#FDEDB3"
+"rgb" = [253, 237, 179]
+
+["palette"."canonical"."type"."oklch"]
+"l" = 0.9451282458303533
+"c" = 0.0760347979078992
+"h" = 94.50581495214358
+
+["palette"."canonical"."type"."origin"]
+"source" = "color_31"
+"purpose" = "code text"
+"requested_oklch" = [0.9451282458303533, 0.0760347979078992, 94.50581495214358]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."constant"]
+"hex" = "#00CAE3"
+"rgb" = [0, 202, 227]
+
+["palette"."canonical"."constant"."oklch"]
+"l" = 0.7689990018473499
+"c" = 0.13319033272601966
+"h" = 210.42101971515936
+
+["palette"."canonical"."constant"."origin"]
+"source" = "color_25"
+"purpose" = "code text"
+"requested_oklch" = [0.7689990018473499, 0.13319033272601966, 210.42101971515936]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."series_1"]
+"hex" = "#23F2F7"
+"rgb" = [35, 242, 247]
+
+["palette"."canonical"."series_1"."oklch"]
+"l" = 0.8738669614604114
+"c" = 0.14467315665985872
+"h" = 197.57654069861755
+
+["palette"."canonical"."series_1"."origin"]
+"source" = "color_28"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.8738669614604114, 0.14467315665985872, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."series_3"]
+"hex" = "#D99D36"
+"rgb" = [217, 157, 54]
+
+["palette"."canonical"."series_3"."oklch"]
+"l" = 0.7362697390282512
+"c" = 0.13476060589117875
+"h" = 76.75803576371642
+
+["palette"."canonical"."series_3"."origin"]
+"source" = "color_23"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.7362697390282512, 0.13476060589117875, 76.75803576371642]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."series_5"]
+"hex" = "#23F2F7"
+"rgb" = [35, 242, 247]
+
+["palette"."canonical"."series_5"."oklch"]
+"l" = 0.8738669614604114
+"c" = 0.14467315665985872
+"h" = 197.57654069861755
+
+["palette"."canonical"."series_5"."origin"]
+"source" = "color_28"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.8738669614604114, 0.14467315665985872, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."canonical"."series_6"]
+"hex" = "#FDEDB3"
+"rgb" = [253, 237, 179]
+
+["palette"."canonical"."series_6"."oklch"]
+"l" = 0.9451282458303533
+"c" = 0.0760347979078992
+"h" = 94.50581495214358
+
+["palette"."canonical"."series_6"."origin"]
+"source" = "color_31"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.9451282458303533, 0.0760347979078992, 94.50581495214358]
+"gamut_mapped" = false
+"derived" = false
+
+["palette"."derived"]
+
+["palette"."derived"."panel"]
+"hex" = "#14252D"
+"rgb" = [20, 37, 45]
+
+["palette"."derived"."panel"."oklch"]
+"l" = 0.2533980284415698
+"c" = 0.027255350961781683
+"h" = 229.44547368477475
+
+["palette"."derived"."panel"."origin"]
+"source" = "color_06"
+"purpose" = "panel background"
+"requested_oklch" = [0.2536056565408643, 0.027399176306209076, 232.21975046397674]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."elevated"]
+"hex" = "#1E2F38"
+"rgb" = [30, 47, 56]
+
+["palette"."derived"."elevated"."oklch"]
+"l" = 0.2943624997767365
+"c" = 0.027780130584843212
+"h" = 232.03324279798977
+
+["palette"."derived"."elevated"."origin"]
+"source" = "color_06"
+"purpose" = "elevated background"
+"requested_oklch" = [0.29360565654086435, 0.027399176306209076, 232.21975046397674]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."muted"]
+"hex" = "#86A0A9"
+"rgb" = [134, 160, 169]
+
+["palette"."derived"."muted"."oklch"]
+"l" = 0.6888416427289353
+"c" = 0.03191940996148578
+"h" = 220.77248501750748
+
+["palette"."derived"."muted"."origin"]
+"source" = "color_19"
+"purpose" = "secondary text"
+"requested_oklch" = [0.6893624997767365, 0.032484504810131896, 220.85256860211354]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."secondary"]
+"hex" = "#BC8F81"
+"rgb" = [188, 143, 129]
+
+["palette"."derived"."secondary"."oklch"]
+"l" = 0.6891179038386995
+"c" = 0.05870202352597246
+"h" = 37.98356486357878
+
+["palette"."derived"."secondary"."origin"]
+"source" = "color_05"
+"purpose" = "secondary accent"
+"requested_oklch" = [0.6893624997767365, 0.0581255508926453, 39.14547186831294]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."selection"]
+"hex" = "#003537"
+"rgb" = [0, 53, 55]
+
+["palette"."derived"."selection"."oklch"]
+"l" = 0.29874876827075425
+"c" = 0.05079516509957663
+"h" = 198.87362944349695
+
+["palette"."derived"."selection"."origin"]
+"source" = "color_28"
+"purpose" = "selection background"
+"requested_oklch" = [0.3, 0.0795702361629223, 197.57654069861755]
+"gamut_mapped" = true
+"derived" = true
+
+["palette"."derived"."warning"]
+"hex" = "#AC9A6B"
+"rgb" = [172, 154, 107]
+
+["palette"."derived"."warning"."oklch"]
+"l" = 0.6906019799578803
+"c" = 0.06719934435193259
+"h" = 89.45413887148949
+
+["palette"."derived"."warning"."origin"]
+"source" = "color_21"
+"purpose" = "status text"
+"requested_oklch" = [0.6893624997767365, 0.06646632664326778, 89.03927431917722]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."error"]
+"hex" = "#BC8F81"
+"rgb" = [188, 143, 129]
+
+["palette"."derived"."error"."oklch"]
+"l" = 0.6891179038386995
+"c" = 0.05870202352597246
+"h" = 37.98356486357878
+
+["palette"."derived"."error"."origin"]
+"source" = "color_05"
+"purpose" = "status text"
+"requested_oklch" = [0.6893624997767365, 0.0581255508926453, 39.14547186831294]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."success"]
+"hex" = "#7AA85B"
+"rgb" = [122, 168, 91]
+
+["palette"."derived"."success"."oklch"]
+"l" = 0.6801128652037908
+"c" = 0.11715398991812893
+"h" = 133.87073241525184
+
+["palette"."derived"."success"."origin"]
+"source" = "color_11"
+"purpose" = "status text"
+"requested_oklch" = [0.6793624997767365, 0.11651128595093, 133.72012541485662]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."info"]
+"hex" = "#80A1B3"
+"rgb" = [128, 161, 179]
+
+["palette"."derived"."info"."oklch"]
+"l" = 0.690535104393752
+"c" = 0.04504978967967419
+"h" = 232.09641609631538
+
+["palette"."derived"."info"."origin"]
+"source" = "color_15"
+"purpose" = "status text"
+"requested_oklch" = [0.6893624997767365, 0.0447799524402919, 232.71020148357155]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."string"]
+"hex" = "#BC8F81"
+"rgb" = [188, 143, 129]
+
+["palette"."derived"."string"."oklch"]
+"l" = 0.6891179038386995
+"c" = 0.05870202352597246
+"h" = 37.98356486357878
+
+["palette"."derived"."string"."origin"]
+"source" = "color_05"
+"purpose" = "code text"
+"requested_oklch" = [0.6893624997767365, 0.0581255508926453, 39.14547186831294]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."function"]
+"hex" = "#41A6C8"
+"rgb" = [65, 166, 200]
+
+["palette"."derived"."function"."oklch"]
+"l" = 0.6804249389477854
+"c" = 0.10444571426549623
+"h" = 223.94867227469751
+
+["palette"."derived"."function"."origin"]
+"source" = "color_18"
+"purpose" = "code text"
+"requested_oklch" = [0.6793624997767365, 0.10435232670998225, 224.2486315013062]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."operator"]
+"hex" = "#DB8142"
+"rgb" = [219, 129, 66]
+
+["palette"."derived"."operator"."oklch"]
+"l" = 0.6889008802698013
+"c" = 0.13545703772713286
+"h" = 53.27863475214723
+
+["palette"."derived"."operator"."origin"]
+"source" = "color_17"
+"purpose" = "code text"
+"requested_oklch" = [0.6893624997767365, 0.13508644464281086, 53.50453828694759]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."comment"]
+"hex" = "#86A0A9"
+"rgb" = [134, 160, 169]
+
+["palette"."derived"."comment"."oklch"]
+"l" = 0.6888416427289353
+"c" = 0.03191940996148578
+"h" = 220.77248501750748
+
+["palette"."derived"."comment"."origin"]
+"source" = "color_19"
+"purpose" = "code text"
+"requested_oklch" = [0.6893624997767365, 0.032484504810131896, 220.85256860211354]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."series_2"]
+"hex" = "#8D6456"
+"rgb" = [141, 100, 86]
+
+["palette"."derived"."series_2"."oklch"]
+"l" = 0.5421054988109493
+"c" = 0.05773159940590908
+"h" = 39.650332577235595
+
+["palette"."derived"."series_2"."origin"]
+"source" = "color_05"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.5419652895699084, 0.0581255508926453, 39.14547186831294]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."series_4"]
+"hex" = "#8D6456"
+"rgb" = [141, 100, 86]
+
+["palette"."derived"."series_4"."oklch"]
+"l" = 0.5421054988109493
+"c" = 0.05773159940590908
+"h" = 39.650332577235595
+
+["palette"."derived"."series_4"."origin"]
+"source" = "color_05"
+"purpose" = "diagram/chart mark"
+"requested_oklch" = [0.5419652895699084, 0.0581255508926453, 39.14547186831294]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."sequential_0"]
+"hex" = "#004445"
+"rgb" = [0, 68, 69]
+
+["palette"."derived"."sequential_0"."oklch"]
+"l" = 0.3505042942346345
+"c" = 0.059694535856745494
+"h" = 196.44472550449214
+
+["palette"."derived"."sequential_0"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.35, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = true
+"derived" = true
+
+["palette"."derived"."sequential_1"]
+"hex" = "#005759"
+"rgb" = [0, 87, 89]
+
+["palette"."derived"."sequential_1"."oklch"]
+"l" = 0.4143944232742418
+"c" = 0.07050830987719879
+"h" = 197.49153441159612
+
+["palette"."derived"."sequential_1"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.415, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = true
+"derived" = true
+
+["palette"."derived"."sequential_2"]
+"hex" = "#006B6E"
+"rgb" = [0, 107, 110]
+
+["palette"."derived"."sequential_2"."oklch"]
+"l" = 0.47906217064804785
+"c" = 0.0814761197369034
+"h" = 198.17856191962775
+
+["palette"."derived"."sequential_2"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.48, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = true
+"derived" = true
+
+["palette"."derived"."sequential_3"]
+"hex" = "#008083"
+"rgb" = [0, 128, 131]
+
+["palette"."derived"."sequential_3"."oklch"]
+"l" = 0.5442785834973233
+"c" = 0.09259578168615465
+"h" = 197.67405978480323
+
+["palette"."derived"."sequential_3"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.5449999999999999, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = true
+"derived" = true
+
+["palette"."derived"."sequential_4"]
+"hex" = "#109599"
+"rgb" = [16, 149, 153]
+
+["palette"."derived"."sequential_4"."oklch"]
+"l" = 0.6091970001412996
+"c" = 0.10106309891396846
+"h" = 198.27009301253773
+
+["palette"."derived"."sequential_4"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.61, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."sequential_5"]
+"hex" = "#34AAAD"
+"rgb" = [52, 170, 173]
+
+["palette"."derived"."sequential_5"."oklch"]
+"l" = 0.675926913704323
+"c" = 0.1014167267930867
+"h" = 197.52463369366822
+
+["palette"."derived"."sequential_5"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.675, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."sequential_6"]
+"hex" = "#4DBEC1"
+"rgb" = [77, 190, 193]
+
+["palette"."derived"."sequential_6"."oklch"]
+"l" = 0.7388192124542251
+"c" = 0.10124654859927389
+"h" = 197.63504865408316
+
+["palette"."derived"."sequential_6"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.74, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."sequential_7"]
+"hex" = "#65D4D6"
+"rgb" = [101, 212, 214]
+
+["palette"."derived"."sequential_7"."oklch"]
+"l" = 0.8061785183251141
+"c" = 0.10138722963846475
+"h" = 196.92323907342646
+
+["palette"."derived"."sequential_7"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.8049999999999999, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = true
+
+["palette"."derived"."sequential_8"]
+"hex" = "#7BE9EC"
+"rgb" = [123, 233, 236]
+
+["palette"."derived"."sequential_8"."oklch"]
+"l" = 0.8700884456670531
+"c" = 0.1013568676751107
+"h" = 197.7963625740257
+
+["palette"."derived"."sequential_8"."origin"]
+"source" = "color_28"
+"purpose" = "ordered single-hue scale stop"
+"requested_oklch" = [0.87, 0.1012712096619011, 197.57654069861755]
+"gamut_mapped" = false
+"derived" = true
+
+["roles"]
+
+["roles"."tokens"]
+"background" = "background"
+"foreground" = "foreground"
+"panel" = "panel"
+"elevated" = "elevated"
+"muted" = "muted"
+"primary" = "primary"
+"secondary" = "secondary"
+"selection" = "selection"
+"selection_text" = "selection_text"
+"border" = "border"
+"warning" = "warning"
+"error" = "error"
+"success" = "success"
+"info" = "info"
+"keyword" = "keyword"
+"string" = "string"
+"number" = "number"
+"function" = "function"
+"type" = "type"
+"operator" = "operator"
+"constant" = "constant"
+"comment" = "comment"
+"series_1" = "series_1"
+"series_2" = "series_2"
+"series_3" = "series_3"
+"series_4" = "series_4"
+"series_5" = "series_5"
+"series_6" = "series_6"
+"sequential_0" = "sequential_0"
+"sequential_1" = "sequential_1"
+"sequential_2" = "sequential_2"
+"sequential_3" = "sequential_3"
+"sequential_4" = "sequential_4"
+"sequential_5" = "sequential_5"
+"sequential_6" = "sequential_6"
+"sequential_7" = "sequential_7"
+"sequential_8" = "sequential_8"
+
+["source_palette"]
+
+["source_palette"."canonical"]
+
+["source_palette"."canonical"."color_01"]
+"hex" = "#000000"
+"rgb" = [0, 0, 0]
+"oklch" = [0.0, 0.0, 0.0]
+"weight" = 22433.0
+
+["source_palette"."canonical"."color_02"]
+"hex" = "#02020E"
+"rgb" = [2, 2, 14]
+"oklch" = [0.0986812673597878, 0.0357963795060302, 277.5951766241159]
+"weight" = 557.0
+
+["source_palette"."canonical"."color_03"]
+"hex" = "#0D0100"
+"rgb" = [13, 1, 0]
+"oklch" = [0.10629842813741576, 0.035485880395376417, 37.11665922240839]
+"weight" = 328.0
+
+["source_palette"."canonical"."color_04"]
+"hex" = "#00101A"
+"rgb" = [0, 16, 26]
+"oklch" = [0.1628867981220946, 0.03380595835054986, 233.36542297649274]
+"weight" = 986.0
+
+["source_palette"."canonical"."color_05"]
+"hex" = "#260600"
+"rgb" = [38, 6, 0]
+"oklch" = [0.18196528956990846, 0.0581255508926453, 39.14547186831294]
+"weight" = 125.0
+
+["source_palette"."canonical"."color_06"]
+"hex" = "#031C28"
+"rgb" = [3, 28, 40]
+"oklch" = [0.21360565654086433, 0.03914168043744154, 232.21975046397674]
+"weight" = 709.0
+
+["source_palette"."canonical"."color_07"]
+"hex" = "#2A2923"
+"rgb" = [42, 41, 35]
+"oklch" = [0.2798702214413367, 0.010788321009551946, 99.27974002888475]
+"weight" = 126.0
+
+["source_palette"."canonical"."color_08"]
+"hex" = "#05303F"
+"rgb" = [5, 48, 63]
+"oklch" = [0.2892438809380673, 0.05190919060381288, 226.8789419557774]
+"weight" = 564.0
+
+["source_palette"."canonical"."color_09"]
+"hex" = "#4F2000"
+"rgb" = [79, 32, 0]
+"oklch" = [0.30736463833274846, 0.08195634014226294, 49.40818866184054]
+"weight" = 140.0
+
+["source_palette"."canonical"."color_10"]
+"hex" = "#07455E"
+"rgb" = [7, 69, 94]
+"oklch" = [0.36735700131323645, 0.07134216673777767, 232.00600158690958]
+"weight" = 229.0
+
+["source_palette"."canonical"."color_11"]
+"hex" = "#2E5701"
+"rgb" = [46, 87, 1]
+"oklch" = [0.4103698612946454, 0.11651128595093, 133.72012541485662]
+"weight" = 67.0
+
+["source_palette"."canonical"."color_12"]
+"hex" = "#555245"
+"rgb" = [85, 82, 69]
+"oklch" = [0.4374235787284093, 0.020973061225666865, 96.41004699249689]
+"weight" = 113.0
+
+["source_palette"."canonical"."color_13"]
+"hex" = "#71481D"
+"rgb" = [113, 72, 29]
+"oklch" = [0.4399599772869332, 0.08024534032281082, 64.04433197366616]
+"weight" = 134.0
+
+["source_palette"."canonical"."color_14"]
+"hex" = "#00637D"
+"rgb" = [0, 99, 125]
+"oklch" = [0.4642014697389975, 0.0870822062737388, 223.86573377796842]
+"weight" = 196.0
+
+["source_palette"."canonical"."color_15"]
+"hex" = "#506F80"
+"rgb" = [80, 111, 128]
+"oklch" = [0.5242782007006203, 0.0447799524402919, 232.71020148357155]
+"weight" = 182.0
+
+["source_palette"."canonical"."color_16"]
+"hex" = "#697500"
+"rgb" = [105, 117, 0]
+"oklch" = [0.5337293909557432, 0.12267544415994987, 116.64018798624767]
+"weight" = 54.0
+
+["source_palette"."canonical"."color_17"]
+"hex" = "#A95403"
+"rgb" = [169, 84, 3]
+"oklch" = [0.5401933034711391, 0.13508644464281086, 53.50453828694759]
+"weight" = 181.0
+
+["source_palette"."canonical"."color_18"]
+"hex" = "#0380A1"
+"rgb" = [3, 128, 161]
+"oklch" = [0.5576776657382398, 0.10435232670998225, 224.2486315013062]
+"weight" = 177.0
+
+["source_palette"."canonical"."color_19"]
+"hex" = "#748E97"
+"rgb" = [116, 142, 151]
+"oklch" = [0.6296611170519105, 0.032484504810131896, 220.85256860211354]
+"weight" = 143.0
+
+["source_palette"."canonical"."color_20"]
+"hex" = "#CF7818"
+"rgb" = [207, 120, 24]
+"oklch" = [0.6547271785070518, 0.14547148413998626, 60.67948173322195]
+"weight" = 182.0
+
+["source_palette"."canonical"."color_21"]
+"hex" = "#A29062"
+"rgb" = [162, 144, 98]
+"oklch" = [0.6582025163626305, 0.06646632664326778, 89.03927431917722]
+"weight" = 65.0
+
+["source_palette"."canonical"."color_22"]
+"hex" = "#18AAC2"
+"rgb" = [24, 170, 194]
+"oklch" = [0.6792916949658772, 0.11502876827885382, 212.8502534868744]
+"weight" = 190.0
+
+["source_palette"."canonical"."color_23"]
+"hex" = "#D99D36"
+"rgb" = [217, 157, 54]
+"oklch" = [0.7362697390282512, 0.13476060589117875, 76.75803576371642]
+"weight" = 105.0
+
+["source_palette"."canonical"."color_24"]
+"hex" = "#A0B4B9"
+"rgb" = [160, 180, 185]
+"oklch" = [0.7561486509211327, 0.02328079143017107, 214.44437534511925]
+"weight" = 213.0
+
+["source_palette"."canonical"."color_25"]
+"hex" = "#00CAE3"
+"rgb" = [0, 202, 227]
+"oklch" = [0.7689990018473499, 0.13319033272601966, 210.42101971515936]
+"weight" = 187.0
+
+["source_palette"."canonical"."color_26"]
+"hex" = "#F7BE4F"
+"rgb" = [247, 190, 79]
+"oklch" = [0.8334957446061207, 0.14115392870877141, 81.10715019530537]
+"weight" = 201.0
+
+["source_palette"."canonical"."color_27"]
+"hex" = "#CFD0C9"
+"rgb" = [207, 208, 201]
+"oklch" = [0.8548346764844598, 0.00959326163780985, 113.18937864992618]
+"weight" = 217.0
+
+["source_palette"."canonical"."color_28"]
+"hex" = "#23F2F7"
+"rgb" = [35, 242, 247]
+"oklch" = [0.8738669614604114, 0.14467315665985872, 197.57654069861755]
+"weight" = 494.0
+
+["source_palette"."canonical"."color_29"]
+"hex" = "#F7DD74"
+"rgb" = [247, 221, 116]
+"oklch" = [0.8980946552021537, 0.12838966317823822, 95.71903634965213]
+"weight" = 168.0
+
+["source_palette"."canonical"."color_30"]
+"hex" = "#A1FCFD"
+"rgb" = [161, 252, 253]
+"oklch" = [0.9345073122477354, 0.08700349445999948, 196.65691858710719]
+"weight" = 184.0
+
+["source_palette"."canonical"."color_31"]
+"hex" = "#FDEDB3"
+"rgb" = [253, 237, 179]
+"oklch" = [0.9451282458303533, 0.0760347979078992, 94.50581495214358]
+"weight" = 178.0
+
+["source_palette"."canonical"."color_32"]
+"hex" = "#FDFDFB"
+"rgb" = [253, 253, 251]
+"oklch" = [0.9934939174813548, 0.002631281267687989, 106.44740039868515]
+"weight" = 1177.0
+
+["validation"]
+"checks" = [{ "foreground" = "foreground", "background" = "background", "ratio" = 17.1744012039836, "required" = 4.5, "pass" = true }, { "foreground" = "muted", "background" = "background", "ratio" = 6.342482269334554, "required" = 4.5, "pass" = true }, { "foreground" = "primary", "background" = "background", "ratio" = 12.58925852603439, "required" = 4.5, "pass" = true }, { "foreground" = "secondary", "background" = "background", "ratio" = 6.15060522641152, "required" = 4.5, "pass" = true }, { "foreground" = "selection_text", "background" = "selection", "ratio" = 13.180716266002664, "required" = 4.5, "pass" = true }, { "foreground" = "border", "background" = "background", "ratio" = 5.046288932937346, "required" = 3, "pass" = true }, { "foreground" = "warning", "background" = "background", "ratio" = 6.320799601323865, "required" = 4.5, "pass" = true }, { "foreground" = "error", "background" = "background", "ratio" = 6.15060522641152, "required" = 4.5, "pass" = true }, { "foreground" = "success", "background" = "background", "ratio" = 6.313093942385167, "required" = 4.5, "pass" = true }, { "foreground" = "info", "background" = "background", "ratio" = 6.385617985644228, "required" = 4.5, "pass" = true }, { "foreground" = "keyword", "background" = "background", "ratio" = 7.351904167770598, "required" = 4.5, "pass" = true }, { "foreground" = "string", "background" = "background", "ratio" = 6.15060522641152, "required" = 4.5, "pass" = true }, { "foreground" = "number", "background" = "background", "ratio" = 12.58925852603439, "required" = 4.5, "pass" = true }, { "foreground" = "function", "background" = "background", "ratio" = 6.2576769043096325, "required" = 4.5, "pass" = true }, { "foreground" = "type", "background" = "background", "ratio" = 14.94356891961572, "required" = 4.5, "pass" = true }, { "foreground" = "operator", "background" = "background", "ratio" = 6.022963608954194, "required" = 4.5, "pass" = true }, { "foreground" = "constant", "background" = "background", "ratio" = 8.79302095576238, "required" = 4.5, "pass" = true }, { "foreground" = "comment", "background" = "background", "ratio" = 6.342482269334554, "required" = 4.5, "pass" = true }, { "foreground" = "series_1", "background" = "panel", "ratio" = 11.345219168423629, "required" = 3, "pass" = true }, { "foreground" = "series_2", "background" = "panel", "ratio" = 3.0699131308763827, "required" = 3, "pass" = true }, { "foreground" = "series_3", "background" = "panel", "ratio" = 6.625407200600109, "required" = 3, "pass" = true }, { "foreground" = "series_4", "background" = "panel", "ratio" = 3.0699131308763827, "required" = 3, "pass" = true }, { "foreground" = "series_5", "background" = "panel", "ratio" = 11.345219168423629, "required" = 3, "pass" = true }, { "foreground" = "series_6", "background" = "panel", "ratio" = 13.466882437983283, "required" = 3, "pass" = true }, { "foreground" = "foreground", "background" = "panel", "ratio" = 15.47726939936068, "required" = 4.5, "pass" = true }, { "foreground" = "muted", "background" = "panel", "ratio" = 5.715733874924861, "required" = 4.5, "pass" = true }, { "foreground" = "primary", "background" = "panel", "ratio" = 11.345219168423629, "required" = 4.5, "pass" = true }, { "foreground" = "keyword", "background" = "panel", "ratio" = 6.625407200600109, "required" = 4.5, "pass" = true }, { "foreground" = "string", "background" = "panel", "ratio" = 5.5428176463122645, "required" = 4.5, "pass" = true }, { "foreground" = "number", "background" = "panel", "ratio" = 11.345219168423629, "required" = 4.5, "pass" = true }, { "foreground" = "function", "background" = "panel", "ratio" = 5.639308766100841, "required" = 4.5, "pass" = true }, { "foreground" = "type", "background" = "panel", "ratio" = 13.466882437983283, "required" = 4.5, "pass" = true }, { "foreground" = "operator", "background" = "panel", "ratio" = 5.427789257462296, "required" = 4.5, "pass" = true }, { "foreground" = "constant", "background" = "panel", "ratio" = 7.924116395684979, "required" = 4.5, "pass" = true }, { "foreground" = "comment", "background" = "panel", "ratio" = 5.715733874924861, "required" = 4.5, "pass" = true }, { "foreground" = "foreground", "background" = "elevated", "ratio" = 13.575375752202303, "required" = 4.5, "pass" = true }, { "foreground" = "muted", "background" = "elevated", "ratio" = 5.013367219343059, "required" = 4.5, "pass" = true }, { "foreground" = "primary", "background" = "elevated", "ratio" = 9.951084343650493, "required" = 4.5, "pass" = true }, { "foreground" = "keyword", "background" = "elevated", "ratio" = 5.811257137076681, "required" = 4.5, "pass" = true }, { "foreground" = "string", "background" = "elevated", "ratio" = 4.861699459578751, "required" = 4.5, "pass" = true }, { "foreground" = "number", "background" = "elevated", "ratio" = 9.951084343650493, "required" = 4.5, "pass" = true }, { "foreground" = "function", "background" = "elevated", "ratio" = 4.946333458902611, "required" = 4.5, "pass" = true }, { "foreground" = "type", "background" = "elevated", "ratio" = 11.812031217464561, "required" = 4.5, "pass" = true }, { "foreground" = "operator", "background" = "elevated", "ratio" = 4.760806106848634, "required" = 4.5, "pass" = true }, { "foreground" = "constant", "background" = "elevated", "ratio" = 6.9503770206425495, "required" = 4.5, "pass" = true }, { "foreground" = "comment", "background" = "elevated", "ratio" = 5.013367219343059, "required" = 4.5, "pass" = true }]
+"contrast_failures" = 0
+"native_visual_acceptance" = "pending"

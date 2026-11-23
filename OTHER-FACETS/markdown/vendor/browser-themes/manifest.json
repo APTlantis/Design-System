@@ -1,0 +1,369 @@
+{
+  "schema": "aptlantis.browser-theme-assets.v1",
+  "packages": [
+    {
+      "name": "@codemirror/autocomplete",
+      "version": "6.20.3",
+      "integrity": "sha512-tlosUqb+3BbxCxZdu4tKeRghPFC+QM7q4X5YhKV2eCmPG+1r2F3f4AaSz5sCrFqUtX4Jh20VFTKecl16MgiV9g==",
+      "license": "LICENSE-codemirror-autocomplete.txt"
+    },
+    {
+      "name": "@codemirror/commands",
+      "version": "6.11.1",
+      "integrity": "sha512-O/4hG3SC1YwcmQ0d2UVNDs+AsaNWd1iHVxbTeEBuqH+6bExAiPK3iS/BvpY6rZGURALv4ZD3sIgcCmRvw3ehBg==",
+      "license": "LICENSE-codemirror-commands.txt"
+    },
+    {
+      "name": "@codemirror/lang-css",
+      "version": "6.3.1",
+      "integrity": "sha512-kr5fwBGiGtmz6l0LSJIbno9QrifNMUusivHbnA1H6Dmqy4HZFte3UAICix1VuKo0lMPKQr2rqB+0BkKi/S3Ejg==",
+      "license": "LICENSE-codemirror-lang-css.txt"
+    },
+    {
+      "name": "@codemirror/lang-html",
+      "version": "6.4.12",
+      "integrity": "sha512-pw2ReWKUqSkbvh76RAT4NYxiogRu+PWkR2ukAwO9uOgrm8uipkzjtKKtNpyeAQwHOqxEeSvAXZ6vr3AfyB9y/w==",
+      "license": "LICENSE-codemirror-lang-html.txt"
+    },
+    {
+      "name": "@codemirror/lang-javascript",
+      "version": "6.2.5",
+      "integrity": "sha512-zD4e5mS+50htS7F+TYjBPsiIFGanfVqg4HyUz6WNFikgOPf2BgKlx+TQedI1w6n/IqRBVBbBWmGFdLB/7uxO4A==",
+      "license": "LICENSE-codemirror-lang-javascript.txt"
+    },
+    {
+      "name": "@codemirror/lang-markdown",
+      "version": "6.5.2",
+      "integrity": "sha512-AwBOdkWYuA//WcM0xO5PfHPUcmz/O2i5o0Nsg1U69SII/loCJlFI1Romd9xp2HYb1kYJRGZotyqRghuHH5n8Kw==",
+      "license": "LICENSE-codemirror-lang-markdown.txt"
+    },
+    {
+      "name": "@codemirror/lang-python",
+      "version": "6.2.1",
+      "integrity": "sha512-IRjC8RUBhn9mGR9ywecNhB51yePWCGgvHfY1lWN/Mrp3cKuHr0isDKia+9HnvhiWNnMpbGhWrkhuWOc09exRyw==",
+      "license": "LICENSE-codemirror-lang-python.txt"
+    },
+    {
+      "name": "@codemirror/language",
+      "version": "6.13.1",
+      "integrity": "sha512-zfvU2r3TyylQLMj/te+5CnQ0rSqZi8B1oTCBbQkagcLW4Xc6imab6qN+pEJhsuNOLaJqiRyBXp9UhWA1DhVvDw==",
+      "license": "LICENSE-codemirror-language.txt"
+    },
+    {
+      "name": "@codemirror/lint",
+      "version": "6.9.7",
+      "integrity": "sha512-28/+iWLYxKxsvGYhSYL7zaCZqLz5+FFFDq9tVsvGv9kv8RY4fFAchJ5WX9M3YrrRlTIsECjsXPqeNgnSmNP2dg==",
+      "license": "LICENSE-codemirror-lint.txt"
+    },
+    {
+      "name": "@codemirror/search",
+      "version": "6.7.2",
+      "integrity": "sha512-gUYkYhT2+n/+VGZ+8EzE5WFkYZUZYm1VOKDudIsNqh42uRVQJ0a6Yss9sdKT3MeOYfuL1N6AZA57oza0Oyr0LA==",
+      "license": "LICENSE-codemirror-search.txt"
+    },
+    {
+      "name": "@codemirror/state",
+      "version": "6.7.6",
+      "integrity": "sha512-kAz+AncRtKuIknedxT1bq4XwXv4UowhbkHU1myPrtVb/jZtImWuV5BXzv5vK6i3kYACsdiZiQKFQQ5Mq7elW8w==",
+      "license": "LICENSE-codemirror-state.txt"
+    },
+    {
+      "name": "@codemirror/streamparser",
+      "version": "6.0.0",
+      "integrity": "sha512-JTFPF6xrfjt0mnfGPgzcLiMwYmvIyNaoizp8BYzv8FE8KrT6GBGDZ190rtt+O7Wke3gG/MFHyiY9YGNeimof4w==",
+      "license": "LICENSE-codemirror-streamparser.txt"
+    },
+    {
+      "name": "@codemirror/view",
+      "version": "6.43.14",
+      "integrity": "sha512-hC45YnmJNR1rz42OF57BLoQNFMV12/13drnvibDsR2quNDmldcb4WvYVV81hFQg56i9lcqQMEDqilhX2QDcGQQ==",
+      "license": "LICENSE-codemirror-view.txt"
+    },
+    {
+      "name": "@lezer/common",
+      "version": "1.5.3",
+      "integrity": "sha512-H0iErY4e43LpXbYDyBci5W4v/RwTgGV3YzYOlJPiGZ8RY8w51kVE+xLn1tg3Z6UmSfyETvtsUK3r7YsgDQEI7Q==",
+      "license": "LICENSE-lezer-common.txt"
+    },
+    {
+      "name": "@lezer/css",
+      "version": "1.3.9",
+      "integrity": "sha512-ZmzgvTOBdJWGIsY/ItAfN7UW8DV802oZG+jeG6E508SwEzz5YhuAajptpWPICvIyqYAD2+VjMdOS40GgGkyEOQ==",
+      "license": "LICENSE-lezer-css.txt"
+    },
+    {
+      "name": "@lezer/highlight",
+      "version": "1.2.5",
+      "integrity": "sha512-O1GMVKgtf5YspFaRzpmqkVgMtIk2HG9uMAbH6wdAIdNh3TVzCsch/+cRi+6l2//UGDKe6NB9BW3cvuR5ezMQ0w==",
+      "license": "LICENSE-lezer-highlight.txt"
+    },
+    {
+      "name": "@lezer/html",
+      "version": "1.3.13",
+      "integrity": "sha512-oI7n6NJml729m7pjm9lvLvmXbdoMoi2f+1pwSDJkl9d68zGr7a9Btz8NdHTGQZtW2DA25ybeuv/SyDb9D5tseg==",
+      "license": "LICENSE-lezer-html.txt"
+    },
+    {
+      "name": "@lezer/javascript",
+      "version": "1.5.6",
+      "integrity": "sha512-sEvOqpl4vJQca0NugSQK02vQPbc5KrvoojnYGoqqFgFO0MtcYhwGiHKVEB+LuXYJnfyXo4QPA8ztbrEa4Fw5NA==",
+      "license": "LICENSE-lezer-javascript.txt"
+    },
+    {
+      "name": "@lezer/lr",
+      "version": "1.4.11",
+      "integrity": "sha512-UwgZcl1R66H2hDzBrA7kWyYmX6s8p5TQ+e/t7CuvgCtBEPxbEPaHYHu+pJBvTvDotEJpuQkJjbXuHiw5Cixxgw==",
+      "license": "LICENSE-lezer-lr.txt"
+    },
+    {
+      "name": "@lezer/markdown",
+      "version": "1.8.0",
+      "integrity": "sha512-X6w3A2NpyhdtGqTWRJB8gR4QDXBaFMbTOs780ZdZ15KKCfBXOQTKcB3Vr+W6tqJHVlealt53tLmHRvOqPTQgYA==",
+      "license": "LICENSE-lezer-markdown.txt"
+    },
+    {
+      "name": "@lezer/python",
+      "version": "1.1.19",
+      "integrity": "sha512-MhQIURHRytsNzP/YXnqpYKW6la6voAH3kyplTOOiCdjyFY6cWWGFVmYVdHIPrElqSDf4iCDktQCockB9FxuhzQ==",
+      "license": "LICENSE-lezer-python.txt"
+    },
+    {
+      "name": "@marijn/find-cluster-break",
+      "version": "1.0.4",
+      "integrity": "sha512-Wy0V7+SGUjnF9/TkiM1hKVDPj7jKXduPNboMVtHTA8dySMURWqfg/JZ9E2Sq8JgSJmkl7k7Qe9FLeMSrSraWmQ==",
+      "license": "LICENSE-marijn-find-cluster-break.txt"
+    },
+    {
+      "name": "@types/trusted-types",
+      "version": "2.0.7",
+      "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==",
+      "license": "LICENSE-types-trusted-types.txt"
+    },
+    {
+      "name": "codemirror",
+      "version": "5.65.16",
+      "integrity": "sha512-br21LjYmSlVL0vFCPWPfhzUCT34FM/pAdK7rRIZwa0rrtrIdotvP4Oh4GUHsu2E3IrQMCfRkL/fN3ytMNxVQvg==",
+      "license": "LICENSE-codemirror.txt"
+    },
+    {
+      "name": "crelt",
+      "version": "1.0.7",
+      "integrity": "sha512-aK6BbWfhf4U/wCcLHKPJl/xa6VkVstRaPywWtMKGwuOLc/wZTyQYuoxgvZnNsBvv7Kg3YTBQYYBCggcviQczuA==",
+      "license": "LICENSE-crelt.txt"
+    },
+    {
+      "name": "dompurify",
+      "version": "3.4.17",
+      "integrity": "sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==",
+      "license": "LICENSE-dompurify.txt"
+    },
+    {
+      "name": "marked",
+      "version": "18.1.1",
+      "integrity": "sha512-zEGgrtUG8crk+TrMacJSVABU4DYDDkS8uqgU3ohrn/2fW9C2AEfUrO3m6IhpIpQpl7YcVpiXXC9cSMWDANT3dg==",
+      "license": "LICENSE-marked.txt"
+    },
+    {
+      "name": "style-mod",
+      "version": "4.1.4",
+      "integrity": "sha512-XXWIQt633/EpAFx8aZDOTjBzrCaGmhvEQlQo6MVPfa2OzO2cWo+4hV9h+6UkHYlXGfy+ODXKUdP7Pthmcu5ATw==",
+      "license": "LICENSE-style-mod.txt"
+    },
+    {
+      "name": "w3c-keyname",
+      "version": "2.2.8",
+      "integrity": "sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==",
+      "license": "LICENSE-w3c-keyname.txt"
+    }
+  ],
+  "files": [
+    {
+      "file": "markdown.js",
+      "sha256": "40d54bcdd04c34e7621b4259428fc3c0c401065ad07e263127698962999af211"
+    },
+    {
+      "file": "cm6-runtime.mjs",
+      "sha256": "b2f3440259ef4f716b74581dd77ab473a6e274960efa8e84e2de265107f84156"
+    },
+    {
+      "file": "cm5-lib-codemirror.js",
+      "sha256": "0644e6418c4129c9584b9b772b8b8bdb0b4fbab1efd848a98baf1fe147381f22"
+    },
+    {
+      "file": "cm5-lib-codemirror.css",
+      "sha256": "eb494ea972d2661ef86f7f6ac656dd6786d721e49c9c1b46e1eb967e4b6f9bf3"
+    },
+    {
+      "file": "cm5-mode-markdown-markdown.js",
+      "sha256": "8fe7b11848f79cc9119b2a239f38a00944f6f2bb764a00bc837ecf8d34cf7690"
+    },
+    {
+      "file": "cm5-mode-javascript-javascript.js",
+      "sha256": "1311c73c66308ba6f78512b4c2e770a6900c80c3629683763329668ee6111163"
+    },
+    {
+      "file": "cm5-mode-python-python.js",
+      "sha256": "19a59ca387addb04e95002c9adbe2b8c231427ce49369ac537107e3088a6947c"
+    },
+    {
+      "file": "cm5-addon-search-search.js",
+      "sha256": "4949580371fcd81c0ad70164b169dd8bcab2bd9869eddaa0d7e295508bec7a04"
+    },
+    {
+      "file": "cm5-addon-search-searchcursor.js",
+      "sha256": "2c0b8cd8fe7ca5ca2253f4aacc914b390bff5b3cac3475df66c43a9ea8c8ccbe"
+    },
+    {
+      "file": "cm5-addon-search-match-highlighter.js",
+      "sha256": "8c3e196f9a5f9e5cf9d7e71751132a05293e7cdb180defacf28be9fe919682cb"
+    },
+    {
+      "file": "cm5-addon-dialog-dialog.js",
+      "sha256": "fd8c925fcc25357617faff21220c026bb91a617b995268d96c5d39232fd42833"
+    },
+    {
+      "file": "cm5-addon-dialog-dialog.css",
+      "sha256": "5df690d771f12118348562dd2a90060433ae2edeccd0908abcaa4480b1e3e468"
+    },
+    {
+      "file": "cm5-addon-edit-matchbrackets.js",
+      "sha256": "9d0e5ee4c199fcbe487a901860c2cf7d007263852677dd5858098fcaa8580f1e"
+    },
+    {
+      "file": "cm5-addon-selection-active-line.js",
+      "sha256": "3afbcf78835c9bdc342e3992c53d9b74286722613bb1a8adc9d140edc8737ee8"
+    },
+    {
+      "file": "cm5-addon-selection-mark-selection.js",
+      "sha256": "5b9c6a0031fe895641f2eb2198df2592ec769a6685d6bb10f3f9b92a7822e286"
+    },
+    {
+      "file": "cm5-addon-hint-show-hint.js",
+      "sha256": "f5cba0672058459ef1d9d7f3c7dc94c0078a4a73604fdd4366b2fb51a9aa498d"
+    },
+    {
+      "file": "cm5-addon-hint-show-hint.css",
+      "sha256": "9058c1c14fcdae199b490bb6214f36a216b9ce84d7df2084830ebb6a60337651"
+    },
+    {
+      "file": "LICENSE-codemirror-autocomplete.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-commands.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lang-css.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lang-html.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lang-javascript.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lang-markdown.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lang-python.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-language.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-lint.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-search.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-state.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-streamparser.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-codemirror-view.txt",
+      "sha256": "05c6130cda97e7600ca91427a41e8a065efcf82365fc0293e7de80faec494c07"
+    },
+    {
+      "file": "LICENSE-lezer-common.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-css.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-highlight.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-html.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-javascript.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-lr.txt",
+      "sha256": "568902fb66eaf1f11750e966b33fd7b5d7c618e65af09f35ef843635bcf5f1ba"
+    },
+    {
+      "file": "LICENSE-lezer-markdown.txt",
+      "sha256": "54bd812a6d334e0c438b78a43cea74b67e882739fd3450115ddc7c52be5706c1"
+    },
+    {
+      "file": "LICENSE-lezer-python.txt",
+      "sha256": "54bd812a6d334e0c438b78a43cea74b67e882739fd3450115ddc7c52be5706c1"
+    },
+    {
+      "file": "LICENSE-marijn-find-cluster-break.txt",
+      "sha256": "9360b00fdd091f05c783b568bdd46c679c41b72415599252de98949462ea1acb"
+    },
+    {
+      "file": "LICENSE-types-trusted-types.txt",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "file": "LICENSE-codemirror.txt",
+      "sha256": "168a4becc968f5001e2ee2e0291b6e4daabafc1894a11ade1e11d56e96096e07"
+    },
+    {
+      "file": "LICENSE-crelt.txt",
+      "sha256": "23852ebf6aef7fadffc92514b3c5df163a8651f2c3ed0dbb494cb49d93bd5de5"
+    },
+    {
+      "file": "LICENSE-dompurify.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "file": "LICENSE-marked.txt",
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    {
+      "file": "LICENSE-style-mod.txt",
+      "sha256": "cb4474e26547397169061d3586c00022cda5330a1b64fa13e872319f3b63aff1"
+    },
+    {
+      "file": "LICENSE-w3c-keyname.txt",
+      "sha256": "869c30f368eb08735e779027b9f4bc9fea2f39624351856aebe42741f0bc0884"
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "5ebb805ef1fa980ba7e74d523c4c803b5d0da5f2cb84a1dac81f6aa930461756"
+    }
+  ]
+}

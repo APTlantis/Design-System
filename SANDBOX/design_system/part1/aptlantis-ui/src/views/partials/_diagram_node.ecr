@@ -1,0 +1,34 @@
+<div class="apt-diagram-inspector" aria-live="polite">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+    <span class="apt-badge" data-tone="cyan"><%= HTML.escape(node.code) %> · <%= HTML.escape(node.layer) %></span>
+    <span class="apt-badge" data-tone="<%= node.status == "ACTIVE" ? "cyan" : "amber" %>"><%= HTML.escape(node.status) %></span>
+  </div>
+
+  <div>
+    <h3><%= HTML.escape(node.title) %></h3>
+    <p style="margin:0.45rem 0 0; color:var(--apt-text-secondary);"><%= HTML.escape(node.summary) %></p>
+  </div>
+
+  <div class="apt-io-grid">
+    <div class="apt-io-box">
+      <h4>Inputs</h4>
+      <ul>
+        <% node.inputs.each do |item| %>
+          <li><%= HTML.escape(item) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="apt-io-box">
+      <h4>Outputs</h4>
+      <ul>
+        <% node.outputs.each do |item| %>
+          <li><%= HTML.escape(item) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="apt-mono" style="margin-top:auto; padding-top:0.65rem; border-top:1px solid var(--apt-border-subtle); font-size:0.72rem; color:var(--apt-text-muted);">
+    Location: <span style="color:var(--apt-accent-ice);"><%= HTML.escape(node.artifact_path) %></span>
+  </div>
+</div>

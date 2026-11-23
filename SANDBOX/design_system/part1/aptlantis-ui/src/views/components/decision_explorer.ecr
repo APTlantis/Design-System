@@ -1,0 +1,65 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">ZERO-JS HTMX BRANCHING</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Aptlantis Build-Routing Guide</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">GET /components/decision-explorer/step/:id · Pure HTMX</span>
+  </div>
+
+  <div class="apt-stage">
+    <div id="decision-host">
+      <%= render_partial("_decision_step", node: start_node) %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Branching state machine with zero client JavaScript</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="htmx" aria-selected="true">HTMX Choice Card</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#decision-code-htmx">Copy Snippet</button>
+    </div>
+
+    <pre id="decision-code-htmx" class="apt-code-pre" data-code-panel="htmx"><%= HTML.escape(<<-'CODE'
+<div id="decision-host">
+  <div class="apt-decision-card">
+    <h3 class="apt-display">What are you building right now?</h3>
+    <div class="apt-decision-choices">
+      <button type="button" class="apt-choice-btn"
+              hx-get="/components/decision-explorer/step/component-backend"
+              hx-target="#decision-host" hx-swap="innerHTML">
+        <strong>A new reusable UI component →</strong>
+        <span>Interactive piece for dashboards, docs, or explainers</span>
+      </button>
+    </div>
+  </div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

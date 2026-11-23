@@ -1,0 +1,20 @@
+<div id="apt-bulk-bar" hx-swap-oob="true" class="apt-bulk-bar" <%= count == 0 ? "hidden" : "" %>>
+  <% if count > 0 %>
+    <span class="apt-mono" style="font-size:0.8rem; color:var(--apt-brand-primary-hover);"><%= count %> SELECTED</span>
+    <span style="color:var(--apt-border-interactive);">|</span>
+    <button class="apt-btn" data-variant="primary"
+            hx-post="/telemetry/bulk-action"
+            hx-vals='{"action": "Attested"}'
+            hx-include="[name='ids']"
+            hx-swap="none">
+      Attest Hashes
+    </button>
+    <button class="apt-btn" data-variant="amber"
+            hx-post="/telemetry/bulk-action"
+            hx-vals='{"action": "Drained"}'
+            hx-include="[name='ids']"
+            hx-swap="none">
+      Drain Nodes
+    </button>
+  <% end %>
+</div>

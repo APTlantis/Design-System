@@ -1,0 +1,20 @@
+<div class="apt-timeline-detail" role="tabpanel" aria-label="<%= HTML.escape(event.title) %>">
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+    <div style="display:flex; align-items:center; gap:0.5rem;">
+      <span class="apt-badge" data-tone="<%= event.kind == "PIVOT" || event.kind == "UPCOMING" ? "amber" : "cyan" %>">
+        <%= HTML.escape(event.version) %> · <%= HTML.escape(event.kind) %>
+      </span>
+      <span class="apt-mono" style="font-size:0.74rem; color:var(--apt-text-muted);"><%= HTML.escape(event.date_label) %></span>
+    </div>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-accent-ice);"><%= HTML.escape(event.artifact) %></span>
+  </div>
+
+  <h3 class="apt-display" style="margin:0; font-size:1.2rem;"><%= HTML.escape(event.title) %></h3>
+  <p style="margin:0; color:var(--apt-text-secondary);"><%= HTML.escape(event.summary) %></p>
+
+  <ul class="apt-stepper-points">
+    <% event.highlights.each do |h| %>
+      <li><%= HTML.escape(h) %></li>
+    <% end %>
+  </ul>
+</div>

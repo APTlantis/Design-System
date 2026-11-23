@@ -1,0 +1,6 @@
+<div hx-swap-oob="afterbegin:#apt-toast-region">
+  <div class="apt-toast" data-tone="<%= tone %>" role="status">
+    <span><%= HTML.escape(message) %></span>
+    <button class="apt-btn" data-variant="ghost" style="height:20px; padding:0 0.35rem;" onclick="this.parentElement.remove()">✕</button>
+  </div>
+</div>

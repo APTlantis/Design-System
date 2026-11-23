@@ -1,0 +1,146 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge">EXHIBITION BLOCK</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Hero Split Spotlight (with Interactive Demo)</h2>
+    <span class="apt-badge" data-tone="cyan">DEFAULT LAYOUT</span>
+  </div>
+
+  <div class="apt-spotlight">
+    <div class="apt-spotlight-copy">
+      <span class="apt-gallery-eyebrow">CHROMATIC ATLAS · VISUAL IDENTITY</span>
+      <h3>One Calibrated Palette, Six Expressive Facets</h3>
+      <p>
+        From raw SVG emblems to live OKLCH tokens, every Aptlantis artifact shares the same
+        oceanic depth and solar amber contrast—whether rendered in a Kemal HUD, Markdown doc,
+        or Mermaid architecture diagram.
+      </p>
+      <ul class="apt-spotlight-list">
+        <li>32 perceptually uniform OKLCH primitives mapped to semantic roles.</li>
+        <li>Zero-build CSS variables portable across any HTML page.</li>
+        <li>Interactive depth without pulling in a heavyweight UI framework.</li>
+      </ul>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <button type="button" class="apt-btn" data-variant="primary" data-apt-spotlight-toggle aria-pressed="true">
+          Disable Bioluminescent Glow
+        </button>
+        <a href="/components/oklch-explorer" class="apt-btn" data-variant="ghost">Open OKLCH Explorer →</a>
+      </div>
+    </div>
+
+    <div class="apt-spotlight-visual" data-glow="on">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="apt-mono" style="font-size:0.7rem; color:var(--apt-brand-primary-hover);">LIVE HUD SPECIMEN</span>
+        <span class="apt-badge" data-tone="amber">OKLCH v2.0</span>
+      </div>
+
+      <svg viewBox="0 0 320 155" style="width:100%; height:auto;" aria-hidden="true">
+        <defs>
+          <linearGradient id="spot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00CAE3" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#F7BE4F" stop-opacity="0.18"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="10" width="300" height="135" rx="10" fill="#031C28" stroke="#07455E"/>
+        <circle cx="90" cy="78" r="44" fill="url(#spot-grad)" stroke="#23F2F7" stroke-width="1.5"/>
+        <polygon points="90,46 116,60 110,96 90,108 70,96 64,60" fill="#05303F" stroke="#F7BE4F" stroke-width="1.5"/>
+        <circle cx="90" cy="77" r="7" fill="#23F2F7"/>
+        <rect x="154" y="34" width="132" height="14" rx="4" fill="#05303F" stroke="#00637D"/>
+        <rect x="154" y="58" width="96" height="10" rx="3" fill="#00CAE3"/>
+        <rect x="154" y="78" width="118" height="10" rx="3" fill="#F7BE4F" opacity="0.85"/>
+        <rect x="154" y="98" width="76" height="10" rx="3" fill="#18AAC2" opacity="0.7"/>
+      </svg>
+
+      <div class="apt-mono" style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--apt-text-muted);">
+        <span>Surface: #031C28</span>
+        <span>Primary: #23F2F7</span>
+        <span>Amber: #F7BE4F</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Variation — Reversed Exhibition Spotlight</h2>
+    <span class="apt-badge" data-tone="amber">data-layout="reversed"</span>
+  </div>
+
+  <div class="apt-spotlight" data-layout="reversed">
+    <div class="apt-spotlight-copy">
+      <span class="apt-gallery-eyebrow" style="color:var(--apt-brand-secondary);">CITY HALL · GOVERNANCE MODEL</span>
+      <h3>Clear Standards Without Bureaucratic Friction</h3>
+      <p>
+        Use reversed spotlights to alternate visual rhythm on long-form explainer pages—keeping
+        readers oriented while introducing distinct systems like City Hall, Chromatic Atlas, and
+        the Logos Pipeline.
+      </p>
+      <a href="/components/diagram-inspector" class="apt-btn" data-variant="ghost">Explore Architecture Diagram →</a>
+    </div>
+
+    <div class="apt-spotlight-visual" data-glow="off">
+      <div style="display:grid; gap:0.5rem;">
+        <div class="apt-panel" style="padding:0.7rem 0.85rem; display:flex; justify-content:space-between;">
+          <span class="apt-mono" style="font-size:0.76rem; color:var(--apt-brand-secondary);">WGS · Workspace Governance</span>
+          <span class="apt-badge" data-tone="cyan">ADOPTED</span>
+        </div>
+        <div class="apt-panel" style="padding:0.7rem 0.85rem; display:flex; justify-content:space-between;">
+          <span class="apt-mono" style="font-size:0.76rem; color:var(--apt-brand-primary-hover);">DRS · Deterministic Release</span>
+          <span class="apt-badge" data-tone="cyan">VERIFIED</span>
+        </div>
+        <div class="apt-panel" style="padding:0.7rem 0.85rem; display:flex; justify-content:space-between;">
+          <span class="apt-mono" style="font-size:0.76rem; color:var(--apt-text-secondary);">SANDBOX · Creative Plateau</span>
+          <span class="apt-badge" data-tone="amber">ACTIVE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Responsive 2-column grid · Optional reversed layout</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Spotlight HTML</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#spotlight-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="spotlight-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-spotlight" data-layout="reversed">
+  <div class="apt-spotlight-copy">
+    <span class="apt-gallery-eyebrow">CHROMATIC ATLAS</span>
+    <h3>One Calibrated Palette, Six Facets</h3>
+    <p>Concise explanation of the feature or system.</p>
+  </div>
+  <div class="apt-spotlight-visual" data-glow="on">
+    <!-- SVG, image, or interactive mini-demo -->
+  </div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

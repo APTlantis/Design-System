@@ -1,0 +1,75 @@
+{
+  "schema": "aptlantis.artifact-manifest.v2",
+  "target": "powerpoint",
+  "theme": "Aptlantis-Logo",
+  "theme_identity": {
+    "version": 1,
+    "prefix": "apt",
+    "slug": "logo",
+    "evidence": [
+      {
+        "source": "--theme-version",
+        "version": 1
+      }
+    ]
+  },
+  "stem": "apt-logo-powerpoint",
+  "files": [
+    {
+      "file": "apt-logo-powerpoint-sample.pptx",
+      "role": "sample",
+      "logical_name": "aptlantis-logo-sample.pptx",
+      "fixed_name_reason": null,
+      "sha256": "df16aa642c414892fd8b72748f87915c0c19d7a3a172ea5881f6ca4ba2b65669"
+    },
+    {
+      "file": "apt-logo-powerpoint-template.potx",
+      "role": "template",
+      "logical_name": "aptlantis-logo-template.potx",
+      "fixed_name_reason": null,
+      "sha256": "240bd41368c65f860120f91e74ef8748f7ec0c557f3f5a0c909cf3236330d992"
+    },
+    {
+      "file": "apt-logo-powerpoint.xml",
+      "role": "primary",
+      "logical_name": "aptlantis-logo.xml",
+      "fixed_name_reason": null,
+      "sha256": "b300040d45197d6d2d5acff1a1f30f2abeb3480bc7ab39bf5230fe271b8d8218"
+    },
+    {
+      "file": "apt-logo-powerpoint-palette.toml",
+      "role": "palette",
+      "logical_name": "palette.toml",
+      "fixed_name_reason": null,
+      "sha256": "6c299a952f2c15f31ea1d94160aad4d296221fde8706246e93f55ce8085a7889"
+    },
+    {
+      "file": "apt-logo-powerpoint-swatch.png",
+      "role": "swatch",
+      "logical_name": "swatch.png",
+      "fixed_name_reason": null,
+      "sha256": "cf6fa7edf297f9f64368f4448f0f99a356c1716a50689fe46b6babb1602f5a9a"
+    },
+    {
+      "file": "apt-logo-powerpoint-template-provenance.json",
+      "role": "template-provenance",
+      "logical_name": "template-provenance.json",
+      "fixed_name_reason": null,
+      "sha256": "42d93ec780befd936ca56a0288feb6cbbad6c2f66a044218b583ace8b8245ae7"
+    },
+    {
+      "file": "apt-logo-powerpoint-tokens.json",
+      "role": "tokens",
+      "logical_name": "tokens.json",
+      "fixed_name_reason": null,
+      "sha256": "c6480fd46cf7baee685d7f850b92d25dedf8d3921855f163647074b40d60907f"
+    },
+    {
+      "file": "apt-logo-powerpoint-validation.json",
+      "role": "validation",
+      "logical_name": "validation.json",
+      "fixed_name_reason": null,
+      "sha256": "d8564b0619a9a276dd5a8be16963a0658c95a05866f49eb75280c5600962b8a5"
+    }
+  ]
+}

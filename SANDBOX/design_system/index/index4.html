@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APTLANTIS — Master Icon Library & Mermaid Diagramming Kit</title>
+
+  <!-- Canonical Brand Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      /* =========================================================
+         APTLANTIS DESIGN TOKENS — ABYSSAL CYAN & SOLAR AMBER
+         ========================================================= */
+      --apt-bg-void: #000000;
+      --apt-bg-canvas: #02020E;
+      --apt-bg-base: #00101A;
+      --apt-bg-raised: #031C28;
+      --apt-bg-overlay: #05303F;
+
+      --apt-border-subtle: #07455E;
+      --apt-border-default: #555245;
+      --apt-border-interactive: #00637D;
+
+      --apt-brand-primary: #00CAE3;
+      --apt-brand-primary-hover: #23F2F7;
+      --apt-brand-primary-dim: #18AAC2;
+      --apt-brand-primary-muted: #0380A1;
+
+      --apt-brand-secondary: #F7BE4F;
+      --apt-brand-secondary-hover: #F7DD74;
+      --apt-accent-ice: #A1FCFD;
+      --apt-accent-sand: #A29062;
+      --apt-accent-terracotta: #BC8F81;
+
+      --apt-text-primary: #FDFDFB;
+      --apt-text-warm-display: #FDEDB3;
+      --apt-text-secondary: #CFD0C9;
+      --apt-text-tertiary: #A0B4B9;
+      --apt-text-muted: #748E97;
+      --apt-text-disabled: #506F80;
+
+      --apt-status-success: #697500;
+      --apt-status-danger: #CF7818;
+
+      /* Mermaid Theme Variables */
+      --apt-mmd-bg: #031C28;
+      --apt-mmd-node-fill: #14252D;
+      --apt-mmd-secondary-fill: #1E2F38;
+      --apt-mmd-border-primary: #23F2F7;
+      --apt-mmd-border-secondary: #BC8F81;
+      --apt-mmd-line: #86A0A9;
+
+      /* Typography & Radii */
+      --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+      --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --apt-radius-sm: 4px;
+      --apt-radius-md: 8px;
+      --apt-radius-lg: 14px;
+      --apt-radius-pill: 9999px;
+
+      /* Elevation & Glow */
+      --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+      --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(7, 69, 94, 0.65);
+      --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+      --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+      --apt-ease-instrument: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--apt-bg-canvas);
+      color: var(--apt-text-secondary);
+      font-family: var(--apt-font-body);
+    }
+
+    body {
+      background-color: var(--apt-bg-canvas);
+      background-image:
+        radial-gradient(circle at 14% 0%, rgba(0, 202, 227, 0.08) 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, rgba(247, 190, 79, 0.05) 0%, transparent 38%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-display { font-family: var(--apt-font-display); }
+    .font-body { font-family: var(--apt-font-body); }
+    .font-mono-tab {
+      font-family: var(--apt-font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Core Cards & Buttons */
+    .apt-card {
+      background-color: var(--apt-bg-raised);
+      border: 1px solid var(--apt-border-subtle);
+      border-radius: var(--apt-radius-lg);
+      box-shadow: var(--apt-shadow-raised);
+      transition: border-color 140ms var(--apt-ease-instrument),
+                  box-shadow 200ms var(--apt-ease-instrument),
+                  transform 140ms var(--apt-ease-instrument);
+    }
+
+    .apt-icon-tile:hover {
+      border-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-shadow-raised), var(--apt-glow-primary);
+      transform: translateY(-2px);
+    }
+
+    .apt-icon-tile:active {
+      transform: translateY(0px);
+    }
+
+    .apt-btn-primary {
+      background-color: var(--apt-brand-primary);
+      color: var(--apt-bg-void);
+      font-family: var(--apt-font-display);
+      font-weight: 600;
+      border-radius: var(--apt-radius-md);
+      transition: all 130ms var(--apt-ease-instrument);
+    }
+    .apt-btn-primary:hover {
+      background-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-glow-primary);
+    }
+    .apt-btn-primary:active {
+      background-color: var(--apt-brand-primary-dim);
+      transform: translateY(1px);
+    }
+
+    .apt-btn-secondary {
+      background-color: var(--apt-brand-secondary);
+      color: var(--apt-bg-void);
+      font-family: var(--apt-font-display);
+      font-weight: 600;
+      border-radius: var(--apt-radius-md);
+      transition: all 130ms var(--apt-ease-instrument);
+    }
+    .apt-btn-secondary:hover {
+      background-color: var(--apt-brand-secondary-hover);
+      box-shadow: var(--apt-glow-secondary);
+    }
+
+    .apt-btn-ghost {
+      background-color: var(--apt-bg-base);
+      color: var(--apt-text-primary);
+      border: 1px solid var(--apt-border-subtle);
+      border-radius: var(--apt-radius-md);
+      transition: all 130ms var(--apt-ease-instrument);
+    }
+    .apt-btn-ghost:hover {
+      border-color: var(--apt-brand-primary-hover);
+      color: var(--apt-accent-ice);
+      box-shadow: var(--apt-glow-primary);
+    }
+    .apt-btn-ghost.active-pill {
+      background-color: rgba(0, 202, 227, 0.14);
+      border-color: var(--apt-brand-primary);
+      color: var(--apt-accent-ice);
+    }
+
+    /* HUD Icon Frame Box */
+    .hud-frame-container {
+      width: 56px;
+      height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--apt-radius-md);
+      transition: all 160ms var(--apt-ease-instrument);
+    }
+    .hud-frame-container.framed {
+      background-color: var(--apt-bg-base);
+      border: 1px solid var(--apt-border-subtle);
+      box-shadow: inset 0 1px 0 rgba(161, 252, 253, 0.05);
+    }
+    .apt-icon-tile:hover .hud-frame-container.framed {
+      border-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-glow-primary);
+    }
+
+    /* Blueprint Dot Grid for Mermaid Diagram Canvas */
+    .mermaid-stage-grid {
+      background-color: #031C28;
+      background-image: radial-gradient(rgba(134, 160, 169, 0.18) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--apt-bg-void); }
+    ::-webkit-scrollbar-thumb { background: var(--apt-border-subtle); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--apt-brand-primary-muted); }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#00CAE3] selection:text-[#000000]">
+
+  <!-- ===================================================================
+       STICKY HEADER NAVIGATION
+       =================================================================== -->
+  <header class="sticky top-0 z-50 border-b border-[#07455E] bg-[#00101A]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <!-- Citadel Shield & Wordmark -->
+      <a href="#top" class="flex items-center gap-3 group shrink-0">
+        <svg width="28" height="32" viewBox="0 0 120 136" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M60 12L106 30V72C106 101 85.5 119.5 60 128C34.5 119.5 14 101 14 72V30L60 12Z" fill="#00101A" stroke="#F7BE4F" stroke-width="5"/>
+          <path d="M55 44H65V56H74V68H82V84H38V68H46V56H55V44Z" fill="#FDFDFB"/>
+          <rect x="57" y="68" width="6" height="16" rx="3" fill="#F7BE4F"/>
+          <path d="M27 89C38 82 49 96 60 89C71 82 82 96 93 89" stroke="#23F2F7" stroke-width="4" stroke-linecap="round"/>
+          <path d="M33 101C42 95 51 107 60 101C69 95 78 107 87 101" stroke="#00CAE3" stroke-width="3.5" stroke-linecap="round"/>
+          <polygon points="60,2 68,10 60,18 52,10" fill="#23F2F7" stroke="#F7BE4F" stroke-width="1.5"/>
+        </svg>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display font-bold tracking-[0.08em] text-[#FDFDFB] text-base sm:text-lg group-hover:text-[#A1FCFD] transition-colors">APTLANTIS</span>
+          <span class="hidden md:inline-block font-mono-tab text-[11px] px-2 py-0.5 rounded-full bg-[#031C28] border border-[#07455E] text-[#00CAE3]">ICON &amp; MERMAID KIT</span>
+        </div>
+      </a>
+
+      <!-- Anchor Links -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-[#A0B4B9]">
+        <a href="#icon-library" class="hover:text-[#23F2F7] transition-colors">48-Icon HUD Library</a>
+        <a href="#mermaid-kit" class="hover:text-[#23F2F7] transition-colors">Mermaid Theme &amp; Pipeline</a>
+        <a href="#mermaid-config" class="hover:text-[#23F2F7] transition-colors">Theme JSON &amp; classDefs</a>
+      </nav>
+
+      <!-- Global Download Full Sprite Sheet -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" onclick="copySpriteSheet()" class="apt-btn-ghost hidden sm:inline-flex px-3 py-2 text-xs font-mono-tab items-center gap-1.5 cursor-pointer">
+          <span>Copy Sprite</span>
+        </button>
+        <button type="button" onclick="downloadSpriteSheet()" class="apt-btn-primary px-3.5 py-2 text-xs sm:text-sm flex items-center gap-2 cursor-pointer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download 48-Icon Sprite (.SVG)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16">
+
+    <!-- ===================================================================
+         HERO OVERVIEW BANNER
+         =================================================================== -->
+    <section class="relative overflow-hidden rounded-[14px] border border-[#07455E] bg-[#00101A] p-6 sm:p-9 shadow-[0_12px_36px_rgba(0,0,0,0.75)]">
+      <div class="pointer-events-none absolute -right-20 -top-20 w-80 h-80 rounded-full border border-[#07455E]/50"></div>
+      <div class="pointer-events-none absolute -right-8 -top-8 w-56 h-56 rounded-full border border-[#00CAE3]/20"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#031C28] border border-[#00637D] mb-4">
+            <span class="w-2 h-2 rounded-full bg-[#23F2F7] shadow-[0_0_8px_#23F2F7]"></span>
+            <span class="font-mono-tab text-[11px] uppercase tracking-wider text-[#A1FCFD]">Canonical Duotone Vector Kit · 24×24 Grid · 1.75px Stroke</span>
+          </div>
+          <h1 class="font-display font-bold text-2xl sm:text-4xl lg:text-[42px] leading-[1.12] tracking-[-0.025em] text-[#FDFDFB]">
+            Master Icon Library &amp; <span class="text-[#FDEDB3]">Mermaid Diagramming Kit</span>
+          </h1>
+          <p class="mt-3 text-sm sm:text-base text-[#CFD0C9] leading-relaxed max-w-2xl">
+            48 permanent duotone HUD vectors built for Aptlantis City Hall standards (<code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">WGS</code>, <code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">SFDS</code>, <code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">CTS</code>, <code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">DRS</code>, <code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">ARHS</code>, <code class="font-mono-tab text-xs text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">AAMHS</code>) paired with your official Mermaid base theme and custom <code class="font-mono-tab text-xs text-[#F7BE4F] bg-[#031C28] px-1.5 py-0.5 rounded">classDef</code> roles.
+          </p>
+        </div>
+
+        <!-- Duotone Color Legend -->
+        <div class="shrink-0 rounded-xl bg-[#031C28] border border-[#07455E] p-4 space-y-2.5 min-w-[240px]">
+          <div class="font-mono-tab text-[11px] uppercase tracking-wider text-[#A0B4B9] border-b border-[#07455E] pb-1.5">Duotone Layer Grammar</div>
+          <div class="flex items-center justify-between text-xs">
+            <span class="flex items-center gap-2 text-[#CFD0C9]"><span class="w-3 h-3 rounded-sm bg-[#00CAE3]"></span>Primary Chassis</span>
+            <code class="font-mono-tab text-[#00CAE3]">#00CAE3</code>
+          </div>
+          <div class="flex items-center justify-between text-xs">
+            <span class="flex items-center gap-2 text-[#CFD0C9]"><span class="w-3 h-3 rounded-sm bg-[#FDFDFB]"></span>Secondary Detail</span>
+            <code class="font-mono-tab text-[#FDFDFB]">#FDFDFB</code>
+          </div>
+          <div class="flex items-center justify-between text-xs">
+            <span class="flex items-center gap-2 text-[#CFD0C9]"><span class="w-3 h-3 rounded-sm bg-[#F7BE4F]"></span>Focal / Accent Node</span>
+            <code class="font-mono-tab text-[#F7BE4F]">#F7BE4F</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 1: SEARCHABLE 48-ICON HUD CATALOG
+         =================================================================== -->
+    <section id="icon-library" class="space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#00CAE3]">01 · Complete 48-Icon Architectural Catalog</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Duotone HUD Vector Library</h2>
+          <p class="mt-1 text-sm text-[#A0B4B9]">Click any icon tile to immediately copy its standalone, self-contained <code class="font-mono-tab text-[#A1FCFD]">&lt;svg&gt;</code> markup at your selected resolution.</p>
+        </div>
+
+        <!-- Size & Frame Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="inline-flex items-center rounded-lg bg-[#00101A] border border-[#07455E] p-1 gap-1" role="group" aria-label="Icon Size">
+            <button type="button" onclick="setIconSize(16, this)" class="size-btn px-2.5 py-1 rounded text-xs font-mono-tab text-[#A0B4B9] hover:text-[#FDFDFB] transition-colors cursor-pointer">16px</button>
+            <button type="button" onclick="setIconSize(24, this)" class="size-btn active-size px-2.5 py-1 rounded text-xs font-mono-tab bg-[#031C28] text-[#23F2F7] border border-[#00637D] cursor-pointer">24px</button>
+            <button type="button" onclick="setIconSize(32, this)" class="size-btn px-2.5 py-1 rounded text-xs font-mono-tab text-[#A0B4B9] hover:text-[#FDFDFB] transition-colors cursor-pointer">32px</button>
+          </div>
+
+          <button type="button" id="hudFrameToggleBtn" onclick="toggleHudFrame()" class="apt-btn-ghost active-pill px-3.5 py-2 text-xs font-mono-tab flex items-center gap-2 cursor-pointer">
+            <span id="hudFrameIndicator" class="w-2 h-2 rounded-full bg-[#23F2F7]"></span>
+            <span>HUD Frame (#07455E)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Category Filter Toolbar -->
+      <div class="apt-card p-4 space-y-4">
+        <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          <!-- Search Input -->
+          <div class="relative flex-1 max-w-md">
+            <svg class="w-4 h-4 text-[#748E97] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/>
+              <line x1="20" y1="20" x2="16.2" y2="16.2"/>
+            </svg>
+            <input
+              id="iconSearchInput"
+              type="text"
+              oninput="handleSearchInput(this.value)"
+              placeholder="Search 48 icons (e.g., gov-citadel, hash, checksum, WGS, telemetry...)"
+              class="w-full pl-10 pr-9 py-2 rounded-lg bg-[#00101A] border border-[#07455E] text-sm text-[#FDFDFB] placeholder-[#748E97] focus:outline-none focus:border-[#23F2F7] focus:shadow-[0_0_0_2px_#00101A,0_0_0_4px_#23F2F7] transition-all"
+            />
+            <button
+              id="clearSearchBtn"
+              type="button"
+              onclick="clearSearch()"
+              class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-[#748E97] hover:text-[#23F2F7] p-1 cursor-pointer"
+              aria-label="Clear search"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Active Count Readout -->
+          <div class="flex items-center justify-between md:justify-end gap-3 font-mono-tab text-xs">
+            <span class="text-[#748E97]">Showing <strong id="visibleIconCount" class="text-[#23F2F7]">48</strong> of 48 vectors</span>
+            <span class="px-2.5 py-1 rounded bg-[#00101A] border border-[#07455E] text-[#A0B4B9]">Stroke: <span id="strokeWidthReadout" class="text-[#FDFDFB]">1.75px</span></span>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div id="categoryFilterBar" class="flex flex-wrap gap-2 pt-1 border-t border-[#07455E]/70">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Icon Grid -->
+      <div id="iconCatalogGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Empty Search State -->
+      <div id="emptySearchState" class="hidden apt-card p-10 text-center space-y-3">
+        <div class="w-12 h-12 mx-auto rounded-lg bg-[#00101A] border border-[#07455E] flex items-center justify-center text-[#00CAE3]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7" stroke="#00CAE3"/>
+            <line x1="20" y1="20" x2="16.2" y2="16.2" stroke="#F7BE4F"/>
+            <line x1="8.5" y1="11" x2="13.5" y2="11" stroke="#FDFDFB"/>
+          </svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">No HUD vectors match that query</h3>
+        <p class="text-sm text-[#A0B4B9] max-w-md mx-auto">No icons matched your current keyword or domain filter. Reset filters to view all 48 Aptlantis symbols.</p>
+        <button type="button" onclick="resetCatalogFilters()" class="apt-btn-ghost px-4 py-2 text-xs font-mono-tab cursor-pointer">Reset All Filters</button>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 2: MERMAID PIPELINE PREVIEW & THEME SPECIFICATION
+         =================================================================== -->
+    <section id="mermaid-kit" class="space-y-6 pt-4">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#F7BE4F]">02 · Diagramming &amp; Topology Standards</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Mermaid Theme &amp; Node Class Reference</h2>
+          <p class="mt-1 text-sm text-[#A0B4B9] max-w-3xl">
+            Calibrated to <code class="font-mono-tab text-[#A1FCFD]">apt-designsystem-mermaid.json</code> (<code class="font-mono-tab text-[#A1FCFD]">#031C28</code> canvas, <code class="font-mono-tab text-[#A1FCFD]">#14252D</code> node surfaces, <code class="font-mono-tab text-[#23F2F7]">#23F2F7</code> primary borders, <code class="font-mono-tab text-[#86A0A9]">#86A0A9</code> orthogonal connectors) with semantic <code class="font-mono-tab text-[#F7BE4F]">classDef</code> overrides for Governance and Audit/Integrity pipelines.
+          </p>
+        </div>
+
+        <!-- Interactive Pipeline Style Mode Toggle -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono-tab text-xs text-[#748E97]">Node Styling:</span>
+          <button type="button" id="mmdModeClassBtn" onclick="setPipelineStyleMode('classed', this)" class="mmd-mode-btn apt-btn-ghost active-pill px-3.5 py-2 text-xs font-mono-tab cursor-pointer">Semantic classDef Roles</button>
+          <button type="button" id="mmdModeBaseBtn" onclick="setPipelineStyleMode('base', this)" class="mmd-mode-btn apt-btn-ghost px-3.5 py-2 text-xs font-mono-tab cursor-pointer">Base Theme Only (#23F2F7)</button>
+        </div>
+      </div>
+
+      <!-- LIVE INTERACTIVE PIPELINE PREVIEW (WGS / SFDS / CTS -> DRS -> ARHS / AAMHS) -->
+      <div class="apt-card overflow-hidden">
+        <div class="px-5 py-3.5 bg-[#00101A] border-b border-[#07455E] flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#23F2F7]"></span>
+            <h3 class="font-display font-semibold text-base text-[#FDFDFB]">Live Architecture Pipeline Preview · Release &amp; Integrity Flow</h3>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 font-mono-tab text-[11px]">
+            <span class="flex items-center gap-1.5 text-[#F7BE4F]"><span class="w-2.5 h-2.5 rounded-xs border border-[#F7BE4F] bg-[#14252D] inline-block"></span>govNode (#F7BE4F)</span>
+            <span class="flex items-center gap-1.5 text-[#23F2F7]"><span class="w-2.5 h-2.5 rounded-xs border border-[#23F2F7] bg-[#14252D] inline-block"></span>releaseNode (#23F2F7)</span>
+            <span class="flex items-center gap-1.5 text-[#BC8F81]"><span class="w-2.5 h-2.5 rounded-xs border border-[#BC8F81] bg-[#1E2F38] inline-block"></span>auditNode (#BC8F81)</span>
+          </div>
+        </div>
+
+        <!-- Interactive SVG Diagram Stage -->
+        <div class="mermaid-stage-grid p-4 sm:p-8 overflow-x-auto">
+          <div class="min-w-[780px] max-w-5xl mx-auto">
+            <svg id="mermaidPipelineSvg" class="w-full h-auto block select-none" viewBox="0 0 920 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aptlantis Architecture Pipeline: WGS, SFDS, and CTS feed into DRS Desktop Release, which outputs to ARHS Release Hashing and AAMHS Archive Integrity">
+              <defs>
+                <!-- Orthogonal Arrowhead (#86A0A9) -->
+                <marker id="aptArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#86A0A9"/>
+                </marker>
+                <marker id="aptArrowActive" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#23F2F7"/>
+                </marker>
+              </defs>
+
+              <!-- ORTHOGONAL CONNECTORS (#86A0A9) -->
+              <!-- WGS -> DRS -->
+              <path id="edge-wgs-drs" d="M 276 74 H 316 V 192 H 344" stroke="#86A0A9" stroke-width="2" stroke-linejoin="round" marker-end="url(#aptArrow)" class="transition-all duration-150"/>
+              <!-- SFDS -> DRS -->
+              <path id="edge-sfds-drs" d="M 276 210 H 344" stroke="#86A0A9" stroke-width="2" stroke-linejoin="round" marker-end="url(#aptArrow)" class="transition-all duration-150"/>
+              <!-- CTS -> DRS -->
+              <path id="edge-cts-drs" d="M 276 346 H 316 V 228 H 344" stroke="#86A0A9" stroke-width="2" stroke-linejoin="round" marker-end="url(#aptArrow)" class="transition-all duration-150"/>
+
+              <!-- DRS -> ARHS -->
+              <path id="edge-drs-arhs" d="M 576 196 H 612 V 126 H 642" stroke="#86A0A9" stroke-width="2" stroke-linejoin="round" marker-end="url(#aptArrow)" class="transition-all duration-150"/>
+              <!-- DRS -> AAMHS -->
+              <path id="edge-drs-aamhs" d="M 576 224 H 612 V 294 H 642" stroke="#86A0A9" stroke-width="2" stroke-linejoin="round" marker-end="url(#aptArrow)" class="transition-all duration-150"/>
+
+              <!-- Edge Protocol Pill Labels (#031C28 edgeLabelBackground) -->
+              <rect x="285" y="122" width="62" height="20" rx="4" fill="#031C28" stroke="#07455E" stroke-width="1"/>
+              <text x="316" y="135" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="10">policy</text>
+
+              <rect x="285" y="274" width="62" height="20" rx="4" fill="#031C28" stroke="#07455E" stroke-width="1"/>
+              <text x="316" y="287" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="10">contract</text>
+
+              <rect x="583" y="150" width="58" height="20" rx="4" fill="#031C28" stroke="#07455E" stroke-width="1"/>
+              <text x="612" y="163" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="10">sha256</text>
+
+              <rect x="583" y="248" width="58" height="20" rx="4" fill="#031C28" stroke="#07455E" stroke-width="1"/>
+              <text x="612" y="261" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="10">manifest</text>
+
+              <!-- =======================================================
+                   LEFT COLUMN: INPUT STANDARDS (WGS, SFDS, CTS)
+                   ======================================================= -->
+              <!-- NODE 1: WGS -->
+              <g class="mmd-node cursor-pointer" data-role="gov" data-node="WGS" onclick="inspectPipelineNode('WGS')">
+                <rect class="node-box" x="24" y="24" width="252" height="100" rx="6" fill="#14252D" stroke="#F7BE4F" stroke-width="2"/>
+                <!-- Embedded HUD Icon: gov-workspace -->
+                <g transform="translate(42, 42)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#00CAE3"/>
+                  <line x1="3" y1="9" x2="21" y2="9" stroke="#00CAE3"/>
+                  <line x1="9" y1="9" x2="9" y2="20" stroke="#FDFDFB"/>
+                  <rect x="12" y="12" width="6" height="5" rx="1" stroke="#F7BE4F"/>
+                </g>
+                <text x="162" y="64" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18">WGS</text>
+                <text x="162" y="86" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="13.5">Workspace Governance</text>
+                <text x="162" y="106" text-anchor="middle" fill="#F7BE4F" font-family="'JetBrains Mono', monospace" font-size="10.5">class: govNode</text>
+              </g>
+
+              <!-- NODE 2: SFDS -->
+              <g class="mmd-node cursor-pointer" data-role="gov" data-node="SFDS" onclick="inspectPipelineNode('SFDS')">
+                <rect class="node-box" x="24" y="160" width="252" height="100" rx="6" fill="#14252D" stroke="#F7BE4F" stroke-width="2"/>
+                <!-- Embedded HUD Icon: gov-taxonomy-tree -->
+                <g transform="translate(42, 178)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="3" width="6" height="4" rx="1" stroke="#F7BE4F"/>
+                  <path d="M12 7V12M6 12H18M6 12V16M18 12V16" stroke="#00CAE3"/>
+                  <rect x="3" y="16" width="6" height="4" rx="1" stroke="#FDFDFB"/>
+                  <rect x="15" y="16" width="6" height="4" rx="1" stroke="#FDFDFB"/>
+                </g>
+                <text x="162" y="200" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18">SFDS</text>
+                <text x="162" y="222" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="13.5">Structure Standard</text>
+                <text x="162" y="242" text-anchor="middle" fill="#F7BE4F" font-family="'JetBrains Mono', monospace" font-size="10.5">class: govNode</text>
+              </g>
+
+              <!-- NODE 3: CTS -->
+              <g class="mmd-node cursor-pointer" data-role="release" data-node="CTS" onclick="inspectPipelineNode('CTS')">
+                <rect class="node-box" x="24" y="296" width="252" height="100" rx="6" fill="#14252D" stroke="#23F2F7" stroke-width="2"/>
+                <!-- Embedded HUD Icon: dev-terminal -->
+                <g transform="translate(42, 314)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#00CAE3"/>
+                  <polyline points="7 10 10.5 13 7 16" stroke="#F7BE4F"/>
+                  <line x1="12.5" y1="16" x2="17" y2="16" stroke="#FDFDFB"/>
+                </g>
+                <text x="162" y="336" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18">CTS</text>
+                <text x="162" y="358" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="13.5">CLI Contracts</text>
+                <text x="162" y="378" text-anchor="middle" fill="#23F2F7" font-family="'JetBrains Mono', monospace" font-size="10.5">class: releaseNode</text>
+              </g>
+
+              <!-- =======================================================
+                   CENTER COLUMN: DRS DESKTOP RELEASE
+                   ======================================================= -->
+              <g class="mmd-node cursor-pointer" data-role="release" data-node="DRS" onclick="inspectPipelineNode('DRS')">
+                <rect class="node-box" x="348" y="156" width="228" height="108" rx="6" fill="#14252D" stroke="#23F2F7" stroke-width="2.2"/>
+                <!-- Embedded HUD Icon: rel-desktop-window -->
+                <g transform="translate(364, 174)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="13" rx="2" stroke="#00CAE3"/>
+                  <line x1="8" y1="20" x2="16" y2="20" stroke="#FDFDFB"/>
+                  <line x1="12" y1="17" x2="12" y2="20" stroke="#FDFDFB"/>
+                  <polyline points="9.5 10.5 11.5 12.5 15 8.5" stroke="#F7BE4F"/>
+                </g>
+                <text x="474" y="198" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="19">DRS</text>
+                <text x="474" y="220" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="14">Desktop Release</text>
+                <text x="474" y="242" text-anchor="middle" fill="#23F2F7" font-family="'JetBrains Mono', monospace" font-size="10.5">class: releaseNode</text>
+              </g>
+
+              <!-- =======================================================
+                   RIGHT COLUMN: INTEGRITY & PRESERVATION (ARHS, AAMHS)
+                   ======================================================= -->
+              <!-- NODE 5: ARHS -->
+              <g class="mmd-node cursor-pointer" data-role="audit" data-node="ARHS" onclick="inspectPipelineNode('ARHS')">
+                <rect class="node-box" x="646" y="76" width="250" height="100" rx="6" fill="#1E2F38" stroke="#BC8F81" stroke-width="2"/>
+                <!-- Embedded HUD Icon: rel-hash-fingerprint -->
+                <g transform="translate(664, 94)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="9" y1="4" x2="7" y2="20" stroke="#00CAE3"/>
+                  <line x1="17" y1="4" x2="15" y2="20" stroke="#00CAE3"/>
+                  <line x1="4" y1="9" x2="20" y2="9" stroke="#FDFDFB"/>
+                  <line x1="4" y1="15" x2="20" y2="15" stroke="#F7BE4F"/>
+                </g>
+                <text x="782" y="116" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18">ARHS</text>
+                <text x="782" y="138" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="13.5">Release Hashing</text>
+                <text x="782" y="158" text-anchor="middle" fill="#BC8F81" font-family="'JetBrains Mono', monospace" font-size="10.5">class: auditNode</text>
+              </g>
+
+              <!-- NODE 6: AAMHS -->
+              <g class="mmd-node cursor-pointer" data-role="audit" data-node="AAMHS" onclick="inspectPipelineNode('AAMHS')">
+                <rect class="node-box" x="646" y="244" width="250" height="100" rx="6" fill="#1E2F38" stroke="#BC8F81" stroke-width="2"/>
+                <!-- Embedded HUD Icon: rel-archive-vault -->
+                <g transform="translate(664, 262)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="4" rx="1" stroke="#F7BE4F"/>
+                  <path d="M5 8V18C5 19.1 5.9 20 7 20H17C18.1 20 19 19.1 19 18V8" stroke="#00CAE3"/>
+                  <line x1="10" y1="13" x2="14" y2="13" stroke="#FDFDFB"/>
+                </g>
+                <text x="782" y="284" text-anchor="middle" fill="#FDFDFB" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18">AAMHS</text>
+                <text x="782" y="306" text-anchor="middle" fill="#CFD0C9" font-family="'Inter', sans-serif" font-size="13.5">Archive Integrity</text>
+                <text x="782" y="326" text-anchor="middle" fill="#BC8F81" font-family="'JetBrains Mono', monospace" font-size="10.5">class: auditNode</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Interactive Node Inspector Strip -->
+        <div class="px-5 py-3.5 bg-[#00101A] border-t border-[#07455E] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="font-mono-tab text-[#748E97]">SELECTED NODE:</span>
+            <span id="selectedMmdNodeBadge" class="font-mono-tab font-semibold text-[#23F2F7]">DRS · Desktop Release</span>
+            <span id="selectedMmdNodeDesc" class="text-[#CFD0C9]">— Primary build &amp; packaging orchestrator binding governance policies and CLI contracts.</span>
+          </div>
+          <span class="font-mono-tab text-[11px] text-[#748E97]">Click any diagram node to inspect role &amp; HUD icon pairing</span>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           SECTION 3: MERMAID JSON THEME & COPYABLE CLASSDEF SNIPPETS
+           =================================================================== -->
+      <div id="mermaid-config" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Left Column: apt-designsystem-mermaid.json -->
+        <div class="apt-card flex flex-col justify-between overflow-hidden">
+          <div class="px-5 py-4 bg-[#00101A] border-b border-[#07455E] flex items-center justify-between gap-3">
+            <div>
+              <h3 class="font-display font-semibold text-base text-[#FDFDFB]">apt-designsystem-mermaid.json</h3>
+              <p class="font-mono-tab text-[11px] text-[#748E97]">Base Mermaid v10/v11 themeVariables config</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="copyMermaidJson()" class="apt-btn-primary px-3 py-1.5 text-xs cursor-pointer">Copy JSON</button>
+              <button type="button" onclick="downloadMermaidJson()" class="apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">.JSON</button>
+            </div>
+          </div>
+
+          <pre id="mermaidJsonPre" class="p-4 overflow-x-auto text-xs leading-relaxed font-mono-tab text-[#A1FCFD] bg-[#02020E] max-h-[430px]"></pre>
+        </div>
+
+        <!-- Right Column: Copyable classDef & Pipeline Mermaid Code -->
+        <div class="space-y-6 flex flex-col justify-between">
+
+          <!-- classDef Reference Card -->
+          <div class="apt-card overflow-hidden">
+            <div class="px-5 py-4 bg-[#00101A] border-b border-[#07455E] flex items-center justify-between gap-3">
+              <div>
+                <h3 class="font-display font-semibold text-base text-[#FDFDFB]">Semantic <code class="font-mono-tab text-[#F7BE4F]">classDef</code> Overrides</h3>
+                <p class="font-mono-tab text-[11px] text-[#748E97]">Governance (#F7BE4F) · Release (#23F2F7) · Audit (#BC8F81)</p>
+              </div>
+              <button type="button" onclick="copyClassDefs()" class="apt-btn-secondary px-3 py-1.5 text-xs cursor-pointer">Copy classDefs</button>
+            </div>
+            <pre id="mermaidClassDefPre" class="p-4 overflow-x-auto text-xs leading-relaxed font-mono-tab text-[#FDEDB3] bg-[#02020E]"></pre>
+          </div>
+
+          <!-- Ready-to-Paste Pipeline Diagram Snippet -->
+          <div class="apt-card overflow-hidden flex-1 flex flex-col justify-between">
+            <div class="px-5 py-4 bg-[#00101A] border-b border-[#07455E] flex items-center justify-between gap-3">
+              <div>
+                <h3 class="font-display font-semibold text-base text-[#FDFDFB]">Pipeline Mermaid Source (<code class="font-mono-tab text-[#23F2F7]">flowchart LR</code>)</h3>
+                <p class="font-mono-tab text-[11px] text-[#748E97]">Complete WGS / SFDS / CTS → DRS → ARHS / AAMHS code</p>
+              </div>
+              <button type="button" onclick="copyPipelineMermaid()" class="apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">Copy .MMD</button>
+            </div>
+            <pre id="mermaidPipelinePre" class="p-4 overflow-x-auto text-xs leading-relaxed font-mono-tab text-[#CFD0C9] bg-[#02020E] flex-1"></pre>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#07455E] bg-[#00101A] py-8 mt-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#748E97]">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-[#23F2F7]"></span>
+        <span class="font-display font-semibold text-[#FDFDFB] tracking-wider">APTLANTIS MASTER ICON &amp; MERMAID KIT</span>
+        <span>· 48 Canonical HUD Vectors</span>
+      </div>
+      <div class="font-mono-tab">24×24 Grid · 1.75px Stroke · Mermaid Base Theme</div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="aptToast" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-200 flex items-center gap-2.5 px-4 py-3 rounded-lg bg-[#05303F] border border-[#23F2F7] text-[#FDFDFB] shadow-[0_12px_36px_rgba(0,0,0,0.85),0_0_18px_rgba(35,242,247,0.28)]">
+    <span class="w-2 h-2 rounded-full bg-[#23F2F7]"></span>
+    <span id="aptToastMsg" class="font-mono-tab text-xs">Copied to clipboard</span>
+  </div>
+
+  <script>
+    /* =====================================================================
+       1. CLIPBOARD & TOAST NOTIFICATION HELPER
+       ===================================================================== */
+    let toastTimeout = null;
+
+    function showToast(msg) {
+      const toast = document.getElementById('aptToast');
+      const label = document.getElementById('aptToastMsg');
+      label.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, 2400);
+    }
+
+    function copyToClipboard(text, label) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) {
+          showToast(`Copied ${label}`);
+          return;
+        }
+      } catch (err) {
+        // Fallback below
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast(`Copied ${label}`));
+      }
+    }
+
+    /* =====================================================================
+       2. ALL 48 APTLANTIS DUOTONE HUD ICONS (6 CATEGORIES × 8 ICONS)
+       ===================================================================== */
+    const ICON_CATEGORIES = [
+      { id: 'all', label: 'All Icons (48)' },
+      { id: 'governance', label: 'Governance & Standards (8)' },
+      { id: 'cli', label: 'CLI, Code & Implementation (8)' },
+      { id: 'release', label: 'Release, Artifacts & Integrity (8)' },
+      { id: 'telemetry', label: 'Data, Storage & Telemetry (8)' },
+      { id: 'agents', label: 'Agents, Knowledge & Analysis (8)' },
+      { id: 'ui', label: 'UI, Navigation & Status (8)' }
+    ];
+
+    const APT_ICONS = [
+      // -------------------------------------------------------------------
+      // CATEGORY 1: GOVERNANCE & STANDARDS (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'gov-citadel',
+        name: 'Aptlantis City Hall',
+        category: 'governance',
+        tags: 'citadel governance city hall authority architecture',
+        paths: `
+          <path d="M9 5H15V9H18V13H20V20H4V13H6V9H9V5Z" stroke="#00CAE3"/>
+          <line x1="12" y1="2.5" x2="12" y2="5" stroke="#FDFDFB"/>
+          <path d="M10 20V16C10 14.9 10.9 14 12 14C13.1 14 14 14.9 14 16V20" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'gov-workspace',
+        name: 'Workspace Governance (WGS)',
+        category: 'governance',
+        tags: 'wgs workspace governance layout panel standard',
+        paths: `
+          <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#00CAE3"/>
+          <line x1="3" y1="9" x2="21" y2="9" stroke="#00CAE3"/>
+          <line x1="9" y1="9" x2="9" y2="20" stroke="#FDFDFB"/>
+          <rect x="12" y="12" width="6" height="5" rx="1" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'gov-standard-doc',
+        name: 'Standard Specification',
+        category: 'governance',
+        tags: 'standard doc specification rfc rule document',
+        paths: `
+          <path d="M6 3H14L19 8V19C19 20.1 18.1 21 17 21H6C4.9 21 4 20.1 4 19V5C4 3.9 4.9 3 6 3Z" stroke="#00CAE3"/>
+          <polyline points="14 3 14 8 19 8" stroke="#FDFDFB"/>
+          <line x1="8" y1="12.5" x2="15" y2="12.5" stroke="#F7BE4F"/>
+          <line x1="8" y1="16.5" x2="13" y2="16.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'gov-policy-shield',
+        name: 'Policy Enforcement Shield',
+        category: 'governance',
+        tags: 'policy shield guard compliance security rule',
+        paths: `
+          <path d="M12 3L19 6V11.5C19 16.2 16 19.8 12 21C8 19.8 5 16.2 5 11.5V6L12 3Z" stroke="#00CAE3"/>
+          <polyline points="9.2 12 11.2 14 15 10" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'gov-contract-seal',
+        name: 'Contract & Attestation Seal',
+        category: 'governance',
+        tags: 'contract seal badge verified attestation',
+        paths: `
+          <circle cx="12" cy="10" r="6" stroke="#F7BE4F"/>
+          <polyline points="9.5 10 11.2 11.7 14.6 8.3" stroke="#FDFDFB"/>
+          <path d="M9 15.2L7.5 21L12 18.8L16.5 21L15 15.2" stroke="#00CAE3"/>
+        `
+      },
+      {
+        id: 'gov-taxonomy-tree',
+        name: 'Structure & Taxonomy (SFDS)',
+        category: 'governance',
+        tags: 'sfds taxonomy tree hierarchy directory structure',
+        paths: `
+          <rect x="9" y="3" width="6" height="4" rx="1" stroke="#F7BE4F"/>
+          <path d="M12 7V12M6 12H18M6 12V16M18 12V16" stroke="#00CAE3"/>
+          <rect x="3" y="16" width="6" height="4" rx="1" stroke="#FDFDFB"/>
+          <rect x="15" y="16" width="6" height="4" rx="1" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'gov-blueprint',
+        name: 'Architectural Blueprint',
+        category: 'governance',
+        tags: 'blueprint schematic grid plan architecture',
+        paths: `
+          <rect x="3" y="4" width="18" height="16" rx="2" stroke="#00CAE3"/>
+          <path d="M7 9H13V15H7V9Z" stroke="#FDFDFB"/>
+          <line x1="16" y1="8" x2="16" y2="16" stroke="#F7BE4F"/>
+          <line x1="14.5" y1="8" x2="17.5" y2="8" stroke="#F7BE4F"/>
+          <line x1="14.5" y1="16" x2="17.5" y2="16" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'gov-compass',
+        name: 'Navigator Orientation Compass',
+        category: 'governance',
+        tags: 'compass orientation navigation direction guide',
+        paths: `
+          <circle cx="12" cy="12" r="8.5" stroke="#00CAE3"/>
+          <polygon points="12,6.5 14.5,12 12,17.5 9.5,12" stroke="#FDFDFB"/>
+          <polygon points="12,6.5 14.5,12 12,12 9.5,12" fill="#F7BE4F" stroke="#F7BE4F"/>
+        `
+      },
+
+      // -------------------------------------------------------------------
+      // CATEGORY 2: CLI, CODE & IMPLEMENTATION (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'dev-terminal',
+        name: 'CLI Contracts Terminal (CTS)',
+        category: 'cli',
+        tags: 'cts cli terminal shell console command',
+        paths: `
+          <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#00CAE3"/>
+          <polyline points="7 10 10.5 13 7 16" stroke="#F7BE4F"/>
+          <line x1="12.5" y1="16" x2="17" y2="16" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'dev-code-brackets',
+        name: 'Source Code Syntax',
+        category: 'cli',
+        tags: 'code brackets syntax source implementation',
+        paths: `
+          <polyline points="8 7 3.5 12 8 17" stroke="#00CAE3"/>
+          <polyline points="16 7 20.5 12 16 17" stroke="#00CAE3"/>
+          <line x1="13.5" y1="5.5" x2="10.5" y2="18.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'dev-api-endpoint',
+        name: 'API Interface Endpoint',
+        category: 'cli',
+        tags: 'api endpoint interface socket plug contract',
+        paths: `
+          <circle cx="6" cy="12" r="2.5" stroke="#F7BE4F"/>
+          <circle cx="18" cy="12" r="2.5" stroke="#00CAE3"/>
+          <line x1="8.5" y1="12" x2="15.5" y2="12" stroke="#FDFDFB"/>
+          <path d="M12 8V10M12 14V16" stroke="#00CAE3"/>
+        `
+      },
+      {
+        id: 'dev-git-branch',
+        name: 'Revision Branch & Merge',
+        category: 'cli',
+        tags: 'git branch merge version control commit',
+        paths: `
+          <circle cx="7" cy="6" r="2.2" stroke="#FDFDFB"/>
+          <circle cx="7" cy="18" r="2.2" stroke="#00CAE3"/>
+          <circle cx="17" cy="9" r="2.2" stroke="#F7BE4F"/>
+          <line x1="7" y1="8.2" x2="7" y2="15.8" stroke="#00CAE3"/>
+          <path d="M17 11.2C17 14.5 12 14.5 7 15.8" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'dev-package',
+        name: 'Runtime Package Crate',
+        category: 'cli',
+        tags: 'package crate dependency library module',
+        paths: `
+          <polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5" stroke="#00CAE3"/>
+          <polyline points="4 7.5 12 12 20 7.5" stroke="#FDFDFB"/>
+          <line x1="12" y1="12" x2="12" y2="21" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'dev-script-file',
+        name: 'Automation Script File',
+        category: 'cli',
+        tags: 'script file executable runner automation',
+        paths: `
+          <path d="M6 3H14L19 8V19C19 20.1 18.1 21 17 21H6C4.9 21 4 20.1 4 19V5C4 3.9 4.9 3 6 3Z" stroke="#00CAE3"/>
+          <polyline points="8.5 12.5 10.5 14.5 8.5 16.5" stroke="#F7BE4F"/>
+          <line x1="12" y1="16.5" x2="15" y2="16.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'dev-sdk-module',
+        name: 'SDK Interlocking Module',
+        category: 'cli',
+        tags: 'sdk module plugin extension component',
+        paths: `
+          <rect x="4" y="4" width="7" height="7" rx="1.5" stroke="#00CAE3"/>
+          <rect x="13" y="4" width="7" height="7" rx="1.5" stroke="#F7BE4F"/>
+          <rect x="4" y="13" width="7" height="7" rx="1.5" stroke="#FDFDFB"/>
+          <path d="M16.5 13.5V19.5M13.5 16.5H19.5" stroke="#00CAE3"/>
+        `
+      },
+      {
+        id: 'dev-config-gear',
+        name: 'System Configuration Gear',
+        category: 'cli',
+        tags: 'config gear settings parameters runtime',
+        paths: `
+          <circle cx="12" cy="12" r="3" stroke="#F7BE4F"/>
+          <circle cx="12" cy="12" r="6.8" stroke="#FDFDFB"/>
+          <path d="M12 3V5.2M12 18.8V21M3 12H5.2M18.8 12H21M5.6 5.6L7.2 7.2M16.8 16.8L18.4 18.4M18.4 5.6L16.8 7.2M7.2 16.8L5.6 18.4" stroke="#00CAE3"/>
+        `
+      },
+
+      // -------------------------------------------------------------------
+      // CATEGORY 3: RELEASE, ARTIFACTS & INTEGRITY (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'rel-desktop-window',
+        name: 'Desktop Release (DRS)',
+        category: 'release',
+        tags: 'drs desktop release application client build',
+        paths: `
+          <rect x="3" y="4" width="18" height="13" rx="2" stroke="#00CAE3"/>
+          <line x1="8" y1="20" x2="16" y2="20" stroke="#FDFDFB"/>
+          <line x1="12" y1="17" x2="12" y2="20" stroke="#FDFDFB"/>
+          <polyline points="9.5 10.5 11.5 12.5 15 8.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'rel-archive-vault',
+        name: 'Archive Integrity Vault (AAMHS)',
+        category: 'release',
+        tags: 'aamhs archive vault preservation storage box',
+        paths: `
+          <rect x="3" y="4" width="18" height="4" rx="1" stroke="#F7BE4F"/>
+          <path d="M5 8V18C5 19.1 5.9 20 7 20H17C18.1 20 19 19.1 19 18V8" stroke="#00CAE3"/>
+          <line x1="10" y1="13" x2="14" y2="13" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'rel-hash-fingerprint',
+        name: 'Release Hashing (ARHS)',
+        category: 'release',
+        tags: 'arhs hash fingerprint sha256 digest cryptographic',
+        paths: `
+          <line x1="9" y1="4" x2="7" y2="20" stroke="#00CAE3"/>
+          <line x1="17" y1="4" x2="15" y2="20" stroke="#00CAE3"/>
+          <line x1="4" y1="9" x2="20" y2="9" stroke="#FDFDFB"/>
+          <line x1="4" y1="15" x2="20" y2="15" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'rel-checksum-verify',
+        name: 'Checksum Verification',
+        category: 'release',
+        tags: 'checksum verify valid integrity check audit',
+        paths: `
+          <circle cx="12" cy="12" r="8.5" stroke="#00CAE3"/>
+          <polyline points="8.5 12.2 11 14.7 16 9.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'rel-bundle-zip',
+        name: 'Artifact Bundle Archive',
+        category: 'release',
+        tags: 'bundle zip artifact compressed release tarball',
+        paths: `
+          <rect x="4" y="3" width="16" height="18" rx="2" stroke="#00CAE3"/>
+          <line x1="12" y1="3" x2="12" y2="15" stroke="#F7BE4F" stroke-dasharray="2 2"/>
+          <rect x="9.5" y="14" width="5" height="4" rx="1" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'rel-tag-version',
+        name: 'Semantic Version Tag',
+        category: 'release',
+        tags: 'tag version semver label release',
+        paths: `
+          <path d="M4 11V5C4 4.45 4.45 4 5 4H11L20 13L13 20L4 11Z" stroke="#00CAE3"/>
+          <circle cx="8.2" cy="8.2" r="1.3" fill="#F7BE4F" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'rel-deploy-rocket',
+        name: 'Release Promotion & Ship',
+        category: 'release',
+        tags: 'deploy rocket ship launch rollout promotion',
+        paths: `
+          <path d="M12 3C15.5 6 17 10.5 17 15H7C7 10.5 8.5 6 12 3Z" stroke="#00CAE3"/>
+          <circle cx="12" cy="10.5" r="1.6" stroke="#F7BE4F"/>
+          <path d="M7 13L4 16H7M17 13L20 16H17M10 18L12 21L14 18" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'rel-lock-immutable',
+        name: 'Immutable Artifact Lock',
+        category: 'release',
+        tags: 'lock immutable sealed freeze provenance',
+        paths: `
+          <rect x="5" y="10" width="14" height="10" rx="2" stroke="#00CAE3"/>
+          <path d="M8 10V7C8 4.79 9.79 3 12 3C14.21 3 16 4.79 16 7V10" stroke="#FDFDFB"/>
+          <circle cx="12" cy="15" r="1.5" fill="#F7BE4F" stroke="#F7BE4F"/>
+        `
+      },
+
+      // -------------------------------------------------------------------
+      // CATEGORY 4: DATA, STORAGE & TELEMETRY (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'data-database',
+        name: 'Persistent Database Cluster',
+        category: 'telemetry',
+        tags: 'database storage sql cluster persistence',
+        paths: `
+          <ellipse cx="12" cy="6.5" rx="7" ry="2.6" stroke="#F7BE4F"/>
+          <path d="M5 6.5V12C5 13.45 8.13 14.6 12 14.6C15.87 14.6 19 13.45 19 12V6.5" stroke="#00CAE3"/>
+          <path d="M5 12V17.5C5 18.95 8.13 20.1 12 20.1C15.87 20.1 19 18.95 19 17.5V12" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'data-bar-chart',
+        name: 'Telemetry Bar Metrics',
+        category: 'telemetry',
+        tags: 'bar chart metrics throughput analytics',
+        paths: `
+          <rect x="3" y="3" width="18" height="18" rx="2.5" stroke="#00CAE3"/>
+          <line x1="8" y1="17" x2="8" y2="12" stroke="#FDFDFB"/>
+          <line x1="12" y1="17" x2="12" y2="8" stroke="#F7BE4F"/>
+          <line x1="16" y1="17" x2="16" y2="10" stroke="#23F2F7"/>
+        `
+      },
+      {
+        id: 'data-telemetry-pulse',
+        name: 'Live Telemetry Signal',
+        category: 'telemetry',
+        tags: 'telemetry pulse waveform heartbeat health',
+        paths: `
+          <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="#00CAE3"/>
+          <polyline points="5.5 12 8.5 12 10.5 8 13.5 16 15.5 12 18.5 12" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'data-stream-ingest',
+        name: 'Data Stream Ingestion',
+        category: 'telemetry',
+        tags: 'stream ingest pipeline flow events',
+        paths: `
+          <path d="M3 7H14L17 10" stroke="#00CAE3"/>
+          <path d="M3 12H19" stroke="#F7BE4F"/>
+          <path d="M3 17H14L17 14" stroke="#FDFDFB"/>
+          <polyline points="16.5 9.5 19.5 12 16.5 14.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'data-table-ledger',
+        name: 'Dataset Ledger (DDS)',
+        category: 'telemetry',
+        tags: 'dds dataset table ledger rows schema',
+        paths: `
+          <rect x="3" y="4" width="18" height="16" rx="2" stroke="#00CAE3"/>
+          <line x1="3" y1="9" x2="21" y2="9" stroke="#F7BE4F"/>
+          <line x1="3" y1="14.5" x2="21" y2="14.5" stroke="#FDFDFB"/>
+          <line x1="9.5" y1="9" x2="9.5" y2="20" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'data-query-filter',
+        name: 'Query & Telemetry Filter',
+        category: 'telemetry',
+        tags: 'query filter slice funnel selector',
+        paths: `
+          <polygon points="4,5 20,5 14,12.5 14,18 10,20 10,12.5" stroke="#00CAE3"/>
+          <line x1="7" y1="8" x2="17" y2="8" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'data-metric-gauge',
+        name: 'Latency & Load Gauge',
+        category: 'telemetry',
+        tags: 'gauge latency load speedometer threshold',
+        paths: `
+          <path d="M4.5 16.5C3.5 14.5 3.5 11.5 5 9C7 5.8 11.5 4.5 15.5 6C19.5 7.5 21 12 19.5 16.5" stroke="#00CAE3"/>
+          <line x1="12" y1="14" x2="16" y2="9.5" stroke="#F7BE4F"/>
+          <circle cx="12" cy="14" r="1.8" fill="#FDFDFB" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'data-storage-bucket',
+        name: 'Object Storage Bucket',
+        category: 'telemetry',
+        tags: 'storage bucket blob object artifact store',
+        paths: `
+          <path d="M5 7H19L17.5 19C17.4 19.6 16.9 20 16.3 20H7.7C7.1 20 6.6 19.6 6.5 19L5 7Z" stroke="#00CAE3"/>
+          <path d="M8 7V5.5C8 4.4 8.9 3.5 10 3.5H14C15.1 3.5 16 4.4 16 5.5V7" stroke="#FDFDFB"/>
+          <line x1="9" y1="12" x2="15" y2="12" stroke="#F7BE4F"/>
+        `
+      },
+
+      // -------------------------------------------------------------------
+      // CATEGORY 5: AGENTS, KNOWLEDGE & SEMANTIC ANALYSIS (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'ai-agent-node',
+        name: 'Agent Task Record (ATS)',
+        category: 'agents',
+        tags: 'ats agent node autonomous task worker',
+        paths: `
+          <polygon points="12,3 19.5,7.5 19.5,16.5 12,21 4.5,16.5 4.5,7.5" stroke="#00CAE3"/>
+          <circle cx="12" cy="12" r="3" stroke="#F7BE4F"/>
+          <line x1="12" y1="3" x2="12" y2="9" stroke="#FDFDFB"/>
+          <line x1="12" y1="15" x2="12" y2="21" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ai-node-graph',
+        name: 'Semantic Mesh Graph (SISN)',
+        category: 'agents',
+        tags: 'sisn node graph network mesh topology',
+        paths: `
+          <line x1="7.5" y1="10.5" x2="11" y2="7.5" stroke="#00CAE3"/>
+          <line x1="13" y1="7.5" x2="16.5" y2="10.5" stroke="#00CAE3"/>
+          <line x1="7.5" y1="13.5" x2="11" y2="16.5" stroke="#00CAE3"/>
+          <line x1="13" y1="16.5" x2="16.5" y2="13.5" stroke="#00CAE3"/>
+          <circle cx="12" cy="6" r="2.2" stroke="#F7BE4F"/>
+          <circle cx="6" cy="12" r="2.2" stroke="#FDFDFB"/>
+          <circle cx="18" cy="12" r="2.2" stroke="#FDFDFB"/>
+          <circle cx="12" cy="18" r="2.2" stroke="#23F2F7"/>
+        `
+      },
+      {
+        id: 'ai-semantic-lens',
+        name: 'Agentic Analysis (AAS)',
+        category: 'agents',
+        tags: 'aas semantic lens analysis inspection vector',
+        paths: `
+          <circle cx="10.5" cy="10.5" r="6" stroke="#00CAE3"/>
+          <line x1="15" y1="15" x2="20" y2="20" stroke="#FDFDFB"/>
+          <polygon points="10.5,7.5 12,10.5 10.5,13.5 9,10.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'ai-knowledge-tome',
+        name: 'Knowledge Corpus Tome',
+        category: 'agents',
+        tags: 'knowledge tome book documentation memory',
+        paths: `
+          <path d="M12 6.5C10.2 5.3 7.6 5 4.5 5.5V18.5C7.6 18 10.2 18.3 12 19.5C13.8 18.3 16.4 18 19.5 18.5V5.5C16.4 5 13.8 5.3 12 6.5Z" stroke="#00CAE3"/>
+          <line x1="12" y1="6.5" x2="12" y2="19.5" stroke="#F7BE4F"/>
+          <line x1="7" y1="9.5" x2="9.5" y2="9.5" stroke="#FDFDFB"/>
+          <line x1="14.5" y1="9.5" x2="17" y2="9.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ai-task-queue',
+        name: 'Agent Execution Queue',
+        category: 'agents',
+        tags: 'task queue checklist backlog jobs',
+        paths: `
+          <polyline points="4.5 7 6 8.5 8.5 5.5" stroke="#F7BE4F"/>
+          <line x1="11" y1="7" x2="19.5" y2="7" stroke="#FDFDFB"/>
+          <polyline points="4.5 12 6 13.5 8.5 10.5" stroke="#F7BE4F"/>
+          <line x1="11" y1="12" x2="19.5" y2="12" stroke="#00CAE3"/>
+          <circle cx="6.2" cy="17" r="1.4" stroke="#00CAE3"/>
+          <line x1="11" y1="17" x2="19.5" y2="17" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ai-audit-eye',
+        name: 'Observability & Audit Eye (AADR)',
+        category: 'agents',
+        tags: 'aadr audit eye inspection observability trace',
+        paths: `
+          <path d="M2.5 12C5 7.5 8.2 5.5 12 5.5C15.8 5.5 19 7.5 21.5 12C19 16.5 15.8 18.5 12 18.5C8.2 18.5 5 16.5 2.5 12Z" stroke="#00CAE3"/>
+          <circle cx="12" cy="12" r="2.8" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'ai-workflow-flow',
+        name: 'Orchestration Pipeline Flow',
+        category: 'agents',
+        tags: 'workflow flow mermaid diagram orchestration steps',
+        paths: `
+          <rect x="3" y="4" width="6" height="5" rx="1" stroke="#FDFDFB"/>
+          <rect x="15" y="15" width="6" height="5" rx="1" stroke="#F7BE4F"/>
+          <path d="M9 6.5H12.5V17.5H15" stroke="#00CAE3"/>
+        `
+      },
+      {
+        id: 'ai-beacon-signal',
+        name: 'Telemetry Broadcast Beacon',
+        category: 'agents',
+        tags: 'beacon signal broadcast sonar telemetry',
+        paths: `
+          <circle cx="12" cy="12" r="2" fill="#F7BE4F" stroke="#F7BE4F"/>
+          <path d="M8.2 8.2C6.1 10.3 6.1 13.7 8.2 15.8" stroke="#23F2F7"/>
+          <path d="M15.8 8.2C17.9 10.3 17.9 13.7 15.8 15.8" stroke="#23F2F7"/>
+          <path d="M5.4 5.4C1.8 9 1.8 15 5.4 18.6" stroke="#00CAE3"/>
+          <path d="M18.6 5.4C22.2 9 22.2 15 18.6 18.6" stroke="#00CAE3"/>
+        `
+      },
+
+      // -------------------------------------------------------------------
+      // CATEGORY 6: UI, NAVIGATION & STATUS (8)
+      // -------------------------------------------------------------------
+      {
+        id: 'ui-search-cmd',
+        name: 'Command Search Lookup',
+        category: 'ui',
+        tags: 'search command palette find lookup',
+        paths: `
+          <circle cx="11" cy="11" r="6.5" stroke="#00CAE3"/>
+          <line x1="16" y1="16" x2="20" y2="20" stroke="#F7BE4F"/>
+          <line x1="9" y1="11" x2="13" y2="11" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ui-layers-stack',
+        name: 'Surface Elevation Stack',
+        category: 'ui',
+        tags: 'layers stack elevation depth surfaces',
+        paths: `
+          <polygon points="12,3.5 20.5,8 12,12.5 3.5,8" stroke="#F7BE4F"/>
+          <polyline points="3.5 12 12 16.5 20.5 12" stroke="#00CAE3"/>
+          <polyline points="3.5 16 12 20.5 20.5 16" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ui-link-anchor',
+        name: 'Reference Link Anchor',
+        category: 'ui',
+        tags: 'link anchor chain reference uri',
+        paths: `
+          <path d="M10 14L14 10" stroke="#F7BE4F"/>
+          <path d="M14.5 13.5L16.5 11.5C18.2 9.8 18.2 7.2 16.5 5.5C14.8 3.8 12.2 3.8 10.5 5.5L8.5 7.5" stroke="#00CAE3"/>
+          <path d="M9.5 10.5L7.5 12.5C5.8 14.2 5.8 16.8 7.5 18.5C9.2 20.2 11.8 20.2 13.5 18.5L15.5 16.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ui-copy-token',
+        name: 'Copy Token / Snippet',
+        category: 'ui',
+        tags: 'copy clipboard duplicate token snippet',
+        paths: `
+          <rect x="9" y="9" width="11" height="11" rx="2" stroke="#00CAE3"/>
+          <path d="M5 15H4.5C3.7 15 3 14.3 3 13.5V4.5C3 3.7 3.7 3 4.5 3H13.5C14.3 3 15 3.7 15 4.5V5" stroke="#FDFDFB"/>
+          <line x1="12.5" y1="14.5" x2="16.5" y2="14.5" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'ui-status-ok',
+        name: 'Nominal Status Verified',
+        category: 'ui',
+        tags: 'status ok nominal pass success check',
+        paths: `
+          <circle cx="12" cy="12" r="8.5" stroke="#00CAE3"/>
+          <polyline points="8.5 12.2 11 14.7 15.8 9.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ui-status-warn',
+        name: 'Advisory Warning Triangle',
+        category: 'ui',
+        tags: 'status warn warning caution alert amber',
+        paths: `
+          <polygon points="12,3.5 21,19.5 3,19.5" stroke="#F7BE4F"/>
+          <line x1="12" y1="9.5" x2="12" y2="14" stroke="#FDFDFB"/>
+          <circle cx="12" cy="16.8" r="0.8" fill="#F7BE4F" stroke="#F7BE4F"/>
+        `
+      },
+      {
+        id: 'ui-status-danger',
+        name: 'Critical Threshold Alert',
+        category: 'ui',
+        tags: 'status danger critical error octagon fault',
+        paths: `
+          <polygon points="8,3 16,3 21,8 21,16 16,21 8,21 3,16 3,8" stroke="#CF7818"/>
+          <line x1="9.5" y1="9.5" x2="14.5" y2="14.5" stroke="#FDFDFB"/>
+          <line x1="14.5" y1="9.5" x2="9.5" y2="14.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        id: 'ui-export-download',
+        name: 'Export & Download Asset',
+        category: 'ui',
+        tags: 'export download save artifact svg json',
+        paths: `
+          <path d="M4 15V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V15" stroke="#00CAE3"/>
+          <line x1="12" y1="4" x2="12" y2="15" stroke="#F7BE4F"/>
+          <polyline points="8 11 12 15 16 11" stroke="#FDFDFB"/>
+        `
+      }
+    ];
+
+    /* =====================================================================
+       3. ICON CATALOG STATE & RENDERING
+       ===================================================================== */
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let selectedIconSize = 24;
+    let hudFrameEnabled = true;
+
+    function getStrokeWidthForSize(px) {
+      if (px === 16) return '1.5';
+      if (px === 32) return '1.85';
+      return '1.75';
+    }
+
+    function buildStandaloneSvg(icon, sizePx) {
+      const sw = getStrokeWidthForSize(sizePx);
+      return `<svg width="${sizePx}" height="${sizePx}" viewBox="0 0 24 24" fill="none" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">${icon.paths.trim().replace(/\s+/g, ' ')}</svg>`;
+    }
+
+    function renderCategoryPills() {
+      const bar = document.getElementById('categoryFilterBar');
+      bar.innerHTML = ICON_CATEGORIES.map(cat => {
+        const isActive = cat.id === activeCategory;
+        return `
+          <button
+            type="button"
+            onclick="selectCategory('${cat.id}')"
+            class="apt-btn-ghost ${isActive ? 'active-pill' : ''} px-3 py-1.5 text-xs font-medium cursor-pointer"
+          >
+            ${cat.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getFilteredIcons() {
+      const q = searchQuery.trim().toLowerCase();
+      return APT_ICONS.filter(icon => {
+        const catMatch = activeCategory === 'all' || icon.category === activeCategory;
+        if (!catMatch) return false;
+        if (!q) return true;
+        return (
+          icon.id.toLowerCase().includes(q) ||
+          icon.name.toLowerCase().includes(q) ||
+          icon.tags.toLowerCase().includes(q) ||
+          icon.category.toLowerCase().includes(q)
+        );
+      });
+    }
+
+    function renderIconGrid() {
+      const grid = document.getElementById('iconCatalogGrid');
+      const emptyState = document.getElementById('emptySearchState');
+      const countEl = document.getElementById('visibleIconCount');
+      const filtered = getFilteredIcons();
+
+      countEl.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.classList.remove('hidden');
+
+      grid.innerHTML = filtered.map(icon => `
+        <button
+          type="button"
+          onclick="copyIconById('${icon.id}')"
+          title="Click to copy <svg> for ${icon.id}"
+          class="apt-card apt-icon-tile text-left p-4 flex flex-col justify-between gap-3.5 cursor-pointer group focus:outline-none focus:border-[#23F2F7]"
+        >
+          <div class="flex items-start justify-between gap-2 w-full">
+            <div class="hud-frame-container ${hudFrameEnabled ? 'framed' : ''}">
+              ${buildStandaloneSvg(icon, selectedIconSize)}
+            </div>
+            <span class="font-mono-tab text-[10px] px-2 py-0.5 rounded bg-[#00101A] border border-[#07455E] text-[#748E97] group-hover:text-[#23F2F7] group-hover:border-[#00637D] transition-colors">
+              COPY SVG
+            </span>
+          </div>
+
+          <div class="w-full">
+            <div class="font-display font-semibold text-sm text-[#FDFDFB] group-hover:text-[#A1FCFD] transition-colors truncate">
+              ${icon.name}
+            </div>
+            <div class="font-mono-tab text-xs text-[#00CAE3] mt-0.5 truncate">
+              ${icon.id}
+            </div>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    function selectCategory(catId) {
+      activeCategory = catId;
+      renderCategoryPills();
+      renderIconGrid();
+    }
+
+    function handleSearchInput(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (val.trim().length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderIconGrid();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('iconSearchInput');
+      input.value = '';
+      handleSearchInput('');
+      input.focus();
+    }
+
+    function resetCatalogFilters() {
+      activeCategory = 'all';
+      clearSearch();
+      renderCategoryPills();
+      renderIconGrid();
+    }
+
+    function setIconSize(px, btn) {
+      selectedIconSize = px;
+      document.getElementById('strokeWidthReadout').textContent = `${getStrokeWidthForSize(px)}px`;
+
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.remove('bg-[#031C28]', 'text-[#23F2F7]', 'border', 'border-[#00637D]');
+        b.classList.add('text-[#A0B4B9]');
+      });
+      btn.classList.remove('text-[#A0B4B9]');
+      btn.classList.add('bg-[#031C28]', 'text-[#23F2F7]', 'border', 'border-[#00637D]');
+
+      renderIconGrid();
+    }
+
+    function toggleHudFrame() {
+      hudFrameEnabled = !hudFrameEnabled;
+      const btn = document.getElementById('hudFrameToggleBtn');
+      const dot = document.getElementById('hudFrameIndicator');
+      if (hudFrameEnabled) {
+        btn.classList.add('active-pill');
+        dot.style.backgroundColor = '#23F2F7';
+      } else {
+        btn.classList.remove('active-pill');
+        dot.style.backgroundColor = '#506F80';
+      }
+      renderIconGrid();
+    }
+
+    function copyIconById(iconId) {
+      const icon = APT_ICONS.find(i => i.id === iconId);
+      if (!icon) return;
+      const svgMarkup = buildStandaloneSvg(icon, selectedIconSize);
+      copyToClipboard(svgMarkup, `${icon.id} (${selectedIconSize}px) <svg>`);
+    }
+
+    /* =====================================================================
+       4. COMPLETE 48-ICON SVG SPRITE SHEET GENERATOR
+       ===================================================================== */
+    function generateFullSpriteSheet() {
+      const symbols = APT_ICONS.map(icon => {
+        const cleanInner = icon.paths.trim().replace(/\n\s+/g, '\n    ');
+        return `  <symbol id="apt-${icon.id}" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">\n    ${cleanInner}\n  </symbol>`;
+      }).join('\n');
+
+      return `<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">\n  <!-- APTLANTIS MASTER ICON SPRITE SHEET (48 DUOTONE HUD VECTORS) -->\n  <!-- Usage: <svg width="24" height="24"><use href="#apt-gov-citadel"/></svg> -->\n${symbols}\n</svg>`;
+    }
+
+    function copySpriteSheet() {
+      copyToClipboard(generateFullSpriteSheet(), '48-Icon SVG Sprite Sheet');
+    }
+
+    function downloadSpriteSheet() {
+      const content = generateFullSpriteSheet();
+      const blob = new Blob([content], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'aptlantis-hud-icons-sprite.svg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded aptlantis-hud-icons-sprite.svg');
+    }
+
+    /* =====================================================================
+       5. MERMAID DIAGRAMMING KIT & PIPELINE INTERACTIVITY
+       ===================================================================== */
+    const MERMAID_THEME_JSON = {
+      "theme": "base",
+      "fontFamily": "system-ui, sans-serif",
+      "themeVariables": {
+        "background": "#031C28",
+        "primaryColor": "#14252D",
+        "primaryTextColor": "#FDFDFB",
+        "primaryBorderColor": "#23F2F7",
+        "secondaryColor": "#1E2F38",
+        "secondaryTextColor": "#FDFDFB",
+        "secondaryBorderColor": "#BC8F81",
+        "tertiaryColor": "#031C28",
+        "tertiaryTextColor": "#FDFDFB",
+        "tertiaryBorderColor": "#748E97",
+        "textColor": "#FDFDFB",
+        "lineColor": "#86A0A9",
+        "mainBkg": "#14252D",
+        "nodeBorder": "#23F2F7",
+        "nodeTextColor": "#FDFDFB",
+        "clusterBkg": "#031C28",
+        "clusterBorder": "#748E97",
+        "titleColor": "#FDFDFB",
+        "edgeLabelBackground": "#031C28",
+        "actorBkg": "#14252D",
+        "actorBorder": "#23F2F7",
+        "actorTextColor": "#FDFDFB",
+        "actorLineColor": "#86A0A9",
+        "signalColor": "#86A0A9",
+        "signalTextColor": "#FDFDFB",
+        "labelBoxBkgColor": "#14252D",
+        "labelBoxBorderColor": "#748E97",
+        "labelTextColor": "#FDFDFB",
+        "loopTextColor": "#FDFDFB",
+        "noteBkgColor": "#1E2F38",
+        "noteBorderColor": "#BC8F81",
+        "noteTextColor": "#FDFDFB",
+        "activationBkgColor": "#1E2F38",
+        "activationBorderColor": "#BC8F81",
+        "sequenceNumberColor": "#031C28",
+        "labelColor": "#FDFDFB",
+        "altBackground": "#1E2F38",
+        "classText": "#FDFDFB",
+        "errorBkgColor": "#14252D",
+        "errorTextColor": "#FDFDFB",
+        "darkMode": true,
+        "fontFamily": "system-ui, sans-serif",
+        "fontSize": "16px"
+      }
+    };
+
+    const MERMAID_CLASSDEFS = `%% Aptlantis Semantic Node Classes
+classDef govNode fill:#14252D,stroke:#F7BE4F,stroke-width:2px,color:#FDFDFB;
+classDef releaseNode fill:#14252D,stroke:#23F2F7,stroke-width:2px,color:#FDFDFB;
+classDef auditNode fill:#1E2F38,stroke:#BC8F81,stroke-width:2px,color:#FDFDFB;
+classDef dangerNode fill:#260600,stroke:#CF7818,stroke-width:2px,color:#FDEDB3;`;
+
+    const MERMAID_PIPELINE_SOURCE = `flowchart LR
+  WGS["WGS<br/>Workspace Governance"]:::govNode
+  SFDS["SFDS<br/>Structure"]:::govNode
+  CTS["CTS<br/>CLI Contracts"]:::releaseNode
+  DRS["DRS<br/>Desktop Release"]:::releaseNode
+  ARHS["ARHS<br/>Release Hashing"]:::auditNode
+  AAMHS["AAMHS<br/>Archive Integrity"]:::auditNode
+
+  WGS -->|policy| DRS
+  SFDS --> DRS
+  CTS -->|contract| DRS
+  DRS -->|sha256| ARHS
+  DRS -->|manifest| AAMHS
+
+  classDef govNode fill:#14252D,stroke:#F7BE4F,stroke-width:2px,color:#FDFDFB;
+  classDef releaseNode fill:#14252D,stroke:#23F2F7,stroke-width:2px,color:#FDFDFB;
+  classDef auditNode fill:#1E2F38,stroke:#BC8F81,stroke-width:2px,color:#FDFDFB;`;
+
+    const PIPELINE_NODE_INFO = {
+      WGS: {
+        title: 'WGS · Workspace Governance',
+        desc: 'Enforces repository layout rules, naming policies, and token compliance (Icon: gov-workspace).'
+      },
+      SFDS: {
+        title: 'SFDS · Structure Standard',
+        desc: 'Defines canonical directory trees and deterministic file placement schemas (Icon: gov-taxonomy-tree).'
+      },
+      CTS: {
+        title: 'CTS · CLI Contracts',
+        desc: 'Specifies command-line flags, exit codes, and JSON output envelopes (Icon: dev-terminal).'
+      },
+      DRS: {
+        title: 'DRS · Desktop Release',
+        desc: 'Primary build & packaging orchestrator binding governance policies and CLI contracts (Icon: rel-desktop-window).'
+      },
+      ARHS: {
+        title: 'ARHS · Release Hashing',
+        desc: 'Generates cryptographic SHA-256 digests and provenance attestations for release binaries (Icon: rel-hash-fingerprint).'
+      },
+      AAMHS: {
+        title: 'AAMHS · Archive Integrity',
+        desc: 'Seals long-term immutable release archives and verifies manifest completeness (Icon: rel-archive-vault).'
+      }
+    };
+
+    function setPipelineStyleMode(mode, btn) {
+      document.querySelectorAll('.mmd-mode-btn').forEach(b => b.classList.remove('active-pill'));
+      btn.classList.add('active-pill');
+
+      document.querySelectorAll('#mermaidPipelineSvg .mmd-node').forEach(nodeGroup => {
+        const role = nodeGroup.getAttribute('data-role');
+        const rect = nodeGroup.querySelector('.node-box');
+        if (mode === 'base') {
+          rect.setAttribute('fill', '#14252D');
+          rect.setAttribute('stroke', '#23F2F7');
+        } else {
+          if (role === 'gov') {
+            rect.setAttribute('fill', '#14252D');
+            rect.setAttribute('stroke', '#F7BE4F');
+          } else if (role === 'audit') {
+            rect.setAttribute('fill', '#1E2F38');
+            rect.setAttribute('stroke', '#BC8F81');
+          } else {
+            rect.setAttribute('fill', '#14252D');
+            rect.setAttribute('stroke', '#23F2F7');
+          }
+        }
+      });
+    }
+
+    function inspectPipelineNode(nodeKey) {
+      const info = PIPELINE_NODE_INFO[nodeKey];
+      if (!info) return;
+      document.getElementById('selectedMmdNodeBadge').textContent = info.title;
+      document.getElementById('selectedMmdNodeDesc').textContent = `— ${info.desc}`;
+
+      // Highlight connected edges briefly
+      const edgeMap = {
+        WGS: ['edge-wgs-drs'],
+        SFDS: ['edge-sfds-drs'],
+        CTS: ['edge-cts-drs'],
+        DRS: ['edge-wgs-drs', 'edge-sfds-drs', 'edge-cts-drs', 'edge-drs-arhs', 'edge-drs-aamhs'],
+        ARHS: ['edge-drs-arhs'],
+        AAMHS: ['edge-drs-aamhs']
+      };
+
+      const allEdges = ['edge-wgs-drs', 'edge-sfds-drs', 'edge-cts-drs', 'edge-drs-arhs', 'edge-drs-aamhs'];
+      allEdges.forEach(id => {
+        const el = document.getElementById(id);
+        el.setAttribute('stroke', '#86A0A9');
+        el.setAttribute('stroke-width', '2');
+        el.setAttribute('marker-end', 'url(#aptArrow)');
+      });
+
+      (edgeMap[nodeKey] || []).forEach(id => {
+        const el = document.getElementById(id);
+        el.setAttribute('stroke', '#23F2F7');
+        el.setAttribute('stroke-width', '2.6');
+        el.setAttribute('marker-end', 'url(#aptArrowActive)');
+      });
+    }
+
+    function copyMermaidJson() {
+      copyToClipboard(JSON.stringify(MERMAID_THEME_JSON, null, 2), 'apt-designsystem-mermaid.json');
+    }
+
+    function downloadMermaidJson() {
+      const content = JSON.stringify(MERMAID_THEME_JSON, null, 2);
+      const blob = new Blob([content], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'apt-designsystem-mermaid.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded apt-designsystem-mermaid.json');
+    }
+
+    function copyClassDefs() {
+      copyToClipboard(MERMAID_CLASSDEFS, 'Mermaid classDef definitions');
+    }
+
+    function copyPipelineMermaid() {
+      copyToClipboard(MERMAID_PIPELINE_SOURCE, 'Mermaid flowchart source');
+    }
+
+    /* =====================================================================
+       INITIALIZE ON LOAD
+       ===================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategoryPills();
+      renderIconGrid();
+      document.getElementById('mermaidJsonPre').textContent = JSON.stringify(MERMAID_THEME_JSON, null, 2);
+      document.getElementById('mermaidClassDefPre').textContent = MERMAID_CLASSDEFS;
+      document.getElementById('mermaidPipelinePre').textContent = MERMAID_PIPELINE_SOURCE;
+    });
+  </script>
+</body>
+</html>

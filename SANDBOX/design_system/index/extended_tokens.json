@@ -1,0 +1,117 @@
+:root {
+  /* =========================================================
+     APTLANTIS BRAND SYSTEM v2.0 — EXTENDED TOKENS
+     Abyssal Cyan & Solar Amber · Navigator-Architect Identity
+     ========================================================= */
+
+  /* 1. Canonical Primitives (32 OKLCH-Calibrated Tokens) */
+  --apt-color-01: #000000;
+  --apt-color-02: #02020E;
+  --apt-color-03: #0D0100;
+  --apt-color-04: #00101A;
+  --apt-color-05: #260600;
+  --apt-color-06: #031C28;
+  --apt-color-07: #2A2923;
+  --apt-color-08: #05303F;
+  --apt-color-09: #4F2000;
+  --apt-color-10: #07455E;
+  --apt-color-11: #2E5701;
+  --apt-color-12: #555245;
+  --apt-color-13: #71481D;
+  --apt-color-14: #00637D;
+  --apt-color-15: #506F80;
+  --apt-color-16: #697500;
+  --apt-color-17: #A95403;
+  --apt-color-18: #0380A1;
+  --apt-color-19: #748E97;
+  --apt-color-20: #CF7818;
+  --apt-color-21: #A29062;
+  --apt-color-22: #18AAC2;
+  --apt-color-23: #D99D36;
+  --apt-color-24: #A0B4B9;
+  --apt-color-25: #00CAE3;
+  --apt-color-26: #F7BE4F;
+  --apt-color-27: #CFD0C9;
+  --apt-color-28: #23F2F7;
+  --apt-color-29: #F7DD74;
+  --apt-color-30: #A1FCFD;
+  --apt-color-31: #FDEDB3;
+  --apt-color-32: #FDFDFB;
+
+  /* 2. Surfaces */
+  --apt-bg-void: var(--apt-color-01);
+  --apt-bg-canvas: var(--apt-color-02);
+  --apt-bg-warm-void: var(--apt-color-03);
+  --apt-bg-base: var(--apt-color-04);
+  --apt-bg-raised: var(--apt-color-06);
+  --apt-bg-overlay: var(--apt-color-08);
+
+  /* 3. Borders */
+  --apt-border-neutral-subtle: var(--apt-color-07);
+  --apt-border-subtle: var(--apt-color-10);
+  --apt-border-default: var(--apt-color-12);
+  --apt-border-warm: var(--apt-color-13);
+  --apt-border-interactive: var(--apt-color-14);
+
+  /* 4. Typography Colors */
+  --apt-text-primary: var(--apt-color-32);
+  --apt-text-warm-display: var(--apt-color-31);
+  --apt-text-secondary: var(--apt-color-27);
+  --apt-text-tertiary: var(--apt-color-24);
+  --apt-text-muted: var(--apt-color-19);
+  --apt-text-disabled: var(--apt-color-15);
+
+  /* 5. Brand & Accents */
+  --apt-brand-primary: var(--apt-color-25);
+  --apt-brand-primary-hover: var(--apt-color-28);
+  --apt-brand-primary-dim: var(--apt-color-22);
+  --apt-brand-primary-muted: var(--apt-color-18);
+  --apt-brand-secondary: var(--apt-color-26);
+  --apt-brand-secondary-hover: var(--apt-color-29);
+  --apt-brand-secondary-dim: var(--apt-color-23);
+  --apt-accent-ice: var(--apt-color-30);
+  --apt-accent-sand: var(--apt-color-21);
+
+  /* 6. In-Palette Semantic Status */
+  --apt-status-success: var(--apt-color-16);
+  --apt-status-success-surface: var(--apt-color-11);
+  --apt-status-warning: var(--apt-color-26);
+  --apt-status-danger: var(--apt-color-20);
+  --apt-status-danger-strong: var(--apt-color-17);
+  --apt-status-danger-surface: var(--apt-color-05);
+  --apt-status-danger-border: var(--apt-color-09);
+  --apt-status-info: var(--apt-color-25);
+
+  /* 7. Telemetry & Data Visualization Series (6-Series Alternating) */
+  --apt-chart-1: var(--apt-brand-primary);       /* #00CAE3 */
+  --apt-chart-2: var(--apt-brand-secondary);     /* #F7BE4F */
+  --apt-chart-3: var(--apt-brand-primary-muted); /* #0380A1 */
+  --apt-chart-4: var(--apt-accent-sand);         /* #A29062 */
+  --apt-chart-5: var(--apt-accent-ice);          /* #A1FCFD */
+  --apt-chart-6: var(--apt-status-danger);       /* #CF7818 */
+  --apt-chart-grid: var(--apt-border-subtle);    /* #07455E */
+  --apt-chart-axis: var(--apt-border-default);   /* #555245 */
+
+  /* 8. Typography & Radii */
+  --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+  --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --apt-radius-sm: 4px;
+  --apt-radius-md: 8px;
+  --apt-radius-lg: 14px;
+  --apt-radius-pill: 9999px;
+
+  /* 9. HUD Elevation & Bioluminescent Glows */
+  --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+  --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65);
+  --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+  --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+  --apt-focus-ring: 0 0 0 2px var(--apt-bg-base), 0 0 0 4px var(--apt-brand-primary-hover);
+
+  /* 10. Motion Physics & Timing Curves */
+  --apt-ease-instrument: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --apt-ease-tide: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --apt-duration-fast: 120ms;
+  --apt-duration-base: 220ms;
+  --apt-duration-slow: 340ms;
+}

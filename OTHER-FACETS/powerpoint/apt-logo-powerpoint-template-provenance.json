@@ -1,0 +1,27 @@
+{
+  "file": "apt-logo-powerpoint-sample.pptx",
+  "template_file": "apt-logo-powerpoint-template.potx",
+  "slides": 23,
+  "layouts": 14,
+  "editable": [
+    "text",
+    "placeholders",
+    "tables",
+    "charts"
+  ],
+  "chart_data": "illustrative template values",
+  "native_application_acceptance": "pending",
+  "source_template": "aptlantis-clogure-template.pptx",
+  "source_sha256": "ff78bc0f960314d5301f3533a18fe65d1a45c6c24e4139ff84e52cc675b6595d",
+  "modified_parts": [
+    "ppt/slideLayouts/slideLayout10.xml",
+    "ppt/slideLayouts/slideLayout13.xml",
+    "ppt/slideLayouts/slideLayout8.xml",
+    "ppt/slideLayouts/slideLayout9.xml",
+    "ppt/theme/theme1.xml",
+    "ppt/charts/chart1.xml",
+    "ppt/charts/chart2.xml",
+    "ppt/charts/chart3.xml"
+  ],
+  "preserved_parts": 138
+}

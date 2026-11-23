@@ -1,0 +1,19 @@
+# Image-derived dark style; authored SVG and Matplotlib renders are separate.
+figure.facecolor: 031C28
+savefig.facecolor: 031C28
+axes.facecolor: 14252D
+axes.edgecolor: 748E97
+axes.labelcolor: FDFDFB
+text.color: FDFDFB
+xtick.color: 86A0A9
+ytick.color: 86A0A9
+grid.color: 748E97
+legend.facecolor: 14252D
+legend.edgecolor: 748E97
+axes.prop_cycle: cycler('color', ['23F2F7', '8D6456', 'D99D36', '8D6456', '23F2F7', 'FDEDB3']) + cycler('linestyle', ['-', '--', ':', '-.', '-', '--'])
+axes.grid: True
+grid.alpha: 1.0
+grid.linewidth: 0.6
+lines.linewidth: 2.5
+font.size: 11
+savefig.transparent: False

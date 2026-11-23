@@ -1,0 +1,40 @@
+/* ==========================================================================
+   APTLANTIS v2.0 — Mermaid Topology Coordinate Grid & Interactive Nodes
+   Requires: tokens-extended.css
+   ========================================================================== */
+
+.apt-topology-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding: 1.5rem;
+  border-radius: var(--apt-radius-md);
+  border: 1px solid var(--apt-border-subtle);
+  background-color: var(--apt-bg-base);
+  /* Subtle oceanic coordinate grid */
+  background-image:
+    linear-gradient(to right, oklch(from var(--apt-border-subtle) l c h / 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(from var(--apt-border-subtle) l c h / 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overflow: auto;
+}
+
+.apt-topology-toolbar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.35rem;
+  z-index: 5;
+}
+
+/* Make Mermaid SVG nodes interactive with keyboard & pointer */
+.apt-topology-frame .node {
+  cursor: pointer;
+  transition: filter var(--apt-duration-fast) var(--apt-ease-instrument);
+}
+
+.apt-topology-frame .node:hover {
+  filter: drop-shadow(0 0 8px rgba(35, 242, 247, 0.45));
+}

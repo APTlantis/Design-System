@@ -1,0 +1,447 @@
+{% if !flag?(:without_zlib) %}
+  require "compress/gzip"
+  require "compress/zlib"
+{% end %}
+require "mime"
+
+# Adds given `Kemal::Handler` to handlers chain.
+# There are 6 handlers by default and all the custom handlers
+# goes between the first 5 and the last `Kemal::RouteHandler`.
+#
+# - `Kemal::InitHandler`
+# - `Kemal::LogHandler`
+# - `Kemal::HeadRequestHandler`
+# - `Kemal::ExceptionHandler`
+# - `Kemal::StaticFileHandler`
+# - Here goes custom handlers
+# - `Kemal::RouteHandler`
+@[Deprecated("Use `use` instead")]
+def add_handler(handler : HTTP::Handler)
+  Kemal.config.add_handler handler
+end
+
+@[Deprecated("Use `use` with position parameter instead")]
+def add_handler(handler : HTTP::Handler, position : Int32)
+  Kemal.config.add_handler handler, position
+end
+
+# Sets public folder from which the static assets will be served.
+#
+# By default this is `/public` not `src/public`.
+def public_folder(path : String)
+  Kemal.config.public_folder = path
+end
+
+# Logs the output via `logger`.
+# This is the built-in `Kemal::LogHandler` by default which uses STDOUT.
+@[Deprecated("Use standard library Log")]
+def log(message : String)
+  logger = Kemal.config.logger?
+  if logger
+    logger.write "#{message}\n"
+  else
+    Log.info { message }
+  end
+end
+
+# Enables / Disables logging.
+# This is enabled by default.
+#
+# ```
+# logging false
+# ```
+def logging(status : Bool)
+  Kemal.config.logging = status
+end
+
+# This is used to replace the built-in `Kemal::LogHandler` with a custom logger.
+#
+# A custom logger must inherit from `Kemal::BaseLogHandler` and must implement
+# `call(context)`, `write(message)` methods.
+#
+# ```
+# class MyCustomLogger < Kemal::BaseLogHandler
+#   def call(context)
+#     puts "I'm logging some custom stuff here."
+#     call_next(context) # => This calls the next handler
+#   end
+#
+#   # This is used from `log` method.
+#   def write(message)
+#     STDERR.puts message # => Logs the output to STDERR
+#   end
+# end
+# ```
+#
+# Now that we have a custom logger here's how we use it
+#
+# ```
+# logger MyCustomLogger.new
+# ```
+@[Deprecated("Use standard library Log")]
+def logger(logger : Kemal::BaseLogHandler)
+  Kemal.config.logger = logger
+end
+
+# Enables / Disables static file serving.
+# This is enabled by default.
+#
+# ```
+# serve_static false
+# ```
+#
+# Static server also have some advanced customization options like `dir_listing`,
+# `dir_index` and `gzip`.
+#
+# ```
+# serve_static({"gzip" => true, "dir_listing" => false})
+# ```
+def serve_static(status : Bool)
+  Kemal.config.serve_static = status
+end
+
+def serve_static(status : Hash(String, V)) forall V
+  Kemal.config.serve_static = status
+end
+
+# Helper for easily modifying response headers.
+# This can be used to modify a response header with the given hash.
+#
+# ```
+# def call(env)
+#   headers(env, {"X-Custom-Header" => "This is a custom value"})
+# end
+# ```
+def headers(env : HTTP::Server::Context, additional_headers : Hash(String, String))
+  env.response.headers.merge!(additional_headers)
+end
+
+# Send a file with given path and base the mime-type on the file extension
+# or default `application/octet-stream` mime_type.
+#
+# ```
+# send_file env, "./path/to/file"
+# ```
+#
+# Optionally you can override the mime_type
+#
+# ```
+# send_file env, "./path/to/file", "image/jpeg"
+# ```
+#
+# Also you can set the filename and the disposition
+#
+# ```
+# send_file env, "./path/to/file", filename: "image.jpg", disposition: "attachment"
+# ```
+def send_file(env : HTTP::Server::Context, path : String, mime_type : String? = nil, *, filename : String? = nil, disposition : String? = nil)
+  file_path = File.expand_path(path, Dir.current)
+  mime_type ||= MIME.from_filename(file_path, "application/octet-stream")
+  env.response.content_type = mime_type
+  env.response.headers["Accept-Ranges"] = Kemal.config.max_ranges > 0 ? "bytes" : "none"
+  env.response.headers["X-Content-Type-Options"] = "nosniff"
+  filestat = File.info(file_path)
+  filesize = filestat.size
+  attachment(env, filename, disposition)
+
+  Kemal.config.static_headers.try(&.call(env, file_path, filestat))
+
+  # The content coding to apply below, or `nil` to send the stored bytes as they are.
+  coding = nil
+  if env.response.headers.has_key?("Content-Encoding")
+    # The caller already encoded the body — `Kemal::StaticFileHandler` does that when it
+    # serves a pre-compressed `.gz` neighbour of *path* — so it goes out untouched, entity
+    # tag included: a validator that arrived with an encoded body already describes it.
+    # This runs whether or not Kemal was built with a compressor of its own.
+    Kemal::Utils.append_vary(env.response.headers, "Accept-Encoding")
+  elsif Kemal::Utils.compressible?(file_path, filesize)
+    # `Accept-Encoding` selects between the encoded and identity forms of this URL, so the
+    # response has to say so even when this request ends up unencoded (RFC 9110 §12.5.5).
+    # Without it a cache hands one client the variant it stored for another.
+    Kemal::Utils.append_vary(env.response.headers, "Accept-Encoding")
+
+    coding = Kemal::Utils.content_coding_for(env.request.headers, file_path, filesize)
+  end
+
+  # RFC 9110 §14.2 defines range handling for GET only, so a `Range` on HEAD is ignored.
+  # So is one whose `If-Range` names a representation other than this one: the client is
+  # resuming a download, and bytes of a changed file appended to its old prefix would
+  # corrupt it silently, so it gets the whole file instead (RFC 9110 §13.1.5).
+  if env.request.method == "GET" && (range_header = env.request.headers["Range"]?) && if_range_matches?(env)
+    ranges = parse_ranges(range_header, filesize)
+
+    # A valid range set none of whose ranges can be satisfied is answered with 416 and the
+    # current length, so the client can retry with a range that fits (RFC 9110 §15.5.17).
+    if ranges && ranges.empty?
+      env.response.status_code = 416
+      env.response.headers["Content-Range"] = "bytes */#{filesize}"
+      # There is no body to decode, and an empty one is not a valid stream in any coding.
+      env.response.headers.delete("Content-Encoding")
+      env.response.content_length = 0
+      return
+    end
+
+    # `nil` means the header was malformed, used a unit other than bytes, or was refused as
+    # abusive. Falling through serves the full representation exactly as a plain GET of the
+    # same URL would, compression included, instead of a bespoke uncompressed copy that a
+    # client could ask for with a two-range header.
+    #
+    # A range set of several parts is declined the same way when the representation carries
+    # a content coding: the `multipart/byteranges` envelope holding the parts is not itself
+    # encoded, so it cannot go out under the `Content-Encoding` those parts came from.
+    if ranges && !(ranges.size > 1 && env.response.headers.has_key?("Content-Encoding"))
+      File.open(file_path) { |file| multipart(file, env, ranges, filesize) }
+      return
+    end
+  end
+
+  # A `HEAD` wants the headers a `GET` would send, and `Kemal::HeadRequestHandler`
+  # gets them by producing the body into a counting sink and reading the length off
+  # it. When the stored bytes go out as they are, that length is the file's own, so
+  # there is nothing to produce: a `HEAD` on a 20 GB file should not read 20 GB. The
+  # file is still opened, so that one the `GET` could not serve fails here the same
+  # way. A body Kemal would compress is still produced - its length is only known
+  # once it has been.
+  if coding.nil? && env.request.method == "HEAD"
+    File.open(file_path) { }
+    env.response.content_length = filesize
+    return
+  end
+
+  File.open(file_path) do |file|
+    {% if flag?(:without_zlib) %}
+      env.response.content_length = filesize
+      IO.copy(file, env.response)
+    {% else %}
+      case coding
+      when "gzip"
+        Kemal::Utils.set_content_coding(env.response.headers, "gzip")
+        Compress::Gzip::Writer.open(env.response) do |gzip|
+          IO.copy(file, gzip)
+        end
+      when "deflate"
+        # HTTP's `deflate` coding is the zlib format of RFC 1950, not the bare RFC 1951
+        # stream `Compress::Deflate::Writer` writes (RFC 9110 §8.4.1.2).
+        Kemal::Utils.set_content_coding(env.response.headers, "deflate")
+        Compress::Zlib::Writer.open(env.response) do |zlib|
+          IO.copy(file, zlib)
+        end
+      else
+        env.response.content_length = filesize
+        IO.copy(file, env.response)
+      end
+    {% end %}
+  end
+  return
+end
+
+# Send a file with given data and default `application/octet-stream` mime_type.
+#
+# ```
+# send_file env, data_slice
+# ```
+#
+# Optionally you can override the mime_type
+#
+# ```
+# send_file env, data_slice, "image/jpeg"
+# ```
+#
+# Also you can set the filename and the disposition
+#
+# ```
+# send_file env, data_slice, filename: "image.jpg", disposition: "attachment"
+# ```
+def send_file(env : HTTP::Server::Context, data : Slice(UInt8), mime_type : String? = nil, *, filename : String? = nil, disposition : String? = nil)
+  mime_type ||= "application/octet-stream"
+  env.response.content_type = mime_type
+  env.response.content_length = data.bytesize
+  attachment(env, filename, disposition)
+  env.response.write data
+end
+
+private def multipart(file, env : HTTP::Server::Context, ranges : Array({Int64, Int64}), fileb : Int64)
+  # See https://www.rfc-editor.org/rfc/rfc9110#section-14.4 and
+  # https://www.rfc-editor.org/rfc/rfc9110#section-15.3.7
+
+  if ranges.size == 1
+    # Single range - send as regular partial content
+    startb, endb = ranges[0]
+    content_length = 1_i64 + endb - startb
+    env.response.status_code = 206
+    env.response.content_length = content_length
+    env.response.headers["Accept-Ranges"] = "bytes"
+    env.response.headers["Content-Range"] = "bytes #{startb}-#{endb}/#{fileb}"
+
+    file.seek(startb)
+    IO.copy(file, env.response, content_length)
+  else
+    # Multiple ranges - send as multipart/byteranges. Each body part carries the media type
+    # of the selected representation, not the multipart type of the enclosing response.
+    content_type = env.response.headers["Content-Type"]
+    boundary = "kemal-#{Random::Secure.hex(16)}"
+    env.response.content_type = "multipart/byteranges; boundary=#{boundary}"
+    env.response.status_code = 206
+    env.response.headers["Accept-Ranges"] = "bytes"
+
+    ranges.each do |start_byte, end_byte|
+      part_length = 1_i64 + end_byte - start_byte
+      env.response.print "--#{boundary}\r\n"
+      env.response.print "Content-Type: #{content_type}\r\n"
+      env.response.print "Content-Range: bytes #{start_byte}-#{end_byte}/#{fileb}\r\n"
+      env.response.print "\r\n"
+
+      file.seek(start_byte)
+      IO.copy(file, env.response, part_length)
+      env.response.print "\r\n"
+    end
+    env.response.print "--#{boundary}--\r\n"
+  end
+end
+
+# Whether a `Range` may be honoured under the request's `If-Range` (RFC 9110 §13.1.5): true
+# when there is no `If-Range`, or when it names the validator this response carries.
+#
+# An entity tag matches only by strong comparison, so a weak tag on either side never does —
+# and the tags Kemal generates are weak, so only a strong one set by `static_headers` can.
+# A date matches only when it equals the response's `Last-Modified` exactly, the comparison
+# the RFC asks for. A response without the validator the client sent cannot confirm it, so
+# the range is ignored and the full representation sent; that is what happens for a route
+# calling `send_file` without setting `Last-Modified` or `ETag` itself.
+private def if_range_matches?(env : HTTP::Server::Context) : Bool
+  if_range = env.request.headers["If-Range"]?.try(&.strip)
+  return true unless if_range
+
+  if if_range.starts_with?('"') || if_range.starts_with?("W/")
+    etag = env.response.headers["Etag"]?
+    !!etag && etag.starts_with?('"') && etag == if_range
+  else
+    date = HTTP.parse_time(if_range)
+    last_modified = env.response.headers["Last-Modified"]?.try { |value| HTTP.parse_time(value) }
+    !!date && date == last_modified
+  end
+end
+
+# Parses a `Range` request header per RFC 9110 §14.1.2 into inclusive `{first, last}` byte
+# positions, clamped to the file and with unsatisfiable ranges dropped.
+#
+# Returns `nil` when the header must be ignored and the full representation served: a unit
+# other than `bytes`, a malformed or invalid range-spec, or a range set refused as abusive.
+# Returns an empty array when the set is valid but none of its ranges is satisfiable, which
+# calls for a `416` (§15.5.17).
+private def parse_ranges(range_header : String, file_size : Int64) : Array({Int64, Int64})?
+  # Range unit names are case-insensitive (RFC 9110 §16.5.1).
+  return unless range_header.size > 6 && range_header[0, 6].compare("bytes=", case_insensitive: true) == 0
+
+  # A range set is only served if it stays within both limits below. Returning `nil` makes
+  # `send_file` ignore the header and serve the full representation, which RFC 9110 §14.2
+  # allows for range sets that indicate "either a broken client or a deliberate
+  # denial-of-service attack".
+  max_ranges = Kemal.config.max_ranges
+  requested_bytes = 0_i64
+  parts = 0
+  ranges = [] of {Int64, Int64}
+
+  range_header[6..].split(',') do |spec|
+    # Each range costs a seek plus a copy, so an unbounded count lets one request do an
+    # unbounded amount of work.
+    parts += 1
+    return if parts > max_ranges
+
+    # Empty list elements are ignored (RFC 9110 §5.6.1.2).
+    next if spec.blank?
+
+    startb, endb = parse_range_spec(spec, file_size) || return
+
+    # A range that selects no bytes is unsatisfiable and dropped; if every range is, the
+    # empty result becomes a 416.
+    next if endb < startb
+
+    # Overlapping or repeated ranges can ask for many times the file's own size, so a small
+    # request would otherwise be amplified into an arbitrarily large response.
+    requested_bytes += 1_i64 + endb - startb
+    return if requested_bytes > file_size
+
+    ranges << {startb, endb}
+  end
+
+  ranges
+end
+
+# Parses one range-spec of a `bytes` range set into inclusive `{first, last}` positions
+# clamped to *file_size*. Returns `nil` for a malformed or invalid spec, which invalidates
+# the whole header (RFC 9110 §14.1.1). An unsatisfiable spec — a first-pos at or beyond the
+# end of the file, or a zero suffix-length — comes back with `last < first`.
+private def parse_range_spec(spec : String, file_size : Int64) : {Int64, Int64}?
+  first, dash, last = spec.strip.partition('-')
+  return if dash.empty?
+
+  if first.empty?
+    # suffix-range: the last `suffix-length` bytes, or the whole file when it is shorter.
+    suffix_length = parse_range_pos(last) || return
+    startb = {file_size - suffix_length, 0_i64}.max
+    endb = file_size - 1
+  else
+    # int-range: `first-last`, or `first-` for everything from `first` to the end. A
+    # last-pos beyond the end is clamped to it (§14.1.2), whereas a last-pos below the
+    # first-pos is invalid.
+    startb = parse_range_pos(first) || return
+    if last.empty?
+      endb = file_size - 1
+    else
+      endb = parse_range_pos(last) || return
+      return if endb < startb
+      endb = {endb, file_size - 1}.min
+    end
+  end
+
+  {startb, endb}
+end
+
+# Parses a decimal byte position. Returns `nil` unless *digits* is one or more ASCII digits.
+# A value too large for `Int64` lies beyond the end of any file, so it is treated as
+# `Int64::MAX` rather than as a parse error: a first-pos that overflows is unsatisfiable,
+# and a last-pos or suffix-length that overflows selects up to the end of the file.
+private def parse_range_pos(digits : String) : Int64?
+  return if digits.empty? || !digits.each_char.all?(&.ascii_number?)
+  digits.to_i64? || Int64::MAX
+end
+
+# Set the Content-Disposition to "attachment" with the specified filename,
+# instructing the user agents to prompt to save.
+private def attachment(env : HTTP::Server::Context, filename : String? = nil, disposition : String? = nil)
+  disposition = "attachment" if disposition.nil? && filename
+  if disposition && filename
+    env.response.headers["Content-Disposition"] = Kemal::Utils.content_disposition(disposition, File.basename(filename))
+  end
+end
+
+# Configures an `HTTP::Server::Response` to compress the response
+# output, either using gzip or deflate, depending on the `Accept-Encoding` request header.
+#
+# Disabled by default.
+#
+# NOTE: This installs the standard library's `HTTP::CompressHandler`, which does not follow
+# RFC 9110 as closely as `send_file` does: it matches `Accept-Encoding` by word and so
+# ignores qvalues (`gzip;q=0` still gets a gzip body), it writes a bare RFC 1951 stream for
+# the `deflate` coding where HTTP asks for the zlib format of RFC 1950, and it adds no
+# `Vary: Accept-Encoding`, which leaves a shared cache free to serve the wrong variant.
+# For static assets prefer `serve_static({"gzip" => true})`, which handles all three; a
+# `Vary: Accept-Encoding` header set by the application is the workaround for the rest.
+def gzip(status : Bool = false)
+  use HTTP::CompressHandler.new if status
+end
+
+# Adds headers to `Kemal::StaticFileHandler`. This is especially useful for `CORS`.
+#
+# ```
+# static_headers do |env, filepath, filestat|
+#   if filepath =~ /\.html$/
+#     env.response.headers.add("Access-Control-Allow-Origin", "*")
+#   end
+#   env.response.headers.add("Content-Size", filestat.size.to_s)
+# end
+# ```
+def static_headers(&headers : HTTP::Server::Context, String, File::Info ->)
+  Kemal.config.static_headers = headers
+end

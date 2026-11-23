@@ -1,0 +1,177 @@
+module Kemal
+  class WebSocketHandler
+    include HTTP::Handler
+
+    INSTANCE = new
+    property routes
+
+    def initialize
+      @routes = Radix::Tree(WebSocket).new
+    end
+
+    def call(context : HTTP::Server::Context)
+      return call_next(context) unless context.ws_route_found? && WebSocketHandler.upgrade_request?(context.request)
+      # A `before_all` filter that already answered - a `halt` with 401 - leaves
+      # nothing to upgrade. The stdlib handler would try anyway, hit the closed
+      # response and raise; the client had its answer, the log got a spurious error.
+      return if context.response.closed?
+      unless context.request.method == "GET"
+        # A `POST` with upgrade headers is still a `POST`. When an HTTP route serves
+        # that method on this path, it is the route's request, not a handshake gone
+        # wrong; only a method nothing serves here is a 405 - and then `Allow` can
+        # never list the method being refused.
+        return call_next(context) if context.route_found?
+
+        reject_websocket_method_not_allowed!(context)
+        return
+      end
+      unless websocket_origin_allowed?(context.request)
+        reject_websocket_forbidden!(context)
+        return
+      end
+      # The stdlib handler answers a bad version (426) or a missing key (400)
+      # itself, without `Connection: close` - and `respond_with_status` resets
+      # any header set beforehand - so the connection stayed open for a
+      # pipelined request. Refuse them here, after the Origin check so an
+      # unknown origin still learns nothing beyond 403.
+      unless context.request.headers["Sec-WebSocket-Version"]? == HTTP::WebSocket::Protocol::VERSION
+        context.response.headers["Sec-WebSocket-Version"] = HTTP::WebSocket::Protocol::VERSION
+        reject_websocket!(context, :upgrade_required)
+        return
+      end
+      unless context.request.headers.has_key?("Sec-WebSocket-Key")
+        reject_websocket!(context, :bad_request)
+        return
+      end
+      context.websocket.call(context)
+    end
+
+    def lookup_ws_route(path : String)
+      @routes.find "/ws" + path
+    end
+
+    def add_route(path : String, filters : FilterHandler::ScopedFilters? = nil, &handler : HTTP::WebSocket, HTTP::Server::Context ->)
+      add_to_radix_tree path, WebSocket.new(path, filters, &handler)
+    end
+
+    # :nodoc:
+    # Whether this request is a handshake this handler upgrades: a `GET` with
+    # upgrade headers to a `ws` route. `Kemal::FilterHandler` asks too, to run
+    # the route's `GET` filters before the upgrade.
+    def self.handshake?(context : HTTP::Server::Context) : Bool
+      context.request.method == "GET" && context.ws_route_found? && upgrade_request?(context.request)
+    end
+
+    private def add_to_radix_tree(path, websocket)
+      node = radix_path "ws", path
+      @routes.add node, websocket
+    end
+
+    private def radix_path(method, path)
+      '/' + method.downcase + path
+    end
+
+    # :nodoc:
+    def self.upgrade_request?(request : HTTP::Request) : Bool
+      return false unless upgrade = request.headers["Upgrade"]?
+      return false unless upgrade.compare("websocket", case_insensitive: true) == 0
+
+      request.headers.includes_word?("Connection", "Upgrade")
+    end
+
+    private def websocket_origin_allowed?(request : HTTP::Request) : Bool
+      allowed = Kemal.config.websocket_allowed_origins
+
+      # Opt-in escape hatch for the previous allow-all behavior (including missing Origin).
+      return true if allowed.includes?("*")
+
+      origin_header = request.headers["Origin"]?
+      return false if !origin_header || origin_header.empty?
+
+      actual = normalize_websocket_origin(origin_header)
+      return false unless actual
+
+      if allowed.empty?
+        return websocket_same_origin?(request, actual)
+      end
+
+      allowed.any? { |entry| normalize_websocket_origin(entry) == actual }
+    end
+
+    # Same-origin: Origin's host[:port] must match the request Host header.
+    # Scheme is taken from the (already normalized) Origin so TLS termination in front of
+    # Kemal still works — Kemal.config.scheme would be "http" in that setup.
+    private def websocket_same_origin?(request : HTTP::Request, actual : String) : Bool
+      return false if actual == "null"
+
+      host = request.headers["Host"]?
+      return false if !host || host.empty?
+
+      scheme = URI.parse(actual).scheme
+      return false if !scheme || scheme.empty?
+
+      expected = normalize_websocket_origin("#{scheme}://#{host}")
+      return false unless expected
+
+      actual == expected
+    end
+
+    private def normalize_websocket_origin(origin : String) : String?
+      o = origin.strip
+      return if o.empty?
+      return "null" if o == "null"
+
+      uri = URI.parse(o) rescue return
+      scheme_raw = uri.scheme
+      host_raw = uri.host
+      return unless scheme_raw && host_raw
+
+      scheme = scheme_raw.downcase
+      host = host_raw.downcase
+      port = uri.port
+      default = URI.default_port(scheme)
+      if port && default && port == default
+        "#{scheme}://#{host}"
+      elsif port
+        "#{scheme}://#{host}:#{port}"
+      else
+        "#{scheme}://#{host}"
+      end
+    end
+
+    private def reject_websocket_forbidden!(context : HTTP::Server::Context)
+      reject_websocket!(context, :forbidden)
+    end
+
+    # RFC 6455 §4.1 requires the opening handshake to be a GET request.
+    #
+    # `Allow` lists what the *resource* supports (RFC 9110 §10.2.1), not what
+    # would have satisfied this particular request, so it has to name the HTTP
+    # routes on the path too. Hardcoding `GET` here dropped them: with
+    # `ws "/chat"` and `post "/chat"`, a `POST` upgrade attempt was answered
+    # `Allow: GET` even though `POST` is served there. `allowed_methods` already
+    # probes both trees and reports the `ws` route as `GET`, so it is the one
+    # place that knows the full set.
+    private def reject_websocket_method_not_allowed!(context : HTTP::Server::Context)
+      allowed = Kemal::RouteHandler::INSTANCE.allowed_methods(context.request.path)
+      # Unreachable while this is only called behind `ws_route_found?` - the same
+      # lookup `allowed_methods` makes - but an empty `Allow` would contradict
+      # the 405 it accompanies, so fall back to the handshake verb rather than
+      # send one. Mirrors the guard in `Kemal::ExceptionHandler`.
+      allowed = ["GET"] if allowed.empty?
+      context.response.headers["Allow"] = allowed.join(", ")
+      reject_websocket!(context, :method_not_allowed)
+    end
+
+    private def reject_websocket!(context : HTTP::Server::Context, status : HTTP::Status)
+      # An upstream handler (e.g. a before filter) may have already responded.
+      return if context.response.closed?
+      context.response.status = status
+      # Close after rejection so a pipelined request cannot reuse this connection
+      # (WebSocket connection smuggling via `Connection: keep-alive, Upgrade`).
+      context.response.headers["Connection"] = "close"
+      context.response.headers["Content-Type"] = "text/plain; charset=UTF-8"
+      context.response.print status.description
+    end
+  end
+end

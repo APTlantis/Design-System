@@ -1,0 +1,31 @@
+{
+  "baseline": {
+    "supported": [
+      "headings",
+      "paragraphs",
+      "emphasis",
+      "links",
+      "autolinks",
+      "lists",
+      "tasks",
+      "tables",
+      "strikethrough",
+      "quotes",
+      "images",
+      "code",
+      "dividers"
+    ],
+    "rendering": "Bundled marked with gfm:true plus DOMPurify; no full GitHub renderer equivalence claimed."
+  },
+  "conditional": {
+    "alerts": "Expected .markdown-alert and .markdown-alert-<type> DOM; no alert parser installed.",
+    "footnotes": "Expected .footnotes and linked references; no footnote parser installed.",
+    "html": "Safe details, summary, kbd, sub and sup depend on host sanitization.",
+    "syntax": "Bundled Prism grammars; unknown languages remain plain text."
+  },
+  "deferred": [
+    "math",
+    "Mermaid",
+    "application-specific adapters"
+  ]
+}

@@ -1,0 +1,91 @@
+<section class="apt-gallery-hero">
+  <div>
+    <div class="apt-gallery-eyebrow">
+      <span>APTLANTIS DESIGN SYSTEM</span>
+      <span>·</span>
+      <span>SANDBOX PROTOTYPE GALLERY</span>
+    </div>
+    <h1>HTML-First Component Collection</h1>
+    <p>
+      Reusable, visually distinctive Aptlantis components built with canonical OKLCH tokens,
+      native HTML, minimal vanilla JS, and targeted Kemal/HTMX fragment endpoints.
+    </p>
+  </div>
+
+  <div class="apt-gallery-stats">
+    <div class="apt-stat-pill">
+      <strong style="color:var(--apt-brand-primary-hover);"><%= components.count(&.live?) %></strong>
+      <span>Live Now</span>
+    </div>
+    <div class="apt-stat-pill">
+      <strong style="color:var(--apt-brand-secondary);"><%= components.size %></strong>
+      <span>Shortlist</span>
+    </div>
+    <div class="apt-stat-pill">
+      <strong>0</strong>
+      <span>JS Frameworks</span>
+    </div>
+  </div>
+</section>
+
+<section class="apt-filter-bar" aria-label="Filter components">
+  <div class="apt-pill-group" data-apt-gallery-filter>
+    <button type="button" class="apt-pill-btn" data-filter="ALL" aria-pressed="true">All (<%= components.size %>)</button>
+    <button type="button" class="apt-pill-btn" data-filter="Narrative" aria-pressed="false">Narrative</button>
+    <button type="button" class="apt-pill-btn" data-filter="Visual Systems" aria-pressed="false">Visual Systems</button>
+    <button type="button" class="apt-pill-btn" data-filter="Theming" aria-pressed="false">Theming</button>
+    <button type="button" class="apt-pill-btn" data-filter="Assets" aria-pressed="false">Assets</button>
+    <button type="button" class="apt-pill-btn" data-filter="Developer" aria-pressed="false">Developer</button>
+    <button type="button" class="apt-pill-btn" data-filter="Interactive" aria-pressed="false">Interactive</button>
+  </div>
+
+  <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-text-muted);">
+    Click any LIVE card to open its interactive specimen &amp; copyable source.
+  </span>
+</section>
+
+<section class="apt-gallery-grid" aria-label="Component specimens">
+  <% components.each do |comp| %>
+    <% if comp.live? %>
+      <a href="/components/<%= comp.slug %>"
+         class="apt-component-card"
+         data-component-card
+         data-live="true"
+         data-status="<%= comp.status %>"
+         data-category="<%= comp.category %>">
+        <div class="apt-card-top">
+          <span class="apt-card-num">SPECIMEN <%= comp.number %></span>
+          <div style="display:flex; gap:0.35rem; align-items:center;">
+            <% if comp.htmx_demo %>
+              <span class="apt-badge" data-tone="amber">HTMX</span>
+            <% end %>
+            <span class="apt-badge" data-tone="cyan">LIVE</span>
+          </div>
+        </div>
+        <h3><%= comp.name %></h3>
+        <p><%= comp.summary %></p>
+        <div class="apt-card-foot">
+          <span><%= comp.category %></span>
+          <span class="apt-card-cta">Open Specimen →</span>
+        </div>
+      </a>
+    <% else %>
+      <article class="apt-component-card"
+               data-component-card
+               data-live="false"
+               data-status="<%= comp.status %>"
+               data-category="<%= comp.category %>">
+        <div class="apt-card-top">
+          <span class="apt-card-num">SPECIMEN <%= comp.number %></span>
+          <span class="apt-badge">PLANNED</span>
+        </div>
+        <h3><%= comp.name %></h3>
+        <p><%= comp.summary %></p>
+        <div class="apt-card-foot">
+          <span><%= comp.category %></span>
+          <span>Queued for Phase B</span>
+        </div>
+      </article>
+    <% end %>
+  <% end %>
+</section>

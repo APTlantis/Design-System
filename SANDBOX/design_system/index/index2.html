@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APTLANTIS — Complete Brand System v2.0</title>
+
+  <!-- Canonical Brand Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      /* =========================================================
+         1. CANONICAL PRIMITIVES (32 TOKENS)
+         ========================================================= */
+      --apt-color-01: #000000;
+      --apt-color-02: #02020E;
+      --apt-color-03: #0D0100;
+      --apt-color-04: #00101A;
+      --apt-color-05: #260600;
+      --apt-color-06: #031C28;
+      --apt-color-07: #2A2923;
+      --apt-color-08: #05303F;
+      --apt-color-09: #4F2000;
+      --apt-color-10: #07455E;
+      --apt-color-11: #2E5701;
+      --apt-color-12: #555245;
+      --apt-color-13: #71481D;
+      --apt-color-14: #00637D;
+      --apt-color-15: #506F80;
+      --apt-color-16: #697500;
+      --apt-color-17: #A95403;
+      --apt-color-18: #0380A1;
+      --apt-color-19: #748E97;
+      --apt-color-20: #CF7818;
+      --apt-color-21: #A29062;
+      --apt-color-22: #18AAC2;
+      --apt-color-23: #D99D36;
+      --apt-color-24: #A0B4B9;
+      --apt-color-25: #00CAE3;
+      --apt-color-26: #F7BE4F;
+      --apt-color-27: #CFD0C9;
+      --apt-color-28: #23F2F7;
+      --apt-color-29: #F7DD74;
+      --apt-color-30: #A1FCFD;
+      --apt-color-31: #FDEDB3;
+      --apt-color-32: #FDFDFB;
+
+      /* =========================================================
+         2. SEMANTIC SURFACES & BORDERS
+         ========================================================= */
+      --apt-bg-void: var(--apt-color-01);
+      --apt-bg-canvas: var(--apt-color-02);
+      --apt-bg-warm-void: var(--apt-color-03);
+      --apt-bg-base: var(--apt-color-04);
+      --apt-bg-raised: var(--apt-color-06);
+      --apt-bg-overlay: var(--apt-color-08);
+
+      --apt-border-neutral-subtle: var(--apt-color-07);
+      --apt-border-subtle: var(--apt-color-10);
+      --apt-border-default: var(--apt-color-12);
+      --apt-border-warm: var(--apt-color-13);
+      --apt-border-interactive: var(--apt-color-14);
+
+      /* =========================================================
+         3. TYPOGRAPHY & BRAND ACCENTS
+         ========================================================= */
+      --apt-text-primary: var(--apt-color-32);
+      --apt-text-warm-display: var(--apt-color-31);
+      --apt-text-secondary: var(--apt-color-27);
+      --apt-text-tertiary: var(--apt-color-24);
+      --apt-text-muted: var(--apt-color-19);
+      --apt-text-disabled: var(--apt-color-15);
+
+      --apt-brand-primary: var(--apt-color-25);
+      --apt-brand-primary-hover: var(--apt-color-28);
+      --apt-brand-primary-dim: var(--apt-color-22);
+      --apt-brand-primary-muted: var(--apt-color-18);
+      --apt-brand-secondary: var(--apt-color-26);
+      --apt-brand-secondary-hover: var(--apt-color-29);
+      --apt-brand-secondary-dim: var(--apt-color-23);
+      --apt-accent-ice: var(--apt-color-30);
+      --apt-accent-sand: var(--apt-color-21);
+
+      /* =========================================================
+         4. IN-PALETTE SEMANTIC STATUS
+         ========================================================= */
+      --apt-status-success: var(--apt-color-16);
+      --apt-status-success-surface: var(--apt-color-11);
+      --apt-status-warning: var(--apt-color-26);
+      --apt-status-danger: var(--apt-color-20);
+      --apt-status-danger-strong: var(--apt-color-17);
+      --apt-status-danger-surface: var(--apt-color-05);
+      --apt-status-danger-border: var(--apt-color-09);
+      --apt-status-info: var(--apt-color-25);
+
+      /* =========================================================
+         5. DATA VISUALIZATION SERIES (BIOLUMINESCENT VS. AMBER)
+         ========================================================= */
+      --apt-chart-1: var(--apt-brand-primary);       /* #00CAE3 */
+      --apt-chart-2: var(--apt-brand-secondary);     /* #F7BE4F */
+      --apt-chart-3: var(--apt-brand-primary-muted); /* #0380A1 */
+      --apt-chart-4: var(--apt-accent-sand);         /* #A29062 */
+      --apt-chart-5: var(--apt-accent-ice);          /* #A1FCFD */
+      --apt-chart-6: var(--apt-status-danger);       /* #CF7818 */
+
+      /* =========================================================
+         6. TYPOGRAPHY, RADII, ELEVATION & MOTION PHYSICS
+         ========================================================= */
+      --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+      --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --apt-radius-sm: 4px;
+      --apt-radius-md: 8px;
+      --apt-radius-lg: 14px;
+      --apt-radius-pill: 9999px;
+
+      --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+      --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65);
+      --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+      --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+      --apt-focus-ring: 0 0 0 2px var(--apt-bg-base), 0 0 0 4px var(--apt-brand-primary-hover);
+
+      --apt-ease-instrument: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --apt-ease-tide: cubic-bezier(0.4, 0.0, 0.2, 1);
+      --apt-duration-fast: 120ms;
+      --apt-duration-base: 220ms;
+      --apt-duration-slow: 340ms;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--apt-bg-canvas);
+      color: var(--apt-text-secondary);
+      font-family: var(--apt-font-body);
+    }
+
+    body {
+      background-color: var(--apt-bg-canvas);
+      background-image:
+        radial-gradient(circle at 18% 0%, rgba(0, 202, 227, 0.07) 0%, transparent 42%),
+        radial-gradient(circle at 85% 12%, rgba(247, 190, 79, 0.05) 0%, transparent 38%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-display { font-family: var(--apt-font-display); }
+    .font-body { font-family: var(--apt-font-body); }
+    .font-mono-tab {
+      font-family: var(--apt-font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Bioluminescent & Instrument Utilities */
+    .apt-card {
+      background-color: var(--apt-bg-raised);
+      border: 1px solid var(--apt-border-subtle);
+      border-radius: var(--apt-radius-lg);
+      box-shadow: var(--apt-shadow-raised);
+      transition: border-color var(--apt-duration-fast) var(--apt-ease-instrument),
+                  box-shadow var(--apt-duration-base) var(--apt-ease-instrument);
+    }
+
+    .apt-card-interactive:hover {
+      border-color: var(--apt-border-interactive);
+      box-shadow: var(--apt-shadow-raised), var(--apt-glow-primary);
+    }
+
+    .apt-btn-primary {
+      background-color: var(--apt-brand-primary);
+      color: var(--apt-bg-void);
+      font-family: var(--apt-font-display);
+      font-weight: 600;
+      border-radius: var(--apt-radius-md);
+      transition: all var(--apt-duration-fast) var(--apt-ease-instrument);
+    }
+    .apt-btn-primary:hover {
+      background-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-glow-primary);
+    }
+    .apt-btn-primary:active {
+      background-color: var(--apt-brand-primary-dim);
+      transform: translateY(1px);
+    }
+
+    .apt-btn-secondary {
+      background-color: var(--apt-brand-secondary);
+      color: var(--apt-bg-void);
+      font-family: var(--apt-font-display);
+      font-weight: 600;
+      border-radius: var(--apt-radius-md);
+      transition: all var(--apt-duration-fast) var(--apt-ease-instrument);
+    }
+    .apt-btn-secondary:hover {
+      background-color: var(--apt-brand-secondary-hover);
+      box-shadow: var(--apt-glow-secondary);
+    }
+    .apt-btn-secondary:active {
+      background-color: var(--apt-brand-secondary-dim);
+    }
+
+    .apt-btn-ghost {
+      background-color: var(--apt-bg-base);
+      color: var(--apt-text-primary);
+      border: 1px solid var(--apt-border-subtle);
+      border-radius: var(--apt-radius-md);
+      transition: all var(--apt-duration-fast) var(--apt-ease-instrument);
+    }
+    .apt-btn-ghost:hover {
+      border-color: var(--apt-brand-primary-hover);
+      color: var(--apt-accent-ice);
+      box-shadow: var(--apt-glow-primary);
+    }
+
+    .apt-btn-ghost.active-pill {
+      background-color: rgba(0, 202, 227, 0.14);
+      border-color: var(--apt-brand-primary);
+      color: var(--apt-accent-ice);
+    }
+
+    /* Clear-space Blueprint Grid Overlay */
+    .clear-space-grid {
+      background-size: 20px 20px;
+      background-image:
+        linear-gradient(to right, rgba(35, 242, 247, 0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(35, 242, 247, 0.16) 1px, transparent 1px);
+    }
+
+    /* Sonar Pulse Animation */
+    @keyframes sonarTide {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.85;
+      }
+      70% {
+        transform: scale(1.75);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.75);
+        opacity: 0;
+      }
+    }
+
+    .animate-sonar {
+      animation: sonarTide 2.6s var(--apt-ease-tide) infinite;
+    }
+
+    /* HUD Icon Frame */
+    .hud-icon-box {
+      transition: all var(--apt-duration-base) var(--apt-ease-instrument);
+    }
+    .hud-icon-box.framed {
+      width: 52px;
+      height: 52px;
+      background-color: var(--apt-bg-base);
+      border: 1px solid var(--apt-border-subtle);
+      border-radius: var(--apt-radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hud-icon-card:hover .hud-icon-box.framed {
+      border-color: var(--apt-brand-primary-hover);
+      box-shadow: var(--apt-glow-primary);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--apt-bg-void);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--apt-border-subtle);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--apt-brand-primary-muted);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#00CAE3] selection:text-[#000000]">
+
+  <!-- ===================================================================
+       STICKY TOP NAVIGATION BAR
+       =================================================================== -->
+  <header class="sticky top-0 z-50 border-b border-[#07455E] bg-[#00101A]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <!-- Mini Brand Lockup -->
+      <a href="#hero" class="flex items-center gap-3 group shrink-0">
+        <svg width="30" height="34" viewBox="0 0 120 136" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M60 12L106 30V72C106 101 85.5 119.5 60 128C34.5 119.5 14 101 14 72V30L60 12Z" fill="#00101A" stroke="#F7BE4F" stroke-width="5"/>
+          <path d="M55 44H65V56H74V68H82V84H38V68H46V56H55V44Z" fill="#FDFDFB"/>
+          <rect x="57" y="68" width="6" height="16" rx="3" fill="#F7BE4F"/>
+          <path d="M27 89C38 82 49 96 60 89C71 82 82 96 93 89" stroke="#23F2F7" stroke-width="4" stroke-linecap="round"/>
+          <path d="M33 101C42 95 51 107 60 101C69 95 78 107 87 101" stroke="#00CAE3" stroke-width="3.5" stroke-linecap="round"/>
+          <polygon points="60,2 68,10 60,18 52,10" fill="#23F2F7" stroke="#F7BE4F" stroke-width="1.5"/>
+        </svg>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display font-bold tracking-[0.08em] text-[#FDFDFB] text-base sm:text-lg group-hover:text-[#A1FCFD] transition-colors">APTLANTIS</span>
+          <span class="hidden sm:inline-block font-mono-tab text-[11px] px-2 py-0.5 rounded-full bg-[#031C28] border border-[#07455E] text-[#00CAE3]">v2.0</span>
+        </div>
+      </a>
+
+      <!-- Section Anchor Links -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-[#A0B4B9]">
+        <a href="#logos" class="hover:text-[#23F2F7] transition-colors">Logos &amp; Lockups</a>
+        <a href="#voice" class="hover:text-[#23F2F7] transition-colors">Brand Voice</a>
+        <a href="#charts" class="hover:text-[#23F2F7] transition-colors">Telemetry Charts</a>
+        <a href="#icons" class="hover:text-[#23F2F7] transition-colors">HUD Icons</a>
+        <a href="#motion" class="hover:text-[#23F2F7] transition-colors">Motion</a>
+        <a href="#tokens" class="hover:text-[#23F2F7] transition-colors">Tokens</a>
+      </nav>
+
+      <!-- Global Copy Extended CSS Button -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="copyExtendedTokens()" class="apt-btn-primary px-3.5 py-2 text-xs sm:text-sm flex items-center gap-2 cursor-pointer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy Extended CSS Tokens</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-20">
+
+    <!-- ===================================================================
+         1. HERO & BRAND ARCHITECTURE
+         =================================================================== -->
+    <section id="hero" class="relative overflow-hidden rounded-[14px] border border-[#07455E] bg-[#00101A] p-6 sm:p-10 lg:p-12 shadow-[0_12px_36px_rgba(0,0,0,0.75)]">
+      <!-- Subtle Top-Right Decorative Compass Ring -->
+      <div class="pointer-events-none absolute -right-24 -top-24 w-96 h-96 rounded-full border border-[#07455E]/50 opacity-50"></div>
+      <div class="pointer-events-none absolute -right-12 -top-12 w-72 h-72 rounded-full border border-[#00CAE3]/20"></div>
+
+      <div class="relative z-10 max-w-4xl">
+        <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-[#031C28] border border-[#00637D] mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#23F2F7] shadow-[0_0_8px_#23F2F7]"></span>
+          <span class="font-mono-tab text-xs tracking-wider uppercase text-[#A1FCFD]">Abyssal Cyan &amp; Solar Amber · Navigator-Architect Identity</span>
+        </div>
+
+        <h1 class="font-display font-bold text-3xl sm:text-5xl lg:text-[52px] leading-[1.08] tracking-[-0.03em] text-[#FDFDFB]">
+          APTLANTIS — <span class="text-[#FDEDB3]">Complete Brand System v2.0</span>
+        </h1>
+
+        <p class="mt-5 text-base sm:text-lg text-[#CFD0C9] leading-relaxed max-w-3xl">
+          An end-to-end visual, verbal, and telemetry design manual engineered on a pure-black oceanic spine (<code class="font-mono-tab text-sm text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">#000000</code> to <code class="font-mono-tab text-sm text-[#A1FCFD] bg-[#031C28] px-1.5 py-0.5 rounded">#05303F</code>) with bioluminescent cyan (<code class="font-mono-tab text-sm text-[#23F2F7] bg-[#031C28] px-1.5 py-0.5 rounded">#23F2F7</code>) and solar gold (<code class="font-mono-tab text-sm text-[#F7BE4F] bg-[#031C28] px-1.5 py-0.5 rounded">#F7BE4F</code>) instrumentation.
+        </p>
+
+        <!-- Quick Stats Bar -->
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="rounded-lg bg-[#031C28] border border-[#07455E] p-4">
+            <div class="font-mono-tab text-xs uppercase tracking-wider text-[#A0B4B9]">Color Architecture</div>
+            <div class="mt-1 font-display font-bold text-2xl sm:text-3xl text-[#FDFDFB]">32 <span class="text-sm font-normal text-[#00CAE3]">Tokens</span></div>
+            <div class="mt-1 text-xs text-[#748E97]">OKLCH-calibrated primitives</div>
+          </div>
+          <div class="rounded-lg bg-[#031C28] border border-[#07455E] p-4">
+            <div class="font-mono-tab text-xs uppercase tracking-wider text-[#A0B4B9]">Peak Contrast</div>
+            <div class="mt-1 font-display font-bold text-2xl sm:text-3xl text-[#23F2F7]">18.93:1</div>
+            <div class="mt-1 text-xs text-[#748E97]">WCAG AAA on base surface</div>
+          </div>
+          <div class="rounded-lg bg-[#031C28] border border-[#07455E] p-4">
+            <div class="font-mono-tab text-xs uppercase tracking-wider text-[#A0B4B9]">Charting System</div>
+            <div class="mt-1 font-display font-bold text-2xl sm:text-3xl text-[#F7BE4F]">6-Series</div>
+            <div class="mt-1 text-xs text-[#748E97]">Cyan-vs-Amber telemetry</div>
+          </div>
+          <div class="rounded-lg bg-[#031C28] border border-[#07455E] p-4">
+            <div class="font-mono-tab text-xs uppercase tracking-wider text-[#A0B4B9]">HUD Sprite Kit</div>
+            <div class="mt-1 font-display font-bold text-2xl sm:text-3xl text-[#A1FCFD]">8 <span class="text-sm font-normal text-[#CFD0C9]">Vectors</span></div>
+            <div class="mt-1 text-xs text-[#748E97]">1.75px duotone inline SVGs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         2. VECTOR LOGO LOCKUPS & DOWNLOADABLE SVGs
+         =================================================================== -->
+    <section id="logos" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#00CAE3]">01 · Emblem &amp; Lockup Hierarchy</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Vector Logo Lockups &amp; Downloadable SVGs</h2>
+          <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+            Multi-layered geometric vectors distilled from the Aptlantis master crest. Test surface contrast and clear-space geometry or export standalone <code class="font-mono-tab text-[#A1FCFD]">.svg</code> files.
+          </p>
+        </div>
+
+        <!-- Interactive Stage Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono-tab text-xs text-[#748E97] mr-1">Stage Surface:</span>
+          <button type="button" onclick="setLogoSurface('#000000', this)" class="surface-toggle-btn apt-btn-ghost active-pill px-3 py-1.5 text-xs font-mono-tab cursor-pointer">#000000 Void</button>
+          <button type="button" onclick="setLogoSurface('#00101A', this)" class="surface-toggle-btn apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">#00101A Base</button>
+          <button type="button" onclick="setLogoSurface('#031C28', this)" class="surface-toggle-btn apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">#031C28 Raised</button>
+          <button type="button" id="clearSpaceBtn" onclick="toggleClearSpace()" class="apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab flex items-center gap-1.5 cursor-pointer">
+            <span class="w-2 h-2 rounded-full bg-[#506F80]" id="clearSpaceDot"></span>
+            Clear-Space Grid
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Logo Lockup Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Lockup A: The Citadel Shield Mark -->
+        <div class="apt-card flex flex-col justify-between overflow-hidden">
+          <div class="p-5 border-b border-[#07455E] flex items-center justify-between">
+            <div>
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">The Citadel Shield Mark</h3>
+              <p class="text-xs text-[#748E97]">Primary emblem · Min width 48px</p>
+            </div>
+            <span class="font-mono-tab text-[11px] px-2 py-0.5 rounded bg-[#00101A] border border-[#07455E] text-[#F7BE4F]">140×160</span>
+          </div>
+
+          <div class="logo-stage relative flex items-center justify-center p-8 min-h-[230px] bg-[#000000] transition-colors duration-200">
+            <div class="relative p-4 border border-dashed border-transparent clear-space-box transition-all">
+              <svg id="svg-citadel-shield" width="132" height="150" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="aptGoldBevel" x1="20" y1="16" x2="120" y2="148" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F7DD74"/>
+                    <stop offset="50%" stop-color="#F7BE4F"/>
+                    <stop offset="100%" stop-color="#D99D36"/>
+                  </linearGradient>
+                  <linearGradient id="aptCitadelWall" x1="70" y1="46" x2="70" y2="104" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FDFDFB"/>
+                    <stop offset="100%" stop-color="#A1FCFD"/>
+                  </linearGradient>
+                  <radialGradient id="aptPortalGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(70 92) rotate(90) scale(16 12)">
+                    <stop offset="0%" stop-color="#FDEDB3"/>
+                    <stop offset="55%" stop-color="#F7BE4F"/>
+                    <stop offset="100%" stop-color="#CF7818" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <!-- Outer Gold Beveled Shield -->
+                <path d="M70 18L124 38V84C124 118.5 100.5 140.5 70 151C39.5 140.5 16 118.5 16 84V38L70 18Z" fill="#00101A" stroke="url(#aptGoldBevel)" stroke-width="5.5"/>
+                <!-- Inner Oceanic Trim -->
+                <path d="M70 25L117 42.5V83.5C117 113.5 96.5 133 70 142.5C43.5 133 23 113.5 23 83.5V42.5L70 25Z" stroke="#07455E" stroke-width="2"/>
+                <!-- Top Compass Diamond Node -->
+                <polygon points="70,4 81,15 70,26 59,15" fill="#23F2F7" stroke="url(#aptGoldBevel)" stroke-width="2.5"/>
+                <polygon points="70,8 76,15 70,22 64,15" fill="#A1FCFD"/>
+                <!-- Flanking Constellation Stars -->
+                <circle cx="42" cy="54" r="2" fill="#A1FCFD"/>
+                <circle cx="98" cy="54" r="2" fill="#A1FCFD"/>
+                <!-- Stepped Citadel Silhouette -->
+                <path d="M64 44H76V56H86V69H96V98H44V69H54V56H64V44Z" fill="url(#aptCitadelWall)"/>
+                <!-- Citadel Battlements & Windows -->
+                <rect x="67" y="48" width="6" height="6" rx="1" fill="#00101A"/>
+                <rect x="57" y="61" width="4" height="6" rx="1" fill="#00101A"/>
+                <rect x="79" y="61" width="4" height="6" rx="1" fill="#00101A"/>
+                <!-- Glowing Solar Amber Portal -->
+                <ellipse cx="70" cy="90" rx="11" ry="14" fill="url(#aptPortalGlow)"/>
+                <path d="M64 98V85C64 81.6863 66.6863 79 70 79C73.3137 79 76 81.6863 76 85V98H64Z" fill="#F7BE4F"/>
+                <path d="M67 98V86.5C67 84.8431 68.3431 83.5 70 83.5C71.6569 83.5 73 84.8431 73 86.5V98H67Z" fill="#FDEDB3"/>
+                <!-- Two Layered Oceanic Cyan Wave Ribbons -->
+                <path d="M31 103C44 95 57 111 70 103C83 95 96 111 109 103" stroke="#23F2F7" stroke-width="5" stroke-linecap="round"/>
+                <path d="M38 116C48.5 109.5 59.5 122.5 70 116C80.5 109.5 91.5 122.5 102 116" stroke="#00CAE3" stroke-width="4.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="p-4 bg-[#00101A] border-t border-[#07455E] flex items-center gap-2.5">
+            <button type="button" onclick="copySvgById('svg-citadel-shield', 'Citadel Shield Mark')" class="apt-btn-ghost flex-1 py-2 px-3 text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Copy SVG</span>
+            </button>
+            <button type="button" onclick="downloadSvgById('svg-citadel-shield', 'aptlantis-citadel-shield.svg')" class="apt-btn-primary flex-1 py-2 px-3 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Download .SVG</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lockup B: Horizontal Wordmark Lockup -->
+        <div class="apt-card flex flex-col justify-between overflow-hidden">
+          <div class="p-5 border-b border-[#07455E] flex items-center justify-between">
+            <div>
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">Horizontal Wordmark Lockup</h3>
+              <p class="text-xs text-[#748E97]">Navbar, headers &amp; deck covers</p>
+            </div>
+            <span class="font-mono-tab text-[11px] px-2 py-0.5 rounded bg-[#00101A] border border-[#07455E] text-[#00CAE3]">340×96</span>
+          </div>
+
+          <div class="logo-stage relative flex items-center justify-center p-6 min-h-[230px] bg-[#000000] transition-colors duration-200">
+            <div class="relative p-3 border border-dashed border-transparent clear-space-box transition-all max-w-full">
+              <svg id="svg-wordmark-lockup" class="w-full h-auto max-w-[310px]" viewBox="0 0 340 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="wmGold" x1="12" y1="12" x2="76" y2="86" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F7DD74"/>
+                    <stop offset="100%" stop-color="#D99D36"/>
+                  </linearGradient>
+                  <linearGradient id="wmTextGrad" x1="96" y1="30" x2="96" y2="66" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FDFDFB"/>
+                    <stop offset="100%" stop-color="#CFD0C9"/>
+                  </linearGradient>
+                </defs>
+                <!-- Shield Emblem -->
+                <path d="M44 14L76 26V53C76 73 62 86 44 92C26 86 12 73 12 53V26L44 14Z" fill="#00101A" stroke="url(#wmGold)" stroke-width="3.5"/>
+                <polygon points="44,5 51,12 44,19 37,12" fill="#23F2F7" stroke="url(#wmGold)" stroke-width="1.5"/>
+                <path d="M40 30H48V37H54V45H60V61H28V45H34V37H40V30Z" fill="#FDFDFB"/>
+                <path d="M40.5 61V53C40.5 51.1 42.1 49.5 44 49.5C45.9 49.5 47.5 51.1 47.5 53V61H40.5Z" fill="#F7BE4F"/>
+                <path d="M21 65C29 60 36 70 44 65C52 60 59 70 67 65" stroke="#23F2F7" stroke-width="3" stroke-linecap="round"/>
+                <path d="M26 73C32 69 38 77 44 73C50 69 56 77 62 73" stroke="#00CAE3" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- Geometric Wordmark -->
+                <text x="94" y="54" fill="url(#wmTextGrad)" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="30" letter-spacing="3.5">APTLANTIS</text>
+
+                <!-- Telemetry Accent Rule & Diamond Node -->
+                <line x1="95" y1="67" x2="298" y2="67" stroke="#07455E" stroke-width="1.5"/>
+                <line x1="95" y1="67" x2="178" y2="67" stroke="#00CAE3" stroke-width="2"/>
+                <polygon points="306,67 311,62 316,67 311,72" fill="#F7BE4F"/>
+                <text x="95" y="81" fill="#748E97" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="9.5" letter-spacing="2.2">NAVIGATOR TELEMETRY</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="p-4 bg-[#00101A] border-t border-[#07455E] flex items-center gap-2.5">
+            <button type="button" onclick="copySvgById('svg-wordmark-lockup', 'Horizontal Wordmark Lockup')" class="apt-btn-ghost flex-1 py-2 px-3 text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Copy SVG</span>
+            </button>
+            <button type="button" onclick="downloadSvgById('svg-wordmark-lockup', 'aptlantis-wordmark-lockup.svg')" class="apt-btn-primary flex-1 py-2 px-3 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Download .SVG</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lockup C: Compass Node Favicon / App Icon -->
+        <div class="apt-card flex flex-col justify-between overflow-hidden">
+          <div class="p-5 border-b border-[#07455E] flex items-center justify-between">
+            <div>
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">Compass Node App Icon</h3>
+              <p class="text-xs text-[#748E97]">Favicon, iOS/macOS dock &amp; avatar</p>
+            </div>
+            <span class="font-mono-tab text-[11px] px-2 py-0.5 rounded bg-[#00101A] border border-[#07455E] text-[#23F2F7]">64×64</span>
+          </div>
+
+          <div class="logo-stage relative flex items-center justify-center gap-6 p-8 min-h-[230px] bg-[#000000] transition-colors duration-200">
+            <!-- 96px Preview of the 64x64 App Icon -->
+            <div class="relative p-3 border border-dashed border-transparent clear-space-box transition-all">
+              <svg id="svg-app-icon" width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="appGlow" cx="32" cy="32" r="30" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#05303F"/>
+                    <stop offset="100%" stop-color="#000000"/>
+                  </radialGradient>
+                </defs>
+                <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="url(#appGlow)" stroke="#07455E" stroke-width="2"/>
+                <circle cx="32" cy="32" r="24" stroke="#00637D" stroke-width="1" stroke-dasharray="3 3"/>
+                <!-- Gold Shield -->
+                <path d="M32 11L50 18V35C50 47.5 42.2 55.2 32 59C21.8 55.2 14 47.5 14 35V18L32 11Z" fill="#00101A" stroke="#F7BE4F" stroke-width="2.4"/>
+                <!-- Top Cyan Diamond -->
+                <polygon points="32,5 36.5,9.5 32,14 27.5,9.5" fill="#23F2F7"/>
+                <!-- Citadel Silhouette -->
+                <path d="M29.5 21H34.5V25.5H38.5V30.5H42V40H22V30.5H25.5V25.5H29.5V21Z" fill="#FDFDFB"/>
+                <rect x="30.2" y="33" width="3.6" height="7" rx="1.8" fill="#F7BE4F"/>
+                <!-- Cyan Wave Ribbons -->
+                <path d="M19.5 43C24 40 28 46 32 43C36 40 40 46 44.5 43" stroke="#23F2F7" stroke-width="2.4" stroke-linecap="round"/>
+                <path d="M22.5 48.5C26 46 29 51 32 48.5C35 46 38 51 41.5 48.5" stroke="#00CAE3" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Actual 1:1 32px Favicon Preview -->
+            <div class="flex flex-col items-center gap-2">
+              <div class="p-2 rounded-lg bg-[#031C28] border border-[#07455E]">
+                <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+                  <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#000000" stroke="#07455E" stroke-width="2.5"/>
+                  <path d="M32 11L50 18V35C50 47.5 42.2 55.2 32 59C21.8 55.2 14 47.5 14 35V18L32 11Z" fill="#00101A" stroke="#F7BE4F" stroke-width="3"/>
+                  <polygon points="32,5 36.5,9.5 32,14 27.5,9.5" fill="#23F2F7"/>
+                  <path d="M29.5 21H34.5V25.5H38.5V30.5H42V40H22V30.5H25.5V25.5H29.5V21Z" fill="#FDFDFB"/>
+                  <rect x="30.2" y="33" width="3.6" height="7" rx="1.8" fill="#F7BE4F"/>
+                  <path d="M19.5 43C24 40 28 46 32 43C36 40 40 46 44.5 43" stroke="#23F2F7" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <span class="font-mono-tab text-[10px] text-[#748E97]">1:1 (32px)</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-[#00101A] border-t border-[#07455E] flex items-center gap-2.5">
+            <button type="button" onclick="copySvgById('svg-app-icon', 'Compass Node App Icon')" class="apt-btn-ghost flex-1 py-2 px-3 text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Copy SVG</span>
+            </button>
+            <button type="button" onclick="downloadSvgById('svg-app-icon', 'aptlantis-app-icon-64.svg')" class="apt-btn-primary flex-1 py-2 px-3 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Download .SVG</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. BRAND VOICE & COPY CALIBRATION MATRIX
+         =================================================================== -->
+    <section id="voice" class="space-y-6">
+      <div class="border-b border-[#07455E] pb-5">
+        <span class="font-mono-tab text-xs uppercase tracking-widest text-[#F7BE4F]">02 · Verbal Identity &amp; Microcopy</span>
+        <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Brand Voice &amp; Copy Calibration Matrix</h2>
+        <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+          Aptlantis speaks as <strong class="text-[#FDFDFB]">The Navigator-Architect</strong>: authoritative, illuminating, and calm under load. Select a product context below to calibrate tone and copy templates.
+        </p>
+      </div>
+
+      <!-- 3 Voice Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="apt-card p-5">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#23F2F7]"></span>
+            <h3 class="font-display font-semibold text-base text-[#FDFDFB]">1. Signal Over Noise</h3>
+          </div>
+          <p class="text-sm text-[#CFD0C9] leading-relaxed">Strip filler adverbs and marketing hype. Lead immediately with the system state, finding, or next deterministic action.</p>
+        </div>
+        <div class="apt-card p-5">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#F7BE4F]"></span>
+            <h3 class="font-display font-semibold text-base text-[#FDFDFB]">2. Illuminating, Not Mystical</h3>
+          </div>
+          <p class="text-sm text-[#CFD0C9] leading-relaxed">Use precise navigational terminology (<em class="text-[#A1FCFD]">chart, beacon, depth, ledger, horizon</em>) grounded in real engineering mechanics.</p>
+        </div>
+        <div class="apt-card p-5">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00CAE3]"></span>
+            <h3 class="font-display font-semibold text-base text-[#FDFDFB]">3. Composure Under Load</h3>
+          </div>
+          <p class="text-sm text-[#CFD0C9] leading-relaxed">During incidents or high-latency spikes, never alarm or apologize excessively. Report root metrics and recovery steps calmly.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Context Switcher -->
+      <div class="apt-card p-6 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#07455E] pb-4">
+          <div class="flex flex-wrap gap-2" id="voiceTabs">
+            <button type="button" onclick="selectVoiceContext('hero', this)" class="voice-tab apt-btn-ghost active-pill px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Marketing Hero</button>
+            <button type="button" onclick="selectVoiceContext('docs', this)" class="voice-tab apt-btn-ghost px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Technical Docs</button>
+            <button type="button" onclick="selectVoiceContext('empty', this)" class="voice-tab apt-btn-ghost px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Empty States</button>
+            <button type="button" onclick="selectVoiceContext('alerts', this)" class="voice-tab apt-btn-ghost px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Critical Alerts</button>
+          </div>
+          <span id="voiceCalibrationBadge" class="font-mono-tab text-xs px-3 py-1 rounded-full bg-[#00101A] border border-[#00637D] text-[#A1FCFD]">
+            Calibration: Visionary · Crisp · Architectural
+          </span>
+        </div>
+
+        <!-- Side-by-Side Do vs Don't -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- DO Card -->
+          <div class="rounded-lg bg-[#00101A] border border-[#00637D] p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="inline-flex items-center gap-1.5 font-mono-tab text-xs font-semibold uppercase tracking-wider text-[#23F2F7]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  DO · Aptlantis Voice
+                </span>
+                <button type="button" onclick="copyVoiceTemplate()" class="apt-btn-ghost px-2.5 py-1 text-xs font-mono-tab cursor-pointer">Copy Copy</button>
+              </div>
+              <p id="voiceDoHeadline" class="font-display font-semibold text-lg text-[#FDFDFB] mb-2">
+                Chart deep system telemetry with zero signal loss.
+              </p>
+              <p id="voiceDoBody" class="text-sm text-[#CFD0C9] leading-relaxed">
+                Unify distributed logs, topology graphs, and real-time latency ledgers inside a high-contrast abyssal workspace engineered for rapid root-cause navigation.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-[#07455E] flex items-center justify-between text-xs font-mono-tab text-[#748E97]">
+              <span id="voicePillarTag">Pillar: Signal Over Noise</span>
+              <span class="text-[#00CAE3]">Approved Pattern</span>
+            </div>
+          </div>
+
+          <!-- DON'T Card -->
+          <div class="rounded-lg bg-[#260600]/60 border border-[#4F2000] p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="inline-flex items-center gap-1.5 font-mono-tab text-xs font-semibold uppercase tracking-wider text-[#CF7818]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  DON'T · Off-Brand Drift
+                </span>
+                <span class="font-mono-tab text-[11px] text-[#CF7818]">Rejected</span>
+              </div>
+              <p id="voiceDontHeadline" class="font-display font-semibold text-lg text-[#CFD0C9]/80 line-through decoration-[#CF7818]/60 mb-2">
+                Dive into the magical ocean of next-gen data insights!
+              </p>
+              <p id="voiceDontBody" class="text-sm text-[#A0B4B9]/80 leading-relaxed">
+                Supercharge your cloud journey today! Our wizard-like AI waves a magic trident over your messy data lakes so you never drown in dashboards again.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-[#4F2000] flex items-center justify-between text-xs font-mono-tab text-[#CF7818]">
+              <span id="voiceAntiTag">Anti-Pattern: Fantasy Cliché &amp; Hyperbole</span>
+              <span>Avoid</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. DATA VISUALIZATION & TELEMETRY CHARTING LAB
+         =================================================================== -->
+    <section id="charts" class="space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#00CAE3]">03 · Bioluminescent vs. Amber Data Grammar</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Data Visualization &amp; Telemetry Charting Lab</h2>
+          <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+            Alternating cyan and warm amber series tokens prevent adjacent hue collision on <code class="font-mono-tab text-[#A1FCFD]">#031C28</code> surfaces with <code class="font-mono-tab text-[#A1FCFD]">#07455E</code> dashed gridlines.
+          </p>
+        </div>
+
+        <!-- Chart Mode Switcher -->
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="setChartMode('bar', this)" class="chart-mode-btn apt-btn-ghost active-pill px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Multi-Series Bar</button>
+          <button type="button" onclick="setChartMode('area', this)" class="chart-mode-btn apt-btn-ghost px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Area Telemetry Stream</button>
+          <button type="button" onclick="setChartMode('node', this)" class="chart-mode-btn apt-btn-ghost px-3.5 py-2 text-xs sm:text-sm font-medium cursor-pointer">Node Topology Graph</button>
+        </div>
+      </div>
+
+      <!-- 6-Series Categorical Swatch Legend -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#00CAE3;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-1</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#00CAE3 · Primary</div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#F7BE4F;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-2</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#F7BE4F · Amber</div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#0380A1;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-3</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#0380A1 · Deep Teal</div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#A29062;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-4</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#A29062 · Sand</div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#A1FCFD;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-5</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#A1FCFD · Ice</div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-[#00101A] border border-[#07455E] p-3 flex items-center gap-3">
+          <span class="w-4 h-4 rounded shrink-0" style="background:#CF7818;"></span>
+          <div class="min-w-0">
+            <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB] truncate">--apt-chart-6</div>
+            <div class="font-mono-tab text-[11px] text-[#748E97]">#CF7818 · Copper</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Telemetry Chart Canvas -->
+      <div class="apt-card p-5 sm:p-6 relative">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <h3 id="chartTitle" class="font-display font-semibold text-lg text-[#FDFDFB]">Sector Throughput &amp; Harmonic Load (6-Series Telemetry)</h3>
+            <p id="chartSubtitle" class="font-mono-tab text-xs text-[#748E97]">Hover bars, stream nodes, or topology links to inspect tabular overlay telemetry</p>
+          </div>
+          <div class="flex items-center gap-2 font-mono-tab text-xs">
+            <span class="px-2.5 py-1 rounded bg-[#00101A] border border-[#07455E] text-[#A0B4B9]">Surface: #031C28</span>
+            <span class="px-2.5 py-1 rounded bg-[#00101A] border border-[#07455E] text-[#00CAE3]">Grid: #07455E dashed</span>
+          </div>
+        </div>
+
+        <!-- Responsive SVG Container -->
+        <div id="chartViewport" class="relative w-full overflow-hidden rounded-lg bg-[#031C28] border border-[#07455E]">
+          <svg id="telemetrySvg" class="w-full h-[340px] sm:h-[380px] block select-none" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid meet"></svg>
+
+          <!-- Floating Overlay Tooltip (#05303F) -->
+          <div id="chartTooltip" class="pointer-events-none hidden absolute z-20 min-w-[190px] rounded-lg bg-[#05303F] border border-[#00637D] p-3 shadow-[0_12px_36px_rgba(0,0,0,0.75)]">
+            <div id="tooltipHeader" class="font-mono-tab text-[11px] uppercase tracking-wider text-[#A0B4B9] border-b border-[#07455E] pb-1.5 mb-2">SECTOR 01</div>
+            <div id="tooltipBody" class="space-y-1 font-mono-tab text-xs"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. HUD DUOTONE ICONOGRAPHY KIT (SVG SPRITES)
+         =================================================================== -->
+    <section id="icons" class="space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#F7BE4F]">04 · Emblem-Derived Vector Sprites</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">HUD Duotone Iconography Kit</h2>
+          <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+            8 geometric <code class="font-mono-tab text-[#A1FCFD]">1.75px</code> stroke duotone icons inspired by the crest's floating telemetry windows. Primary geometry uses <code class="font-mono-tab text-[#00CAE3]">#00CAE3</code> / <code class="font-mono-tab text-[#FDFDFB]">#FDFDFB</code> with solar amber (<code class="font-mono-tab text-[#F7BE4F]">#F7BE4F</code>) focal nodes.
+          </p>
+        </div>
+
+        <!-- Scale & HUD Frame Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono-tab text-xs text-[#748E97] mr-1">Size:</span>
+          <button type="button" onclick="setIconSize(24, this)" class="icon-size-btn apt-btn-ghost active-pill px-3 py-1.5 text-xs font-mono-tab cursor-pointer">24px (1.75px)</button>
+          <button type="button" onclick="setIconSize(16, this)" class="icon-size-btn apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">16px (1.5px)</button>
+          <button type="button" id="hudFrameToggle" onclick="toggleHudFrames()" class="apt-btn-ghost active-pill px-3 py-1.5 text-xs font-mono-tab flex items-center gap-1.5 cursor-pointer">
+            <span class="w-2 h-2 rounded-full bg-[#23F2F7]" id="hudFrameDot"></span>
+            HUD Frame (48px)
+          </button>
+        </div>
+      </div>
+
+      <!-- 8 Icon Grid (Populated via JS for clean single-source SVG copy) -->
+      <div id="hudIconGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- ===================================================================
+         6. MOTION & INTERACTION PHYSICS LAB
+         =================================================================== -->
+    <section id="motion" class="space-y-6">
+      <div class="border-b border-[#07455E] pb-5">
+        <span class="font-mono-tab text-xs uppercase tracking-widest text-[#00CAE3]">05 · Temporal Choreography</span>
+        <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Motion &amp; Interaction Physics Lab</h2>
+        <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+          Calibrated to feel like sonar pulses and precision maritime instrumentation—fast initial response with zero overshoot bounce.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Instrument Easing Curve Trigger -->
+        <div class="apt-card p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">Instrument Easing</h3>
+              <span class="font-mono-tab text-xs text-[#23F2F7]">--apt-ease-instrument</span>
+            </div>
+            <p class="mt-1 font-mono-tab text-xs text-[#748E97]">cubic-bezier(0.2, 0.8, 0.2, 1)</p>
+            <p class="mt-2 text-sm text-[#CFD0C9]">Zero-overshoot settle for tabs, drawers, and metric readouts across 120ms, 220ms, and 340ms durations.</p>
+          </div>
+
+          <!-- Track -->
+          <div class="p-4 rounded-lg bg-[#00101A] border border-[#07455E] space-y-3">
+            <div class="relative h-10 rounded-md bg-[#02020E] border border-[#07455E] flex items-center px-2 overflow-hidden">
+              <div id="instrumentPuck" class="w-16 h-6 rounded bg-[#00CAE3] text-[#000000] font-mono-tab font-bold text-[11px] flex items-center justify-center shadow-[0_0_14px_rgba(35,242,247,0.4)]" style="transform: translateX(0px);">
+                220ms
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" onclick="triggerInstrumentMotion(120)" class="apt-btn-ghost py-1.5 text-xs font-mono-tab cursor-pointer">120ms Fast</button>
+              <button type="button" onclick="triggerInstrumentMotion(220)" class="apt-btn-ghost py-1.5 text-xs font-mono-tab cursor-pointer">220ms Base</button>
+              <button type="button" onclick="triggerInstrumentMotion(340)" class="apt-btn-ghost py-1.5 text-xs font-mono-tab cursor-pointer">340ms Slow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Sonar Tide Ambient Pulse -->
+        <div class="apt-card p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">Sonar Tide Pulse</h3>
+              <span class="font-mono-tab text-xs text-[#F7BE4F]">--apt-ease-tide</span>
+            </div>
+            <p class="mt-1 font-mono-tab text-xs text-[#748E97]">cubic-bezier(0.4, 0.0, 0.2, 1)</p>
+            <p class="mt-2 text-sm text-[#CFD0C9]">Sinusoidal beacon respiration indicating active telemetry ingestion or live node synchronization.</p>
+          </div>
+
+          <div class="p-4 rounded-lg bg-[#00101A] border border-[#07455E] flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="relative w-12 h-12 flex items-center justify-center">
+                <span id="sonarRing" class="absolute inset-0 rounded-full border-2 border-[#23F2F7] animate-sonar"></span>
+                <span class="relative w-4 h-4 rounded-full bg-[#23F2F7] shadow-[0_0_12px_#23F2F7]"></span>
+              </div>
+              <div>
+                <div class="font-mono-tab text-xs font-semibold text-[#FDFDFB]">STREAM: ACTIVE</div>
+                <div id="sonarStateLabel" class="font-mono-tab text-[11px] text-[#00CAE3]">2.6s sinusoidal cycle</div>
+              </div>
+            </div>
+            <button type="button" id="sonarToggleBtn" onclick="toggleSonarPulse()" class="apt-btn-ghost px-3 py-1.5 text-xs font-mono-tab cursor-pointer">Pause</button>
+          </div>
+        </div>
+
+        <!-- Card 3: Bioluminescent Focus & Glow Feedback -->
+        <div class="apt-card p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-semibold text-lg text-[#FDFDFB]">Bioluminescent Glow</h3>
+              <span class="font-mono-tab text-xs text-[#A1FCFD]">--apt-glow-primary</span>
+            </div>
+            <p class="mt-1 font-mono-tab text-xs text-[#748E97]">0 0 18px rgba(35, 242, 247, 0.28)</p>
+            <p class="mt-2 text-sm text-[#CFD0C9]">Interactive elements step from <code class="font-mono-tab text-xs text-[#A1FCFD]">#07455E</code> borders to <code class="font-mono-tab text-xs text-[#23F2F7]">#23F2F7</code> with ambient cyan or gold aura.</p>
+          </div>
+
+          <div class="p-4 rounded-lg bg-[#00101A] border border-[#07455E] space-y-3">
+            <input type="text" value="apt-node-04.abyssal.internal" aria-label="Telemetry Node Endpoint" class="w-full px-3 py-2 rounded-md bg-[#02020E] border border-[#07455E] text-xs font-mono-tab text-[#A1FCFD] focus:outline-none focus:border-[#23F2F7] focus:shadow-[0_0_0_2px_#00101A,0_0_0_4px_#23F2F7] transition-all" />
+            <div class="flex gap-2">
+              <button type="button" class="apt-btn-primary flex-1 py-2 text-xs cursor-pointer">Cyan Glow CTA</button>
+              <button type="button" class="apt-btn-secondary flex-1 py-2 text-xs cursor-pointer">Amber Glow CTA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         7. COMPLETE EXTENDED TOKENS (tokens-extended.css)
+         =================================================================== -->
+    <section id="tokens" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#07455E] pb-5">
+        <div>
+          <span class="font-mono-tab text-xs uppercase tracking-widest text-[#F7BE4F]">06 · Production CSS Variables</span>
+          <h2 class="mt-1 font-display font-semibold text-2xl sm:text-3xl text-[#FDFDFB] tracking-[-0.02em]">Extended Design Tokens (<code class="font-mono-tab text-[#00CAE3] text-xl sm:text-2xl">tokens-extended.css</code>)</h2>
+          <p class="mt-1.5 text-sm text-[#A0B4B9] max-w-2xl">
+            Merges all 32 canonical primitives and semantic aliases with v2.0 telemetry chart series, HUD elevation glows, and motion timing curves.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="copyExtendedTokens()" class="apt-btn-primary px-4 py-2.5 text-xs sm:text-sm flex items-center gap-2 cursor-pointer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy tokens-extended.css</span>
+          </button>
+          <button type="button" onclick="downloadExtendedTokens()" class="apt-btn-ghost px-4 py-2.5 text-xs sm:text-sm font-medium cursor-pointer">
+            Download .CSS
+          </button>
+        </div>
+      </div>
+
+      <div class="apt-card overflow-hidden">
+        <div class="px-4 py-2.5 bg-[#00101A] border-b border-[#07455E] flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#CF7818]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#F7BE4F]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#23F2F7]"></span>
+            <span class="ml-2 font-mono-tab text-xs text-[#A0B4B9]">tokens-extended.css · 32 Primitives + Charting + Motion + HUD</span>
+          </div>
+          <span class="font-mono-tab text-[11px] text-[#748E97]">UTF-8 · CSS Custom Properties</span>
+        </div>
+        <pre id="extendedTokensCode" class="p-5 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono-tab text-[#A1FCFD] bg-[#02020E] max-h-[460px]"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#07455E] bg-[#00101A] py-8 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#748E97]">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-[#00CAE3]"></span>
+        <span class="font-display font-semibold text-[#FDFDFB] tracking-wider">APTLANTIS BRAND SYSTEM v2.0</span>
+        <span>· Abyssal Cyan &amp; Solar Amber</span>
+      </div>
+      <div class="font-mono-tab">WCAG AAA Verified · Dark-First Architecture</div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="aptToast" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-200 flex items-center gap-2.5 px-4 py-3 rounded-lg bg-[#05303F] border border-[#23F2F7] text-[#FDFDFB] shadow-[0_12px_36px_rgba(0,0,0,0.85),0_0_18px_rgba(35,242,247,0.28)]">
+    <span class="w-2 h-2 rounded-full bg-[#23F2F7]"></span>
+    <span id="aptToastMsg" class="font-mono-tab text-xs">Copied to clipboard</span>
+  </div>
+
+  <script>
+    /* =====================================================================
+       1. CLIPBOARD & TOAST HELPER (iFrame-safe execCommand fallback)
+       ===================================================================== */
+    let toastTimer = null;
+
+    function showToast(message) {
+      const toast = document.getElementById('aptToast');
+      const msgEl = document.getElementById('aptToastMsg');
+      msgEl.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, 2400);
+    }
+
+    function copyTextSafe(text, label) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (ok) {
+          showToast(`Copied ${label} to clipboard`);
+          return;
+        }
+      } catch (e) {
+        // Fallback below
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`Copied ${label} to clipboard`);
+        });
+      }
+    }
+
+    /* =====================================================================
+       2. LOGO STAGE CONTROLS & SVG EXPORT
+       ===================================================================== */
+    let clearSpaceEnabled = false;
+
+    function setLogoSurface(hex, btn) {
+      document.querySelectorAll('.logo-stage').forEach(stage => {
+        stage.style.backgroundColor = hex;
+      });
+      document.querySelectorAll('.surface-toggle-btn').forEach(b => b.classList.remove('active-pill'));
+      btn.classList.add('active-pill');
+    }
+
+    function toggleClearSpace() {
+      clearSpaceEnabled = !clearSpaceEnabled;
+      const btn = document.getElementById('clearSpaceBtn');
+      const dot = document.getElementById('clearSpaceDot');
+      const stages = document.querySelectorAll('.logo-stage');
+      const boxes = document.querySelectorAll('.clear-space-box');
+
+      if (clearSpaceEnabled) {
+        btn.classList.add('active-pill');
+        dot.style.backgroundColor = '#23F2F7';
+        stages.forEach(s => s.classList.add('clear-space-grid'));
+        boxes.forEach(b => b.style.borderColor = '#23F2F7');
+      } else {
+        btn.classList.remove('active-pill');
+        dot.style.backgroundColor = '#506F80';
+        stages.forEach(s => s.classList.remove('clear-space-grid'));
+        boxes.forEach(b => b.style.borderColor = 'transparent');
+      }
+    }
+
+    function getCleanSvgMarkup(svgId) {
+      const svgEl = document.getElementById(svgId);
+      const clone = svgEl.cloneNode(true);
+      clone.removeAttribute('class');
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      return new XMLSerializer().serializeToString(clone);
+    }
+
+    function copySvgById(svgId, title) {
+      const markup = getCleanSvgMarkup(svgId);
+      copyTextSafe(markup, `${title} SVG`);
+    }
+
+    function downloadSvgById(svgId, filename) {
+      const markup = getCleanSvgMarkup(svgId);
+      const blob = new Blob([markup], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Downloaded ${filename}`);
+    }
+
+    /* =====================================================================
+       3. BRAND VOICE MATRIX DATA & INTERACTIVITY
+       ===================================================================== */
+    const voiceMatrix = {
+      hero: {
+        calibration: 'Calibration: Visionary · Crisp · Architectural',
+        doHeadline: 'Chart deep system telemetry with zero signal loss.',
+        doBody: 'Unify distributed logs, topology graphs, and real-time latency ledgers inside a high-contrast abyssal workspace engineered for rapid root-cause navigation.',
+        pillar: 'Pillar: Signal Over Noise',
+        dontHeadline: 'Dive into the magical ocean of next-gen data insights!',
+        dontBody: 'Supercharge your cloud journey today! Our wizard-like AI waves a magic trident over your messy data lakes so you never drown in dashboards again.',
+        anti: 'Anti-Pattern: Fantasy Cliché & Hyperbole'
+      },
+      docs: {
+        calibration: 'Calibration: Exact · Structured · Instructional',
+        doHeadline: 'Bind --apt-border-interactive (#00637D) to active tab states.',
+        doBody: 'Preserve a minimum 3:1 non-text UI contrast ratio across --apt-bg-base (#00101A) and --apt-bg-raised (#031C28) surfaces. Pair focus rings with --apt-glow-primary.',
+        pillar: 'Pillar: Illuminating, Not Mystical',
+        dontHeadline: 'Simply pop in the cyan border token to make tabs look awesome.',
+        dontBody: 'Feel free to sprinkle glowing cyan borders wherever you want things to pop! It gives your app a cool futuristic vibe.',
+        anti: 'Anti-Pattern: Imprecise & Casual Guidance'
+      },
+      empty: {
+        calibration: 'Calibration: Constructive · Deterministic · Forward-Looking',
+        doHeadline: 'No telemetry streams anchored in this sector.',
+        doBody: 'Connect an OpenTelemetry collector or bind a node endpoint to begin charting real-time throughput and latency baselines.',
+        pillar: 'Pillar: Signal Over Noise',
+        dontHeadline: 'Oops! Nothing to see here yet :(',
+        dontBody: 'Looks like your abyss is totally empty right now! Click around to start summoning some charts.',
+        anti: 'Anti-Pattern: Apologetic Filler & Emoticons'
+      },
+      alerts: {
+        calibration: 'Calibration: Clinical · Diagnostic · Composed',
+        doHeadline: 'Ingestion throttled: node apt-04 exceeded 420ms latency threshold.',
+        doBody: 'Secondary replicas remain synchronized at 99.98% quorum. Inspect backpressure queue depth or reroute traffic to sector-02.',
+        pillar: 'Pillar: Composure Under Load',
+        dontHeadline: 'Uh oh! Something went wrong in the deep!',
+        dontBody: 'Yikes! Node apt-04 is having a meltdown and things are running super slow. Please try again later!',
+        anti: 'Anti-Pattern: Panic Language & Opaque Cause'
+      }
+    };
+
+    let currentVoiceKey = 'hero';
+
+    function selectVoiceContext(key, btn) {
+      currentVoiceKey = key;
+      const data = voiceMatrix[key];
+      document.querySelectorAll('.voice-tab').forEach(b => b.classList.remove('active-pill'));
+      btn.classList.add('active-pill');
+
+      document.getElementById('voiceCalibrationBadge').textContent = data.calibration;
+      document.getElementById('voiceDoHeadline').textContent = data.doHeadline;
+      document.getElementById('voiceDoBody').textContent = data.doBody;
+      document.getElementById('voicePillarTag').textContent = data.pillar;
+      document.getElementById('voiceDontHeadline').textContent = data.dontHeadline;
+      document.getElementById('voiceDontBody').textContent = data.dontBody;
+      document.getElementById('voiceAntiTag').textContent = data.anti;
+    }
+
+    function copyVoiceTemplate() {
+      const data = voiceMatrix[currentVoiceKey];
+      copyTextSafe(`${data.doHeadline}\n${data.doBody}`, 'Voice Microcopy Template');
+    }
+
+    /* =====================================================================
+       4. DATA VISUALIZATION & TELEMETRY CHARTING LAB (SVG)
+       ===================================================================== */
+    const chartPalette = ['#00CAE3', '#F7BE4F', '#0380A1', '#A29062', '#A1FCFD', '#CF7818'];
+    const seriesNames = ['Ingress', 'Solar Sync', 'Core Mesh', 'Archive', 'Beacon', 'Backpressure'];
+
+    const barDatasets = [
+      { label: 'SEC-01', values: [86, 68, 74, 52, 91, 24] },
+      { label: 'SEC-02', values: [94, 79, 65, 61, 88, 19] },
+      { label: 'SEC-03', values: [72, 85, 81, 48, 76, 38] },
+      { label: 'SEC-04', values: [89, 73, 90, 67, 95, 21] },
+      { label: 'SEC-05', values: [97, 88, 78, 59, 92, 16] }
+    ];
+
+    const streamTimes = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'];
+    const streamSeries = [
+      [62, 68, 79, 92, 88, 95, 91], // #00CAE3
+      [44, 52, 61, 74, 83, 77, 85], // #F7BE4F
+      [35, 40, 48, 55, 60, 58, 64], // #0380A1
+      [25, 29, 34, 41, 39, 45, 42]  // #A29062
+    ];
+
+    let currentChartMode = 'bar';
+
+    function setChartMode(mode, btn) {
+      currentChartMode = mode;
+      document.querySelectorAll('.chart-mode-btn').forEach(b => b.classList.remove('active-pill'));
+      btn.classList.add('active-pill');
+      hideChartTooltip();
+      renderTelemetryChart();
+    }
+
+    function showChartTooltip(evt, headerText, rows) {
+      const viewport = document.getElementById('chartViewport');
+      const tooltip = document.getElementById('chartTooltip');
+      const header = document.getElementById('tooltipHeader');
+      const body = document.getElementById('tooltipBody');
+
+      header.textContent = headerText;
+      body.innerHTML = rows.map(r => `
+        <div class="flex items-center justify-between gap-4">
+          <span class="flex items-center gap-1.5 text-[#CFD0C9]">
+            <span class="w-2 h-2 rounded-full inline-block" style="background:${r.color};"></span>
+            ${r.name}
+          </span>
+          <span class="font-semibold text-[#FDFDFB]">${r.val}</span>
+        </div>
+      `).join('');
+
+      tooltip.classList.remove('hidden');
+
+      const rect = viewport.getBoundingClientRect();
+      let left = evt.clientX - rect.left + 14;
+      let top = evt.clientY - rect.top - 12;
+
+      if (left + 210 > rect.width) left = evt.clientX - rect.left - 205;
+      if (top + 140 > rect.height) top = rect.height - 145;
+      if (top < 8) top = 8;
+
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
+    }
+
+    function hideChartTooltip() {
+      document.getElementById('chartTooltip').classList.add('hidden');
+    }
+
+    function renderTelemetryChart() {
+      const svg = document.getElementById('telemetrySvg');
+      const titleEl = document.getElementById('chartTitle');
+
+      if (currentChartMode === 'bar') {
+        titleEl.textContent = 'Sector Throughput & Harmonic Load (6-Series Telemetry)';
+        renderBarChart(svg);
+      } else if (currentChartMode === 'area') {
+        titleEl.textContent = '24h Bioluminescent vs. Solar Stream Telemetry';
+        renderAreaChart(svg);
+      } else {
+        titleEl.textContent = 'Abyssal Mesh Topology & Quorum Links';
+        renderNodeChart(svg);
+      }
+    }
+
+    function renderBarChart(svg) {
+      const padL = 56, padR = 28, padT = 28, padB = 46;
+      const w = 900, h = 360;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      let html = '';
+
+      // Horizontal dashed gridlines (#07455E) & tabular axis labels (#A0B4B9)
+      for (let i = 0; i <= 4; i++) {
+        const val = i * 25;
+        const y = padT + plotH - (val / 100) * plotH;
+        const stroke = i === 0 ? '#555245' : '#07455E';
+        const dash = i === 0 ? '' : 'stroke-dasharray="4 4"';
+        html += `<line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="${stroke}" stroke-width="1" ${dash}/>`;
+        html += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="11">${val}%</text>`;
+      }
+
+      const groupW = plotW / barDatasets.length;
+      const barW = 16;
+      const gap = 5;
+      const totalClusterW = barDatasets[0].values.length * barW + (barDatasets[0].values.length - 1) * gap;
+
+      barDatasets.forEach((group, gIdx) => {
+        const groupX = padL + gIdx * groupW + (groupW - totalClusterW) / 2;
+
+        // X Axis Label
+        html += `<text x="${padL + gIdx * groupW + groupW / 2}" y="${h - 16}" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">${group.label}</text>`;
+
+        group.values.forEach((v, sIdx) => {
+          const bH = (v / 100) * plotH;
+          const x = groupX + sIdx * (barW + gap);
+          const y = padT + plotH - bH;
+          const color = chartPalette[sIdx];
+
+          html += `
+            <rect
+              x="${x}" y="${y}" width="${barW}" height="${bH}" rx="3"
+              fill="${color}" fill-opacity="0.9"
+              class="cursor-pointer transition-opacity duration-150 hover:opacity-100"
+              onmousemove="handleBarHover(event, ${gIdx}, ${sIdx})"
+              onmouseleave="hideChartTooltip()"
+            />
+          `;
+        });
+      });
+
+      svg.innerHTML = html;
+    }
+
+    window.handleBarHover = function(evt, gIdx, sIdx) {
+      const group = barDatasets[gIdx];
+      const rows = group.values.map((val, idx) => ({
+        name: idx === sIdx ? `▸ ${seriesNames[idx]}` : seriesNames[idx],
+        val: `${val}.0%`,
+        color: chartPalette[idx]
+      }));
+      showChartTooltip(evt, `${group.label} · TELEMETRY`, rows);
+    };
+
+    function renderAreaChart(svg) {
+      const padL = 56, padR = 28, padT = 28, padB = 46;
+      const w = 900, h = 360;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      let html = `<defs>`;
+      streamSeries.forEach((_, idx) => {
+        const col = chartPalette[idx];
+        html += `
+          <linearGradient id="areaGrad${idx}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${col}" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="${col}" stop-opacity="0.0"/>
+          </linearGradient>
+        `;
+      });
+      html += `</defs>`;
+
+      // Gridlines
+      for (let i = 0; i <= 4; i++) {
+        const val = i * 25;
+        const y = padT + plotH - (val / 100) * plotH;
+        html += `<line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="${i === 0 ? '#555245' : '#07455E'}" stroke-width="1" ${i === 0 ? '' : 'stroke-dasharray="4 4"'}/>`;
+        html += `<text x="${padL - 10}" y="${y + 4}" text-anchor="end" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="11">${val} Tb</text>`;
+      }
+
+      const stepX = plotW / (streamTimes.length - 1);
+
+      streamTimes.forEach((t, idx) => {
+        const x = padL + idx * stepX;
+        html += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${padT + plotH}" stroke="#07455E" stroke-opacity="0.45" stroke-dasharray="3 3"/>`;
+        html += `<text x="${x}" y="${h - 16}" text-anchor="middle" fill="#A0B4B9" font-family="'JetBrains Mono', monospace" font-size="11">${t}</text>`;
+      });
+
+      streamSeries.forEach((pts, sIdx) => {
+        const col = chartPalette[sIdx];
+        const coords = pts.map((v, i) => ({
+          x: padL + i * stepX,
+          y: padT + plotH - (v / 100) * plotH
+        }));
+
+        const lineD = coords.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+        const areaD = `${lineD} L ${coords[coords.length - 1].x} ${padT + plotH} L ${coords[0].x} ${padT + plotH} Z`;
+
+        html += `<path d="${areaD}" fill="url(#areaGrad${sIdx})"/>`;
+        html += `<path d="${lineD}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+        coords.forEach((p, tIdx) => {
+          html += `
+            <circle
+              cx="${p.x}" cy="${p.y}" r="5"
+              fill="#00101A" stroke="${col}" stroke-width="2.5"
+              class="cursor-pointer"
+              onmousemove="handleStreamHover(event, ${tIdx})"
+              onmouseleave="hideChartTooltip()"
+            />
+          `;
+        });
+      });
+
+      svg.innerHTML = html;
+    }
+
+    window.handleStreamHover = function(evt, tIdx) {
+      const rows = streamSeries.map((pts, sIdx) => ({
+        name: seriesNames[sIdx],
+        val: `${pts[tIdx]}.4 Tb/s`,
+        color: chartPalette[sIdx]
+      }));
+      showChartTooltip(evt, `UTC ${streamTimes[tIdx]} · STREAM`, rows);
+    };
+
+    function renderNodeChart(svg) {
+      const nodes = [
+        { id: 'CITADEL-CORE', x: 450, y: 175, r: 24, color: '#F7BE4F', latency: '4ms', load: '62%' },
+        { id: 'BEACON-NORTH', x: 240, y: 95, r: 17, color: '#23F2F7', latency: '11ms', load: '74%' },
+        { id: 'SONAR-WEST', x: 190, y: 255, r: 16, color: '#00CAE3', latency: '14ms', load: '58%' },
+        { id: 'LEDGER-EAST', x: 675, y: 100, r: 18, color: '#00CAE3', latency: '9ms', load: '81%' },
+        { id: 'ARCHIVE-SOUTH', x: 690, y: 255, r: 16, color: '#A29062', latency: '19ms', load: '43%' },
+        { id: 'RELAY-06', x: 450, y: 62, r: 13, color: '#A1FCFD', latency: '7ms', load: '51%' },
+        { id: 'EDGE-WARN', x: 450, y: 295, r: 14, color: '#CF7818', latency: '42ms', load: '89%' }
+      ];
+
+      const edges = [
+        [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6],
+        [1, 5], [5, 3], [1, 2], [3, 4], [2, 6], [6, 4]
+      ];
+
+      let html = `
+        <circle cx="450" cy="175" r="135" fill="none" stroke="#07455E" stroke-dasharray="4 4"/>
+        <circle cx="450" cy="175" r="225" fill="none" stroke="#07455E" stroke-opacity="0.55" stroke-dasharray="2 6"/>
+      `;
+
+      edges.forEach(([a, b]) => {
+        const n1 = nodes[a], n2 = nodes[b];
+        const isWarn = a === 6 || b === 6;
+        html += `<line x1="${n1.x}" y1="${n1.y}" x2="${n2.x}" y2="${n2.y}" stroke="${isWarn ? '#CF7818' : '#00637D'}" stroke-width="${isWarn ? '1.8' : '1.5'}" ${isWarn ? 'stroke-dasharray="5 4"' : ''}/>`;
+      });
+
+      nodes.forEach((n, idx) => {
+        html += `
+          <g class="cursor-pointer" onmousemove="handleNodeHover(event, ${idx})" onmouseleave="hideChartTooltip()">
+            <circle cx="${n.x}" cy="${n.y}" r="${n.r + 6}" fill="${n.color}" fill-opacity="0.12"/>
+            <circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="#00101A" stroke="${n.color}" stroke-width="2.5"/>
+            <circle cx="${n.x}" cy="${n.y}" r="${Math.max(4, n.r * 0.32)}" fill="${n.color}"/>
+            <text x="${n.x}" y="${n.y + n.r + 16}" text-anchor="middle" fill="#FDFDFB" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">${n.id}</text>
+          </g>
+        `;
+      });
+
+      svg.innerHTML = html;
+
+      window._topoNodes = nodes;
+    }
+
+    window.handleNodeHover = function(evt, idx) {
+      const n = window._topoNodes[idx];
+      showChartTooltip(evt, n.id, [
+        { name: 'RTT Latency', val: n.latency, color: n.color },
+        { name: 'Compute Load', val: n.load, color: '#00CAE3' },
+        { name: 'Quorum State', val: idx === 6 ? 'THROTTLED' : 'NOMINAL', color: idx === 6 ? '#CF7818' : '#23F2F7' }
+      ]);
+    };
+
+    /* =====================================================================
+       5. HUD DUOTONE ICONOGRAPHY KIT (8 CUSTOM SVG SPRITES)
+       ===================================================================== */
+    const hudIcons = [
+      {
+        name: 'Telemetry Bar Chart',
+        token: 'hud-telemetry-chart',
+        inner: `
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="#00CAE3"/>
+          <line x1="8" y1="17" x2="8" y2="12" stroke="#FDFDFB"/>
+          <line x1="12" y1="17" x2="12" y2="8" stroke="#F7BE4F"/>
+          <line x1="16" y1="17" x2="16" y2="10" stroke="#23F2F7"/>
+        `
+      },
+      {
+        name: 'Terminal / Code',
+        token: 'hud-terminal-code',
+        inner: `
+          <rect x="3" y="4" width="18" height="16" rx="3" stroke="#00CAE3"/>
+          <polyline points="7 10 10 13 7 16" stroke="#F7BE4F"/>
+          <line x1="12.5" y1="16" x2="17" y2="16" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        name: 'Node Topology',
+        token: 'hud-node-topology',
+        inner: `
+          <line x1="7.5" y1="10.5" x2="11" y2="7.5" stroke="#00CAE3"/>
+          <line x1="13" y1="7.5" x2="16.5" y2="10.5" stroke="#00CAE3"/>
+          <line x1="7.5" y1="13.5" x2="11" y2="16.5" stroke="#00CAE3"/>
+          <line x1="13" y1="16.5" x2="16.5" y2="13.5" stroke="#00CAE3"/>
+          <circle cx="12" cy="6" r="2.2" stroke="#F7BE4F"/>
+          <circle cx="6" cy="12" r="2.2" stroke="#FDFDFB"/>
+          <circle cx="18" cy="12" r="2.2" stroke="#FDFDFB"/>
+          <circle cx="12" cy="18" r="2.2" stroke="#23F2F7"/>
+        `
+      },
+      {
+        name: 'Database Cluster',
+        token: 'hud-database-cluster',
+        inner: `
+          <ellipse cx="12" cy="6.5" rx="7" ry="2.8" stroke="#F7BE4F"/>
+          <path d="M5 6.5V12C5 13.55 8.13 14.8 12 14.8C15.87 14.8 19 13.55 19 12V6.5" stroke="#00CAE3"/>
+          <path d="M5 12V17.5C5 19.05 8.13 20.3 12 20.3C15.87 20.3 19 19.05 19 17.5V12" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        name: 'Knowledge Tome',
+        token: 'hud-knowledge-tome',
+        inner: `
+          <path d="M12 6.5C10.2 5.3 7.6 5 4.5 5.5V18.5C7.6 18 10.2 18.3 12 19.5C13.8 18.3 16.4 18 19.5 18.5V5.5C16.4 5 13.8 5.3 12 6.5Z" stroke="#00CAE3"/>
+          <line x1="12" y1="6.5" x2="12" y2="19.5" stroke="#F7BE4F"/>
+          <line x1="7" y1="9.5" x2="9.5" y2="9.5" stroke="#FDFDFB"/>
+          <line x1="14.5" y1="9.5" x2="17" y2="9.5" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        name: 'System Core Gear',
+        token: 'hud-core-gear',
+        inner: `
+          <circle cx="12" cy="12" r="3.2" stroke="#F7BE4F"/>
+          <path d="M12 3.5V5.5M12 18.5V20.5M3.5 12H5.5M18.5 12H20.5M6 6L7.4 7.4M16.6 16.6L18 18M18 6L16.6 7.4M7.4 16.6L6 18" stroke="#23F2F7"/>
+          <circle cx="12" cy="12" r="6.8" stroke="#FDFDFB"/>
+        `
+      },
+      {
+        name: 'Sonar Beacon',
+        token: 'hud-sonar-beacon',
+        inner: `
+          <circle cx="12" cy="12" r="2.2" fill="#F7BE4F" stroke="#F7BE4F"/>
+          <path d="M8.2 8.2C6.1 10.3 6.1 13.7 8.2 15.8" stroke="#23F2F7"/>
+          <path d="M15.8 8.2C17.9 10.3 17.9 13.7 15.8 15.8" stroke="#23F2F7"/>
+          <path d="M5.4 5.4C1.8 9 1.8 15 5.4 18.6" stroke="#00CAE3"/>
+          <path d="M18.6 5.4C22.2 9 22.2 15 18.6 18.6" stroke="#00CAE3"/>
+        `
+      },
+      {
+        name: 'Depth Compass',
+        token: 'hud-depth-compass',
+        inner: `
+          <circle cx="12" cy="12" r="8.5" stroke="#00CAE3"/>
+          <polygon points="12,6.5 14.5,12 12,17.5 9.5,12" stroke="#FDFDFB"/>
+          <polygon points="12,6.5 14.5,12 12,12 9.5,12" fill="#F7BE4F" stroke="#F7BE4F"/>
+        `
+      }
+    ];
+
+    let currentIconPx = 24;
+    let hudFramesOn = true;
+
+    function buildIconSvgString(icon, sizePx) {
+      const sw = sizePx === 16 ? '1.5' : '1.75';
+      return `<svg width="${sizePx}" height="${sizePx}" viewBox="0 0 24 24" fill="none" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">${icon.inner.trim()}</svg>`;
+    }
+
+    function renderHudIconGrid() {
+      const grid = document.getElementById('hudIconGrid');
+      grid.innerHTML = hudIcons.map((icon, idx) => `
+        <div class="hud-icon-card apt-card apt-card-interactive p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-start justify-between gap-3">
+            <div class="hud-icon-box ${hudFramesOn ? 'framed' : ''}">
+              ${buildIconSvgString(icon, currentIconPx)}
+            </div>
+            <span class="font-mono-tab text-[11px] px-2 py-0.5 rounded bg-[#00101A] border border-[#07455E] text-[#748E97]">${currentIconPx}px</span>
+          </div>
+
+          <div>
+            <h3 class="font-display font-semibold text-base text-[#FDFDFB]">${icon.name}</h3>
+            <p class="font-mono-tab text-xs text-[#00CAE3] mt-0.5">${icon.token}</p>
+          </div>
+
+          <button type="button" onclick="copyHudIcon(${idx})" class="apt-btn-ghost w-full py-2 px-3 text-xs font-medium flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>Copy SVG</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function setIconSize(px, btn) {
+      currentIconPx = px;
+      document.querySelectorAll('.icon-size-btn').forEach(b => b.classList.remove('active-pill'));
+      btn.classList.add('active-pill');
+      renderHudIconGrid();
+    }
+
+    function toggleHudFrames() {
+      hudFramesOn = !hudFramesOn;
+      const btn = document.getElementById('hudFrameToggle');
+      const dot = document.getElementById('hudFrameDot');
+      if (hudFramesOn) {
+        btn.classList.add('active-pill');
+        dot.style.backgroundColor = '#23F2F7';
+      } else {
+        btn.classList.remove('active-pill');
+        dot.style.backgroundColor = '#506F80';
+      }
+      renderHudIconGrid();
+    }
+
+    function copyHudIcon(idx) {
+      const icon = hudIcons[idx];
+      const svgCode = buildIconSvgString(icon, currentIconPx);
+      copyTextSafe(svgCode, `${icon.name} (${currentIconPx}px) SVG`);
+    }
+
+    /* =====================================================================
+       6. MOTION & INTERACTION PHYSICS LAB
+       ===================================================================== */
+    let puckAtRight = false;
+    let sonarPaused = false;
+
+    function triggerInstrumentMotion(durationMs) {
+      const puck = document.getElementById('instrumentPuck');
+      const parentW = puck.parentElement.clientWidth;
+      const maxTravel = Math.max(40, parentW - puck.offsetWidth - 16);
+
+      puckAtRight = !puckAtRight;
+      puck.textContent = `${durationMs}ms`;
+      puck.style.transition = `transform ${durationMs}ms cubic-bezier(0.2, 0.8, 0.2, 1)`;
+      puck.style.transform = puckAtRight ? `translateX(${maxTravel}px)` : 'translateX(0px)';
+    }
+
+    function toggleSonarPulse() {
+      sonarPaused = !sonarPaused;
+      const ring = document.getElementById('sonarRing');
+      const btn = document.getElementById('sonarToggleBtn');
+      const label = document.getElementById('sonarStateLabel');
+
+      if (sonarPaused) {
+        ring.style.animationPlayState = 'paused';
+        btn.textContent = 'Resume';
+        label.textContent = 'Paused · --apt-ease-tide';
+      } else {
+        ring.style.animationPlayState = 'running';
+        btn.textContent = 'Pause';
+        label.textContent = '2.6s sinusoidal cycle';
+      }
+    }
+
+    /* =====================================================================
+       7. EXTENDED CSS TOKENS SPECIMEN (tokens-extended.css)
+       ===================================================================== */
+    const extendedTokensCss = `:root {
+  /* =========================================================
+     APTLANTIS BRAND SYSTEM v2.0 — EXTENDED TOKENS
+     Abyssal Cyan & Solar Amber · Navigator-Architect Identity
+     ========================================================= */
+
+  /* 1. Canonical Primitives (32 OKLCH-Calibrated Tokens) */
+  --apt-color-01: #000000;
+  --apt-color-02: #02020E;
+  --apt-color-03: #0D0100;
+  --apt-color-04: #00101A;
+  --apt-color-05: #260600;
+  --apt-color-06: #031C28;
+  --apt-color-07: #2A2923;
+  --apt-color-08: #05303F;
+  --apt-color-09: #4F2000;
+  --apt-color-10: #07455E;
+  --apt-color-11: #2E5701;
+  --apt-color-12: #555245;
+  --apt-color-13: #71481D;
+  --apt-color-14: #00637D;
+  --apt-color-15: #506F80;
+  --apt-color-16: #697500;
+  --apt-color-17: #A95403;
+  --apt-color-18: #0380A1;
+  --apt-color-19: #748E97;
+  --apt-color-20: #CF7818;
+  --apt-color-21: #A29062;
+  --apt-color-22: #18AAC2;
+  --apt-color-23: #D99D36;
+  --apt-color-24: #A0B4B9;
+  --apt-color-25: #00CAE3;
+  --apt-color-26: #F7BE4F;
+  --apt-color-27: #CFD0C9;
+  --apt-color-28: #23F2F7;
+  --apt-color-29: #F7DD74;
+  --apt-color-30: #A1FCFD;
+  --apt-color-31: #FDEDB3;
+  --apt-color-32: #FDFDFB;
+
+  /* 2. Surfaces */
+  --apt-bg-void: var(--apt-color-01);
+  --apt-bg-canvas: var(--apt-color-02);
+  --apt-bg-warm-void: var(--apt-color-03);
+  --apt-bg-base: var(--apt-color-04);
+  --apt-bg-raised: var(--apt-color-06);
+  --apt-bg-overlay: var(--apt-color-08);
+
+  /* 3. Borders */
+  --apt-border-neutral-subtle: var(--apt-color-07);
+  --apt-border-subtle: var(--apt-color-10);
+  --apt-border-default: var(--apt-color-12);
+  --apt-border-warm: var(--apt-color-13);
+  --apt-border-interactive: var(--apt-color-14);
+
+  /* 4. Typography Colors */
+  --apt-text-primary: var(--apt-color-32);
+  --apt-text-warm-display: var(--apt-color-31);
+  --apt-text-secondary: var(--apt-color-27);
+  --apt-text-tertiary: var(--apt-color-24);
+  --apt-text-muted: var(--apt-color-19);
+  --apt-text-disabled: var(--apt-color-15);
+
+  /* 5. Brand & Accents */
+  --apt-brand-primary: var(--apt-color-25);
+  --apt-brand-primary-hover: var(--apt-color-28);
+  --apt-brand-primary-dim: var(--apt-color-22);
+  --apt-brand-primary-muted: var(--apt-color-18);
+  --apt-brand-secondary: var(--apt-color-26);
+  --apt-brand-secondary-hover: var(--apt-color-29);
+  --apt-brand-secondary-dim: var(--apt-color-23);
+  --apt-accent-ice: var(--apt-color-30);
+  --apt-accent-sand: var(--apt-color-21);
+
+  /* 6. In-Palette Semantic Status */
+  --apt-status-success: var(--apt-color-16);
+  --apt-status-success-surface: var(--apt-color-11);
+  --apt-status-warning: var(--apt-color-26);
+  --apt-status-danger: var(--apt-color-20);
+  --apt-status-danger-strong: var(--apt-color-17);
+  --apt-status-danger-surface: var(--apt-color-05);
+  --apt-status-danger-border: var(--apt-color-09);
+  --apt-status-info: var(--apt-color-25);
+
+  /* 7. Telemetry & Data Visualization Series (6-Series Alternating) */
+  --apt-chart-1: var(--apt-brand-primary);       /* #00CAE3 */
+  --apt-chart-2: var(--apt-brand-secondary);     /* #F7BE4F */
+  --apt-chart-3: var(--apt-brand-primary-muted); /* #0380A1 */
+  --apt-chart-4: var(--apt-accent-sand);         /* #A29062 */
+  --apt-chart-5: var(--apt-accent-ice);          /* #A1FCFD */
+  --apt-chart-6: var(--apt-status-danger);       /* #CF7818 */
+  --apt-chart-grid: var(--apt-border-subtle);    /* #07455E */
+  --apt-chart-axis: var(--apt-border-default);   /* #555245 */
+
+  /* 8. Typography & Radii */
+  --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+  --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --apt-radius-sm: 4px;
+  --apt-radius-md: 8px;
+  --apt-radius-lg: 14px;
+  --apt-radius-pill: 9999px;
+
+  /* 9. HUD Elevation & Bioluminescent Glows */
+  --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+  --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65);
+  --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+  --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+  --apt-focus-ring: 0 0 0 2px var(--apt-bg-base), 0 0 0 4px var(--apt-brand-primary-hover);
+
+  /* 10. Motion Physics & Timing Curves */
+  --apt-ease-instrument: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --apt-ease-tide: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --apt-duration-fast: 120ms;
+  --apt-duration-base: 220ms;
+  --apt-duration-slow: 340ms;
+}`;
+
+    function copyExtendedTokens() {
+      copyTextSafe(extendedTokensCss, 'tokens-extended.css');
+    }
+
+    function downloadExtendedTokens() {
+      const blob = new Blob([extendedTokensCss], { type: 'text/css;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'tokens-extended.css';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded tokens-extended.css');
+    }
+
+    /* =====================================================================
+       INITIALIZE ON LOAD
+       ===================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('extendedTokensCode').textContent = extendedTokensCss;
+      renderTelemetryChart();
+      renderHudIconGrid();
+    });
+  </script>
+</body>
+</html>

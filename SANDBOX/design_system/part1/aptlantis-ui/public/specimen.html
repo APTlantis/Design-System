@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APTLANTIS v2.0 — Standalone Desktop Component Specimen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  /* =========================================================
+     APTLANTIS BRAND SYSTEM v2.0 — EXTENDED TOKENS
+     Abyssal Cyan & Solar Amber · Navigator-Architect Identity
+     ========================================================= */
+
+  /* 1. Canonical Primitives (32 OKLCH-Calibrated Tokens) */
+  --apt-color-01: #000000;
+  --apt-color-02: #02020E;
+  --apt-color-03: #0D0100;
+  --apt-color-04: #00101A;
+  --apt-color-05: #260600;
+  --apt-color-06: #031C28;
+  --apt-color-07: #2A2923;
+  --apt-color-08: #05303F;
+  --apt-color-09: #4F2000;
+  --apt-color-10: #07455E;
+  --apt-color-11: #2E5701;
+  --apt-color-12: #555245;
+  --apt-color-13: #71481D;
+  --apt-color-14: #00637D;
+  --apt-color-15: #506F80;
+  --apt-color-16: #697500;
+  --apt-color-17: #A95403;
+  --apt-color-18: #0380A1;
+  --apt-color-19: #748E97;
+  --apt-color-20: #CF7818;
+  --apt-color-21: #A29062;
+  --apt-color-22: #18AAC2;
+  --apt-color-23: #D99D36;
+  --apt-color-24: #A0B4B9;
+  --apt-color-25: #00CAE3;
+  --apt-color-26: #F7BE4F;
+  --apt-color-27: #CFD0C9;
+  --apt-color-28: #23F2F7;
+  --apt-color-29: #F7DD74;
+  --apt-color-30: #A1FCFD;
+  --apt-color-31: #FDEDB3;
+  --apt-color-32: #FDFDFB;
+
+  /* 2. Surfaces */
+  --apt-bg-void: var(--apt-color-01);
+  --apt-bg-canvas: var(--apt-color-02);
+  --apt-bg-warm-void: var(--apt-color-03);
+  --apt-bg-base: var(--apt-color-04);
+  --apt-bg-raised: var(--apt-color-06);
+  --apt-bg-overlay: var(--apt-color-08);
+
+  /* 3. Borders */
+  --apt-border-neutral-subtle: var(--apt-color-07);
+  --apt-border-subtle: var(--apt-color-10);
+  --apt-border-default: var(--apt-color-12);
+  --apt-border-warm: var(--apt-color-13);
+  --apt-border-interactive: var(--apt-color-14);
+
+  /* 4. Typography Colors */
+  --apt-text-primary: var(--apt-color-32);
+  --apt-text-warm-display: var(--apt-color-31);
+  --apt-text-secondary: var(--apt-color-27);
+  --apt-text-tertiary: var(--apt-color-24);
+  --apt-text-muted: var(--apt-color-19);
+  --apt-text-disabled: var(--apt-color-15);
+
+  /* 5. Brand & Accents */
+  --apt-brand-primary: var(--apt-color-25);
+  --apt-brand-primary-hover: var(--apt-color-28);
+  --apt-brand-primary-dim: var(--apt-color-22);
+  --apt-brand-primary-muted: var(--apt-color-18);
+  --apt-brand-secondary: var(--apt-color-26);
+  --apt-brand-secondary-hover: var(--apt-color-29);
+  --apt-brand-secondary-dim: var(--apt-color-23);
+  --apt-accent-ice: var(--apt-color-30);
+  --apt-accent-sand: var(--apt-color-21);
+
+  /* 6. In-Palette Semantic Status */
+  --apt-status-success: var(--apt-color-16);
+  --apt-status-success-surface: var(--apt-color-11);
+  --apt-status-warning: var(--apt-color-26);
+  --apt-status-danger: var(--apt-color-20);
+  --apt-status-danger-strong: var(--apt-color-17);
+  --apt-status-danger-surface: var(--apt-color-05);
+  --apt-status-danger-border: var(--apt-color-09);
+  --apt-status-info: var(--apt-color-25);
+
+  /* 7. Telemetry & Data Visualization Series (6-Series Alternating) */
+  --apt-chart-1: var(--apt-brand-primary);       /* #00CAE3 */
+  --apt-chart-2: var(--apt-brand-secondary);     /* #F7BE4F */
+  --apt-chart-3: var(--apt-brand-primary-muted); /* #0380A1 */
+  --apt-chart-4: var(--apt-accent-sand);         /* #A29062 */
+  --apt-chart-5: var(--apt-accent-ice);          /* #A1FCFD */
+  --apt-chart-6: var(--apt-status-danger);       /* #CF7818 */
+  --apt-chart-grid: var(--apt-border-subtle);    /* #07455E */
+  --apt-chart-axis: var(--apt-border-default);   /* #555245 */
+
+  /* 8. Typography & Radii */
+  --apt-font-display: "Space Grotesk", system-ui, sans-serif;
+  --apt-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --apt-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --apt-radius-sm: 4px;
+  --apt-radius-md: 8px;
+  --apt-radius-lg: 14px;
+  --apt-radius-pill: 9999px;
+
+  /* 9. HUD Elevation & Bioluminescent Glows */
+  --apt-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06);
+  --apt-shadow-overlay: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65);
+  --apt-glow-primary: 0 0 18px rgba(35, 242, 247, 0.28);
+  --apt-glow-secondary: 0 0 18px rgba(247, 190, 79, 0.24);
+  --apt-focus-ring: 0 0 0 2px var(--apt-bg-base), 0 0 0 4px var(--apt-brand-primary-hover);
+
+  /* 10. Motion Physics & Timing Curves */
+  --apt-ease-instrument: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --apt-ease-tide: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --apt-duration-fast: 120ms;
+  --apt-duration-base: 220ms;
+  --apt-duration-slow: 340ms;
+}
+
+/* ==========================================================================
+   APTLANTIS v2.0 — Desktop Component Primitives (apt-components.css)
+   Requires: tokens-extended.css
+   ========================================================================== */
+
+@layer apt.reset, apt.layout, apt.controls, apt.data, apt.overlays;
+
+@layer apt.reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--apt-bg-canvas);
+    color: var(--apt-text-primary);
+    font-family: var(--apt-font-body);
+    font-size: 0.875rem; /* 14px desktop density */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Unified keyboard focus ring */
+  :focus-visible {
+    outline: 2px solid var(--apt-brand-primary-hover);
+    outline-offset: 2px;
+    box-shadow: var(--apt-glow-primary);
+  }
+
+  .apt-mono {
+    font-family: var(--apt-font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .apt-display {
+    font-family: var(--apt-font-display);
+    letter-spacing: -0.02em;
+  }
+
+  kbd.apt-kbd {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    border: 1px solid var(--apt-border-subtle);
+    background: var(--apt-bg-base);
+    color: var(--apt-text-secondary);
+    font-family: var(--apt-font-mono);
+    font-size: 0.6875rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1. APPLICATION SHELL & WORKSPACE PANES
+   -------------------------------------------------------------------------- */
+@layer apt.layout {
+  .apt-shell {
+    display: grid;
+    grid-template-columns: 56px 1fr minmax(0, var(--apt-inspector-w, 380px));
+    grid-template-rows: 48px 1fr;
+    grid-template-areas:
+      "rail header header"
+      "rail canvas inspector";
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--apt-bg-void);
+    transition: grid-template-columns var(--apt-duration-base) var(--apt-ease-instrument);
+  }
+
+  /* Auto-collapse right inspector when empty or closed */
+  .apt-shell:has(#apt-inspector:empty),
+  .apt-shell[data-inspector="closed"] {
+    grid-template-columns: 56px 1fr 0px;
+  }
+
+  .apt-rail {
+    grid-area: rail;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0;
+    background: var(--apt-bg-void);
+    border-right: 1px solid var(--apt-border-subtle);
+  }
+
+  .apt-rail-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .apt-topbar {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: var(--apt-bg-base);
+    border-bottom: 1px solid var(--apt-border-subtle);
+  }
+
+  .apt-canvas {
+    grid-area: canvas;
+    overflow-y: auto;
+    padding: 1.25rem 1.5rem;
+    background: var(--apt-bg-canvas);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .apt-inspector {
+    grid-area: inspector;
+    overflow-y: auto;
+    background: var(--apt-bg-raised);
+    border-left: 1px solid var(--apt-border-subtle);
+  }
+
+  .apt-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+
+  .apt-panel {
+    background: var(--apt-bg-raised);
+    border: 1px solid var(--apt-border-subtle);
+    border-radius: var(--apt-radius-md);
+    padding: 1rem;
+    box-shadow: var(--apt-shadow-raised);
+    transition: border-color var(--apt-duration-fast) var(--apt-ease-instrument);
+  }
+
+  .apt-panel:focus-within {
+    border-color: var(--apt-brand-primary-hover);
+  }
+
+  .apt-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid oklch(from var(--apt-border-subtle) l c h / 0.5);
+  }
+
+  .apt-panel-title {
+    margin: 0;
+    font-family: var(--apt-font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--apt-text-primary);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. BUTTONS, BADGES & INPUT CONTROLS (Attribute-Driven Variants)
+   -------------------------------------------------------------------------- */
+@layer apt.controls {
+  .apt-btn {
+    --_bg: var(--apt-bg-overlay);
+    --_fg: var(--apt-text-primary);
+    --_border: var(--apt-border-subtle);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 30px;
+    padding: 0 0.75rem;
+    border-radius: var(--apt-radius-sm);
+    border: 1px solid var(--_border);
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--apt-duration-fast) var(--apt-ease-instrument),
+      border-color var(--apt-duration-fast) var(--apt-ease-instrument),
+      box-shadow var(--apt-duration-fast) var(--apt-ease-instrument);
+  }
+
+  .apt-btn:hover:not(:disabled) {
+    background: oklch(from var(--_bg) calc(l + 0.05) c h);
+    border-color: var(--apt-brand-primary-hover);
+  }
+
+  .apt-btn:active:not(:disabled) {
+    background: oklch(from var(--_bg) calc(l - 0.03) c h);
+  }
+
+  .apt-btn[data-variant="primary"] {
+    --_bg: var(--apt-brand-primary);
+    --_fg: var(--apt-bg-void);
+    --_border: var(--apt-brand-primary);
+    font-weight: 600;
+  }
+
+  .apt-btn[data-variant="primary"]:hover:not(:disabled) {
+    --_bg: var(--apt-brand-primary-hover);
+    box-shadow: var(--apt-glow-primary);
+  }
+
+  .apt-btn[data-variant="amber"] {
+    --_bg: var(--apt-brand-secondary);
+    --_fg: var(--apt-bg-void);
+    --_border: var(--apt-brand-secondary);
+    font-weight: 600;
+  }
+
+  .apt-btn[data-variant="amber"]:hover:not(:disabled) {
+    --_bg: var(--apt-brand-secondary-hover);
+    box-shadow: var(--apt-glow-secondary);
+  }
+
+  .apt-btn[data-variant="danger"] {
+    --_bg: var(--apt-status-danger-surface);
+    --_fg: var(--apt-brand-secondary-hover);
+    --_border: var(--apt-status-danger-border);
+  }
+
+  .apt-btn[data-variant="danger"]:hover:not(:disabled) {
+    --_bg: var(--apt-status-danger-strong);
+    --_fg: var(--apt-text-primary);
+    border-color: var(--apt-status-danger);
+  }
+
+  .apt-btn[data-variant="ghost"] {
+    --_bg: transparent;
+    --_border: transparent;
+    color: var(--apt-text-secondary);
+  }
+
+  .apt-btn[data-variant="ghost"]:hover,
+  .apt-btn[data-active="true"] {
+    color: var(--apt-brand-primary-hover);
+    background: oklch(from var(--apt-brand-primary) l c h / 0.12);
+  }
+
+  .apt-btn[data-size="icon"] {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+  }
+
+  /* htmx active request indicator */
+  .apt-btn.htmx-request {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Live Telemetry Beacon */
+  .apt-beacon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--apt-radius-pill);
+    background: var(--apt-bg-raised);
+    border: 1px solid var(--apt-border-subtle);
+    font-family: var(--apt-font-mono);
+    font-size: 0.72rem;
+    color: var(--apt-brand-primary-hover);
+  }
+
+  .apt-beacon::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: apt-tide-pulse 2.6s var(--apt-ease-tide) infinite;
+  }
+
+  @keyframes apt-tide-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; }
+    50% { opacity: 0.35; box-shadow: none; }
+  }
+
+  /* Status Pill Badge */
+  .apt-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.12rem 0.45rem;
+    border-radius: var(--apt-radius-sm);
+    font-family: var(--apt-font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: 1px solid var(--apt-border-subtle);
+    background: var(--apt-bg-base);
+    color: var(--apt-text-secondary);
+  }
+
+  .apt-badge[data-tone="cyan"] {
+    border-color: oklch(from var(--apt-brand-primary) l c h / 0.5);
+    color: var(--apt-brand-primary-hover);
+    background: oklch(from var(--apt-brand-primary) l c h / 0.1);
+  }
+
+  .apt-badge[data-tone="amber"] {
+    border-color: oklch(from var(--apt-brand-secondary) l c h / 0.5);
+    color: var(--apt-brand-secondary);
+    background: oklch(from var(--apt-brand-secondary) l c h / 0.1);
+  }
+
+  /* Semantic Field Wrapper with :has() validation */
+  .apt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .apt-field label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--apt-text-secondary);
+  }
+
+  .apt-input {
+    height: 34px;
+    padding: 0 0.65rem;
+    border-radius: var(--apt-radius-sm);
+    border: 1px solid var(--apt-border-subtle);
+    background: var(--apt-bg-base);
+    color: var(--apt-text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+  }
+
+  .apt-field:has(.apt-input:user-invalid) .apt-input {
+    border-color: var(--apt-status-danger);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. HIGH-DENSITY TELEMETRY TABLE, BULK SELECTION & CHARTS
+   -------------------------------------------------------------------------- */
+@layer apt.data {
+  .apt-table-wrap {
+    position: relative;
+    overflow: auto;
+    border: 1px solid var(--apt-border-subtle);
+    border-radius: var(--apt-radius-md);
+    background: var(--apt-bg-raised);
+  }
+
+  .apt-table-wrap.htmx-request tbody {
+    opacity: 0.55;
+    transition: opacity var(--apt-duration-fast) var(--apt-ease-instrument);
+  }
+
+  .apt-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.8125rem;
+  }
+
+  .apt-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 0.6rem 0.75rem;
+    background: var(--apt-bg-base);
+    border-bottom: 1px solid var(--apt-border-subtle);
+    color: var(--apt-text-secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .apt-table tbody tr {
+    border-bottom: 1px solid oklch(from var(--apt-border-subtle) l c h / 0.55);
+    cursor: pointer;
+    transition: background-color var(--apt-duration-fast) var(--apt-ease-instrument);
+  }
+
+  .apt-table tbody tr:hover {
+    background: var(--apt-bg-overlay);
+  }
+
+  /* Pure CSS row highlight when checkbox is checked */
+  .apt-table tbody tr:has(input[type="checkbox"]:checked),
+  .apt-table tbody tr[data-selected="true"] {
+    background: oklch(from var(--apt-brand-primary) l c h / 0.14);
+  }
+
+  .apt-table td {
+    padding: 0.55rem 0.75rem;
+    vertical-align: middle;
+  }
+
+  /* Custom oceanic checkbox */
+  .apt-check {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid var(--apt-border-subtle);
+    background: var(--apt-bg-base);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+  }
+
+  .apt-check:checked,
+  .apt-check:indeterminate {
+    background: var(--apt-brand-primary);
+    border-color: var(--apt-brand-primary-hover);
+  }
+
+  .apt-check:checked::before {
+    content: "";
+    width: 8px;
+    height: 5px;
+    border-left: 2px solid var(--apt-bg-void);
+    border-bottom: 2px solid var(--apt-bg-void);
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+
+  .apt-check:indeterminate::before {
+    content: "";
+    width: 8px;
+    height: 2px;
+    background: var(--apt-bg-void);
+  }
+
+  /* Floating Bulk Action Toolbar */
+  .apt-bulk-bar {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--apt-radius-md);
+    background: var(--apt-bg-overlay);
+    border: 1px solid var(--apt-brand-primary-hover);
+    box-shadow: var(--apt-glow-primary), var(--apt-shadow-overlay);
+  }
+
+  .apt-bulk-bar[hidden] {
+    display: none;
+  }
+
+  /* 6-Series Telemetry Chart Frame */
+  .apt-chart-frame {
+    position: relative;
+    height: 160px;
+    padding: 0.5rem;
+    border-radius: var(--apt-radius-sm);
+    background: var(--apt-bg-base);
+    border: 1px solid oklch(from var(--apt-border-subtle) l c h / 0.6);
+  }
+
+  .apt-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 0.65rem;
+    font-family: var(--apt-font-mono);
+    font-size: 0.72rem;
+    color: var(--apt-text-secondary);
+  }
+
+  .apt-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .apt-legend-swatch {
+    width: 10px;
+    height: 3px;
+    border-radius: 1px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. NATIVE TOP-LAYER OVERLAYS (<dialog>, [popover], OOB Toasts)
+   -------------------------------------------------------------------------- */
+@layer apt.overlays {
+  dialog.apt-dialog {
+    width: min(540px, calc(100vw - 2rem));
+    padding: 0;
+    border: 1px solid var(--apt-brand-primary-hover);
+    border-radius: var(--apt-radius-md);
+    background: var(--apt-bg-overlay);
+    color: var(--apt-text-primary);
+    box-shadow: var(--apt-glow-primary), var(--apt-shadow-overlay);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition:
+      opacity var(--apt-duration-base) var(--apt-ease-instrument),
+      transform var(--apt-duration-base) var(--apt-ease-instrument),
+      display var(--apt-duration-base) allow-discrete;
+  }
+
+  @starting-style {
+    dialog.apt-dialog[open] {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+  }
+
+  dialog.apt-dialog::backdrop {
+    background: rgba(0, 10, 16, 0.78);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Native Popover Menu */
+  [popover].apt-menu {
+    margin: 0.35rem 0 0 0;
+    padding: 0.35rem;
+    min-width: 210px;
+    border-radius: var(--apt-radius-md);
+    border: 1px solid var(--apt-border-subtle);
+    background: var(--apt-bg-overlay);
+    color: var(--apt-text-primary);
+    box-shadow: var(--apt-shadow-overlay);
+  }
+
+  .apt-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border: 0;
+    border-radius: var(--apt-radius-sm);
+    background: transparent;
+    color: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .apt-menu-item:hover {
+    background: oklch(from var(--apt-brand-primary) l c h / 0.16);
+    color: var(--apt-brand-primary-hover);
+  }
+
+  /* OOB Toast Region */
+  #apt-toast-region {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 340px;
+    pointer-events: none;
+  }
+
+  .apt-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: var(--apt-radius-md);
+    background: var(--apt-bg-overlay);
+    border: 1px solid var(--apt-border-subtle);
+    border-left: 3px solid var(--apt-status-info);
+    box-shadow: var(--apt-shadow-overlay);
+    font-size: 0.8125rem;
+    animation: apt-toast-in var(--apt-duration-base) var(--apt-ease-instrument);
+  }
+
+  @keyframes apt-toast-in {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .apt-toast[data-tone="warning"] { border-left-color: var(--apt-status-warning); }
+  .apt-toast[data-tone="danger"]  { border-left-color: var(--apt-status-danger); }
+  .apt-toast[data-tone="success"] { border-left-color: var(--apt-status-success); }
+}
+
+/* ==========================================================================
+   APTLANTIS v2.0 — Mermaid Topology Coordinate Grid & Interactive Nodes
+   Requires: tokens-extended.css
+   ========================================================================== */
+
+.apt-topology-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding: 1.5rem;
+  border-radius: var(--apt-radius-md);
+  border: 1px solid var(--apt-border-subtle);
+  background-color: var(--apt-bg-base);
+  /* Subtle oceanic coordinate grid */
+  background-image:
+    linear-gradient(to right, oklch(from var(--apt-border-subtle) l c h / 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(from var(--apt-border-subtle) l c h / 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overflow: auto;
+}
+
+.apt-topology-toolbar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.35rem;
+  z-index: 5;
+}
+
+/* Make Mermaid SVG nodes interactive with keyboard & pointer */
+.apt-topology-frame .node {
+  cursor: pointer;
+  transition: filter var(--apt-duration-fast) var(--apt-ease-instrument);
+}
+
+.apt-topology-frame .node:hover {
+  filter: drop-shadow(0 0 8px rgba(35, 242, 247, 0.45));
+}
+
+  </style>
+</head>
+<body>
+  <div class="apt-shell">
+    <nav class="apt-rail" aria-label="Primary Modules">
+      <div class="apt-rail-group">
+        <button class="apt-btn" data-variant="ghost" data-size="icon" data-active="true" title="Telemetry Ledger">◈</button>
+        <button class="apt-btn" data-variant="ghost" data-size="icon" title="Command Palette (⌘K)" onclick="openCommandPalette()">⌕</button>
+      </div>
+      <div class="apt-rail-group">
+        <span class="apt-mono" style="font-size:0.65rem; color:var(--apt-text-muted);">v2.0</span>
+      </div>
+    </nav>
+
+    <header class="apt-topbar">
+      <div style="display:flex; align-items:center; gap:0.85rem;">
+        <span class="apt-display" style="font-weight:700; letter-spacing:0.06em; color:var(--apt-brand-primary-hover);">APTLANTIS</span>
+        <span style="color:var(--apt-border-interactive);">/</span>
+        <span class="apt-mono" style="font-size:0.8rem; color:var(--apt-text-secondary);">DESKTOP COMPONENT SPECIMEN</span>
+        <span class="apt-beacon">STREAM: ACTIVE</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button class="apt-btn" data-variant="ghost" onclick="openCommandPalette()">
+          <span>Search</span>
+          <kbd class="apt-kbd">⌘K</kbd>
+        </button>
+
+        <button class="apt-btn" popovertarget="sector-menu">Sector 01 · Abyssal ▾</button>
+        <div id="sector-menu" popover="auto" class="apt-menu">
+          <button class="apt-menu-item" onclick="filterSector('ALL'); document.getElementById('sector-menu').hidePopover()">
+            <span>All Sectors</span><kbd class="apt-kbd">⌘0</kbd>
+          </button>
+          <button class="apt-menu-item" onclick="filterSector('WGS'); document.getElementById('sector-menu').hidePopover()">
+            <span>WGS · Governance</span><kbd class="apt-kbd">⌘1</kbd>
+          </button>
+          <button class="apt-menu-item" onclick="filterSector('DRS'); document.getElementById('sector-menu').hidePopover()">
+            <span>DRS · Release</span><kbd class="apt-kbd">⌘2</kbd>
+          </button>
+        </div>
+
+        <button class="apt-btn" data-variant="primary" onclick="document.getElementById('deploy-dialog').showModal()">
+          + Dispatch Contract
+        </button>
+      </div>
+    </header>
+
+    <main class="apt-canvas">
+      <div class="apt-grid-2">
+        <section class="apt-panel">
+          <div class="apt-panel-head">
+            <h2 class="apt-panel-title">6-Series Ingestion Latency (ms)</h2>
+            <span class="apt-badge" data-tone="cyan">p99 · 14.2 ms</span>
+          </div>
+          <div class="apt-chart-frame">
+            <svg viewBox="0 0 400 120" width="100%" height="100%" preserveAspectRatio="none">
+              <line x1="0" y1="30" x2="400" y2="30" stroke="var(--apt-chart-grid)" stroke-dasharray="3 3" />
+              <line x1="0" y1="60" x2="400" y2="60" stroke="var(--apt-chart-grid)" stroke-dasharray="3 3" />
+              <line x1="0" y1="90" x2="400" y2="90" stroke="var(--apt-chart-grid)" stroke-dasharray="3 3" />
+              <polyline fill="none" stroke="var(--apt-chart-1)" stroke-width="2" points="0,85 80,72 160,78 240,45 320,52 400,34" />
+              <polyline fill="none" stroke="var(--apt-chart-2)" stroke-width="2" points="0,95 80,88 160,64 240,70 320,42 400,48" />
+              <polyline fill="none" stroke="var(--apt-chart-3)" stroke-width="2" points="0,70 80,62 160,82 240,58 320,66 400,55" />
+            </svg>
+          </div>
+          <div class="apt-legend">
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-1)"></span>S1 Core</span>
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-2)"></span>S2 Audit</span>
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-3)"></span>S3 Relay</span>
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-4)"></span>S4 Sync</span>
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-5)"></span>S5 Edge</span>
+            <span class="apt-legend-item"><span class="apt-legend-swatch" style="background:var(--apt-chart-6)"></span>S6 Warn</span>
+          </div>
+        </section>
+
+        <section class="apt-panel">
+          <div class="apt-panel-head">
+            <h2 class="apt-panel-title">OOB Toast &amp; State Triggers</h2>
+            <span class="apt-badge">aria-live="polite"</span>
+          </div>
+          <p style="margin:0 0 0.85rem 0; color:var(--apt-text-secondary); font-size:0.8125rem;">
+            Test out-of-band (<code>hx-swap-oob</code>) notifications and right-hand inspector drawer expansion.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <button class="apt-btn" onclick="pushToast('success', 'Attestation digest verified across quorum.')">Success Toast</button>
+            <button class="apt-btn" onclick="pushToast('info', 'Telemetry stream synchronized with Sector 01.')">Info Toast</button>
+            <button class="apt-btn" data-variant="amber" onclick="pushToast('warning', 'Queue depth elevated on worker #4.')">Warning Toast</button>
+            <button class="apt-btn" data-variant="danger" onclick="pushToast('danger', 'Contract signature mismatch rejected.')">Danger Toast</button>
+          </div>
+        </section>
+      </div>
+
+      <section>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem;">
+          <h2 class="apt-panel-title">Active Telemetry Ledger (Click row to inspect · Check boxes for Bulk Bar)</h2>
+          <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-text-secondary);" id="row-counter">4 NODES ONLINE</span>
+        </div>
+
+        <div class="apt-table-wrap">
+          <table class="apt-table">
+            <thead>
+              <tr>
+                <th style="width:36px;"><input id="select-all" type="checkbox" class="apt-check" onclick="toggleSelectAll(this)" aria-label="Select all" /></th>
+                <th>Node Identifier</th>
+                <th>Contract</th>
+                <th>Status</th>
+                <th>Latency</th>
+                <th>SHA-256 Digest</th>
+              </tr>
+            </thead>
+            <tbody id="ledger-body">
+              <tr data-contract="DRS" onclick="inspectNode(this, 'apt-node-01.abyssal', 'DRS · v2.4', '11.4 ms', '9f84c20a771b…e01b', 'Nominal oceanic ingress; zero packet loss over 24h.')">
+                <td onclick="event.stopPropagation()"><input type="checkbox" class="apt-check row-check" onchange="syncBulkBar()" /></td>
+                <td class="apt-mono">apt-node-01.abyssal</td>
+                <td><span class="apt-badge" data-tone="cyan">DRS · v2.4</span></td>
+                <td class="apt-mono" style="color:var(--apt-chart-4);">● VERIFIED</td>
+                <td class="apt-mono">11.4 ms</td>
+                <td class="apt-mono" style="color:var(--apt-text-secondary);">9f84c20a771b…e01b</td>
+              </tr>
+              <tr data-contract="WGS" onclick="inspectNode(this, 'apt-gov-02.hadal', 'WGS · v2.0', '14.8 ms', '3d19a88c402f…77a4', 'Governance quorum signer active; 6/6 keys attested.')">
+                <td onclick="event.stopPropagation()"><input type="checkbox" class="apt-check row-check" onchange="syncBulkBar()" /></td>
+                <td class="apt-mono">apt-gov-02.hadal</td>
+                <td><span class="apt-badge">WGS · v2.0</span></td>
+                <td class="apt-mono" style="color:var(--apt-chart-4);">● VERIFIED</td>
+                <td class="apt-mono">14.8 ms</td>
+                <td class="apt-mono" style="color:var(--apt-text-secondary);">3d19a88c402f…77a4</td>
+              </tr>
+              <tr data-contract="CTS" onclick="inspectNode(this, 'apt-telemetry-03.trench', 'CTS · v1.9', '28.1 ms', '7c01e55b190d…44c9', 'Elevated queue depth on ingestion worker #4.')">
+                <td onclick="event.stopPropagation()"><input type="checkbox" class="apt-check row-check" onchange="syncBulkBar()" /></td>
+                <td class="apt-mono">apt-telemetry-03.trench</td>
+                <td><span class="apt-badge" data-tone="amber">CTS · v1.9</span></td>
+                <td class="apt-mono" style="color:var(--apt-chart-2);">▲ DEGRADED</td>
+                <td class="apt-mono">28.1 ms</td>
+                <td class="apt-mono" style="color:var(--apt-text-secondary);">7c01e55b190d…44c9</td>
+              </tr>
+              <tr data-contract="DRS" onclick="inspectNode(this, 'apt-edge-04.pelagic', 'DRS · v2.4', '9.2 ms', '1a64f90e883c…12f0', 'Edge cache warm; serving 14.2k req/s.')">
+                <td onclick="event.stopPropagation()"><input type="checkbox" class="apt-check row-check" onchange="syncBulkBar()" /></td>
+                <td class="apt-mono">apt-edge-04.pelagic</td>
+                <td><span class="apt-badge" data-tone="cyan">DRS · v2.4</span></td>
+                <td class="apt-mono" style="color:var(--apt-chart-4);">● VERIFIED</td>
+                <td class="apt-mono">9.2 ms</td>
+                <td class="apt-mono" style="color:var(--apt-text-secondary);">1a64f90e883c…12f0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <aside id="apt-inspector" class="apt-inspector" aria-label="Node Inspector"></aside>
+  </div>
+
+  <div id="apt-bulk-bar" class="apt-bulk-bar" hidden>
+    <span id="bulk-count" class="apt-mono" style="font-size:0.8rem; color:var(--apt-brand-primary-hover);">0 SELECTED</span>
+    <span style="color:var(--apt-border-interactive);">|</span>
+    <button class="apt-btn" data-variant="primary" onclick="bulkAction('Attested')">Attest Hashes</button>
+    <button class="apt-btn" data-variant="amber" onclick="bulkAction('Drained')">Drain Nodes</button>
+    <button class="apt-btn" data-variant="ghost" onclick="clearSelection()">Clear</button>
+  </div>
+
+  <dialog id="deploy-dialog" class="apt-dialog">
+    <form onsubmit="handleDispatch(event)" style="padding:1.25rem; display:grid; gap:1rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <h3 class="apt-display" style="margin:0; font-size:1.05rem;">Dispatch Release Contract</h3>
+        <button type="button" class="apt-btn" data-variant="ghost" onclick="this.closest('dialog').close()">✕</button>
+      </div>
+      <div class="apt-field">
+        <label for="spec-node">Target Node Hostname</label>
+        <input id="spec-node" name="node" class="apt-input apt-mono" required placeholder="apt-node-05.abyssal" />
+      </div>
+      <div class="apt-field">
+        <label for="spec-contract">Governance Spec</label>
+        <select id="spec-contract" name="contract" class="apt-input apt-mono">
+          <option value="DRS · v2.4">DRS · v2.4 (Deterministic Release)</option>
+          <option value="WGS · v2.0">WGS · v2.0 (Workspace Governance)</option>
+          <option value="CTS · v1.9">CTS · v1.9 (Continuous Telemetry)</option>
+        </select>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+        <button type="button" class="apt-btn" data-variant="ghost" onclick="this.closest('dialog').close()">Cancel</button>
+        <button type="submit" class="apt-btn" data-variant="primary">Execute Dispatch</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="cmd-dialog" class="apt-dialog" style="margin-top:10vh;">
+    <div style="padding:0.85rem;">
+      <input id="cmd-input" class="apt-input apt-mono" style="width:100%;" placeholder="Filter actions or contracts..." oninput="filterCommands(this.value)" />
+      <div id="cmd-list" style="margin-top:0.65rem; display:grid; gap:0.25rem;">
+        <button class="apt-menu-item" onclick="document.getElementById('cmd-dialog').close(); document.getElementById('deploy-dialog').showModal()">
+          <span>+ Dispatch New Release Contract</span><kbd class="apt-kbd">ACTION</kbd>
+        </button>
+        <button class="apt-menu-item" onclick="filterSector('DRS'); document.getElementById('cmd-dialog').close()">
+          <span>Filter Ledger: DRS Contracts</span><kbd class="apt-kbd">FILTER</kbd>
+        </button>
+        <button class="apt-menu-item" onclick="filterSector('ALL'); document.getElementById('cmd-dialog').close()">
+          <span>Reset Ledger Filter</span><kbd class="apt-kbd">RESET</kbd>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="apt-toast-region" aria-live="polite"></div>
+
+  <script>
+    function inspectNode(row, node, contract, latency, digest, notes) {
+      document.querySelectorAll('#ledger-body tr').forEach(r => r.removeAttribute('data-selected'));
+      row.setAttribute('data-selected', 'true');
+
+      const inspector = document.getElementById('apt-inspector');
+      inspector.innerHTML = `
+        <div style="padding:1.15rem; display:grid; gap:1rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--apt-border-subtle); padding-bottom:0.75rem;">
+            <div>
+              <div class="apt-mono" style="font-size:0.7rem; color:var(--apt-brand-primary-hover);">NODE INSPECTOR</div>
+              <h3 class="apt-mono" style="margin:0.15rem 0 0 0; font-size:0.95rem;">${node}</h3>
+            </div>
+            <button class="apt-btn" data-variant="ghost" onclick="closeInspector()" aria-label="Close Inspector">✕</button>
+          </div>
+          <div class="apt-panel" style="background:var(--apt-bg-base);">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; font-size:0.8rem;">
+              <div>
+                <div style="color:var(--apt-text-secondary); font-size:0.7rem;">CONTRACT</div>
+                <div class="apt-mono">${contract}</div>
+              </div>
+              <div>
+                <div style="color:var(--apt-text-secondary); font-size:0.7rem;">P99 LATENCY</div>
+                <div class="apt-mono" style="color:var(--apt-brand-primary-hover);">${latency}</div>
+              </div>
+              <div style="grid-column:1 / -1;">
+                <div style="color:var(--apt-text-secondary); font-size:0.7rem;">ATTESTATION DIGEST</div>
+                <div class="apt-mono" style="word-break:break-all;">${digest}</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="color:var(--apt-text-secondary); font-size:0.72rem; text-transform:uppercase; font-weight:600; margin-bottom:0.35rem;">Telemetry Notes</div>
+            <p style="margin:0; font-size:0.8125rem;">${notes}</p>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="apt-btn" data-variant="primary" style="flex:1;" onclick="pushToast('success', 'Verified digest for ' + '${node}')">Verify Digest</button>
+            <button class="apt-btn" data-variant="danger" onclick="pushToast('warning', 'Drain initiated for ' + '${node}')">Drain</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeInspector() {
+      document.getElementById('apt-inspector').innerHTML = '';
+      document.querySelectorAll('#ledger-body tr').forEach(r => r.removeAttribute('data-selected'));
+    }
+
+    function syncBulkBar() {
+      const checks = [...document.querySelectorAll('.row-check')];
+      const checked = checks.filter(c => c.checked);
+      const selectAll = document.getElementById('select-all');
+      const bulkBar = document.getElementById('apt-bulk-bar');
+
+      selectAll.checked = checked.length > 0 && checked.length === checks.length;
+      selectAll.indeterminate = checked.length > 0 && checked.length < checks.length;
+
+      if (checked.length > 0) {
+        bulkBar.hidden = false;
+        document.getElementById('bulk-count').textContent = `${checked.length} SELECTED`;
+      } else {
+        bulkBar.hidden = true;
+      }
+    }
+
+    function toggleSelectAll(master) {
+      document.querySelectorAll('.row-check').forEach(c => { c.checked = master.checked; });
+      syncBulkBar();
+    }
+
+    function clearSelection() {
+      document.querySelectorAll('.row-check, #select-all').forEach(c => {
+        c.checked = false;
+        c.indeterminate = false;
+      });
+      syncBulkBar();
+    }
+
+    function bulkAction(label) {
+      const count = document.querySelectorAll('.row-check:checked').length;
+      pushToast('success', `${label} ${count} selected ledger node(s).`);
+      clearSelection();
+    }
+
+    function pushToast(tone, message) {
+      const region = document.getElementById('apt-toast-region');
+      const toast = document.createElement('div');
+      toast.className = 'apt-toast';
+      toast.setAttribute('data-tone', tone);
+      toast.innerHTML = `<span>${message}</span><button class="apt-btn" data-variant="ghost" style="height:20px; padding:0 0.35rem;" onclick="this.parentElement.remove()">✕</button>`;
+      region.prepend(toast);
+      setTimeout(() => toast.remove(), 4500);
+    }
+
+    function filterSector(code) {
+      const rows = document.querySelectorAll('#ledger-body tr');
+      let visible = 0;
+      rows.forEach(row => {
+        const match = code === 'ALL' || row.dataset.contract === code;
+        row.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      document.getElementById('row-counter').textContent = `${visible} NODES SHOWN`;
+    }
+
+    function handleDispatch(e) {
+      e.preventDefault();
+      const form = e.target;
+      const node = form.node.value.trim();
+      const contract = form.contract.value;
+      const tbody = document.getElementById('ledger-body');
+      const tr = document.createElement('tr');
+      tr.dataset.contract = contract.split(' ')[0];
+      tr.innerHTML = `
+        <td onclick="event.stopPropagation()"><input type="checkbox" class="apt-check row-check" onchange="syncBulkBar()" /></td>
+        <td class="apt-mono">${node}</td>
+        <td><span class="apt-badge" data-tone="cyan">${contract}</span></td>
+        <td class="apt-mono" style="color:var(--apt-chart-4);">● VERIFIED</td>
+        <td class="apt-mono">10.1 ms</td>
+        <td class="apt-mono" style="color:var(--apt-text-secondary);">8b41d09f221a…99c2</td>
+      `;
+      tr.onclick = () => inspectNode(tr, node, contract, '10.1 ms', '8b41d09f221a…99c2', 'Newly dispatched contract node.');
+      tbody.prepend(tr);
+      form.reset();
+      document.getElementById('deploy-dialog').close();
+      pushToast('success', `Dispatched ${contract} to ${node}.`);
+    }
+
+    function openCommandPalette() {
+      const dlg = document.getElementById('cmd-dialog');
+      dlg.showModal();
+      document.getElementById('cmd-input').focus();
+    }
+
+    function filterCommands(q) {
+      const term = q.toLowerCase();
+      document.querySelectorAll('#cmd-list .apt-menu-item').forEach(btn => {
+        btn.style.display = btn.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openCommandPalette();
+      }
+    });
+  </script>
+</body>
+</html>

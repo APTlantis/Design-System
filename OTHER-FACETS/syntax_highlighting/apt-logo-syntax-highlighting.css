@@ -1,0 +1,59 @@
+:root {
+  --apt-background: #031C28;
+  --apt-foreground: #FDFDFB;
+  --apt-panel: #14252D;
+  --apt-elevated: #1E2F38;
+  --apt-muted: #86A0A9;
+  --apt-primary: #23F2F7;
+  --apt-secondary: #BC8F81;
+  --apt-selection: #003537;
+  --apt-selection-text: #FDFDFB;
+  --apt-border: #748E97;
+  --apt-warning: #AC9A6B;
+  --apt-error: #BC8F81;
+  --apt-success: #7AA85B;
+  --apt-info: #80A1B3;
+  --apt-keyword: #D99D36;
+  --apt-string: #BC8F81;
+  --apt-number: #23F2F7;
+  --apt-function: #41A6C8;
+  --apt-type: #FDEDB3;
+  --apt-operator: #DB8142;
+  --apt-constant: #00CAE3;
+  --apt-comment: #86A0A9;
+  --apt-invalid: #BC8F81;
+  --apt-diff-added: #7AA85B;
+  --apt-diff-deleted: #BC8F81;
+  --apt-diff-changed: #AC9A6B;
+  --apt-tag: #D99D36;
+  --apt-attribute: #FDEDB3;
+  --apt-escape: #00CAE3;
+  --apt-label: #41A6C8;
+}
+
+pre[class*='language-'], code[class*='language-'] {
+ color:var(--apt-foreground); background:var(--apt-panel);
+ font-family:Consolas, monospace; text-shadow:none; line-height:1.65;
+ white-space:pre; tab-size:4;
+}
+pre[class*='language-'] { padding:24px; overflow:auto; }
+pre[class*='language-'] ::selection, code[class*='language-']::selection {
+ background:var(--apt-selection); color:var(--apt-selection-text);
+}
+.token.bold, .token.important { font-weight:bold; }
+.token.italic { font-style:italic; }
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color:var(--apt-comment); }
+.token.punctuation, .token.operator { color:var(--apt-operator); }
+.token.property, .token.tag, .token.boolean, .token.constant, .token.symbol { color:var(--apt-constant); }
+.token.number { color:var(--apt-number); }
+.token.selector, .token.attr-name, .token.builtin, .token.class-name { color:var(--apt-type); }
+.token.string, .token.char, .token.attr-value { color:var(--apt-string); }
+.token.keyword, .token.atrule { color:var(--apt-keyword); }
+.token.function { color:var(--apt-function); }
+.token.regex, .token.important { color:var(--apt-primary); }
+.token.inserted { color:var(--apt-diff-added); }
+.token.deleted { color:var(--apt-diff-deleted); }
+.token.parameter, .token.variable { color:var(--apt-foreground); }
+.token.namespace { color:var(--apt-type); }
+.token.annotation, .token.decorator { color:var(--apt-function); }
+.token.interpolation-punctuation { color:var(--apt-operator); }

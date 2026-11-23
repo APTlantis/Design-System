@@ -1,0 +1,804 @@
+require "./spec_helper"
+require "log/spec"
+
+# Writes *payload* to a fresh connection to *port* and reads until the server
+# closes it. Returns what came back and whether it was closed, rather than left
+# open waiting for another request.
+private def exchange_on_one_connection(port : Int32, payload : String) : {String, Bool}
+  TCPSocket.open("127.0.0.1", port) do |socket|
+    socket.read_timeout = 2.seconds
+    socket << payload
+    socket.flush
+    received = IO::Memory.new
+    begin
+      IO.copy(socket, received)
+      {received.to_s, true}
+    rescue IO::TimeoutError
+      {received.to_s, false}
+    end
+  end
+end
+
+describe "Kemal::ExceptionHandler" do
+  it "renders 404 on route not found" do
+    get "/" do
+      "Hello"
+    end
+
+    request = HTTP::Request.new("GET", "/asd")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 404
+  end
+
+  it "answers an unmatched route with 404 through the full chain without a custom handler" do
+    # Without a registered `error 404` this used to fall through as an empty
+    # `200` - which is what every request in the `test` environment got, since
+    # only `Kemal.run` outside it registered the page.
+    get "/" do
+      "Hello"
+    end
+
+    response = call_request_on_app(HTTP::Request.new("GET", "/nope"))
+    response.status_code.should eq 404
+    response.headers["Content-Type"].should eq "text/plain"
+    response.body.should eq "Not Found"
+  end
+
+  describe "a body written before the error" do
+    it "is replaced by a custom status page" do
+      error 403 do
+        "forbidden page"
+      end
+      get "/" do |env|
+        env.response.print "partial body "
+        env.response.status_code = 403
+        "ignored"
+      end
+
+      response = call_request_on_app(HTTP::Request.new("GET", "/"))
+      response.status_code.should eq 403
+      # Used to be "partial body forbidden page".
+      response.body.should eq "forbidden page"
+    end
+
+    it "is replaced by a custom exception page" do
+      error CustomExceptionType do
+        "exception page"
+      end
+      get "/" do |env|
+        env.response.print "partial body "
+        raise CustomExceptionType.new
+      end
+
+      response = call_request_on_app(HTTP::Request.new("GET", "/"))
+      response.status_code.should eq 500
+      response.body.should eq "exception page"
+    end
+
+    it "is replaced by the built-in 500 page" do
+      Kemal.config.env = "production"
+      get "/" do |env|
+        env.response.print "partial body "
+        raise "boom"
+      end
+
+      response = call_request_on_app(HTTP::Request.new("GET", "/"))
+      response.status_code.should eq 500
+      response.body.should_not contain "partial body"
+      response.body.should contain "Kemal has encountered an error. (500)"
+    end
+
+    it "is not counted into the Content-Length of a HEAD" do
+      error 403 do
+        "forbidden page"
+      end
+      get "/" do |env|
+        env.response.print "partial body "
+        env.response.status_code = 403
+        "ignored"
+      end
+
+      response = call_request_on_app(HTTP::Request.new("HEAD", "/"))
+      response.status_code.should eq 403
+      response.headers["Content-Length"].should eq "forbidden page".bytesize.to_s
+    end
+
+    it "stays when it has already gone out to the client" do
+      # Past the output buffer the headers and body are on the wire; the error
+      # page cannot replace what the client already has, so nothing is appended.
+      error 403 do
+        "forbidden page"
+      end
+      big = "x" * 16_384
+      get "/" do |env|
+        env.response.print big
+        env.response.flush
+        env.response.status_code = 403
+        "ignored"
+      end
+
+      response = call_request_on_app(HTTP::Request.new("GET", "/"))
+      response.status_code.should eq 200
+      response.body.should eq big
+    end
+
+    it "ends the connection when an exception cuts it short" do
+      # The headers promised 100 bytes and the client got 7. Answering the next
+      # request on the same connection used to splice its response into the
+      # missing 93, so a client - or a proxy pooling the connection - read
+      # "partialHTTP/1.1 200 OK..." as one body.
+      get "/partial" do |env|
+        env.response.content_length = 100
+        env.response.print "partial"
+        env.response.flush
+        raise "boom"
+      end
+      get "/next" do
+        "next response"
+      end
+
+      Kemal.config.setup
+      server = HTTP::Server.new(Kemal.config.handlers)
+      address = server.bind_tcp("127.0.0.1", 0)
+      spawn { server.listen }
+
+      begin
+        received, closed = exchange_on_one_connection(address.port,
+          "GET /partial HTTP/1.1\r\nHost: localhost\r\n\r\n" \
+          "GET /next HTTP/1.1\r\nHost: localhost\r\n\r\n")
+      ensure
+        server.close
+      end
+
+      received.should start_with "HTTP/1.1 200 OK\r\n"
+      received.should end_with "\r\n\r\npartial"
+      closed.should be_true
+    end
+
+    it "keeps the connection of a halted response with an error handler" do
+      # `halt` closes a complete response, and the status it sets raises the
+      # `CustomException` its `error` handler would answer. Nothing was cut
+      # short, so the next request on the connection is still answered.
+      error 401 { "nope" }
+      before_all "/guarded" do |env|
+        halt env, status_code: 401, response: "denied"
+      end
+      get "/guarded" do
+        "guarded"
+      end
+      get "/next" do
+        "next response"
+      end
+
+      Kemal.config.setup
+      server = HTTP::Server.new(Kemal.config.handlers)
+      address = server.bind_tcp("127.0.0.1", 0)
+      spawn { server.listen }
+
+      begin
+        # The second request asks for the close, so the read ends with it.
+        received, _ = exchange_on_one_connection(address.port,
+          "GET /guarded HTTP/1.1\r\nHost: localhost\r\n\r\n" \
+          "GET /next HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n")
+      ensure
+        server.close
+      end
+
+      received.should start_with "HTTP/1.1 401 Unauthorized\r\n"
+      received.should end_with "\r\n\r\nnext response"
+    end
+
+    it "keeps the connection of a chunked response an after filter fails on" do
+      # Streamed past the output buffer, the body goes out chunked, and an
+      # `after` filter setting a header then raises (#759). The server still ends
+      # the body with the final chunk, so the next response cannot run into it.
+      after_get "/big" do |env|
+        env.response.content_type = "application/json"
+      end
+      get "/big" do |env|
+        env.response.print "x" * 100_000
+        ""
+      end
+      get "/next" do
+        "next response"
+      end
+
+      Kemal.config.setup
+      server = HTTP::Server.new(Kemal.config.handlers)
+      address = server.bind_tcp("127.0.0.1", 0)
+      spawn { server.listen }
+
+      begin
+        received, _ = exchange_on_one_connection(address.port,
+          "GET /big HTTP/1.1\r\nHost: localhost\r\n\r\n" \
+          "GET /next HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n")
+      ensure
+        server.close
+      end
+
+      received.should contain "Transfer-Encoding: chunked\r\n"
+      received.should end_with "\r\n\r\nnext response"
+    end
+  end
+
+  it "does not reflect the request in the message a 404 handler receives" do
+    # Echoing `ex.message` is the obvious thing to write in an `error 404`
+    # handler, and the response is `text/html`, so the message must not carry
+    # anything the client chose.
+    error 404 do |_env, ex|
+      ex.message.to_s
+    end
+
+    request = HTTP::Request.new("BREW", "/<script>alert(1)</script>")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 404
+    response.body.should_not contain "<script>"
+    response.body.should_not contain "BREW"
+    response.body.should eq "Not Found"
+  end
+
+  it "keeps the request reachable on the 404 exception" do
+    error 404 do |_env, ex|
+      ex.as(Kemal::Exceptions::RouteNotFound).context.request.path
+    end
+
+    request = HTTP::Request.new("GET", "/missing")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.body.should eq "/missing"
+  end
+
+  it "renders custom error" do
+    error 403 do
+      "403 error"
+    end
+    get "/" do |env|
+      env.response.status_code = 403
+    end
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 403
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "403 error"
+  end
+
+  it "renders custom 500 error" do
+    error 500 do
+      "Something happened"
+    end
+    get "/" do |env|
+      env.response.status_code = 500
+    end
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "Something happened"
+  end
+
+  it "renders custom error for a crystal exception" do
+    error RuntimeError do
+      "A RuntimeError has occurred"
+    end
+
+    get "/" do
+      raise RuntimeError.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "A RuntimeError has occurred"
+  end
+
+  it "renders custom error for a custom exception" do
+    error CustomExceptionType do
+      "A custom exception of CustomExceptionType has occurred"
+    end
+
+    get "/" do
+      raise CustomExceptionType.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "A custom exception of CustomExceptionType has occurred"
+  end
+
+  it "logs an exception a custom handler renders" do
+    # A handler that renders the page must not also take the failure out of the
+    # log; a catch-all `error Exception` would otherwise hide every crash.
+    error CustomExceptionType do
+      "handled"
+    end
+
+    get "/" do
+      raise CustomExceptionType.new("something broke")
+    end
+
+    Log.capture("kemal") do |logs|
+      response = call_request_on_app(HTTP::Request.new("GET", "/"))
+      response.status_code.should eq 500
+      response.body.should eq "handled"
+
+      logs.check(:error, "something broke")
+      logs.entry.exception.should be_a(CustomExceptionType)
+    end
+  end
+
+  it "renders custom error for a custom exception with a specific HTTP status code" do
+    error CustomExceptionType do |env|
+      env.response.status_code = 503
+      "A custom exception of CustomExceptionType has occurred"
+    end
+
+    get "/" do
+      raise CustomExceptionType.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 503
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "A custom exception of CustomExceptionType has occurred"
+  end
+
+  it "renders custom error for a child of a custom exception" do
+    error CustomExceptionType do |_, error|
+      "A custom exception of #{error.class} has occurred"
+    end
+
+    get "/" do
+      raise ChildCustomExceptionType.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "A custom exception of ChildCustomExceptionType has occurred"
+  end
+
+  it "overrides the content type for filters" do
+    before_get do |env|
+      env.response.content_type = "application/json"
+    end
+    error 500 do |_, err|
+      err.message
+    end
+    get "/" do |env|
+      env.response.status_code = 500
+    end
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "Rendered error with 500"
+  end
+
+  it "keeps the specified error Content-Type" do
+    error 500 do
+      "Something happened"
+    end
+    get "/" do |env|
+      env.response.content_type = "application/json"
+      env.response.status_code = 500
+    end
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "application/json"
+    response.body.should eq "Something happened"
+  end
+
+  it "renders custom error with env and error" do
+    error 500 do |_, err|
+      err.message
+    end
+    get "/" do |env|
+      env.response.content_type = "application/json"
+      env.response.status_code = 500
+    end
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Type"].should eq "application/json"
+    response.body.should eq "Rendered error with 500"
+  end
+
+  it "does not do anything on a closed io" do
+    get "/" do |env|
+      halt env, status_code: 404
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    client_response = call_request_on_app(request)
+    client_response.status_code.should eq 404
+  end
+
+  it "renders payload too large with 413 from the exception" do
+    error 413 do
+      "payload too large"
+    end
+
+    get "/" do
+      raise Kemal::Exceptions::PayloadTooLarge.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 413
+    response.headers["Content-Type"].should eq "text/html"
+    response.body.should eq "payload too large"
+  end
+
+  it "renders payload too large with 413 without a custom handler" do
+    get "/" do
+      raise Kemal::Exceptions::PayloadTooLarge.new
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 413
+    response.headers["Content-Type"].should eq "text/plain"
+    response.body.should eq "Payload Too Large"
+  end
+
+  it "sends the default error body as text/plain through the full handler chain" do
+    # `Kemal::InitHandler` presets `text/html`; the bare status reason is not HTML.
+    get "/" do
+      raise Kemal::Exceptions::PayloadTooLarge.new
+    end
+
+    response = call_request_on_app(HTTP::Request.new("GET", "/"))
+    response.status_code.should eq 413
+    response.headers["Content-Type"].should eq "text/plain"
+    response.body.should eq "Payload Too Large"
+  end
+
+  it "sends the default error body as text/plain when the route had set another type" do
+    get "/" do |env|
+      env.response.content_type = "application/json"
+      raise Kemal::Exceptions::PayloadTooLarge.new
+    end
+
+    response = call_request_on_app(HTTP::Request.new("GET", "/"))
+    response.status_code.should eq 413
+    response.headers["Content-Type"].should eq "text/plain"
+    response.body.should eq "Payload Too Large"
+  end
+
+  it "renders 400 for a malformed JSON body" do
+    post "/j" do |env|
+      env.params.json["x"]?
+      "ok"
+    end
+
+    headers = HTTP::Headers{"Content-Type" => "application/json"}
+    request = HTTP::Request.new("POST", "/j", headers, body: "{ not valid json")
+    response = call_request_on_app(request)
+    response.status_code.should eq 400
+    response.body.should eq "Bad Request"
+  end
+
+  it "renders 400 for a malformed multipart body" do
+    post "/m" do |env|
+      env.params.files
+      "ok"
+    end
+
+    headers = HTTP::Headers{"Content-Type" => "multipart/form-data; boundary=AaB03x"}
+    request = HTTP::Request.new("POST", "/m", headers, body: "not a real multipart payload")
+    response = call_request_on_app(request)
+    response.status_code.should eq 400
+  end
+
+  it "renders 400 for a multipart body without a boundary" do
+    post "/m2" do |env|
+      env.params.files
+      "ok"
+    end
+
+    headers = HTTP::Headers{"Content-Type" => "multipart/form-data"}
+    request = HTTP::Request.new("POST", "/m2", headers, body: "whatever")
+    response = call_request_on_app(request)
+    response.status_code.should eq 400
+  end
+
+  it "uses a custom 400 handler for malformed bodies" do
+    error 400 do
+      "custom bad request"
+    end
+    post "/j" do |env|
+      env.params.json["x"]?
+      "ok"
+    end
+
+    headers = HTTP::Headers{"Content-Type" => "application/json"}
+    request = HTTP::Request.new("POST", "/j", headers, body: "{ nope")
+    response = call_request_on_app(request)
+    response.status_code.should eq 400
+    response.body.should eq "custom bad request"
+  end
+
+  it "does not reclassify a parse error raised inside handler code as 400" do
+    # A JSON::ParseException from handler code (e.g. parsing an upstream API
+    # response) is a server error and must stay a 500, not be turned into a 400.
+    get "/" do
+      JSON.parse("{ not json")
+      "ok"
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+  end
+
+  it "escapes the exception message on the development error page" do
+    get "/user-lookup" do |env|
+      raise "User '#{env.params.query["name"]}' not found"
+    end
+
+    request = HTTP::Request.new("GET", "/user-lookup?name=%3C/title%3E%3Cscript%3Ealert(1)%3C/script%3E")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.body.should_not contain "<script>alert(1)</script>"
+    response.body.should contain "&lt;script&gt;alert(1)&lt;/script&gt;"
+  end
+
+  it "escapes the request path on the development error page" do
+    get "/u/*path" do
+      raise "boom"
+    end
+
+    request = HTTP::Request.new("GET", "/u/<img/src=x/onerror=alert(1)>")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.body.should_not contain "<img/src=x/onerror=alert(1)>"
+    response.body.should contain "&lt;img/src=x/onerror=alert(1)&gt;"
+  end
+
+  it "leaves ordinary exception messages readable on the development error page" do
+    get "/" do
+      raise %(User 'bob' not found in "users" & sessions)
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.body.should contain %(- User 'bob' not found in "users" & sessions</title>)
+    response.body.should contain %(<h1 class="title">User 'bob' not found in "users" &amp; sessions</h1>)
+  end
+
+  it "sends a restrictive Content-Security-Policy with the development error page" do
+    get "/" do
+      raise "boom"
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.headers["Content-Security-Policy"].should eq "default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'"
+    response.headers["X-Content-Type-Options"].should eq "nosniff"
+  end
+
+  it "doesn't reflect the request on the production error page" do
+    Kemal.config.env = "production"
+    get "/u/*path" do |env|
+      raise "User '#{env.params.query["name"]}' not found"
+    end
+
+    request = HTTP::Request.new("GET", "/u/<script>?name=<script>")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.body.should_not contain "<script>"
+    response.body.should contain "Kemal has encountered an error. (500)"
+  end
+
+  it "serves the production error page in every environment but development" do
+    # `staging` is internet-facing in most deployments and `prod` is a typo of the one
+    # value that used to be safe. Neither may get the message or the backtrace.
+    get "/" do
+      raise "secret db password is hunter2"
+    end
+
+    {"staging", "prod", "Production", "test"}.each do |env_name|
+      Kemal.config.env = env_name
+
+      request = HTTP::Request.new("GET", "/")
+      io = IO::Memory.new
+      response = HTTP::Server::Response.new(io)
+      context = HTTP::Server::Context.new(request, response)
+      Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+      Kemal::ExceptionHandler::INSTANCE.call(context)
+      response.close
+      io.rewind
+      response = HTTP::Client::Response.from_io(io, decompress: false)
+      response.status_code.should eq 500
+      response.body.should_not contain "hunter2"
+      response.body.should_not contain "exception_handler_spec.cr"
+      response.body.should contain "Kemal has encountered an error. (500)"
+    end
+  end
+
+  it "shows the development error page where show_exceptions asks for it" do
+    Kemal.config.env = "staging"
+    Kemal.config.show_exceptions = true
+    get "/" do
+      raise "secret db password is hunter2"
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.body.should contain "hunter2"
+  end
+
+  it "hides the development error page where show_exceptions refuses it" do
+    Kemal.config.env = "development"
+    Kemal.config.show_exceptions = false
+    get "/" do
+      raise "secret db password is hunter2"
+    end
+
+    request = HTTP::Request.new("GET", "/")
+    io = IO::Memory.new
+    response = HTTP::Server::Response.new(io)
+    context = HTTP::Server::Context.new(request, response)
+    Kemal::ExceptionHandler::INSTANCE.next = Kemal::RouteHandler::INSTANCE
+    Kemal::ExceptionHandler::INSTANCE.call(context)
+    response.close
+    io.rewind
+    response = HTTP::Client::Response.from_io(io, decompress: false)
+    response.status_code.should eq 500
+    response.body.should_not contain "hunter2"
+    response.body.should contain "Kemal has encountered an error. (500)"
+  end
+end

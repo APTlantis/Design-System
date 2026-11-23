@@ -1,0 +1,15 @@
+name: aptlantis-ui
+version: 2.0.0
+authors:
+  - APTLANTIS Engineering
+
+targets:
+  aptlantis:
+    main: src/aptlantis.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 1.15.0
+
+crystal: ">= 1.12.0"

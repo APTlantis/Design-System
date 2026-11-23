@@ -1,0 +1,336 @@
+{
+  "kind": "kmind.theme-package",
+  "schemaVersion": 1,
+  "id": "apt-logo-canonical32",
+  "name": "Aptlantis-Logo Â· Canonical 32",
+  "theme": {
+    "schemaVersion": 1,
+    "id": "apt-logo-canonical32",
+    "name": "Aptlantis-Logo Â· Canonical 32",
+    "description": "Aptlantis-Logo: image-derived dark mind-map theme from the canonical 32-color palette.",
+    "variants": {
+      "light": {
+        "tokens": {
+          "layout": {
+            "fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+            "fontSize": 14,
+            "fontWeight": 450,
+            "lineHeight": 1.45,
+            "textAlign": "left",
+            "paddingX": 14,
+            "paddingY": 10,
+            "nodeMinWidth": 60,
+            "nodeMinHeight": 40
+          },
+          "paint": {
+            "bg": "#031C28",
+            "panel": "#14252D",
+            "text": "#FDFDFB",
+            "muted": "#86A0A9",
+            "border": "#748E97",
+            "nodeFill": "#14252D",
+            "nodeFillSelected": "#003537",
+            "nodeStroke": "#748E97",
+            "nodeStrokeSelected": "#23F2F7",
+            "edgeStroke": "#23F2F7",
+            "relationStroke": "#966C5F",
+            "relationStrokeSelected": "#23F2F7",
+            "summaryStroke": "#748E97"
+          }
+        },
+        "edges": {
+          "strokeWidth": 4,
+          "cap": "round",
+          "join": "round",
+          "routeType": "orthogonal-rounded"
+        },
+        "relations": {
+          "strokeWidth": 2,
+          "cap": "round",
+          "join": "round"
+        },
+        "nodeShape": {
+          "type": "rounded-rect",
+          "radius": 16,
+          "strokeWidth": 0
+        },
+        "rainbow": {
+          "enabled": false,
+          "palette": [
+            "#23F2F7",
+            "#BC8F81",
+            "#D99D36",
+            "#BC8F81",
+            "#23F2F7",
+            "#FDEDB3",
+            "#41A6C8",
+            "#DB8142",
+            "#00CAE3",
+            "#7AA85B",
+            "#80A1B3",
+            "#AC9A6B"
+          ]
+        },
+        "background": {
+          "color": "#031C28"
+        },
+        "rules": {
+          "nodeRules": [
+            {
+              "id": "m3-root",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 0
+              },
+              "apply": {
+                "layout": {
+                  "textAlign": "center",
+                  "fontWeight": 700,
+                  "fontSize": 24,
+                  "paddingX": 18,
+                  "paddingY": 12
+                },
+                "paint": {
+                  "nodeFill": "#002526",
+                  "nodeFillSelected": "#003B3D",
+                  "nodeStroke": "#23F2F7",
+                  "text": "#FDFDFB"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-1",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 1
+              },
+              "apply": {
+                "layout": {
+                  "fontWeight": 600,
+                  "fontSize": 18
+                },
+                "paint": {
+                  "nodeFill": "#0D1D25",
+                  "nodeStroke": "#748E97",
+                  "text": "#FDFDFB"
+                },
+                "incomingEdge": {
+                  "strokeColor": "#23F2F7",
+                  "routeType": "center-quadratic"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-2",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 2
+              },
+              "apply": {
+                "paint": {
+                  "nodeFill": "#2A1B16",
+                  "nodeStroke": "#748E97",
+                  "text": "#FDFDFB"
+                },
+                "incomingEdge": {
+                  "strokeColor": "#966C5F"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-3plus",
+              "priority": 10,
+              "when": {
+                "kind": "depthRange",
+                "minDepth": 3
+              },
+              "apply": {
+                "incomingEdge": {
+                  "strokeWidth": 1.75,
+                  "strokeColor": "#748E97"
+                },
+                "paint": {
+                  "nodeFill": "#14252D",
+                  "nodeStroke": "#748E97",
+                  "text": "#849FA8"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "dark": {
+        "tokens": {
+          "layout": {
+            "fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+            "fontSize": 14,
+            "fontWeight": 450,
+            "lineHeight": 1.45,
+            "textAlign": "left",
+            "paddingX": 14,
+            "paddingY": 10,
+            "nodeMinWidth": 60,
+            "nodeMinHeight": 40
+          },
+          "paint": {
+            "bg": "#031C28",
+            "panel": "#14252D",
+            "text": "#FDFDFB",
+            "muted": "#86A0A9",
+            "border": "#748E97",
+            "nodeFill": "#14252D",
+            "nodeFillSelected": "#003537",
+            "nodeStroke": "#748E97",
+            "nodeStrokeSelected": "#23F2F7",
+            "edgeStroke": "#23F2F7",
+            "relationStroke": "#966C5F",
+            "relationStrokeSelected": "#23F2F7",
+            "summaryStroke": "#748E97"
+          }
+        },
+        "edges": {
+          "strokeWidth": 4,
+          "cap": "round",
+          "join": "round",
+          "routeType": "orthogonal-rounded"
+        },
+        "relations": {
+          "strokeWidth": 2,
+          "cap": "round",
+          "join": "round"
+        },
+        "nodeShape": {
+          "type": "rounded-rect",
+          "radius": 16,
+          "strokeWidth": 0
+        },
+        "rainbow": {
+          "enabled": false,
+          "palette": [
+            "#23F2F7",
+            "#BC8F81",
+            "#D99D36",
+            "#BC8F81",
+            "#23F2F7",
+            "#FDEDB3",
+            "#41A6C8",
+            "#DB8142",
+            "#00CAE3",
+            "#7AA85B",
+            "#80A1B3",
+            "#AC9A6B"
+          ]
+        },
+        "background": {
+          "color": "#031C28"
+        },
+        "rules": {
+          "nodeRules": [
+            {
+              "id": "m3-root",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 0
+              },
+              "apply": {
+                "layout": {
+                  "textAlign": "center",
+                  "fontWeight": 700,
+                  "fontSize": 24,
+                  "paddingX": 18,
+                  "paddingY": 12
+                },
+                "paint": {
+                  "nodeFill": "#002526",
+                  "nodeFillSelected": "#003B3D",
+                  "nodeStroke": "#23F2F7",
+                  "text": "#FDFDFB"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-1",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 1
+              },
+              "apply": {
+                "layout": {
+                  "fontWeight": 600,
+                  "fontSize": 18
+                },
+                "paint": {
+                  "nodeFill": "#0D1D25",
+                  "nodeStroke": "#748E97",
+                  "text": "#FDFDFB"
+                },
+                "incomingEdge": {
+                  "strokeColor": "#23F2F7",
+                  "routeType": "center-quadratic"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-2",
+              "priority": 10,
+              "when": {
+                "kind": "depth",
+                "depth": 2
+              },
+              "apply": {
+                "paint": {
+                  "nodeFill": "#2A1B16",
+                  "nodeStroke": "#748E97",
+                  "text": "#FDFDFB"
+                },
+                "incomingEdge": {
+                  "strokeColor": "#966C5F"
+                }
+              }
+            },
+            {
+              "id": "m3-depth-3plus",
+              "priority": 10,
+              "when": {
+                "kind": "depthRange",
+                "minDepth": 3
+              },
+              "apply": {
+                "incomingEdge": {
+                  "strokeWidth": 1.75,
+                  "strokeColor": "#748E97"
+                },
+                "paint": {
+                  "nodeFill": "#14252D",
+                  "nodeStroke": "#748E97",
+                  "text": "#849FA8"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "updatedAt": 0
+  },
+  "updatedAt": 0,
+  "description": "Aptlantis-Logo: image-derived dark mind-map theme from the canonical 32-color palette.",
+  "preview": {
+    "thumbnail": {
+      "source": "theme-preview-svg-v1",
+      "dataUrl": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22244%22%20height%3D%2296%22%20viewBox%3D%220%200%20244%2096%22%20role%3D%22img%22%3E%3Ctitle%3EDark%20hierarchy%20color%20preview%3C%2Ftitle%3E%3Crect%20width%3D%22244%22%20height%3D%2296%22%20fill%3D%22%23031C28%22%20%2F%3E%3Crect%20x%3D%228%22%20y%3D%2234%22%20width%3D%2266%22%20height%3D%2228%22%20rx%3D%229%22%20fill%3D%22%23002526%22%20stroke%3D%22%2323F2F7%22%20%2F%3E%3Cpath%20d%3D%22M20%2048h42%22%20stroke%3D%22%23FDFDFB%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20%2F%3E%3Cpath%20d%3D%22M74%2048%20Q90%2048%2096%2027%22%20fill%3D%22none%22%20stroke%3D%22%2323F2F7%22%20stroke-width%3D%223%22%20%2F%3E%3Crect%20x%3D%2296%22%20y%3D%2215%22%20width%3D%2262%22%20height%3D%2224%22%20rx%3D%229%22%20fill%3D%22%230D1D25%22%20stroke%3D%22%23748E97%22%20%2F%3E%3Cpath%20d%3D%22M108%2027h38%22%20stroke%3D%22%23FDFDFB%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20%2F%3E%3Cpath%20d%3D%22M74%2048%20Q90%2048%20176%2069%22%20fill%3D%22none%22%20stroke%3D%22%2323F2F7%22%20stroke-width%3D%223%22%20%2F%3E%3Crect%20x%3D%22176%22%20y%3D%2257%22%20width%3D%2260%22%20height%3D%2224%22%20rx%3D%229%22%20fill%3D%22%232A1B16%22%20stroke%3D%22%23748E97%22%20%2F%3E%3Cpath%20d%3D%22M188%2069h36%22%20stroke%3D%22%23FDFDFB%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20%2F%3E%3C%2Fsvg%3E",
+      "width": 244,
+      "height": 96,
+      "generatedAt": 0
+    }
+  },
+  "createdAt": 0,
+  "defaults": {
+    "appearance": "dark"
+  }
+}

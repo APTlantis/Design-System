@@ -1,0 +1,68 @@
+<div class="apt-stepper-body" role="tabpanel" aria-label="<%= HTML.escape(stage.title) %>">
+  <div>
+    <div style="display:flex; align-items:center; gap:0.5rem;">
+      <span class="apt-badge" data-tone="<%= stage.accent %>"><%= stage.code %></span>
+      <span class="apt-mono" style="font-size:0.74rem; color:var(--apt-text-muted);"><%= HTML.escape(stage.subtitle) %></span>
+    </div>
+    <h3><%= HTML.escape(stage.title) %></h3>
+    <p class="apt-stepper-summary"><%= HTML.escape(stage.summary) %></p>
+    <ul class="apt-stepper-points">
+      <% stage.details.each do |point| %>
+        <li><%= HTML.escape(point) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="apt-stepper-visual">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <span class="apt-mono" style="font-size:0.68rem; color:var(--apt-text-muted);">STAGE SCHEMATIC</span>
+      <span class="apt-mono" style="font-size:0.68rem; color:var(--apt-brand-primary-hover);">0<%= stage.index %> / 04</span>
+    </div>
+
+    <% if stage.index == 1 %>
+      <svg viewBox="0 0 240 120" style="width:100%; height:auto;" aria-hidden="true">
+        <polygon points="120,12 184,38 172,96 120,112 68,96 56,38" fill="#031C28" stroke="#00CAE3" stroke-width="2"/>
+        <polygon points="120,26 164,46 156,86 120,98 84,86 76,46" fill="#05303F" stroke="#F7BE4F" stroke-width="1.5"/>
+        <circle cx="120" cy="60" r="14" fill="#00101A" stroke="#23F2F7" stroke-width="2"/>
+        <circle cx="120" cy="60" r="5" fill="#F7BE4F"/>
+      </svg>
+    <% elsif stage.index == 2 %>
+      <svg viewBox="0 0 240 120" style="width:100%; height:auto;" aria-hidden="true">
+        <rect x="14" y="22" width="32" height="76" rx="4" fill="#00101A" stroke="#07455E"/>
+        <rect x="52" y="22" width="32" height="76" rx="4" fill="#031C28" stroke="#00637D"/>
+        <rect x="90" y="22" width="32" height="76" rx="4" fill="#0380A1" stroke="#00CAE3"/>
+        <rect x="128" y="22" width="32" height="76" rx="4" fill="#23F2F7"/>
+        <rect x="166" y="22" width="26" height="76" rx="4" fill="#D99D36"/>
+        <rect x="198" y="22" width="28" height="76" rx="4" fill="#F7BE4F"/>
+        <text x="14" y="112" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="9">OKLCH L* C* H* · 32 TOKENS</text>
+      </svg>
+    <% elsif stage.index == 3 %>
+      <svg viewBox="0 0 240 120" style="width:100%; height:auto;" aria-hidden="true">
+        <rect x="12" y="18" width="84" height="24" rx="4" fill="#031C28" stroke="#00637D"/>
+        <text x="20" y="34" fill="#A1FCFD" font-family="JetBrains Mono, monospace" font-size="9">--apt-color-25</text>
+        <rect x="12" y="54" width="84" height="24" rx="4" fill="#031C28" stroke="#71481D"/>
+        <text x="20" y="70" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="9">--apt-color-26</text>
+        <path d="M96 30 L138 30 M96 66 L138 66" stroke="#00CAE3" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <rect x="138" y="18" width="90" height="24" rx="4" fill="#05303F" stroke="#23F2F7"/>
+        <text x="145" y="34" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="9">brand-primary</text>
+        <rect x="138" y="54" width="90" height="24" rx="4" fill="#05303F" stroke="#F7BE4F"/>
+        <text x="145" y="70" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="9">brand-secondary</text>
+      </svg>
+    <% else %>
+      <svg viewBox="0 0 240 120" style="width:100%; height:auto;" aria-hidden="true">
+        <rect x="16" y="16" width="96" height="36" rx="5" fill="#031C28" stroke="#00CAE3"/>
+        <text x="26" y="38" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="10">HTML + CSS</text>
+        <rect x="128" y="16" width="96" height="36" rx="5" fill="#031C28" stroke="#F7BE4F"/>
+        <text x="142" y="38" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="10">MERMAID</text>
+        <rect x="16" y="66" width="96" height="36" rx="5" fill="#031C28" stroke="#18AAC2"/>
+        <text x="34" y="88" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="10">DATA VIZ</text>
+        <rect x="128" y="66" width="96" height="36" rx="5" fill="#031C28" stroke="#A29062"/>
+        <text x="140" y="88" fill="#FDFDFB" font-family="JetBrains Mono, monospace" font-size="10">MARKDOWN</text>
+      </svg>
+    <% end %>
+
+    <div class="apt-mono" style="font-size:0.7rem; color:var(--apt-text-muted); border-top:1px solid var(--apt-border-subtle); padding-top:0.5rem;">
+      Artifact: <span style="color:var(--apt-accent-ice);"><%= HTML.escape(stage.artifact) %></span>
+    </div>
+  </div>
+</div>

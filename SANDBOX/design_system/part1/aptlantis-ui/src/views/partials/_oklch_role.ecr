@@ -1,0 +1,11 @@
+<div class="apt-panel" style="display:grid; gap:0.55rem;">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+    <span class="apt-mono" style="font-size:0.78rem; color:var(--apt-brand-primary-hover);"><%= HTML.escape(role.token) %></span>
+    <span class="apt-badge" data-tone="amber"><%= HTML.escape(role.hex_ref) %></span>
+  </div>
+  <strong class="apt-display" style="font-size:0.98rem;"><%= HTML.escape(role.label) %></strong>
+  <p style="margin:0; font-size:0.83rem; color:var(--apt-text-secondary);"><%= HTML.escape(role.usage) %></p>
+  <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">
+    Calibrated OKLCH: oklch(<%= role.l %> <%= role.c %> <%= role.h %>)
+  </span>
+</div>

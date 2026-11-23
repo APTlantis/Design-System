@@ -1,0 +1,1574 @@
+[{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1b7"
+  },
+  "path": "apt.color.01",
+  "$description": "Imported from --apt-color-01",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0,
+      0,
+      0
+    ],
+    "hex": "#000000"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.905Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1b8"
+  },
+  "path": "apt.color.02",
+  "$description": "Imported from --apt-color-02",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0078,
+      0.0078,
+      0.0549
+    ],
+    "hex": "#02020e"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.984Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1b9"
+  },
+  "path": "apt.color.03",
+  "$description": "Imported from --apt-color-03",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.051,
+      0.0039,
+      0
+    ],
+    "hex": "#0d0100"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.986Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1ba"
+  },
+  "path": "apt.color.04",
+  "$description": "Imported from --apt-color-04",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0,
+      0.0627,
+      0.102
+    ],
+    "hex": "#00101a"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.988Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1bb"
+  },
+  "path": "apt.color.05",
+  "$description": "Imported from --apt-color-05",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.149,
+      0.0235,
+      0
+    ],
+    "hex": "#260600"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.989Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1bc"
+  },
+  "path": "apt.color.06",
+  "$description": "Imported from --apt-color-06",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0118,
+      0.1098,
+      0.1569
+    ],
+    "hex": "#031c28"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.992Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1bd"
+  },
+  "path": "apt.color.07",
+  "$description": "Imported from --apt-color-07",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.1647,
+      0.1608,
+      0.1373
+    ],
+    "hex": "#2a2923"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.995Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1be"
+  },
+  "path": "apt.color.08",
+  "$description": "Imported from --apt-color-08",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0196,
+      0.1882,
+      0.2471
+    ],
+    "hex": "#05303f"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.996Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bb8df7c82abf80e1bf"
+  },
+  "path": "apt.color.09",
+  "$description": "Imported from --apt-color-09",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.3098,
+      0.1255,
+      0
+    ],
+    "hex": "#4f2000"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.998Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c0"
+  },
+  "path": "apt.color.10",
+  "$description": "Imported from --apt-color-10",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0275,
+      0.2706,
+      0.3686
+    ],
+    "hex": "#07455e"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:31.999Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c1"
+  },
+  "path": "apt.color.11",
+  "$description": "Imported from --apt-color-11",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.1804,
+      0.3412,
+      0.0039
+    ],
+    "hex": "#2e5701"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c2"
+  },
+  "path": "apt.color.12",
+  "$description": "Imported from --apt-color-12",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.3333,
+      0.3216,
+      0.2706
+    ],
+    "hex": "#555245"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.002Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c3"
+  },
+  "path": "apt.color.13",
+  "$description": "Imported from --apt-color-13",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.4431,
+      0.2824,
+      0.1137
+    ],
+    "hex": "#71481d"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.003Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c4"
+  },
+  "path": "apt.color.14",
+  "$description": "Imported from --apt-color-14",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0,
+      0.3882,
+      0.4902
+    ],
+    "hex": "#00637d"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.004Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c5"
+  },
+  "path": "apt.color.15",
+  "$description": "Imported from --apt-color-15",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.3137,
+      0.4353,
+      0.502
+    ],
+    "hex": "#506f80"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.006Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c6"
+  },
+  "path": "apt.color.16",
+  "$description": "Imported from --apt-color-16",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.4118,
+      0.4588,
+      0
+    ],
+    "hex": "#697500"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.007Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c7"
+  },
+  "path": "apt.color.17",
+  "$description": "Imported from --apt-color-17",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.6627,
+      0.3294,
+      0.0118
+    ],
+    "hex": "#a95403"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.008Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c8"
+  },
+  "path": "apt.color.18",
+  "$description": "Imported from --apt-color-18",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0118,
+      0.502,
+      0.6314
+    ],
+    "hex": "#0380a1"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.009Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1c9"
+  },
+  "path": "apt.color.19",
+  "$description": "Imported from --apt-color-19",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.4549,
+      0.5569,
+      0.5922
+    ],
+    "hex": "#748e97"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.010Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ca"
+  },
+  "path": "apt.color.20",
+  "$description": "Imported from --apt-color-20",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.8118,
+      0.4706,
+      0.0941
+    ],
+    "hex": "#cf7818"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.010Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1cb"
+  },
+  "path": "apt.color.21",
+  "$description": "Imported from --apt-color-21",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.6353,
+      0.5647,
+      0.3843
+    ],
+    "hex": "#a29062"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.011Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1cc"
+  },
+  "path": "apt.color.22",
+  "$description": "Imported from --apt-color-22",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.0941,
+      0.6667,
+      0.7608
+    ],
+    "hex": "#18aac2"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.012Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1cd"
+  },
+  "path": "apt.color.23",
+  "$description": "Imported from --apt-color-23",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.851,
+      0.6157,
+      0.2118
+    ],
+    "hex": "#d99d36"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.013Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ce"
+  },
+  "path": "apt.color.24",
+  "$description": "Imported from --apt-color-24",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.6275,
+      0.7059,
+      0.7255
+    ],
+    "hex": "#a0b4b9"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.014Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1cf"
+  },
+  "path": "apt.color.25",
+  "$description": "Imported from --apt-color-25",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0,
+      0.7922,
+      0.8902
+    ],
+    "hex": "#00cae3"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.015Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d0"
+  },
+  "path": "apt.color.26",
+  "$description": "Imported from --apt-color-26",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.9686,
+      0.7451,
+      0.3098
+    ],
+    "hex": "#f7be4f"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.016Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d1"
+  },
+  "path": "apt.color.27",
+  "$description": "Imported from --apt-color-27",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.8118,
+      0.8157,
+      0.7882
+    ],
+    "hex": "#cfd0c9"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.017Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d2"
+  },
+  "path": "apt.color.28",
+  "$description": "Imported from --apt-color-28",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.1373,
+      0.949,
+      0.9686
+    ],
+    "hex": "#23f2f7"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.018Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d3"
+  },
+  "path": "apt.color.29",
+  "$description": "Imported from --apt-color-29",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.9686,
+      0.8667,
+      0.4549
+    ],
+    "hex": "#f7dd74"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.019Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d4"
+  },
+  "path": "apt.color.30",
+  "$description": "Imported from --apt-color-30",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.6314,
+      0.9882,
+      0.9922
+    ],
+    "hex": "#a1fcfd"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.020Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d5"
+  },
+  "path": "apt.color.31",
+  "$description": "Imported from --apt-color-31",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.9922,
+      0.9294,
+      0.702
+    ],
+    "hex": "#fdedb3"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.021Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d6"
+  },
+  "path": "apt.color.32",
+  "$description": "Imported from --apt-color-32",
+  "$type": "color",
+  "$value": {
+    "colorSpace": "srgb",
+    "components": [
+      0.9922,
+      0.9922,
+      0.9843
+    ],
+    "hex": "#fdfdfb"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.022Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d7"
+  },
+  "path": "apt.bg.void",
+  "$description": "Imported from --apt-bg-void",
+  "$type": "color",
+  "$value": "{apt.color.01}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.023Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d8"
+  },
+  "path": "apt.bg.canvas",
+  "$description": "Imported from --apt-bg-canvas",
+  "$type": "color",
+  "$value": "{apt.color.02}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.025Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1d9"
+  },
+  "path": "apt.bg.warm-void",
+  "$description": "Imported from --apt-bg-warm-void",
+  "$type": "color",
+  "$value": "{apt.color.03}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.026Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1da"
+  },
+  "path": "apt.bg.base",
+  "$description": "Imported from --apt-bg-base",
+  "$type": "color",
+  "$value": "{apt.color.04}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.027Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1db"
+  },
+  "path": "apt.bg.raised",
+  "$description": "Imported from --apt-bg-raised",
+  "$type": "color",
+  "$value": "{apt.color.06}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.028Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1dc"
+  },
+  "path": "apt.bg.overlay",
+  "$description": "Imported from --apt-bg-overlay",
+  "$type": "color",
+  "$value": "{apt.color.08}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.028Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1dd"
+  },
+  "path": "apt.border.neutral-subtle",
+  "$description": "Imported from --apt-border-neutral-subtle",
+  "$type": "number",
+  "$value": "{apt.color.07}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.030Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1de"
+  },
+  "path": "apt.border.subtle",
+  "$description": "Imported from --apt-border-subtle",
+  "$type": "number",
+  "$value": "{apt.color.10}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.030Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1df"
+  },
+  "path": "apt.border.default",
+  "$description": "Imported from --apt-border-default",
+  "$type": "number",
+  "$value": "{apt.color.12}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.031Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e0"
+  },
+  "path": "apt.border.warm",
+  "$description": "Imported from --apt-border-warm",
+  "$type": "number",
+  "$value": "{apt.color.13}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.033Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e1"
+  },
+  "path": "apt.border.interactive",
+  "$description": "Imported from --apt-border-interactive",
+  "$type": "number",
+  "$value": "{apt.color.14}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.034Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e2"
+  },
+  "path": "apt.text.primary",
+  "$description": "Imported from --apt-text-primary",
+  "$type": "color",
+  "$value": "{apt.color.32}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.035Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e3"
+  },
+  "path": "apt.text.warm-display",
+  "$description": "Imported from --apt-text-warm-display",
+  "$type": "color",
+  "$value": "{apt.color.31}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.036Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e4"
+  },
+  "path": "apt.text.secondary",
+  "$description": "Imported from --apt-text-secondary",
+  "$type": "color",
+  "$value": "{apt.color.27}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.037Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e5"
+  },
+  "path": "apt.text.tertiary",
+  "$description": "Imported from --apt-text-tertiary",
+  "$type": "color",
+  "$value": "{apt.color.24}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.038Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e6"
+  },
+  "path": "apt.text.muted",
+  "$description": "Imported from --apt-text-muted",
+  "$type": "color",
+  "$value": "{apt.color.19}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.039Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e7"
+  },
+  "path": "apt.text.disabled",
+  "$description": "Imported from --apt-text-disabled",
+  "$type": "color",
+  "$value": "{apt.color.15}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.040Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e8"
+  },
+  "path": "apt.brand.primary",
+  "$description": "Imported from --apt-brand-primary",
+  "$type": "number",
+  "$value": "{apt.color.25}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.041Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1e9"
+  },
+  "path": "apt.brand.primary-hover",
+  "$description": "Imported from --apt-brand-primary-hover",
+  "$type": "number",
+  "$value": "{apt.color.28}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.042Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ea"
+  },
+  "path": "apt.brand.primary-dim",
+  "$description": "Imported from --apt-brand-primary-dim",
+  "$type": "number",
+  "$value": "{apt.color.22}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.043Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1eb"
+  },
+  "path": "apt.brand.primary-muted",
+  "$description": "Imported from --apt-brand-primary-muted",
+  "$type": "number",
+  "$value": "{apt.color.18}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.044Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ec"
+  },
+  "path": "apt.brand.secondary",
+  "$description": "Imported from --apt-brand-secondary",
+  "$type": "number",
+  "$value": "{apt.color.26}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.045Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ed"
+  },
+  "path": "apt.brand.secondary-hover",
+  "$description": "Imported from --apt-brand-secondary-hover",
+  "$type": "number",
+  "$value": "{apt.color.29}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.046Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ee"
+  },
+  "path": "apt.brand.secondary-dim",
+  "$description": "Imported from --apt-brand-secondary-dim",
+  "$type": "number",
+  "$value": "{apt.color.23}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.047Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ef"
+  },
+  "path": "apt.accent.ice",
+  "$description": "Imported from --apt-accent-ice",
+  "$type": "color",
+  "$value": "{apt.color.30}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.048Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f0"
+  },
+  "path": "apt.accent.sand",
+  "$description": "Imported from --apt-accent-sand",
+  "$type": "color",
+  "$value": "{apt.color.21}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.049Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f1"
+  },
+  "path": "apt.status.success",
+  "$description": "Imported from --apt-status-success",
+  "$type": "number",
+  "$value": "{apt.color.16}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.050Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f2"
+  },
+  "path": "apt.status.success-surface",
+  "$description": "Imported from --apt-status-success-surface",
+  "$type": "color",
+  "$value": "{apt.color.11}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.051Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f3"
+  },
+  "path": "apt.status.warning",
+  "$description": "Imported from --apt-status-warning",
+  "$type": "number",
+  "$value": "{apt.color.26}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.052Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f4"
+  },
+  "path": "apt.status.danger",
+  "$description": "Imported from --apt-status-danger",
+  "$type": "number",
+  "$value": "{apt.color.20}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.052Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f5"
+  },
+  "path": "apt.status.danger-strong",
+  "$description": "Imported from --apt-status-danger-strong",
+  "$type": "number",
+  "$value": "{apt.color.17}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.053Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f6"
+  },
+  "path": "apt.status.danger-surface",
+  "$description": "Imported from --apt-status-danger-surface",
+  "$type": "color",
+  "$value": "{apt.color.05}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.054Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f7"
+  },
+  "path": "apt.status.danger-border",
+  "$description": "Imported from --apt-status-danger-border",
+  "$type": "number",
+  "$value": "{apt.color.09}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.055Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f8"
+  },
+  "path": "apt.status.info",
+  "$description": "Imported from --apt-status-info",
+  "$type": "number",
+  "$value": "{apt.color.25}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.056Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1f9"
+  },
+  "path": "apt.chart.1",
+  "$description": "Imported from --apt-chart-1",
+  "$type": "number",
+  "$value": "{apt.brand.primary}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.057Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1fa"
+  },
+  "path": "apt.chart.2",
+  "$description": "Imported from --apt-chart-2",
+  "$type": "number",
+  "$value": "{apt.brand.secondary}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.058Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1fb"
+  },
+  "path": "apt.chart.3",
+  "$description": "Imported from --apt-chart-3",
+  "$type": "number",
+  "$value": "{apt.brand.primary.muted}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.058Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1fc"
+  },
+  "path": "apt.chart.4",
+  "$description": "Imported from --apt-chart-4",
+  "$type": "number",
+  "$value": "{apt.accent.sand}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.059Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1fd"
+  },
+  "path": "apt.chart.5",
+  "$description": "Imported from --apt-chart-5",
+  "$type": "number",
+  "$value": "{apt.accent.ice}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.060Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1fe"
+  },
+  "path": "apt.chart.6",
+  "$description": "Imported from --apt-chart-6",
+  "$type": "number",
+  "$value": "{apt.status.danger}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.061Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e1ff"
+  },
+  "path": "apt.chart.grid",
+  "$description": "Imported from --apt-chart-grid",
+  "$type": "number",
+  "$value": "{apt.border.subtle}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.062Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e200"
+  },
+  "path": "apt.chart.axis",
+  "$description": "Imported from --apt-chart-axis",
+  "$type": "number",
+  "$value": "{apt.border.default}",
+  "status": "validated",
+  "tier": "semantic",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.063Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e201"
+  },
+  "path": "apt.font.display",
+  "$description": "Imported from --apt-font-display",
+  "$type": "fontFamily",
+  "$value": [
+    "Space Grotesk",
+    "system-ui",
+    "sans-serif"
+  ],
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.064Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e202"
+  },
+  "path": "apt.font.body",
+  "$description": "Imported from --apt-font-body",
+  "$type": "fontFamily",
+  "$value": [
+    "Inter",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "sans-serif"
+  ],
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.066Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e203"
+  },
+  "path": "apt.font.mono",
+  "$description": "Imported from --apt-font-mono",
+  "$type": "fontFamily",
+  "$value": [
+    "JetBrains Mono",
+    "ui-monospace",
+    "monospace"
+  ],
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.067Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e204"
+  },
+  "path": "apt.radius.sm",
+  "$description": "Imported from --apt-radius-sm",
+  "$type": "dimension",
+  "$value": {
+    "value": 4,
+    "unit": "px"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.068Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e205"
+  },
+  "path": "apt.radius.md",
+  "$description": "Imported from --apt-radius-md",
+  "$type": "dimension",
+  "$value": {
+    "value": 8,
+    "unit": "px"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.068Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e206"
+  },
+  "path": "apt.radius.lg",
+  "$description": "Imported from --apt-radius-lg",
+  "$type": "dimension",
+  "$value": {
+    "value": 14,
+    "unit": "px"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.069Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e207"
+  },
+  "path": "apt.radius.pill",
+  "$description": "Imported from --apt-radius-pill",
+  "$type": "dimension",
+  "$value": {
+    "value": 9999,
+    "unit": "px"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.070Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e208"
+  },
+  "path": "apt.shadow.raised",
+  "$description": "Imported from --apt-shadow-raised",
+  "$type": "shadow",
+  "$value": "0 4px 16px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(161, 252, 253, 0.06)",
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.071Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e209"
+  },
+  "path": "apt.shadow.overlay",
+  "$description": "Imported from --apt-shadow-overlay",
+  "$type": "shadow",
+  "$value": "0 12px 36px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(7, 69, 94, 0.65)",
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.072Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20a"
+  },
+  "path": "apt.glow.primary",
+  "$description": "Imported from --apt-glow-primary",
+  "$type": "number",
+  "$value": "0 0 18px rgba(35, 242, 247, 0.28)",
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.073Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20b"
+  },
+  "path": "apt.glow.secondary",
+  "$description": "Imported from --apt-glow-secondary",
+  "$type": "number",
+  "$value": "0 0 18px rgba(247, 190, 79, 0.24)",
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.074Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20c"
+  },
+  "path": "apt.focus.ring",
+  "$description": "Imported from --apt-focus-ring",
+  "$type": "number",
+  "$value": "0 0 0 2px var(--apt-bg-base), 0 0 0 4px var(--apt-brand-primary-hover)",
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.075Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20d"
+  },
+  "path": "apt.ease.instrument",
+  "$description": "Imported from --apt-ease-instrument",
+  "$type": "cubicBezier",
+  "$value": [
+    0.2,
+    0.8,
+    0.2,
+    1
+  ],
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.076Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20e"
+  },
+  "path": "apt.ease.tide",
+  "$description": "Imported from --apt-ease-tide",
+  "$type": "cubicBezier",
+  "$value": [
+    0.4,
+    0,
+    0.2,
+    1
+  ],
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.078Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e20f"
+  },
+  "path": "apt.duration.fast",
+  "$description": "Imported from --apt-duration-fast",
+  "$type": "duration",
+  "$value": {
+    "value": 120,
+    "unit": "ms"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.079Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e210"
+  },
+  "path": "apt.duration.base",
+  "$description": "Imported from --apt-duration-base",
+  "$type": "duration",
+  "$value": {
+    "value": 220,
+    "unit": "ms"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.080Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6b0331bc8df7c82abf80e211"
+  },
+  "path": "apt.duration.slow",
+  "$description": "Imported from --apt-duration-slow",
+  "$type": "duration",
+  "$value": {
+    "value": 340,
+    "unit": "ms"
+  },
+  "status": "validated",
+  "tier": "primitive",
+  "updatedAt": {
+    "$date": "2026-11-22T18:17:32.080Z"
+  }
+}]

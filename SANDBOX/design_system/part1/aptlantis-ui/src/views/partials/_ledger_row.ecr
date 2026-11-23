@@ -1,0 +1,18 @@
+<tr hx-get="/nodes/<%= node.id %>" hx-target="#apt-inspector" hx-swap="innerHTML">
+  <td onclick="event.stopPropagation()">
+    <input type="checkbox"
+           name="ids"
+           value="<%= node.id %>"
+           class="apt-check"
+           hx-post="/telemetry/selection"
+           hx-include="[name='ids']"
+           hx-swap="none" />
+  </td>
+  <td class="apt-mono"><%= HTML.escape(node.hostname) %></td>
+  <td><span class="apt-badge" data-tone="<%= node.tone %>"><%= HTML.escape(node.contract) %></span></td>
+  <td class="apt-mono" style="color:var(<%= node.status == "VERIFIED" ? "--apt-chart-4" : "--apt-chart-2" %>);">
+    <%= node.status == "VERIFIED" ? "● VERIFIED" : "▲ DEGRADED" %>
+  </td>
+  <td class="apt-mono"><%= node.latency_ms %> ms</td>
+  <td class="apt-mono" style="color:var(--apt-text-secondary);"><%= node.digest %>…</td>
+</tr>

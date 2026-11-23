@@ -1,0 +1,21 @@
+<div class="apt-explain-content" role="tabpanel" aria-label="<%= HTML.escape(depth.label) %> explanation">
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+    <span class="apt-badge" data-tone="<%= depth.key == "technical" ? "amber" : "cyan" %>">
+      DEPTH: <%= depth.label.upcase %>
+    </span>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);"><%= HTML.escape(depth.reading_time) %></span>
+  </div>
+
+  <h3><%= HTML.escape(depth.headline) %></h3>
+  <p><%= HTML.escape(depth.body) %></p>
+
+  <ul class="apt-explain-bullets">
+    <% depth.bullets.each do |bullet| %>
+      <li><%= HTML.escape(bullet) %></li>
+    <% end %>
+  </ul>
+
+  <% if sample = depth.code_sample %>
+    <pre class="apt-explain-code"><%= HTML.escape(sample) %></pre>
+  <% end %>
+</div>

@@ -1,0 +1,176 @@
+[
+  {
+    "name": "@codemirror/autocomplete",
+    "version": "6.20.3",
+    "integrity": "sha512-tlosUqb+3BbxCxZdu4tKeRghPFC+QM7q4X5YhKV2eCmPG+1r2F3f4AaSz5sCrFqUtX4Jh20VFTKecl16MgiV9g==",
+    "license": "LICENSE-codemirror-autocomplete.txt"
+  },
+  {
+    "name": "@codemirror/commands",
+    "version": "6.11.1",
+    "integrity": "sha512-O/4hG3SC1YwcmQ0d2UVNDs+AsaNWd1iHVxbTeEBuqH+6bExAiPK3iS/BvpY6rZGURALv4ZD3sIgcCmRvw3ehBg==",
+    "license": "LICENSE-codemirror-commands.txt"
+  },
+  {
+    "name": "@codemirror/lang-css",
+    "version": "6.3.1",
+    "integrity": "sha512-kr5fwBGiGtmz6l0LSJIbno9QrifNMUusivHbnA1H6Dmqy4HZFte3UAICix1VuKo0lMPKQr2rqB+0BkKi/S3Ejg==",
+    "license": "LICENSE-codemirror-lang-css.txt"
+  },
+  {
+    "name": "@codemirror/lang-html",
+    "version": "6.4.12",
+    "integrity": "sha512-pw2ReWKUqSkbvh76RAT4NYxiogRu+PWkR2ukAwO9uOgrm8uipkzjtKKtNpyeAQwHOqxEeSvAXZ6vr3AfyB9y/w==",
+    "license": "LICENSE-codemirror-lang-html.txt"
+  },
+  {
+    "name": "@codemirror/lang-javascript",
+    "version": "6.2.5",
+    "integrity": "sha512-zD4e5mS+50htS7F+TYjBPsiIFGanfVqg4HyUz6WNFikgOPf2BgKlx+TQedI1w6n/IqRBVBbBWmGFdLB/7uxO4A==",
+    "license": "LICENSE-codemirror-lang-javascript.txt"
+  },
+  {
+    "name": "@codemirror/lang-markdown",
+    "version": "6.5.2",
+    "integrity": "sha512-AwBOdkWYuA//WcM0xO5PfHPUcmz/O2i5o0Nsg1U69SII/loCJlFI1Romd9xp2HYb1kYJRGZotyqRghuHH5n8Kw==",
+    "license": "LICENSE-codemirror-lang-markdown.txt"
+  },
+  {
+    "name": "@codemirror/lang-python",
+    "version": "6.2.1",
+    "integrity": "sha512-IRjC8RUBhn9mGR9ywecNhB51yePWCGgvHfY1lWN/Mrp3cKuHr0isDKia+9HnvhiWNnMpbGhWrkhuWOc09exRyw==",
+    "license": "LICENSE-codemirror-lang-python.txt"
+  },
+  {
+    "name": "@codemirror/language",
+    "version": "6.13.1",
+    "integrity": "sha512-zfvU2r3TyylQLMj/te+5CnQ0rSqZi8B1oTCBbQkagcLW4Xc6imab6qN+pEJhsuNOLaJqiRyBXp9UhWA1DhVvDw==",
+    "license": "LICENSE-codemirror-language.txt"
+  },
+  {
+    "name": "@codemirror/lint",
+    "version": "6.9.7",
+    "integrity": "sha512-28/+iWLYxKxsvGYhSYL7zaCZqLz5+FFFDq9tVsvGv9kv8RY4fFAchJ5WX9M3YrrRlTIsECjsXPqeNgnSmNP2dg==",
+    "license": "LICENSE-codemirror-lint.txt"
+  },
+  {
+    "name": "@codemirror/search",
+    "version": "6.7.2",
+    "integrity": "sha512-gUYkYhT2+n/+VGZ+8EzE5WFkYZUZYm1VOKDudIsNqh42uRVQJ0a6Yss9sdKT3MeOYfuL1N6AZA57oza0Oyr0LA==",
+    "license": "LICENSE-codemirror-search.txt"
+  },
+  {
+    "name": "@codemirror/state",
+    "version": "6.7.6",
+    "integrity": "sha512-kAz+AncRtKuIknedxT1bq4XwXv4UowhbkHU1myPrtVb/jZtImWuV5BXzv5vK6i3kYACsdiZiQKFQQ5Mq7elW8w==",
+    "license": "LICENSE-codemirror-state.txt"
+  },
+  {
+    "name": "@codemirror/streamparser",
+    "version": "6.0.0",
+    "integrity": "sha512-JTFPF6xrfjt0mnfGPgzcLiMwYmvIyNaoizp8BYzv8FE8KrT6GBGDZ190rtt+O7Wke3gG/MFHyiY9YGNeimof4w==",
+    "license": "LICENSE-codemirror-streamparser.txt"
+  },
+  {
+    "name": "@codemirror/view",
+    "version": "6.43.14",
+    "integrity": "sha512-hC45YnmJNR1rz42OF57BLoQNFMV12/13drnvibDsR2quNDmldcb4WvYVV81hFQg56i9lcqQMEDqilhX2QDcGQQ==",
+    "license": "LICENSE-codemirror-view.txt"
+  },
+  {
+    "name": "@lezer/common",
+    "version": "1.5.3",
+    "integrity": "sha512-H0iErY4e43LpXbYDyBci5W4v/RwTgGV3YzYOlJPiGZ8RY8w51kVE+xLn1tg3Z6UmSfyETvtsUK3r7YsgDQEI7Q==",
+    "license": "LICENSE-lezer-common.txt"
+  },
+  {
+    "name": "@lezer/css",
+    "version": "1.3.9",
+    "integrity": "sha512-ZmzgvTOBdJWGIsY/ItAfN7UW8DV802oZG+jeG6E508SwEzz5YhuAajptpWPICvIyqYAD2+VjMdOS40GgGkyEOQ==",
+    "license": "LICENSE-lezer-css.txt"
+  },
+  {
+    "name": "@lezer/highlight",
+    "version": "1.2.5",
+    "integrity": "sha512-O1GMVKgtf5YspFaRzpmqkVgMtIk2HG9uMAbH6wdAIdNh3TVzCsch/+cRi+6l2//UGDKe6NB9BW3cvuR5ezMQ0w==",
+    "license": "LICENSE-lezer-highlight.txt"
+  },
+  {
+    "name": "@lezer/html",
+    "version": "1.3.13",
+    "integrity": "sha512-oI7n6NJml729m7pjm9lvLvmXbdoMoi2f+1pwSDJkl9d68zGr7a9Btz8NdHTGQZtW2DA25ybeuv/SyDb9D5tseg==",
+    "license": "LICENSE-lezer-html.txt"
+  },
+  {
+    "name": "@lezer/javascript",
+    "version": "1.5.6",
+    "integrity": "sha512-sEvOqpl4vJQca0NugSQK02vQPbc5KrvoojnYGoqqFgFO0MtcYhwGiHKVEB+LuXYJnfyXo4QPA8ztbrEa4Fw5NA==",
+    "license": "LICENSE-lezer-javascript.txt"
+  },
+  {
+    "name": "@lezer/lr",
+    "version": "1.4.11",
+    "integrity": "sha512-UwgZcl1R66H2hDzBrA7kWyYmX6s8p5TQ+e/t7CuvgCtBEPxbEPaHYHu+pJBvTvDotEJpuQkJjbXuHiw5Cixxgw==",
+    "license": "LICENSE-lezer-lr.txt"
+  },
+  {
+    "name": "@lezer/markdown",
+    "version": "1.8.0",
+    "integrity": "sha512-X6w3A2NpyhdtGqTWRJB8gR4QDXBaFMbTOs780ZdZ15KKCfBXOQTKcB3Vr+W6tqJHVlealt53tLmHRvOqPTQgYA==",
+    "license": "LICENSE-lezer-markdown.txt"
+  },
+  {
+    "name": "@lezer/python",
+    "version": "1.1.19",
+    "integrity": "sha512-MhQIURHRytsNzP/YXnqpYKW6la6voAH3kyplTOOiCdjyFY6cWWGFVmYVdHIPrElqSDf4iCDktQCockB9FxuhzQ==",
+    "license": "LICENSE-lezer-python.txt"
+  },
+  {
+    "name": "@marijn/find-cluster-break",
+    "version": "1.0.4",
+    "integrity": "sha512-Wy0V7+SGUjnF9/TkiM1hKVDPj7jKXduPNboMVtHTA8dySMURWqfg/JZ9E2Sq8JgSJmkl7k7Qe9FLeMSrSraWmQ==",
+    "license": "LICENSE-marijn-find-cluster-break.txt"
+  },
+  {
+    "name": "@types/trusted-types",
+    "version": "2.0.7",
+    "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==",
+    "license": "LICENSE-types-trusted-types.txt"
+  },
+  {
+    "name": "codemirror",
+    "version": "5.65.16",
+    "integrity": "sha512-br21LjYmSlVL0vFCPWPfhzUCT34FM/pAdK7rRIZwa0rrtrIdotvP4Oh4GUHsu2E3IrQMCfRkL/fN3ytMNxVQvg==",
+    "license": "LICENSE-codemirror.txt"
+  },
+  {
+    "name": "crelt",
+    "version": "1.0.7",
+    "integrity": "sha512-aK6BbWfhf4U/wCcLHKPJl/xa6VkVstRaPywWtMKGwuOLc/wZTyQYuoxgvZnNsBvv7Kg3YTBQYYBCggcviQczuA==",
+    "license": "LICENSE-crelt.txt"
+  },
+  {
+    "name": "dompurify",
+    "version": "3.4.17",
+    "integrity": "sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==",
+    "license": "LICENSE-dompurify.txt"
+  },
+  {
+    "name": "marked",
+    "version": "18.1.1",
+    "integrity": "sha512-zEGgrtUG8crk+TrMacJSVABU4DYDDkS8uqgU3ohrn/2fW9C2AEfUrO3m6IhpIpQpl7YcVpiXXC9cSMWDANT3dg==",
+    "license": "LICENSE-marked.txt"
+  },
+  {
+    "name": "style-mod",
+    "version": "4.1.4",
+    "integrity": "sha512-XXWIQt633/EpAFx8aZDOTjBzrCaGmhvEQlQo6MVPfa2OzO2cWo+4hV9h+6UkHYlXGfy+ODXKUdP7Pthmcu5ATw==",
+    "license": "LICENSE-style-mod.txt"
+  },
+  {
+    "name": "w3c-keyname",
+    "version": "2.2.8",
+    "integrity": "sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==",
+    "license": "LICENSE-w3c-keyname.txt"
+  }
+]

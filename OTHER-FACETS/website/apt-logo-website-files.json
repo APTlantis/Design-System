@@ -1,0 +1,82 @@
+{
+  "schema": "aptlantis.artifact-manifest.v2",
+  "target": "website",
+  "theme": "Aptlantis-Logo",
+  "theme_identity": {
+    "version": 1,
+    "prefix": "apt",
+    "slug": "logo",
+    "evidence": [
+      {
+        "source": "--theme-version",
+        "version": 1
+      }
+    ]
+  },
+  "stem": "apt-logo-website",
+  "files": [
+    {
+      "file": "apt-logo-website-readme.md",
+      "role": "readme",
+      "logical_name": "README.md",
+      "fixed_name_reason": null,
+      "sha256": "1b9653edd320f8a7742040b9404e88235b979cc816fb3379f3f6e5992be46d4c"
+    },
+    {
+      "file": "apt-logo-website-components.html",
+      "role": "components",
+      "logical_name": "components.html",
+      "fixed_name_reason": null,
+      "sha256": "2499fa3b23bb96b909dc4b0585b006bd1a6a040a8df7290d2b98717160f741b8"
+    },
+    {
+      "file": "apt-logo-website-examples.html",
+      "role": "examples",
+      "logical_name": "examples.html",
+      "fixed_name_reason": null,
+      "sha256": "b4636d7a6d9d86948a7d5c15d65482e8bd0698f107116ac77bb2863610583912"
+    },
+    {
+      "file": "apt-logo-website-landing.html",
+      "role": "landing",
+      "logical_name": "landing.html",
+      "fixed_name_reason": null,
+      "sha256": "87f9a8115d80dd4eee6093c49d9a62eb34c5c0b711a2f30c4f18ad50bccf7e94"
+    },
+    {
+      "file": "apt-logo-website-palette.toml",
+      "role": "palette",
+      "logical_name": "palette.toml",
+      "fixed_name_reason": null,
+      "sha256": "df0f6741fa211d530e3dc18fb77d344fabb8ab676ded37187ec65a951e4aa2bb"
+    },
+    {
+      "file": "apt-logo-website-swatch.png",
+      "role": "swatch",
+      "logical_name": "swatch.png",
+      "fixed_name_reason": null,
+      "sha256": "14f6c154507135fd17fccabf3d3f160fbdc4e5566b7e06c46e38770b565c1bdb"
+    },
+    {
+      "file": "apt-logo-website.css",
+      "role": "primary",
+      "logical_name": "theme.css",
+      "fixed_name_reason": null,
+      "sha256": "9a18e8f5e81f3aa51338ccd230a2057319a830cb4d5decdee3ceeb626dc62154"
+    },
+    {
+      "file": "apt-logo-website-tokens.json",
+      "role": "tokens",
+      "logical_name": "tokens.json",
+      "fixed_name_reason": null,
+      "sha256": "2fd14193fbdada475ee8697a05b53a649b3cb2e313d7d1832748f30233f3fb99"
+    },
+    {
+      "file": "apt-logo-website-validation.json",
+      "role": "validation",
+      "logical_name": "validation.json",
+      "fixed_name_reason": null,
+      "sha256": "55d46eebea741de9f94300c25102b90edddef828770dacc6b0cd448bc383dd60"
+    }
+  ]
+}
