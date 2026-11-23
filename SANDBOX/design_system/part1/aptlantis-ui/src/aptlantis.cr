@@ -202,6 +202,18 @@ get "/components/component-playground" do
   render "src/views/components/component_playground.ecr", "src/views/layout.ecr"
 end
 
+# 1d. Phase C — Logos & Theming Pipeline Explainer Demonstration
+get "/explainer/logos-pipeline" do
+  active_nav = "explainer"
+  topbar_label = "EXPLAINER / LOGOS & THEMING PIPELINE"
+  stages = CATALOG.stepper_stages
+  depths = CATALOG.explanation_depths
+  roles = CATALOG.oklch_roles
+  diagram_nodes = CATALOG.diagram_nodes
+  artifacts = CATALOG.artifacts
+  render "src/views/explainer_logos.ecr", "src/views/layout.ecr"
+end
+
 # 2. Filter Ledger Rows (Sector Popover Menu)
 get "/telemetry" do |env|
   sector = env.params.query["sector"]? || "ALL"

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><%= active_nav == "gallery" ? "APTLANTIS v2.0 — Component Gallery" : "APTLANTIS v2.0 — Telemetry Workspace" %></title>
+  <title><%= active_nav == "explainer" ? "APTLANTIS v2.0 — Logos & Theming Explainer" : (active_nav == "gallery" ? "APTLANTIS v2.0 — Component Gallery" : "APTLANTIS v2.0 — Telemetry Workspace") %></title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
@@ -24,6 +24,9 @@
         </a>
         <a href="/components" class="apt-btn" data-variant="ghost" data-size="icon" data-active="<%= active_nav == "gallery" %>" title="Component Gallery">
           <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-gallery"/></svg>
+        </a>
+        <a href="/explainer/logos-pipeline" class="apt-btn" data-variant="ghost" data-size="icon" data-active="<%= active_nav == "explainer" %>" title="Logos & Theming Pipeline Explainer">
+          <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-explainer"/></svg>
         </a>
         <a href="/#topology-panel" class="apt-btn" data-variant="ghost" data-size="icon" title="Contract Topology">
           <svg width="18" height="18"><use href="/icons/apt-hud-sprite.svg#icon-topology"/></svg>
@@ -46,11 +49,10 @@
       </div>
 
       <div style="display:flex; align-items:center; gap:0.5rem;">
-        <% if active_nav == "gallery" %>
-          <a href="/components" class="apt-btn" data-variant="ghost">Gallery Index</a>
+        <a href="/components" class="apt-btn" data-variant="ghost" data-active="<%= active_nav == "gallery" %>">Gallery</a>
+        <a href="/explainer/logos-pipeline" class="apt-btn" data-variant="ghost" data-active="<%= active_nav == "explainer" %>">Logos Explainer</a>
+        <% if active_nav != "telemetry" %>
           <a href="/" class="apt-btn" data-variant="ghost">Telemetry App</a>
-        <% else %>
-          <a href="/components" class="apt-btn" data-variant="ghost">Component Gallery</a>
         <% end %>
         <button class="apt-btn" data-variant="ghost" onclick="openCommandPalette()">
           <span>Search</span>
@@ -133,6 +135,9 @@
     <div style="padding:0.85rem;">
       <input id="cmd-input" class="apt-input apt-mono" style="width:100%;" placeholder="Filter actions or contracts..." oninput="filterCommands(this.value)" />
       <div id="cmd-list" style="margin-top:0.65rem; display:grid; gap:0.25rem;">
+        <a class="apt-menu-item" href="/explainer/logos-pipeline" style="text-decoration:none;">
+          <span>Phase C · Logos &amp; Theming Pipeline Explainer</span><kbd class="apt-kbd">EXPLAINER</kbd>
+        </a>
         <a class="apt-menu-item" href="/components" style="text-decoration:none;">
           <span>Open Component Gallery (12 Shortlist)</span><kbd class="apt-kbd">GALLERY</kbd>
         </a>

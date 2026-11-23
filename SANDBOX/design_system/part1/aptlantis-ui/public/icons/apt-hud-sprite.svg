@@ -18,4 +18,8 @@
     <rect x="3" y="14" width="7" height="7" rx="1.5"/>
     <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="#F7BE4F"/>
   </symbol>
+  <symbol id="icon-explainer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8" stroke="#F7BE4F"/>
+  </symbol>
 </svg>
