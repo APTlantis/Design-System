@@ -1,0 +1,347 @@
+<div class="apt-mmd-bar">
+  <div style="display:flex; align-items:center; gap:0.6rem;">
+    <span style="width:9px; height:9px; border-radius:50%; background:#23F2F7; display:inline-block;"></span>
+    <strong class="apt-display" style="font-size:0.95rem;"><%= HTML.escape(lens.headline) %></strong>
+  </div>
+  <div class="apt-mmd-legend">
+    <span style="color:#F7BE4F;"><span class="apt-mmd-legend-swatch" style="background:#14252D; border:1px solid #F7BE4F;"></span>govNode</span>
+    <span style="color:#23F2F7;"><span class="apt-mmd-legend-swatch" style="background:#14252D; border:1px solid #23F2F7;"></span>visualNode</span>
+    <span style="color:#00CAE3;"><span class="apt-mmd-legend-swatch" style="background:#14252D; border:1px solid #00CAE3;"></span>engNode</span>
+    <span style="color:#BC8F81;"><span class="apt-mmd-legend-swatch" style="background:#1E2F38; border:1px solid #BC8F81;"></span>docNode</span>
+  </div>
+</div>
+
+<div class="apt-mmd-stage" data-mmd-stage data-style-mode="classed">
+  <% if lens.id == "ecosystem" %>
+    <svg class="apt-mmd-svg" viewBox="0 0 920 390" fill="none" role="img" aria-label="Agent Skills Ecosystem Overview">
+      <defs>
+        <marker id="aptMmdArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#86A0A9"/>
+        </marker>
+        <marker id="aptMmdArrowActive" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#23F2F7"/>
+        </marker>
+      </defs>
+
+      <!-- Orthogonal Connectors -->
+      <path class="apt-mmd-edge" data-mmd-edge="skill-synthesis-engine,hub-city-hall" d="M 262 195 H 322 V 76 H 370" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="skill-synthesis-engine,hub-visual" d="M 262 195 H 322 V 195 H 370" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="skill-synthesis-engine,hub-engineering" d="M 262 195 H 322 V 314 H 370" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="hub-visual,hub-docs" d="M 610 195 H 674" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="hub-city-hall,hub-engineering" d="M 490 124 V 142 M 610 76 H 644 V 314 H 614" stroke-dasharray="5 4" marker-end="url(#aptMmdArrow)"/>
+
+      <!-- Edge Protocol Pills -->
+      <rect x="284" y="122" width="76" height="20" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="322" y="135" text-anchor="middle" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="10">synthesize</text>
+      <rect x="615" y="185" width="52" height="20" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="641" y="198" text-anchor="middle" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="10">assets</text>
+
+      <!-- Meta Hub: skill-synthesis-engine -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="skill-synthesis-engine" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/skill-synthesis-engine" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="22" y="145" width="240" height="100" rx="6"/>
+        <text x="142" y="182" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">skill-synthesis-engine</text>
+        <text x="142" y="204" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Meta-Skill Authoring</text>
+        <text x="142" y="226" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10.5">class: docNode · 1 skill</text>
+      </g>
+
+      <!-- Hub 1: City Hall (ACTIVE) -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="hub-city-hall" aria-selected="true"
+         hx-get="/explainer/agent-skills/skill/hub-city-hall" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="372" y="26" width="238" height="100" rx="6"/>
+        <circle cx="592" cy="44" r="4.5" fill="#23F2F7"/>
+        <text x="491" y="64" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17">City Hall Suite (5)</text>
+        <text x="491" y="86" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Governance &amp; Standards</text>
+        <text x="491" y="108" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10.5">class: govNode · ACTIVE</text>
+      </g>
+
+      <!-- Hub 2: Visual & Brand -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="hub-visual" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/hub-visual" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="372" y="145" width="238" height="100" rx="6"/>
+        <text x="491" y="182" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17">Visual &amp; Brand (6)</text>
+        <text x="491" y="204" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Tokens · SVG · Mermaid · Charts</text>
+        <text x="491" y="226" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10.5">class: visualNode</text>
+      </g>
+
+      <!-- Hub 3: Engineering & Media -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="hub-engineering" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/hub-engineering" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="372" y="264" width="238" height="100" rx="6"/>
+        <text x="491" y="302" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17">Engineering &amp; Media (8)</text>
+        <text x="491" y="324" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Rust · Data · CLI · Media</text>
+        <text x="491" y="346" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10.5">class: engNode</text>
+      </g>
+
+      <!-- Hub 4: Docs & Publishing -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="hub-docs" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/hub-docs" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="676" y="145" width="222" height="100" rx="6"/>
+        <text x="787" y="182" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="17">Docs &amp; Sites (4)</text>
+        <text x="787" y="204" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">AsciiDoc · Pandoc · Mirrors</text>
+        <text x="787" y="226" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10.5">class: docNode</text>
+      </g>
+    </svg>
+
+  <% elsif lens.id == "city-hall" %>
+    <svg class="apt-mmd-svg" viewBox="0 0 920 400" fill="none" role="img" aria-label="City Hall 5-Skill Governance Routing Topology">
+      <defs>
+        <marker id="aptMmdArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#86A0A9"/>
+        </marker>
+        <marker id="aptMmdArrowActive" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#23F2F7"/>
+        </marker>
+      </defs>
+
+      <!-- Orthogonal Connectors -->
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall,city-hall-project-formation" d="M 248 184 H 294 V 80 H 344" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall,city-hall-project-governance" d="M 248 200 H 344" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall,city-hall-standards-maintenance" d="M 248 216 H 294 V 320 H 344" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall-project-formation,city-hall-project-governance" d="M 468 128 V 150" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall-project-governance,city-hall-governance-review" d="M 592 200 H 656" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="city-hall-standards-maintenance,city-hall-governance-review" d="M 592 320 H 776 V 252" stroke-dasharray="5 4" marker-end="url(#aptMmdArrow)"/>
+
+      <!-- Protocol Pills -->
+      <rect x="262" y="106" width="66" height="20" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="295" y="119" text-anchor="middle" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="10">rough idea</text>
+      <rect x="444" y="130" width="48" height="18" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="468" y="142" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="9.5">PPS</text>
+      <rect x="598" y="190" width="54" height="20" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="625" y="203" text-anchor="middle" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="10">evidence</text>
+      <rect x="262" y="274" width="66" height="20" rx="4" fill="#031C28" stroke="#07455E"/>
+      <text x="295" y="287" text-anchor="middle" fill="#A0B4B9" font-family="JetBrains Mono, monospace" font-size="10">SFDS / WGS</text>
+
+      <!-- Hub: city-hall -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="city-hall" aria-selected="true"
+         hx-get="/explainer/agent-skills/skill/city-hall" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="22" y="150" width="226" height="100" rx="6"/>
+        <circle cx="232" cy="166" r="4.5" fill="#23F2F7"/>
+        <text x="135" y="188" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="18">city-hall</text>
+        <text x="135" y="210" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Orient &amp; Route Entrypoint</text>
+        <text x="135" y="232" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">ACTIVE · HUB ROUTER</text>
+      </g>
+
+      <!-- project-formation -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="city-hall-project-formation" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/city-hall-project-formation" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="346" y="30" width="246" height="96" rx="6"/>
+        <circle cx="576" cy="46" r="4.5" fill="#23F2F7"/>
+        <text x="469" y="66" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">project-formation</text>
+        <text x="469" y="88" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Intent · Boundaries · PPS</text>
+        <text x="469" y="110" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">ACTIVE · PRE-FORMALIZATION</text>
+      </g>
+
+      <!-- project-governance -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="city-hall-project-governance" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/city-hall-project-governance" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="346" y="152" width="246" height="96" rx="6"/>
+        <circle cx="576" cy="168" r="4.5" fill="#23F2F7"/>
+        <text x="469" y="188" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">project-governance</text>
+        <text x="469" y="210" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Onboard · Records · Closeout</text>
+        <text x="469" y="232" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">ACTIVE · EXECUTION</text>
+      </g>
+
+      <!-- standards-maintenance -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="city-hall-standards-maintenance" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/city-hall-standards-maintenance" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="346" y="272" width="246" height="96" rx="6"/>
+        <circle cx="576" cy="288" r="4.5" fill="#23F2F7"/>
+        <text x="469" y="308" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">standards-maintenance</text>
+        <text x="469" y="330" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">SFDS · WGS · Schemas</text>
+        <text x="469" y="352" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">ACTIVE · AUTHORITY</text>
+      </g>
+
+      <!-- governance-review -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="gov" data-mmd-node="city-hall-governance-review" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/city-hall-governance-review" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="658" y="152" width="240" height="96" rx="6"/>
+        <circle cx="882" cy="168" r="4.5" fill="#23F2F7"/>
+        <text x="778" y="188" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">governance-review</text>
+        <text x="778" y="210" text-anchor="middle" fill="#CFD0C9" font-family="Inter, sans-serif" font-size="12.5">Conformance · Drift · Audit</text>
+        <text x="778" y="232" text-anchor="middle" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">ACTIVE · VERIFICATION</text>
+      </g>
+    </svg>
+
+  <% elsif lens.id == "visual-docs" %>
+    <svg class="apt-mmd-svg" viewBox="0 0 920 430" fill="none" role="img" aria-label="Visual, Brand and Documentation Skills Pipeline">
+      <defs>
+        <marker id="aptMmdArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#86A0A9"/>
+        </marker>
+        <marker id="aptMmdArrowActive" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#23F2F7"/>
+        </marker>
+      </defs>
+
+      <!-- Connectors -->
+      <path class="apt-mmd-edge" data-mmd-edge="pipeline-brand-system,pipeline-brand-generator" d="M 132 106 V 134" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="pipeline-brand-generator,visual-engineering-architect" d="M 244 178 H 314" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="visual-engineering-architect,svg-creator" d="M 550 162 H 584 V 66 H 622" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="visual-engineering-architect,mermaid-diagrams" d="M 550 178 H 622" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="visual-engineering-architect,chartjs-charts" d="M 550 194 H 584 V 284 H 622" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="documentation-ingestion-mirroring,asciidoc-docs" d="M 244 366 H 314" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="asciidoc-docs,documentation-site-engineer" d="M 550 366 H 622" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="pandoc-document-engineer,documentation-site-engineer" d="M 550 284 H 584 V 348 H 622" stroke-dasharray="4 4" marker-end="url(#aptMmdArrow)"/>
+
+      <!-- Brand Column -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="pipeline-brand-system" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/pipeline-brand-system" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="24" width="224" height="80" rx="6"/>
+        <text x="132" y="58" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">pipeline-brand-system</text>
+        <text x="132" y="80" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">Brand Lineage &amp; Manuals</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="pipeline-brand-generator" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/pipeline-brand-generator" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="138" width="224" height="80" rx="6"/>
+        <text x="132" y="172" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">pipeline-brand-generator</text>
+        <text x="132" y="194" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">OKLCH Tokens · palette.toml</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="documentation-ingestion-mirroring" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/documentation-ingestion-mirroring" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="326" width="224" height="80" rx="6"/>
+        <text x="132" y="360" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">doc-ingestion-mirroring</text>
+        <text x="132" y="382" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10">Bounded Mirrors &amp; Links</text>
+      </g>
+
+      <!-- Middle Router Column -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="visual-engineering-architect" aria-selected="true"
+         hx-get="/explainer/agent-skills/skill/visual-engineering-architect" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="316" y="134" width="234" height="88" rx="6"/>
+        <text x="433" y="170" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">visual-eng-architect</text>
+        <text x="433" y="194" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">Diagram &amp; Chart Router</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="pandoc-document-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/pandoc-document-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="316" y="246" width="234" height="66" rx="6"/>
+        <text x="433" y="276" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14">pandoc-document-engineer</text>
+        <text x="433" y="296" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10">Format Transforms &amp; Lua</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="asciidoc-docs" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/asciidoc-docs" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="316" y="328" width="234" height="76" rx="6"/>
+        <text x="433" y="362" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">asciidoc-docs</text>
+        <text x="433" y="384" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10">AsciiDoc · Asciidoctor · Antora</text>
+      </g>
+
+      <!-- Right Specialists Column -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="svg-creator" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/svg-creator" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="624" y="26" width="268" height="76" rx="6"/>
+        <text x="758" y="60" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15.5">svg-creator</text>
+        <text x="758" y="82" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">Editable Vectors &amp; Icons</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="mermaid-diagrams" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/mermaid-diagrams" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="624" y="138" width="268" height="76" rx="6"/>
+        <text x="758" y="172" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15.5">mermaid-diagrams</text>
+        <text x="758" y="194" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">Mermaid Source &amp; Themes</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="visual" data-mmd-node="chartjs-charts" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/chartjs-charts" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="624" y="246" width="268" height="68" rx="6"/>
+        <text x="758" y="276" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">chartjs-charts</text>
+        <text x="758" y="296" text-anchor="middle" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">Canvas Data Visualizations</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="doc" data-mmd-node="documentation-site-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/documentation-site-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="624" y="328" width="268" height="76" rx="6"/>
+        <text x="758" y="362" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">documentation-site-engineer</text>
+        <text x="758" y="384" text-anchor="middle" fill="#BC8F81" font-family="JetBrains Mono, monospace" font-size="10">Starlight · Docusaurus · MkDocs</text>
+      </g>
+    </svg>
+
+  <% else %>
+    <svg class="apt-mmd-svg" viewBox="0 0 920 390" fill="none" role="img" aria-label="Local Engineering, Data and Media Skills">
+      <defs>
+        <marker id="aptMmdArrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#86A0A9"/>
+        </marker>
+        <marker id="aptMmdArrowActive" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 1 1.5 L 9 5 L 1 8.5 z" fill="#23F2F7"/>
+        </marker>
+      </defs>
+
+      <!-- Orthogonal Connectors -->
+      <path class="apt-mmd-edge" data-mmd-edge="repository-archaeologist,rust-tauri-app-architect" d="M 272 72 H 334" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="rust-tauri-app-architect,desktop-release-installer-engineer" d="M 588 72 H 646" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="powershell-automation-engineer,desktop-release-installer-engineer" d="M 272 178 H 614 V 96 H 646" stroke-dasharray="5 4" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="duckdb-sqlite-data-engineer,local-ai-retrieval-engineer" d="M 272 296 H 334" marker-end="url(#aptMmdArrow)"/>
+      <path class="apt-mmd-edge" data-mmd-edge="ffmpeg-media-engineer,imagemagick-imaging-engineer" d="M 772 246 V 270" stroke-dasharray="4 4" marker-end="url(#aptMmdArrow)"/>
+
+      <!-- Row 1: Desktop App Delivery -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="repository-archaeologist" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/repository-archaeologist" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="28" width="252" height="86" rx="6"/>
+        <text x="146" y="64" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">repository-archaeologist</text>
+        <text x="146" y="88" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Read-Only Repo Recon</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="rust-tauri-app-architect" aria-selected="true"
+         hx-get="/explainer/agent-skills/skill/rust-tauri-app-architect" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="336" y="28" width="252" height="86" rx="6"/>
+        <text x="462" y="64" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">rust-tauri-app-architect</text>
+        <text x="462" y="88" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Desktop Apps · IPC · State</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="desktop-release-installer-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/desktop-release-installer-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="648" y="28" width="252" height="86" rx="6"/>
+        <text x="774" y="64" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">desktop-release-installer</text>
+        <text x="774" y="88" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Installers · Signing · SHA-256</text>
+      </g>
+
+      <!-- Row 2: Automation & Media -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="powershell-automation-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/powershell-automation-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="138" width="252" height="80" rx="6"/>
+        <text x="146" y="172" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">powershell-automation</text>
+        <text x="146" y="194" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">PS7 Scripts &amp; Modules</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="ffmpeg-media-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/ffmpeg-media-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="648" y="162" width="252" height="82" rx="6"/>
+        <text x="774" y="196" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15">ffmpeg-media-engineer</text>
+        <text x="774" y="218" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Audio / Video Pipelines</text>
+      </g>
+
+      <!-- Row 3: Data, RAG & Imaging -->
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="duckdb-sqlite-data-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/duckdb-sqlite-data-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="20" y="256" width="252" height="84" rx="6"/>
+        <text x="146" y="290" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">duckdb-sqlite-data-eng</text>
+        <text x="146" y="312" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Local SQL · Schemas · Backups</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="local-ai-retrieval-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/local-ai-retrieval-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="336" y="256" width="252" height="84" rx="6"/>
+        <text x="462" y="290" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">local-ai-retrieval-eng</text>
+        <text x="462" y="312" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">Ollama · Embeddings · RAG</text>
+      </g>
+
+      <g class="apt-mmd-node" role="button" tabindex="0" data-role="eng" data-mmd-node="imagemagick-imaging-engineer" aria-selected="false"
+         hx-get="/explainer/agent-skills/skill/imagemagick-imaging-engineer" hx-target="#skills-inspector-host" hx-swap="innerHTML">
+        <rect class="mmd-box" x="648" y="274" width="252" height="84" rx="6"/>
+        <text x="774" y="308" text-anchor="middle" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="14.5">imagemagick-imaging-eng</text>
+        <text x="774" y="330" text-anchor="middle" fill="#00CAE3" font-family="JetBrains Mono, monospace" font-size="10">ImageMagick 7 · Palettes · Alpha</text>
+      </g>
+    </svg>
+  <% end %>
+</div>
+
+<div id="skills-inspector-host">
+  <%= render_partial("_skill_inspector", skill: default_skill) %>
+</div>
+
+<% if oob %>
+  <pre id="skills-mmd-source" hx-swap-oob="true" class="apt-code-pre"><%= HTML.escape(lens.mermaid_source.strip) %></pre>
+<% end %>

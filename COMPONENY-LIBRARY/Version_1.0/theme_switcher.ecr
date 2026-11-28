@@ -1,0 +1,121 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge">ISOLATED CSS SCOPING</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Isolated Palette Switcher</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Only the preview stage changes; outer shell stays untouched</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-theme-switcher" data-apt-theme-switcher>
+      <div class="apt-theme-bar">
+        <div class="apt-pill-group" role="group" aria-label="Select isolated preview theme">
+          <% presets.each_with_index do |preset, i| %>
+            <button type="button"
+                    class="apt-pill-btn"
+                    data-theme-pick="<%= preset.key %>"
+                    data-theme-label="<%= HTML.escape(preset.name) %>"
+                    data-theme-desc="<%= HTML.escape(preset.tagline) %>"
+                    data-theme-css="<%= HTML.escape(preset.css_snippet) %>"
+                    aria-pressed="<%= i == 0 %>">
+              <span class="apt-theme-swatch-dot" style="background:<%= preset.primary_hex %>;"></span>
+              <%= preset.name %>
+            </button>
+          <% end %>
+        </div>
+
+        <button type="button" class="apt-btn" data-apt-copy="#theme-live-css">Copy Active Tokens</button>
+      </div>
+
+      <div class="apt-theme-stage" data-theme-stage data-apt-theme="abyssal">
+        <div class="apt-theme-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+            <span class="apt-theme-chip" data-theme-name><%= presets.first.name %></span>
+            <span class="apt-mono" style="font-size:0.7rem; color:var(--t-muted);">ISOLATED SPECIMEN</span>
+          </div>
+
+          <div>
+            <h3 class="apt-display" style="margin:0 0 0.3rem; font-size:1.15rem; color:var(--t-text);">Chromatic Atlas — Surface Preview</h3>
+            <p style="margin:0; font-size:0.84rem; color:var(--t-muted);" data-theme-tagline><%= presets.first.tagline %></p>
+          </div>
+
+          <div class="apt-theme-metrics">
+            <div class="apt-theme-metric">
+              <strong>14.2:1</strong>
+              <span>Text Contrast</span>
+            </div>
+            <div class="apt-theme-metric">
+              <strong>32</strong>
+              <span>OKLCH Tokens</span>
+            </div>
+            <div class="apt-theme-metric">
+              <strong>0 ms</strong>
+              <span>Swap Overhead</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <button type="button" class="apt-theme-btn">Primary Action</button>
+            <button type="button" class="apt-theme-btn" data-ghost="true">Secondary Ghost</button>
+          </div>
+        </div>
+
+        <div class="apt-theme-card" style="background:var(--t-overlay);">
+          <span class="apt-mono" style="font-size:0.7rem; color:var(--t-secondary);">SCOPED TOKEN OVERRIDE</span>
+          <pre id="theme-live-css"
+               data-theme-snippet
+               class="apt-mono"
+               style="margin:0; font-size:0.74rem; line-height:1.55; color:var(--t-text); overflow-x:auto; white-space:pre-wrap;"><%= HTML.escape(presets.first.css_snippet) %></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Pure CSS custom property scoping</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">HTML + Data Attribute</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#theme-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="theme-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-theme-switcher" data-apt-theme-switcher>
+  <div class="apt-pill-group" role="group">
+    <button type="button" class="apt-pill-btn" data-theme-pick="abyssal" aria-pressed="true">Abyssal Cyan</button>
+    <button type="button" class="apt-pill-btn" data-theme-pick="citadel" aria-pressed="false">Solar Citadel</button>
+    <button type="button" class="apt-pill-btn" data-theme-pick="daylight" aria-pressed="false">Chromatic Paper</button>
+  </div>
+  <div class="apt-theme-stage" data-theme-stage data-apt-theme="abyssal">
+    <!-- Isolated themed content -->
+  </div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

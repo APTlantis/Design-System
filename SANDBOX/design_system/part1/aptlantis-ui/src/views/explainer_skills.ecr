@@ -1,0 +1,116 @@
+<div data-apt-mmd-kit style="display:grid; gap:1.25rem;">
+  <div class="apt-specimen-nav">
+    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+      <a href="/components" class="apt-btn" data-variant="ghost">← Component Gallery</a>
+      <a href="/explainer/logos-pipeline" class="apt-btn" data-variant="ghost">Logos Explainer</a>
+      <span class="apt-badge" data-tone="amber">24 ARCHIVED SKILLS · 5 ACTIVE</span>
+    </div>
+
+    <!-- index4 Node Styling Mode Toggle -->
+    <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
+      <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Node Styling:</span>
+      <div class="apt-pill-group" role="group" aria-label="Mermaid node styling mode">
+        <button type="button" class="apt-pill-btn" data-mmd-mode="classed" aria-pressed="true">Semantic classDef Roles</button>
+        <button type="button" class="apt-pill-btn" data-mmd-mode="base" aria-pressed="false">Base Theme Only (#23F2F7)</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="apt-gallery-hero">
+    <div>
+      <div class="apt-gallery-eyebrow">
+        <span>MERMAID THEME &amp; NODE CLASS REFERENCE</span>
+        <span>·</span>
+        <span>Y:\AGENT SKILLS\Created</span>
+      </div>
+      <h1>Agent Skills Topology &amp; Routing Atlas</h1>
+      <p>
+        Inspired by <code>index4</code>'s blueprint Mermaid kit: 4 focused lenses keep the 24 archived
+        skills—and the dense 5-skill City Hall governance suite—clean, inspectable, and ready to copy as Mermaid source.
+      </p>
+    </div>
+
+    <div class="apt-gallery-stats">
+      <div class="apt-stat-pill">
+        <strong style="color:var(--apt-brand-primary-hover);">5</strong>
+        <span>Active Pool</span>
+      </div>
+      <div class="apt-stat-pill">
+        <strong style="color:var(--apt-brand-secondary);">24</strong>
+        <span>Y:\ Archive</span>
+      </div>
+      <div class="apt-stat-pill">
+        <strong>4</strong>
+        <span>Lenses</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Switchable Topology Lenses -->
+  <section class="apt-filter-bar" aria-label="Switch diagram lens">
+    <div class="apt-pill-group" role="tablist" aria-label="Agent skill topology lenses">
+      <% topology.lenses.each_with_index do |lens, i| %>
+        <button type="button"
+                class="apt-pill-btn"
+                role="tab"
+                data-mmd-lens-btn
+                aria-selected="<%= i == 0 %>"
+                hx-get="/explainer/agent-skills/lens/<%= lens.id %>"
+                hx-target="#skills-lens-host"
+                hx-swap="innerHTML">
+          <%= lens.label %>
+        </button>
+      <% end %>
+    </div>
+
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">
+      <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#23F2F7; margin-right:0.35rem;"></span>Cyan dot = Active in <code>.gemini/config/skills</code>
+    </span>
+  </section>
+
+  <!-- Blueprint Mermaid Diagram Card + Live Inspector Strip -->
+  <section id="skills-lens-host" class="apt-mmd-card">
+    <%= render_partial("_skill_lens", lens: initial_lens, default_skill: initial_skill, oob: false) %>
+  </section>
+
+  <!-- index4 Bottom Reference Panels: JSON Theme | classDefs + Active Lens .MMD -->
+  <section class="apt-mmd-config-grid">
+    <div class="apt-code-viewer">
+      <div class="apt-code-bar">
+        <div>
+          <strong class="apt-display" style="font-size:0.9rem;">apt-designsystem-mermaid.json</strong>
+          <div class="apt-mono" style="font-size:0.68rem; color:var(--apt-text-muted);">Base Mermaid v10/v11 themeVariables config</div>
+        </div>
+        <div style="display:flex; gap:0.4rem;">
+          <button type="button" class="apt-btn" data-variant="primary" data-apt-copy="#skills-mmd-json">Copy JSON</button>
+          <a href="/explainer/agent-skills/download/mermaid-json" class="apt-btn" data-variant="ghost" download>.JSON</a>
+        </div>
+      </div>
+      <pre id="skills-mmd-json" class="apt-code-pre" style="color:var(--apt-accent-ice);"><%= HTML.escape(topology.mermaid_json.strip) %></pre>
+    </div>
+
+    <div style="display:grid; gap:1rem;">
+      <div class="apt-code-viewer">
+        <div class="apt-code-bar">
+          <div>
+            <strong class="apt-display" style="font-size:0.9rem;">Semantic <code>classDef</code> Overrides</strong>
+            <div class="apt-mono" style="font-size:0.68rem; color:var(--apt-text-muted);">govNode · visualNode · engNode · docNode</div>
+          </div>
+          <button type="button" class="apt-btn" data-apt-copy="#skills-mmd-classdefs">Copy classDefs</button>
+        </div>
+        <pre id="skills-mmd-classdefs" class="apt-code-pre" style="color:var(--apt-text-warm-display);"><%= HTML.escape(topology.class_defs.strip) %></pre>
+      </div>
+
+      <div class="apt-code-viewer">
+        <div class="apt-code-bar">
+          <div>
+            <strong class="apt-display" style="font-size:0.9rem;">Active Lens Mermaid Source (<code>flowchart LR</code>)</strong>
+            <div class="apt-mono" style="font-size:0.68rem; color:var(--apt-text-muted);">Updates automatically when you switch lenses</div>
+          </div>
+          <button type="button" class="apt-btn" data-apt-copy="#skills-mmd-source">Copy .MMD</button>
+        </div>
+        <pre id="skills-mmd-source" class="apt-code-pre"><%= HTML.escape(initial_lens.mermaid_source.strip) %></pre>
+      </div>
+    </div>
+  </section>
+</div>

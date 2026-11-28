@@ -1,0 +1,93 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge">LIVE PROPERTY WORKBENCH</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Interactive HUD Card Playground</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Edit controls to update both live preview &amp; copyable HTML</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-playground" data-apt-playground>
+      <div class="apt-playground-controls">
+        <div class="apt-field">
+          <label for="pg-variant">Card Variant</label>
+          <select id="pg-variant" class="apt-input apt-mono" data-pg-variant>
+            <option value="primary" selected>primary (Abyssal Cyan)</option>
+            <option value="amber">amber (Solar Governance)</option>
+            <option value="ghost">ghost (Dashed Wireframe)</option>
+          </select>
+        </div>
+
+        <div class="apt-field">
+          <label for="pg-density">Surface Density</label>
+          <select id="pg-density" class="apt-input apt-mono" data-pg-density>
+            <option value="compact">compact</option>
+            <option value="comfortable" selected>comfortable</option>
+            <option value="spacious">spacious</option>
+          </select>
+        </div>
+
+        <div class="apt-field">
+          <label for="pg-tone">Status Badge Tone</label>
+          <select id="pg-tone" class="apt-input apt-mono" data-pg-tone>
+            <option value="cyan" selected>cyan (ONLINE)</option>
+            <option value="amber">amber (GOVERNANCE)</option>
+          </select>
+        </div>
+
+        <div class="apt-field">
+          <label for="pg-title">Card Title</label>
+          <input id="pg-title" class="apt-input" type="text" value="Pelagic Telemetry Node" data-pg-title-input />
+        </div>
+
+        <div class="apt-field">
+          <label for="pg-metric">Telemetry Readout</label>
+          <input id="pg-metric" class="apt-input apt-mono" type="text" value="9.4 ms · VERIFIED" data-pg-metric-input />
+        </div>
+
+        <label style="display:flex; align-items:center; gap:0.55rem; cursor:pointer; font-size:0.84rem;">
+          <input type="checkbox" class="apt-check" checked data-pg-glow />
+          <span>Enable Bioluminescent Glow</span>
+        </label>
+      </div>
+
+      <div style="display:grid; gap:1rem;">
+        <div class="apt-playground-stage">
+          <article class="apt-hud-card" data-pg-card data-variant="primary" data-density="comfortable" data-glow="on">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+              <strong class="apt-display" data-pg-title style="font-size:1.05rem;">Pelagic Telemetry Node</strong>
+              <span class="apt-badge" data-pg-badge data-tone="cyan">ONLINE</span>
+            </div>
+            <span class="apt-mono" data-pg-metric style="font-size:0.78rem; color:var(--apt-text-secondary);">9.4 ms · VERIFIED</span>
+          </article>
+        </div>
+
+        <div class="apt-code-viewer">
+          <div class="apt-code-bar">
+            <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-brand-primary-hover);">GENERATED HTML</span>
+            <button type="button" class="apt-btn" data-apt-copy="#pg-generated-code">Copy Generated HTML</button>
+          </div>
+          <pre id="pg-generated-code" class="apt-code-pre" data-pg-code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

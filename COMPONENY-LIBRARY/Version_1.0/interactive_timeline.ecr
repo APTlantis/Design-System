@@ -1,0 +1,105 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">HTMX + KEYBOARD AXIS</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Aptlantis Evolution Timeline</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">GET /components/interactive-timeline/event/:id · Keyboard ← / →</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-timeline" data-apt-timeline>
+      <div class="apt-timeline-axis" role="tablist" aria-label="Project milestones">
+        <% events.each_with_index do |ev, i| %>
+          <button type="button"
+                  class="apt-timeline-node"
+                  role="tab"
+                  data-timeline-node="<%= ev.id %>"
+                  aria-selected="<%= i == 0 %>"
+                  tabindex="<%= i == 0 ? 0 : -1 %>"
+                  hx-get="/components/interactive-timeline/event/<%= ev.id %>"
+                  hx-target="#timeline-detail-host"
+                  hx-swap="innerHTML">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span class="apt-timeline-dot" aria-hidden="true"></span>
+              <span class="apt-mono" style="font-size:0.68rem; color:var(--apt-brand-secondary);"><%= ev.version %></span>
+            </div>
+            <strong class="apt-display" style="font-size:0.86rem; color:var(--apt-text-primary);"><%= ev.title %></strong>
+            <span class="apt-mono" style="font-size:0.66rem; color:var(--apt-text-muted);"><%= ev.date_label %></span>
+          </button>
+        <% end %>
+      </div>
+
+      <div id="timeline-detail-host">
+        <%= render_partial("_timeline_event", event: events.first) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Variation — Compact Vertical Changelog</h2>
+    <span class="apt-badge">PURE HTML + CSS</span>
+  </div>
+
+  <div class="apt-timeline-vertical">
+    <% events.first(3).each do |ev| %>
+      <div class="apt-timeline-vitem">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+          <strong class="apt-display" style="font-size:0.9rem;"><%= ev.version %> · <%= ev.title %></strong>
+          <span class="apt-mono" style="font-size:0.7rem; color:var(--apt-text-muted);"><%= ev.date_label %></span>
+        </div>
+        <p style="margin:0.3rem 0 0; font-size:0.82rem; color:var(--apt-text-secondary);"><%= ev.summary %></p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Horizontal axis + HTMX detail target</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Timeline HTML</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#timeline-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="timeline-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-timeline" data-apt-timeline>
+  <div class="apt-timeline-axis" role="tablist">
+    <button type="button" class="apt-timeline-node" role="tab" data-timeline-node="v1" aria-selected="true"
+            hx-get="/components/interactive-timeline/event/v01"
+            hx-target="#timeline-detail-host" hx-swap="innerHTML">
+      <span class="apt-timeline-dot"></span>
+      <strong>v0.1 · Brand Emblems</strong>
+    </button>
+  </div>
+  <div id="timeline-detail-host"></div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

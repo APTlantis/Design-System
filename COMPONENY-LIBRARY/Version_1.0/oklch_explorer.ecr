@@ -1,0 +1,131 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">LIVE OKLCH + HTMX</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Interactive OKLCH Tuner &amp; Semantic Roles</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Native CSS oklch(L C H) · Zero color libraries</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-oklch" data-apt-oklch>
+      <div class="apt-oklch-controls">
+        <div class="apt-slider-row">
+          <div class="apt-slider-head">
+            <label for="ok-l">Lightness (L)</label>
+            <strong data-oklch-l-out style="color:var(--apt-brand-primary-hover);">0.77</strong>
+          </div>
+          <input id="ok-l" class="apt-range" type="range" min="0.12" max="0.96" step="0.01" value="0.77" data-oklch-l />
+        </div>
+
+        <div class="apt-slider-row">
+          <div class="apt-slider-head">
+            <label for="ok-c">Chroma (C)</label>
+            <strong data-oklch-c-out style="color:var(--apt-brand-primary-hover);">0.145</strong>
+          </div>
+          <input id="ok-c" class="apt-range" type="range" min="0.000" max="0.260" step="0.005" value="0.145" data-oklch-c />
+        </div>
+
+        <div class="apt-slider-row">
+          <div class="apt-slider-head">
+            <label for="ok-h">Hue Angle (H)</label>
+            <strong data-oklch-h-out style="color:var(--apt-brand-primary-hover);">204°</strong>
+          </div>
+          <input id="ok-h" class="apt-range" type="range" min="0" max="360" step="1" value="204" data-oklch-h />
+        </div>
+
+        <div style="border-top:1px solid var(--apt-border-subtle); padding-top:0.85rem; display:grid; gap:0.55rem;">
+          <span class="apt-mono" style="font-size:0.7rem; color:var(--apt-text-muted);">LOAD APTLANTIS SEMANTIC ROLE</span>
+          <div class="apt-role-grid" role="listbox" aria-label="Aptlantis semantic color roles">
+            <% roles.each_with_index do |role, i| %>
+              <button type="button"
+                      class="apt-role-chip"
+                      data-oklch-role="<%= role.key %>"
+                      data-l="<%= role.l %>"
+                      data-c="<%= role.c %>"
+                      data-h="<%= role.h %>"
+                      aria-selected="<%= i == 0 %>"
+                      hx-get="/components/oklch-explorer/role/<%= role.key %>"
+                      hx-target="#oklch-role-detail"
+                      hx-swap="innerHTML">
+                <span class="apt-role-dot" style="background:<%= role.hex_ref %>;"></span>
+                <span style="display:grid;">
+                  <strong style="font-size:0.78rem;"><%= role.label %></strong>
+                  <span class="apt-mono" style="font-size:0.66rem; color:var(--apt-text-muted);"><%= role.hex_ref %></span>
+                </span>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; gap:0.85rem; align-content:start;">
+        <div class="apt-oklch-preview">
+          <div class="apt-oklch-swatch">
+            <span id="oklch-css-readout" class="apt-oklch-swatch-tag" data-oklch-css>oklch(0.77 0.145 204)</span>
+            <button type="button" class="apt-btn" data-apt-copy="#oklch-css-readout">Copy OKLCH</button>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+            <span class="apt-mono" style="font-size:0.74rem; color:var(--ok-color);">LIVE ACCENT PREVIEW</span>
+            <span style="padding:0.2rem 0.6rem; border-radius:999px; font-family:var(--apt-font-mono); font-size:0.7rem; border:1px solid var(--ok-color); color:var(--ok-color);">
+              ACTIVE TOKEN
+            </span>
+          </div>
+          <p style="margin:0; font-size:0.83rem; color:var(--apt-text-secondary);">
+            Adjust L, C, or H to verify how perceptual lightness stays smooth while sweeping across oceanic cyans and solar ambers.
+          </p>
+        </div>
+
+        <div id="oklch-role-detail">
+          <%= render_partial("_oklch_role", role: roles.first) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">CSS custom properties + range inputs</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">HTML + CSS OKLCH</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#oklch-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="oklch-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-oklch" data-apt-oklch>
+  <input type="range" min="0.12" max="0.96" step="0.01" value="0.77" data-oklch-l />
+  <input type="range" min="0.000" max="0.260" step="0.005" value="0.145" data-oklch-c />
+  <input type="range" min="0" max="360" step="1" value="204" data-oklch-h />
+  <div class="apt-oklch-swatch">
+    <span data-oklch-css>oklch(0.77 0.145 204)</span>
+  </div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>

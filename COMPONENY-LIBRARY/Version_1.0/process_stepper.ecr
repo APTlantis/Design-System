@@ -1,0 +1,150 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">HTMX + KEYBOARD</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Logos &amp; Theming Pipeline (HTMX Fragment Mode)</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">GET /components/process-stepper/stage/:index</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-stepper" data-apt-stepper>
+      <div class="apt-stepper-track" role="tablist" aria-label="Theming Pipeline Stages">
+        <% stages.each_with_index do |stage, i| %>
+          <button type="button"
+                  class="apt-step-trigger"
+                  role="tab"
+                  data-step-index="<%= stage.index %>"
+                  aria-selected="<%= i == 0 %>"
+                  tabindex="<%= i == 0 ? 0 : -1 %>"
+                  hx-get="/components/process-stepper/stage/<%= stage.index %>"
+                  hx-target="#stepper-live-panel"
+                  hx-swap="innerHTML">
+            <span class="apt-step-code"><%= stage.code %></span>
+            <span class="apt-step-label"><%= stage.title %></span>
+          </button>
+        <% end %>
+      </div>
+
+      <div id="stepper-live-panel">
+        <%= render_partial("_stepper_stage", stage: stages.first) %>
+      </div>
+
+      <div class="apt-stepper-footer">
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="apt-btn" data-step-prev>← Previous</button>
+          <button type="button" class="apt-btn" data-variant="primary" data-step-next>Next Stage →</button>
+        </div>
+        <div class="apt-stepper-progress" aria-hidden="true">
+          <div class="apt-stepper-progress-fill" data-step-progress style="width:25%;"></div>
+        </div>
+        <span class="apt-mono" data-step-counter style="font-size:0.75rem; color:var(--apt-text-secondary);">STAGE 01 / 04</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Variation — Compact Zero-Backend Stepper</h2>
+    <span class="apt-badge">PURE HTML + JS</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-stepper" data-apt-stepper data-variant="compact">
+      <div class="apt-stepper-track" role="tablist" aria-label="Compact Steps">
+        <button type="button" class="apt-step-trigger" role="tab" data-step-index="1" aria-selected="true">
+          <span class="apt-step-code">01</span>
+          <span class="apt-step-label">Draft in Sandbox</span>
+        </button>
+        <button type="button" class="apt-step-trigger" role="tab" data-step-index="2" aria-selected="false" tabindex="-1">
+          <span class="apt-step-code">02</span>
+          <span class="apt-step-label">Test in Explainer</span>
+        </button>
+        <button type="button" class="apt-step-trigger" role="tab" data-step-index="3" aria-selected="false" tabindex="-1">
+          <span class="apt-step-code">03</span>
+          <span class="apt-step-label">Promote to Library</span>
+        </button>
+      </div>
+
+      <div class="apt-panel" data-step-panel="1">
+        <strong class="apt-display">01 · Draft in Sandbox</strong>
+        <p style="margin:0.35rem 0 0; color:var(--apt-text-secondary);">Build the interactive specimen inside <code>SANDBOX</code> with zero premature abstraction.</p>
+      </div>
+      <div class="apt-panel" data-step-panel="2" hidden>
+        <strong class="apt-display">02 · Test in Explainer</strong>
+        <p style="margin:0.35rem 0 0; color:var(--apt-text-secondary);">Compose the component on a real explainer page to verify spacing, contrast, and ergonomics.</p>
+      </div>
+      <div class="apt-panel" data-step-panel="3" hidden>
+        <strong class="apt-display">03 · Promote to Library</strong>
+        <p style="margin:0.35rem 0 0; color:var(--apt-text-secondary);">Once proven useful, copy the clean HTML/CSS/JS slice into <code>COMPONENY-LIBRARY</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Keyboard: ← / → / Home / End</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Standalone HTML</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="htmx" aria-selected="false">HTMX Fragment Mode</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#stepper-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="stepper-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-stepper" data-apt-stepper>
+  <div class="apt-stepper-track" role="tablist">
+    <button type="button" class="apt-step-trigger" role="tab" data-step-index="1" aria-selected="true">
+      <span class="apt-step-code">STAGE 01</span>
+      <span class="apt-step-label">Source Artwork</span>
+    </button>
+    <button type="button" class="apt-step-trigger" role="tab" data-step-index="2" aria-selected="false" tabindex="-1">
+      <span class="apt-step-code">STAGE 02</span>
+      <span class="apt-step-label">OKLCH Tokens</span>
+    </button>
+  </div>
+
+  <div class="apt-panel" data-step-panel="1">Stage 1 content...</div>
+  <div class="apt-panel" data-step-panel="2" hidden>Stage 2 content...</div>
+</div>
+CODE
+) %></pre>
+
+    <pre id="stepper-code-htmx" class="apt-code-pre" data-code-panel="htmx" hidden><%= HTML.escape(<<-'CODE'
+<button type="button" class="apt-step-trigger" role="tab"
+        data-step-index="2"
+        hx-get="/components/process-stepper/stage/2"
+        hx-target="#stepper-live-panel"
+        hx-swap="innerHTML">
+  <span class="apt-step-code">STAGE 02</span>
+  <span class="apt-step-label">OKLCH Extraction</span>
+</button>
+<div id="stepper-live-panel"></div>
+CODE
+) %></pre>
+  </div>
+</section>

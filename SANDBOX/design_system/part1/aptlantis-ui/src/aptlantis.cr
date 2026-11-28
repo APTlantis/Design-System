@@ -3,9 +3,11 @@ require "ecr"
 require "html"
 require "./models/node"
 require "./models/components"
+require "./models/skills_topology"
 
-STORE   = Aptlantis::Store.new
-CATALOG = Aptlantis::ComponentCatalog.new
+STORE           = Aptlantis::Store.new
+CATALOG         = Aptlantis::ComponentCatalog.new
+SKILLS_TOPOLOGY = Aptlantis::SkillsTopology.new
 
 # Helper to render an ECR partial cleanly into a String
 macro render_partial(path, **locals)
@@ -212,6 +214,41 @@ get "/explainer/logos-pipeline" do
   diagram_nodes = CATALOG.diagram_nodes
   artifacts = CATALOG.artifacts
   render "src/views/explainer_logos.ecr", "src/views/layout.ecr"
+end
+
+# 1e. Agent Skills Topology (index4 Mermaid Kit + 4 Switchable Lenses)
+get "/explainer/agent-skills" do
+  active_nav = "skills"
+  topbar_label = "EXPLAINER / AGENT SKILLS TOPOLOGY"
+  topology = SKILLS_TOPOLOGY
+  initial_lens = topology.lenses.first
+  initial_skill = topology.find_skill(initial_lens.default_node_id).not_nil!
+  render "src/views/explainer_skills.ecr", "src/views/layout.ecr"
+end
+
+get "/explainer/agent-skills/lens/:id" do |env|
+  id = env.params.url["id"]
+  if lens = SKILLS_TOPOLOGY.find_lens(id)
+    default_skill = SKILLS_TOPOLOGY.find_skill(lens.default_node_id).not_nil!
+    render_partial("_skill_lens", lens: lens, default_skill: default_skill, oob: true)
+  else
+    halt env, status_code: 404, response: "Lens not found"
+  end
+end
+
+get "/explainer/agent-skills/skill/:id" do |env|
+  id = env.params.url["id"]
+  if skill = SKILLS_TOPOLOGY.find_skill(id)
+    render_partial("_skill_inspector", skill: skill)
+  else
+    halt env, status_code: 404, response: "Skill not found"
+  end
+end
+
+get "/explainer/agent-skills/download/mermaid-json" do |env|
+  env.response.content_type = "application/json"
+  env.response.headers["Content-Disposition"] = %(attachment; filename="apt-designsystem-mermaid.json")
+  SKILLS_TOPOLOGY.mermaid_json
 end
 
 # 2. Filter Ledger Rows (Sector Popover Menu)

@@ -452,6 +452,74 @@
     });
   }
 
+  // 14. Mermaid Skills Topology (classDef vs Base Theme toggle + active node/edge highlight)
+  function bindMermaidTopology(root) {
+    root.querySelectorAll("[data-apt-mmd-kit]").forEach((kit) => {
+      if (kit.dataset.bound) return;
+      kit.dataset.bound = "true";
+
+      const modeBtns = Array.from(kit.querySelectorAll("[data-mmd-mode]"));
+      const lensBtns = Array.from(kit.querySelectorAll("[data-mmd-lens-btn]"));
+
+      modeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mode = btn.getAttribute("data-mmd-mode");
+          modeBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+          kit.querySelectorAll("[data-mmd-stage]").forEach((stage) => {
+            stage.setAttribute("data-style-mode", mode);
+          });
+        });
+      });
+
+      lensBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          lensBtns.forEach((b) => b.setAttribute("aria-selected", String(b === btn)));
+        });
+      });
+    });
+
+    root.querySelectorAll("[data-mmd-stage]").forEach((stage) => {
+      if (stage.dataset.bound) return;
+      stage.dataset.bound = "true";
+
+      // Sync current mode from outer kit toggle if present
+      const activeModeBtn = document.querySelector("[data-mmd-mode][aria-pressed='true']");
+      if (activeModeBtn) {
+        stage.setAttribute("data-style-mode", activeModeBtn.getAttribute("data-mmd-mode"));
+      }
+
+      const nodes = Array.from(stage.querySelectorAll("[data-mmd-node]"));
+      const edges = Array.from(stage.querySelectorAll("[data-mmd-edge]"));
+
+      function highlight(nodeId) {
+        nodes.forEach((n) => n.setAttribute("aria-selected", String(n.getAttribute("data-mmd-node") === nodeId)));
+        edges.forEach((e) => {
+          const ends = (e.getAttribute("data-mmd-edge") || "").split(",");
+          const active = ends.includes(nodeId);
+          e.setAttribute("data-active", String(active));
+          e.setAttribute("marker-end", active ? "url(#aptMmdArrowActive)" : "url(#aptMmdArrow)");
+        });
+      }
+
+      nodes.forEach((node) => {
+        const id = node.getAttribute("data-mmd-node");
+        node.addEventListener("click", () => highlight(id));
+        node.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            highlight(id);
+            if (typeof htmx !== "undefined" && node.hasAttribute("hx-get")) {
+              htmx.trigger(node, "click");
+            }
+          }
+        });
+      });
+
+      const initial = nodes.find((n) => n.getAttribute("aria-selected") === "true");
+      if (initial) highlight(initial.getAttribute("data-mmd-node"));
+    });
+  }
+
   function initAll(root) {
     bindCopyButtons(root);
     bindCodeTabs(root);
@@ -466,6 +534,7 @@
     bindSpotlights(root);
     bindTimelines(root);
     bindPlaygrounds(root);
+    bindMermaidTopology(root);
   }
 
   document.addEventListener("DOMContentLoaded", () => initAll(document));

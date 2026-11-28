@@ -1,0 +1,126 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">HTMX INSPECTOR + DOWNLOAD</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Aptlantis Local Artifact Browser</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Select an artifact to inspect, copy usage, or download</span>
+  </div>
+
+  <div class="apt-stage" data-apt-artifacts style="display:grid; gap:1rem;">
+    <div class="apt-pill-group" role="group" aria-label="Filter artifacts by category" style="justify-self:start;">
+      <button type="button" class="apt-pill-btn" data-artifact-filter="ALL" aria-pressed="true">All (<%= artifacts.size %>)</button>
+      <button type="button" class="apt-pill-btn" data-artifact-filter="Logos" aria-pressed="false">Logos</button>
+      <button type="button" class="apt-pill-btn" data-artifact-filter="Icons" aria-pressed="false">Icons</button>
+      <button type="button" class="apt-pill-btn" data-artifact-filter="Tokens" aria-pressed="false">Tokens</button>
+      <button type="button" class="apt-pill-btn" data-artifact-filter="Diagrams" aria-pressed="false">Diagrams</button>
+    </div>
+
+    <div class="apt-artifact-layout">
+      <div class="apt-artifact-grid">
+        <% artifacts.each_with_index do |item, i| %>
+          <article class="apt-artifact-card"
+                   data-artifact-card
+                   data-artifact-category="<%= item.category %>"
+                   data-selected="<%= i == 0 %>"
+                   hx-get="/components/artifact-gallery/item/<%= item.id %>"
+                   hx-target="#artifact-detail-host"
+                   hx-swap="innerHTML"
+                   style="cursor:pointer;">
+            <div class="apt-artifact-thumb" aria-hidden="true">
+              <% if item.id == "citadel-shield" %>
+                <svg width="56" height="56" viewBox="0 0 120 120"><polygon points="60,8 108,30 98,88 60,112 22,88 12,30" fill="#031C28" stroke="#00CAE3" stroke-width="4"/><polygon points="60,24 90,40 84,78 60,94 36,78 30,40" fill="#05303F" stroke="#F7BE4F" stroke-width="2.5"/><circle cx="60" cy="58" r="10" fill="#23F2F7"/></svg>
+              <% elsif item.id == "hud-sprite" %>
+                <div style="display:flex; gap:0.75rem; color:var(--apt-brand-primary-hover);">
+                  <svg width="24" height="24"><use href="/icons/apt-hud-sprite.svg#icon-ledger"/></svg>
+                  <svg width="24" height="24"><use href="/icons/apt-hud-sprite.svg#icon-gallery"/></svg>
+                  <svg width="24" height="24"><use href="/icons/apt-hud-sprite.svg#icon-topology"/></svg>
+                </div>
+              <% elsif item.id == "tokens-extended" || item.id == "website-palette" %>
+                <div style="display:flex; gap:4px; align-items:center;">
+                  <span style="width:18px; height:42px; border-radius:3px; background:#031C28; border:1px solid #07455E;"></span>
+                  <span style="width:18px; height:42px; border-radius:3px; background:#00CAE3;"></span>
+                  <span style="width:18px; height:42px; border-radius:3px; background:#23F2F7;"></span>
+                  <span style="width:18px; height:42px; border-radius:3px; background:#F7BE4F;"></span>
+                  <span style="width:18px; height:42px; border-radius:3px; background:#BC8F81;"></span>
+                </div>
+              <% elsif item.id == "telemetry-bars" %>
+                <svg width="110" height="54" viewBox="0 0 180 80">
+                  <rect x="10" y="28" width="20" height="44" rx="3" fill="#00CAE3"/>
+                  <rect x="38" y="16" width="20" height="56" rx="3" fill="#F7BE4F"/>
+                  <rect x="66" y="34" width="20" height="38" rx="3" fill="#0380A1"/>
+                  <rect x="94" y="22" width="20" height="50" rx="3" fill="#A29062"/>
+                  <rect x="122" y="12" width="20" height="60" rx="3" fill="#A1FCFD"/>
+                  <rect x="150" y="38" width="20" height="34" rx="3" fill="#CF7818"/>
+                </svg>
+              <% else %>
+                <span class="apt-mono" style="font-size:0.74rem; color:var(--apt-brand-secondary);">{ theme: "base" }</span>
+              <% end %>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
+              <strong class="apt-display" style="font-size:0.88rem;"><%= item.name %></strong>
+              <span class="apt-badge" data-tone="cyan"><%= item.format %></span>
+            </div>
+
+            <div class="apt-mono" style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--apt-text-muted);">
+              <span><%= item.category %></span>
+              <span><%= item.size_label %></span>
+            </div>
+          </article>
+        <% end %>
+      </div>
+
+      <div id="artifact-detail-host">
+        <%= render_partial("_artifact_detail", artifact: artifacts.first) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Category filter + HTMX inspector fragment</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Artifact Card + HTMX</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#artifact-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="artifact-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<article class="apt-artifact-card"
+         data-artifact-card
+         data-artifact-category="Logos"
+         hx-get="/components/artifact-gallery/item/citadel-shield"
+         hx-target="#artifact-detail-host"
+         hx-swap="innerHTML">
+  <div class="apt-artifact-thumb"><!-- Inline SVG or image preview --></div>
+  <strong class="apt-display">Aptlantis Citadel Shield</strong>
+</article>
+<div id="artifact-detail-host"></div>
+CODE
+) %></pre>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<div class="apt-mmd-inspector" aria-live="polite">
+  <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.5rem;">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.55rem;">
+      <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">SELECTED SKILL:</span>
+      <strong class="apt-display" style="font-size:0.98rem; color:var(--apt-text-primary);"><%= HTML.escape(skill.short_label) %></strong>
+      <span class="apt-badge" data-tone="<%= skill.role == "gov" ? "amber" : "cyan" %>">class: <%= HTML.escape(skill.class_name) %></span>
+      <% if skill.active %>
+        <span class="apt-badge" data-tone="cyan">ACTIVE IN USER POOL</span>
+      <% else %>
+        <span class="apt-badge">ARCHIVED (Y:\)</span>
+      <% end %>
+    </div>
+    <span class="apt-mono" style="font-size:0.7rem; color:var(--apt-accent-ice);"><%= HTML.escape(skill.archive_path) %></span>
+  </div>
+
+  <p style="margin:0; font-size:0.84rem; color:var(--apt-text-secondary);">
+    <strong style="color:var(--apt-text-primary);">Use for:</strong> <%= HTML.escape(skill.purpose) %>
+  </p>
+
+  <p style="margin:0; font-size:0.8rem; color:var(--apt-text-muted);">
+    <strong style="color:var(--apt-brand-secondary);">Boundaries:</strong> <%= HTML.escape(skill.boundaries) %>
+  </p>
+</div>

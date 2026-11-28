@@ -1,0 +1,141 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">HTMX + ZERO-JS VARIANT</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Progressive Depth Switcher (HTMX Fragment Mode)</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">GET /components/explanation-panel/depth/:level</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-explain" data-apt-explain>
+      <div class="apt-explain-head">
+        <div class="apt-explain-meta">
+          <span class="apt-mono" style="font-size:0.74rem; color:var(--apt-brand-primary-hover);">TOPIC</span>
+          <strong class="apt-display" style="font-size:0.95rem;">Chromatic Atlas · Semantic Token Architecture</strong>
+        </div>
+
+        <div class="apt-pill-group" role="tablist" aria-label="Explanation depth">
+          <% depths.each_with_index do |depth, i| %>
+            <button type="button"
+                    class="apt-pill-btn"
+                    role="tab"
+                    data-depth-key="<%= depth.key %>"
+                    aria-selected="<%= i == 0 %>"
+                    tabindex="<%= i == 0 ? 0 : -1 %>"
+                    hx-get="/components/explanation-panel/depth/<%= depth.key %>"
+                    hx-target="#explain-live-body"
+                    hx-swap="innerHTML">
+              <%= depth.label %>
+            </button>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="explain-live-body">
+        <%= render_partial("_explanation_depth", depth: depths.first) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-grid-2">
+  <div class="apt-panel">
+    <div class="apt-panel-head">
+      <h2 class="apt-panel-title">Variation — Pure HTML &lt;details&gt; Disclosure</h2>
+      <span class="apt-badge">ZERO JS</span>
+    </div>
+    <details class="apt-disclosure" open>
+      <summary>What is a Complexity Plateau?</summary>
+      <div class="apt-disclosure-body">
+        A deliberate pause in infrastructure expansion so creative work—reusable components and visual explainers—takes priority over speculative architecture.
+      </div>
+    </details>
+  </div>
+
+  <div class="apt-panel">
+    <div class="apt-panel-head">
+      <h2 class="apt-panel-title">Variation — Amber Governance Callout</h2>
+      <span class="apt-badge" data-tone="amber">LOCAL TABS</span>
+    </div>
+    <div class="apt-explain" data-apt-explain data-tone="amber">
+      <div class="apt-explain-head">
+        <span class="apt-mono" style="font-size:0.75rem; color:var(--apt-brand-secondary);">CITY HALL · WGS</span>
+        <div class="apt-pill-group" role="tablist">
+          <button type="button" class="apt-pill-btn" role="tab" data-depth-key="brief" aria-selected="true">Brief</button>
+          <button type="button" class="apt-pill-btn" role="tab" data-depth-key="rule" aria-selected="false" tabindex="-1">Rule</button>
+        </div>
+      </div>
+      <div class="apt-explain-content" data-depth-panel="brief">
+        <p>Standards exist to clarify boundaries—not to slow down creative experimentation in the Sandbox.</p>
+      </div>
+      <div class="apt-explain-content" data-depth-panel="rule" hidden>
+        <ul class="apt-explain-bullets">
+          <li>Prototype freely in <code>SANDBOX</code>.</li>
+          <li>Promote only proven, reusable pieces to the Component Library.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Keyboard: ← / → between depth levels</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="html" aria-selected="true">Standalone HTML</button>
+        <button type="button" class="apt-pill-btn" data-code-tab="details" aria-selected="false">Zero-JS Disclosure</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#explain-code-html">Copy Snippet</button>
+    </div>
+
+    <pre id="explain-code-html" class="apt-code-pre" data-code-panel="html"><%= HTML.escape(<<-'CODE'
+<div class="apt-explain" data-apt-explain>
+  <div class="apt-explain-head">
+    <strong class="apt-display">Semantic Color Tokens</strong>
+    <div class="apt-pill-group" role="tablist">
+      <button type="button" class="apt-pill-btn" role="tab" data-depth-key="simple" aria-selected="true">Simple</button>
+      <button type="button" class="apt-pill-btn" role="tab" data-depth-key="detailed" aria-selected="false">Detailed</button>
+      <button type="button" class="apt-pill-btn" role="tab" data-depth-key="technical" aria-selected="false">Technical</button>
+    </div>
+  </div>
+  <div class="apt-explain-content" data-depth-panel="simple">Simple explanation...</div>
+  <div class="apt-explain-content" data-depth-panel="detailed" hidden>Detailed explanation...</div>
+  <div class="apt-explain-content" data-depth-panel="technical" hidden>Technical explanation...</div>
+</div>
+CODE
+) %></pre>
+
+    <pre id="explain-code-details" class="apt-code-pre" data-code-panel="details" hidden><%= HTML.escape(<<-'CODE'
+<details class="apt-disclosure">
+  <summary>What is a Complexity Plateau?</summary>
+  <div class="apt-disclosure-body">
+    A deliberate pause in infrastructure expansion to focus on creative construction.
+  </div>
+</details>
+CODE
+) %></pre>
+  </div>
+</section>

@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><%= active_nav == "explainer" ? "APTLANTIS v2.0 — Logos & Theming Explainer" : (active_nav == "gallery" ? "APTLANTIS v2.0 — Component Gallery" : "APTLANTIS v2.0 — Telemetry Workspace") %></title>
+  <title><%= active_nav == "skills" ? "APTLANTIS v2.0 — Agent Skills Topology" : (active_nav == "explainer" ? "APTLANTIS v2.0 — Logos & Theming Explainer" : (active_nav == "gallery" ? "APTLANTIS v2.0 — Component Gallery" : "APTLANTIS v2.0 — Telemetry Workspace")) %></title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/tokens-extended.css" />
-  <link rel="stylesheet" href="/css/apt-components.css" />
-  <link rel="stylesheet" href="/css/apt-topology.css" />
-  <link rel="stylesheet" href="/css/apt-gallery.css" />
+  <link rel="stylesheet" href="/css/tokens-extended.css?v=4" />
+  <link rel="stylesheet" href="/css/apt-components.css?v=4" />
+  <link rel="stylesheet" href="/css/apt-topology.css?v=4" />
+  <link rel="stylesheet" href="/css/apt-gallery.css?v=4" />
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <script src="https://unpkg.com/htmx-ext-sse@2.2.2/sse.js"></script>
-  <script src="/js/apt-explainer.js" defer></script>
+  <script src="/js/apt-explainer.js?v=4" defer></script>
 </head>
 <body hx-ext="sse" sse-connect="/stream">
   <div class="apt-shell">
@@ -51,6 +51,7 @@
       <div style="display:flex; align-items:center; gap:0.5rem;">
         <a href="/components" class="apt-btn" data-variant="ghost" data-active="<%= active_nav == "gallery" %>">Gallery</a>
         <a href="/explainer/logos-pipeline" class="apt-btn" data-variant="ghost" data-active="<%= active_nav == "explainer" %>">Logos Explainer</a>
+        <a href="/explainer/agent-skills" class="apt-btn" data-variant="ghost" data-active="<%= active_nav == "skills" %>">Skills Atlas</a>
         <% if active_nav != "telemetry" %>
           <a href="/" class="apt-btn" data-variant="ghost">Telemetry App</a>
         <% end %>
@@ -135,6 +136,9 @@
     <div style="padding:0.85rem;">
       <input id="cmd-input" class="apt-input apt-mono" style="width:100%;" placeholder="Filter actions or contracts..." oninput="filterCommands(this.value)" />
       <div id="cmd-list" style="margin-top:0.65rem; display:grid; gap:0.25rem;">
+        <a class="apt-menu-item" href="/explainer/agent-skills" style="text-decoration:none;">
+          <span>Agent Skills Topology (24 Archived · 5 Active)</span><kbd class="apt-kbd">SKILLS</kbd>
+        </a>
         <a class="apt-menu-item" href="/explainer/logos-pipeline" style="text-decoration:none;">
           <span>Phase C · Logos &amp; Theming Pipeline Explainer</span><kbd class="apt-kbd">EXPLAINER</kbd>
         </a>

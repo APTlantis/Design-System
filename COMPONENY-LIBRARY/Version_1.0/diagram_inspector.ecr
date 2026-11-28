@@ -1,0 +1,148 @@
+<div class="apt-specimen-nav">
+  <a href="/components" class="apt-btn" data-variant="ghost">← Back to Gallery</a>
+  <div style="display:flex; gap:0.45rem;">
+    <span class="apt-badge" data-tone="cyan">SPECIMEN <%= spec.number %></span>
+    <span class="apt-badge" data-tone="amber">INTERACTIVE SVG + HTMX</span>
+  </div>
+</div>
+
+<section class="apt-specimen-header">
+  <div>
+    <h1><%= spec.name %></h1>
+    <p><%= spec.summary %></p>
+    <div class="apt-dep-list" aria-label="Component dependencies">
+      <% spec.dependencies.each do |dep| %>
+        <span class="apt-dep-chip"><%= dep %></span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Live Specimen — Aptlantis System Flow (Click or Tab + Enter on any node)</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">GET /components/diagram-inspector/node/:id</span>
+  </div>
+
+  <div class="apt-stage">
+    <div class="apt-diagram" data-apt-diagram>
+      <div class="apt-diagram-canvas">
+        <svg class="apt-diagram-svg" viewBox="0 0 560 300" role="group" aria-label="Aptlantis Architecture Diagram">
+          <defs>
+            <marker id="apt-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#00CAE3"/>
+            </marker>
+          </defs>
+
+          <!-- Connecting flow lines -->
+          <path d="M 190 78 L 245 78" stroke="#00637D" stroke-width="2" marker-end="url(#apt-arrow)"/>
+          <path d="M 110 116 L 110 184 L 245 215" fill="none" stroke="#00637D" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#apt-arrow)"/>
+          <path d="M 415 78 L 465 78 L 465 148 L 415 148" fill="none" stroke="#A29062" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <path d="M 330 116 L 330 176" stroke="#00CAE3" stroke-width="2" marker-end="url(#apt-arrow)"/>
+
+          <!-- Node 1: Design Foundation -->
+          <g class="apt-diagram-node"
+             role="button"
+             tabindex="0"
+             data-diagram-node="foundation"
+             aria-selected="true"
+             aria-label="Inspect Design Foundation"
+             hx-get="/components/diagram-inspector/node/foundation"
+             hx-target="#diagram-inspector-panel"
+             hx-swap="innerHTML">
+            <rect x="20" y="40" width="170" height="76" rx="8"/>
+            <text x="34" y="64" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">DF-01 · TOKENS</text>
+            <text x="34" y="86" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">Design Foundation</text>
+            <text x="34" y="103" fill="#A0B4B9" font-family="Inter, sans-serif" font-size="10">OKLCH · Fonts · Icons</text>
+          </g>
+
+          <!-- Node 2: Component Library -->
+          <g class="apt-diagram-node"
+             role="button"
+             tabindex="0"
+             data-diagram-node="components"
+             aria-selected="false"
+             aria-label="Inspect Component Library"
+             hx-get="/components/diagram-inspector/node/components"
+             hx-target="#diagram-inspector-panel"
+             hx-swap="innerHTML">
+            <rect x="250" y="40" width="165" height="76" rx="8"/>
+            <text x="264" y="64" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">CL-02 · SPECIMENS</text>
+            <text x="264" y="86" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">Component Library</text>
+            <text x="264" y="103" fill="#A0B4B9" font-family="Inter, sans-serif" font-size="10">HTML-first UI pieces</text>
+          </g>
+
+          <!-- Node 3: Behavior Layer -->
+          <g class="apt-diagram-node"
+             role="button"
+             tabindex="0"
+             data-diagram-node="behavior"
+             aria-selected="false"
+             aria-label="Inspect Behavior and HTMX Layer"
+             hx-get="/components/diagram-inspector/node/behavior"
+             hx-target="#diagram-inspector-panel"
+             hx-swap="innerHTML">
+            <rect x="20" y="182" width="170" height="76" rx="8"/>
+            <text x="34" y="206" fill="#23F2F7" font-family="JetBrains Mono, monospace" font-size="10">BL-03 · BEHAVIOR</text>
+            <text x="34" y="228" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">Behavior &amp; HTMX</text>
+            <text x="34" y="245" fill="#A0B4B9" font-family="Inter, sans-serif" font-size="10">JS + Kemal Fragments</text>
+          </g>
+
+          <!-- Node 4: Explainer Platform -->
+          <g class="apt-diagram-node"
+             role="button"
+             tabindex="0"
+             data-diagram-node="explainer"
+             aria-selected="false"
+             aria-label="Inspect Explainer Platform"
+             hx-get="/components/diagram-inspector/node/explainer"
+             hx-target="#diagram-inspector-panel"
+             hx-swap="innerHTML">
+            <rect x="250" y="182" width="165" height="76" rx="8"/>
+            <text x="264" y="206" fill="#F7BE4F" font-family="JetBrains Mono, monospace" font-size="10">EX-04 · EXHIBITION</text>
+            <text x="264" y="228" fill="#FDFDFB" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">Explainer Platform</text>
+            <text x="264" y="245" fill="#A0B4B9" font-family="Inter, sans-serif" font-size="10">City Hall · Atlas · Logos</text>
+          </g>
+        </svg>
+      </div>
+
+      <div id="diagram-inspector-panel">
+        <%= render_partial("_diagram_node", node: nodes.first) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="apt-panel">
+  <div class="apt-panel-head">
+    <h2 class="apt-panel-title">Copyable Usage Example</h2>
+    <span class="apt-mono" style="font-size:0.72rem; color:var(--apt-text-muted);">Keyboard: Tab to node, Enter or Space to inspect</span>
+  </div>
+
+  <div class="apt-code-viewer" data-apt-code-viewer>
+    <div class="apt-code-bar">
+      <div class="apt-code-tabs" role="tablist">
+        <button type="button" class="apt-pill-btn" data-code-tab="svg" aria-selected="true">SVG Node + HTMX</button>
+      </div>
+      <button type="button" class="apt-btn" data-apt-copy="#diagram-code-svg">Copy Snippet</button>
+    </div>
+
+    <pre id="diagram-code-svg" class="apt-code-pre" data-code-panel="svg"><%= HTML.escape(<<-'CODE'
+<div class="apt-diagram" data-apt-diagram>
+  <div class="apt-diagram-canvas">
+    <svg class="apt-diagram-svg" viewBox="0 0 560 300">
+      <g class="apt-diagram-node" role="button" tabindex="0"
+         data-diagram-node="foundation" aria-selected="true"
+         hx-get="/components/diagram-inspector/node/foundation"
+         hx-target="#diagram-inspector-panel" hx-swap="innerHTML">
+        <rect x="20" y="40" width="170" height="76" rx="8"/>
+        <text x="34" y="86" fill="#FDFDFB">Design Foundation</text>
+      </g>
+    </svg>
+  </div>
+  <div id="diagram-inspector-panel"></div>
+</div>
+CODE
+) %></pre>
+  </div>
+</section>
